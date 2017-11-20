@@ -7,7 +7,7 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       modal: false,
-    
+
     };
 
     this.toggle = this.toggle.bind(this);
@@ -19,13 +19,13 @@ class Dashboard extends Component {
       });
     }
 
-  
+
 
   render() {
-  
+
     return (
       <div className="animated fadeIn">
-        Hallo Welt!
+        Hallo Ashkan!
         </div>
     );
   }
