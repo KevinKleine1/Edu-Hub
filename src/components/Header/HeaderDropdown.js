@@ -50,7 +50,7 @@ var options = {
     audience: 'https://kevkle.eu.auth0.com/userinfo',
     sso: true,
     params:{
-      scope: 'openid'
+      scope: 'openid email'
     }
    },
   languageDictionary: {
@@ -82,13 +82,14 @@ class HeaderDropdown extends React.Component {
   }
  
   newLogin(){
-    const auth = new Auth();
+    const auth = new Auth();  //deprecated, will be removed in later versions
     auth.login();
    }
 
    lockLogin(){
-     lock.show();
-   }
+    lock.show();
+      
+    }
 
   newLogout(){
     const auth = new Auth();
@@ -114,7 +115,7 @@ class HeaderDropdown extends React.Component {
         <DropdownToggle nav>
         {
           logged && (
-            <img src={'img/avatars/8.jpg'} className="img-avatar" alt="Hallo Elvis!"/>
+            <img src={'img/avatars/5.jpg'} className="img-avatar" alt="Hallo, Maria!"/>
             )
         }
         {

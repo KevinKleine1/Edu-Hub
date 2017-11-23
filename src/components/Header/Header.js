@@ -84,7 +84,7 @@ class Header extends Component {
          {
           logged && (
             <NavItem className="d-md-down-none">
-            Hallo, Elvis!
+            Hallo, Maria!
           </NavItem>
             )
         }

@@ -3,10 +3,12 @@ import {NavLink} from 'react-router-dom';
 import {Badge, Nav, NavItem, NavLink as RsNavLink} from 'reactstrap';
 import classNames from 'classnames';
 import nav from './_nav';
+import navuser from './_navuser';
 import SidebarFooter from './../SidebarFooter';
 import SidebarForm from './../SidebarForm';
 import SidebarHeader from './../SidebarHeader';
 import SidebarMinimizer from './../SidebarMinimizer';
+
 
 class Sidebar extends Component {
 
@@ -21,6 +23,13 @@ class Sidebar extends Component {
 
   }
 
+  isAuthenticated() {
+    // Check whether the current time is past the 
+    // access token's expiry time
+    let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+    return new Date().getTime() < expiresAt;
+  }
+
   // todo Sidebar nav secondLevel
   // secondLevelActive(routeName) {
   //   return this.props.location.pathname.indexOf(routeName) > -1 ? "nav nav-second-level collapse in" : "nav nav-second-level collapse";
@@ -28,7 +37,7 @@ class Sidebar extends Component {
 
 
   render() {
-
+    const logged = this.isAuthenticated();
     const props = this.props;
     const activeRoute = this.activeRoute;
     const handleClick = this.handleClick;
@@ -98,6 +107,7 @@ class Sidebar extends Component {
       return items.map( (item, index) => navLink(item, index) );
     };
 
+
     // sidebar-nav root
     return (
       <div className="sidebar">
@@ -105,7 +115,14 @@ class Sidebar extends Component {
         <SidebarForm/>
         <nav className="sidebar-nav">
           <Nav>
+
             {navList(nav.items)}
+            {
+          logged && (
+            navList(navuser.items)
+            )
+        }
+             
           </Nav>
         </nav>
         <SidebarFooter/>

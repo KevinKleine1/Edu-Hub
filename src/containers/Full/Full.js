@@ -9,6 +9,8 @@ import Footer from '../../components/Footer/';
 import Callback from '../../Callback/Callback';
 import Dashboard from '../../views/Dashboard/';
 import Auth from '../../Auth/Auth';
+import Profile from '../../views/Profile/Profile';
+import Admin from '../../views/Admin/Admin';
 
 
 const auth = new Auth();
@@ -31,6 +33,8 @@ class Full extends Component {
             <Container fluid>
               <Switch>
               <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
+              <Route path="/profil" name="Profil" component={Profile}/>
+              <Route path="/admin" name="Admin" component={Admin}/>
               <Route path="/callback" render={(props) => {
             handleAuthentication(props);
             return <Callback {...props} /> 

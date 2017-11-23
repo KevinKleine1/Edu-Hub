@@ -28,7 +28,7 @@ export default class Auth {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
-        this.showShit();
+        this.showData();
         history.replace('/dashboard');
       } else if (err) {
         history.replace('/dashboard');
@@ -38,7 +38,7 @@ export default class Auth {
     });
   }
 
-  showShit(){
+  showData(){
     console.log(localStorage.getItem('access_token'));
     console.log(localStorage.getItem('id_token'));
     console.log(localStorage.getItem('expires_at'));
