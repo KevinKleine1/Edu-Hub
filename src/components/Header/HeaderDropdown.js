@@ -26,8 +26,10 @@ import {
   PopoverHeader, 
   PopoverBody
 } from 'reactstrap';
+import {lock} from 'auth0-lock';
 
 import LoginForm from '../Forms/LoginForm';
+
 
 class HeaderDropdown extends React.Component {
   constructor(props) {
@@ -40,11 +42,25 @@ class HeaderDropdown extends React.Component {
       modal: false
     };
   }
+
+ 
+
+
+  isAuthenticated() {
+    // Check whether the current time is past the 
+    // access token's expiry time
+    let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+    return new Date().getTime() < expiresAt;
+  }
  
   newLogin(){
     const auth = new Auth();
     auth.login();
 
+  }
+  newLogout(){
+    const auth = new Auth();
+    auth.logout();
   }
 
   toggle() {
@@ -60,15 +76,37 @@ class HeaderDropdown extends React.Component {
   }
 
   dropAccnt() {
+    const logged = this.isAuthenticated();
     return (
       <NavDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
         <DropdownToggle nav>
-          <img src={'img/avatars/NotLogged.jpg'} className="img-avatar" alt="Nicht Registriert"/>
+        {
+          logged && (
+            <img src={'img/avatars/8.jpg'} className="img-avatar" alt="Hallo Elvis!"/>
+            )
+        }
+        {
+          !logged && (
+            <img src={'img/avatars/NotLogged.jpg'} className="img-avatar" alt="Nicht Registriert"/>
+            )
+        }
+          
         </DropdownToggle>
-        <DropdownMenu right>
-          <DropdownItem onClick={this.toggleModal}><i className="fa fa-user"></i> Einloggen</DropdownItem>
-          <DropdownItem><i className="fa fa-shield"></i> Registrieren</DropdownItem>
-        </DropdownMenu>
+        {
+          logged && (
+            <DropdownMenu right>
+            <DropdownItem onClick={this.newLogout}><i className="fa fa-user"></i>Ausloggen</DropdownItem>
+            </DropdownMenu>
+            )
+        }
+        {
+          !logged && (
+            <DropdownMenu right>
+            <DropdownItem onClick={this.toggleModal}><i className="fa fa-user"></i> Einloggen/Registrieren</DropdownItem>
+            </DropdownMenu>
+            )
+        }
+        
         <Modal isOpen={this.state.modal} toggle={this.toggleModal} className={this.props.className}>
       <ModalHeader toggle={this.toggleModal}>Jetzt Einloggen</ModalHeader>
       <ModalBody>
@@ -91,6 +129,7 @@ class HeaderDropdown extends React.Component {
       </ModalBody>
       <ModalFooter>
         <Button color="primary" onClick={this.newLogin}>Sexy Login</Button>{' '}
+        <Button color="primary" onClick={this.newLogout}>Sexy Logout</Button>
         <Button color="secondary" onClick={this.toggleModal}>Cancel</Button>
       </ModalFooter>
     </Modal>

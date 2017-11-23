@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {
   Nav,
   NavItem,
+  NavLink,
+  Badge,
   NavbarToggler,
   NavbarBrand,
 } from 'reactstrap';
@@ -15,6 +17,13 @@ class Header extends Component {
 
   constructor(props) {
     super(props);
+  }
+
+  isAuthenticated() {
+    // Check whether the current time is past the 
+    // access token's expiry time
+    let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+    return new Date().getTime() < expiresAt;
   }
 
   sidebarToggle(e) {
@@ -38,6 +47,7 @@ class Header extends Component {
   }
 
   render() {
+    const logged = this.isAuthenticated();
     return (
       <header className="app-header navbar">
         <NavbarToggler className="d-lg-none" onClick={this.mobileSidebarToggle}>
@@ -48,11 +58,46 @@ class Header extends Component {
           <span className="navbar-toggler-icon"></span>
         </NavbarToggler>
         <Nav className="ml-auto" navbar>
+        {
+          logged && (
+            <NavItem className="d-md-down-none">
+            <NavLink href="#"><i className="icon-bell"></i><Badge pill color="danger">5</Badge></NavLink>
+          </NavItem>     
+            )
+        }
+        {
+          logged && (
+            
+            <NavItem className="d-md-down-none">
+            <NavLink href="#"><i className="icon-list"></i></NavLink>
+          </NavItem>
+            
+            )
+        }
+        {
+          logged && (
+            <NavItem className="d-md-down-none">
+            <NavLink href="#"><i className="icon-location-pin"></i></NavLink>
+          </NavItem>     
+            )
+        }
+         {
+          logged && (
+            <NavItem className="d-md-down-none">
+            Hallo, Elvis!
+          </NavItem>
+            )
+        }
           <HeaderDropdown/>
         </Nav>
-        <NavbarToggler className="d-md-down-none" onClick={this.asideToggle}>
-          <span className="navbar-toggler-icon"></span>
-        </NavbarToggler>
+        {
+          logged && (
+            <NavbarToggler className="d-md-down-none" onClick={this.asideToggle}>
+              <span className="navbar-toggler-icon"></span>
+            </NavbarToggler>   
+            )
+        }
+        
       </header>
     )
   }

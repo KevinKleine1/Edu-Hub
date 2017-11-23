@@ -1,7 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {HashRouter, Route, Switch} from 'react-router-dom';
+import {Router, Route} from 'react-router';
+import createBrowserHistory from 'history/createBrowserHistory'
 import { makeMainRoutes } from './routes';
+import history from './history';
+import Auth from './Auth/Auth';
+
 
 // Styles
 // Import Font Awesome Icons Set
@@ -9,23 +13,25 @@ import 'font-awesome/css/font-awesome.min.css';
 // Import Simple Line Icons Set
 import 'simple-line-icons/css/simple-line-icons.css';
 // Import Main styles for this application
-import '../scss/style.scss'
+import '../scss/style.scss';
 // Temp fix for reactstrap
-import '../scss/core/_dropdown-menu-right.scss'
+import '../scss/core/_dropdown-menu-right.scss';
 
 // Containers
-import Full from './containers/Full/'
+import Full from './containers/Full/';
 
-//Views
-import Login from './views/Pages/Login/'
+const auth = new Auth();
 
+const handleAuthentication = (nextState, replace) => {
+  if (/access_token|id_token|error/.test(nextState.location.hash)) {
+    auth.handleAuthentication();
+  }
+}
 
 
 
 ReactDOM.render((
-  <HashRouter>
-    <Switch>
-      <Route path="/" name="Home" component={Full}/>
-    </Switch>
-  </HashRouter>
+  <Router history={history} component={Full}> 
+      <Route path="/" render={(props) => <Full auth={auth} {...props} />} />
+  </Router>
 ), document.getElementById('root'));

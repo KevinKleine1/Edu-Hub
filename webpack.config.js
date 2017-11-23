@@ -20,11 +20,14 @@ module.exports = (env = {}) => {
     },
     output: {
       path: BUILD_DIR,
-      filename: '[name].bundle.js'
+      filename: '[name].bundle.js',
+      publicPath: '/'
+
     },
     // watch: true,
     devtool: env.prod ? 'source-map' : 'cheap-module-eval-source-map',
     devServer: {
+      historyApiFallback: true,
       contentBase: BUILD_DIR,
       //   port: 9001,
       compress: true,
@@ -106,7 +109,12 @@ module.exports = (env = {}) => {
           {from: './public/img', to: 'img'}
         ],
         {copyUnmodified: false}
-      )
+      ),
+      new webpack.DefinePlugin({
+        'process.env': {
+          NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+        }
+      })
     ]
   }
 };
