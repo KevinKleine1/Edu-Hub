@@ -7,7 +7,7 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownToggle,
-  NavDropdown,
+  Dropdown,
   Input,
   InputGroup,
   InputGroupAddon, 
@@ -108,13 +108,30 @@ class HeaderDropdown extends React.Component {
     });
   }
 
+  compare1(){
+    const a = 's256349@mvrht.net';
+    return localStorage.getItem('email') === a  
+  }
+  compare2(){
+    const a = 's688527@mvrht.net';
+    return localStorage.getItem('email') === a
+  }
+
   dropAccnt() {
     const logged = this.isAuthenticated();
+    const peter = this.compare1();
+    const maria = this.compare2();
+    
     return (
-      <NavDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+      <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} nav={true}>
         <DropdownToggle nav>
         {
-          logged && (
+        (logged && peter) && (
+            <img src={'img/avatars/8.jpg'} className="img-avatar" alt="Hallo, Elvis!"/>
+            )
+        }
+        {
+        (logged && maria) && (
             <img src={'img/avatars/5.jpg'} className="img-avatar" alt="Hallo, Maria!"/>
             )
         }
@@ -140,7 +157,7 @@ class HeaderDropdown extends React.Component {
             )
         }
         
-      </NavDropdown>
+      </Dropdown>
      
     );
   }

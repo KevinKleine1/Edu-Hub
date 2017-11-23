@@ -2,6 +2,7 @@ import history from '../history';
 import auth0 from 'auth0-js';
 import Auth0Lock from 'auth0-lock';
 import { AUTH_CONFIG } from './auth0-variables';
+import jwt from 'jsonwebtoken';  //install jsonwebtoken
 
 export default class Auth {
   auth0 = new auth0.WebAuth({
@@ -38,10 +39,17 @@ export default class Auth {
     });
   }
 
-  showData(){
+  showData(){                                                     //Testing function will be deleted for final production
     console.log(localStorage.getItem('access_token'));
     console.log(localStorage.getItem('id_token'));
     console.log(localStorage.getItem('expires_at'));
+  }
+
+  //find a better way to handle the decoding
+  decoden(){
+    var decoded = jwt.decode(localStorage.getItem('id_token'));       //decoder for JWT Token
+    localStorage.setItem('email', decoded.email);
+    console.log(decoded.email);
   }
 
   setSession(authResult) {
@@ -52,6 +60,8 @@ export default class Auth {
     localStorage.setItem('expires_at', expiresAt);
     // navigate to the home route
     history.replace('/dashboard');
+    this.decoden();
+    
   }
 
   logout() {
@@ -59,6 +69,7 @@ export default class Auth {
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
+    localStorage.removeItem('email');
     // navigate to the home route
     history.replace('/dashboard');
   }
