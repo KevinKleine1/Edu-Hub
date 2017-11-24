@@ -46,6 +46,8 @@ class Header extends Component {
     document.body.classList.toggle('aside-menu-hidden');
   }
 
+
+  // testfunctions to check if authentication detects different users
   compare1(){
     const a = 's256349@mvrht.net';
     return localStorage.getItem('email') === a  

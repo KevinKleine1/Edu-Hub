@@ -20,8 +20,10 @@ import '../scss/core/_dropdown-menu-right.scss';
 // Containers
 import Full from './containers/Full/';
 
+// creates the auth object
 const auth = new Auth();
 
+// function to access the id_token and log the user in
 const handleAuthentication = (nextState, replace) => {
   if (/access_token|id_token|error/.test(nextState.location.hash)) {
     auth.handleAuthentication();

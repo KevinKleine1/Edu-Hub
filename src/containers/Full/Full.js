@@ -11,16 +11,24 @@ import Dashboard from '../../views/Dashboard/';
 import Auth from '../../Auth/Auth';
 import Profile from '../../views/Profile/Profile';
 import Admin from '../../views/Admin/Admin';
+import ProfilePop from '../../views/Profile/ProfilePop';
+import AdminPop from '../../views/Admin/AdminPop';
+import Welcome from '../../views/Pages/Welcome/Welcome';
 
-
+//creates the login object to handle the authentication
 const auth = new Auth();
 
+//find a better way to integrate the function globally
+
+//handles the authentication
 const handleAuthentication = (nextState, replace) => {
   if (/access_token|id_token|error/.test(nextState.location.hash)) {
     auth.handleAuthentication();
   }
 }
 
+
+//main app class where everything gets put together
 class Full extends Component {
   render() {
     return (
@@ -35,6 +43,9 @@ class Full extends Component {
               <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
               <Route path="/profil" name="Profil" component={Profile}/>
               <Route path="/admin" name="Admin" component={Admin}/>
+              <Route path="/profilpop" name="Profilpop" component={ProfilePop}/>
+              <Route path="/adminpop" name="Adminpop" component={AdminPop}/>
+              <Route path="/welcome" name="Welcome" component={Welcome}/>
               <Route path="/callback" render={(props) => {
             handleAuthentication(props);
             return <Callback {...props} /> 

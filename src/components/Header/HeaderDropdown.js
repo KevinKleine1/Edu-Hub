@@ -31,6 +31,9 @@ import Auth0Lock from 'auth0-lock';
 
 import LoginForm from '../Forms/LoginForm';
 
+
+
+// customizing objects for the lock
 var options = {
   language: 'de',
   oidcConformant: true,
@@ -59,6 +62,8 @@ var options = {
   },
 };
 
+
+// creates a lock object with our client data to handle the login
 var lock = new Auth0Lock('TAzP3VaJ1PJgDR2S5zTV0c4inUpt9A9J', 'kevkle.eu.auth0.com', options);
 
 class HeaderDropdown extends React.Component {
@@ -66,7 +71,6 @@ class HeaderDropdown extends React.Component {
     super(props);
     
     this.toggle = this.toggle.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
     this.state = {
       dropdownOpen: false,
       modal: false
@@ -86,28 +90,29 @@ class HeaderDropdown extends React.Component {
     auth.login();
    }
 
+
+   // function to show the login modal
    lockLogin(){
     lock.show();
       
     }
 
+  // triggers logout function
   newLogout(){
     const auth = new Auth();
     auth.logout();
   }
 
+  //toggles the dropdown
   toggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen,
     });
   }
 
-  toggleModal() {
-    this.setState({     
-      modal: !this.state.modal
-    });
-  }
 
+  // testfunction to check if the distinguishing of the accounts works
+  //delete in later version
   compare1(){
     const a = 's256349@mvrht.net';
     return localStorage.getItem('email') === a  
@@ -117,14 +122,23 @@ class HeaderDropdown extends React.Component {
     return localStorage.getItem('email') === a
   }
 
+  //drops the header nav
   dropAccnt() {
     const logged = this.isAuthenticated();
     const peter = this.compare1();
     const maria = this.compare2();
+    const testo = (this.compare1() || this.compare2());
     
     return (
       <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} nav={true}>
         <DropdownToggle nav>
+
+        {
+        (logged && !testo) && (
+            <img src={'img/avatars/NotLogged.jpg'} className="img-avatar" alt="Hallo, Elvis!"/>
+            )
+        }
+
         {
         (logged && peter) && (
             <img src={'img/avatars/8.jpg'} className="img-avatar" alt="Hallo, Elvis!"/>
@@ -142,6 +156,14 @@ class HeaderDropdown extends React.Component {
         }
           
         </DropdownToggle>
+
+        {
+          (logged && !testo) && (
+            <DropdownMenu right>
+            <DropdownItem onClick={this.newLogout}><i className="fa fa-user"></i>Ausloggen</DropdownItem>
+            </DropdownMenu>
+            )
+        }
         {
           logged && (
             <DropdownMenu right>

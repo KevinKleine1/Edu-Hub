@@ -4,6 +4,8 @@ import { Input, InputGroup, Container, Row, Col, CardGroup, Card, CardBody, Butt
 
 class Login extends React.Component {
 
+
+  // NOT USED ANYMORE DELETE IN NEXT VERSION
   constructor(props) {
     super(props);
 

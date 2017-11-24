@@ -10,9 +10,9 @@ import {
 import {Grid, Row, Col, Clearfix} from 'react-bootstrap';
 
 
-//change static url to relative ones
+// delete after database connection
 
-class Profile extends Component {
+class ProfilePop extends Component {
     render() {
       return (<div className="container-fluid">
         <div className="card w-75">
@@ -26,7 +26,7 @@ class Profile extends Component {
   
             <div className="container">
               <div className="row justify-content-md-center">
-            <img className="img-circle" src='../img/avatars/5.jpg'></img>
+            <img className="img-circle" src='../img/avatars/8.jpg'></img>
             <br/>
           </div>
         </div>
@@ -46,7 +46,7 @@ class Profile extends Component {
                         </b>
   
                     </InputGroupAddon>
-                    <span className="input-group-addon" id="basic-addon3" style={{width: "500px"}}>Maria Müller</span>
+                    <span className="input-group-addon" id="basic-addon3" style={{width: "500px"}}>Elvis Presley</span>
   
                   </InputGroup>
                   <InputGroup className="mb-3">
@@ -58,7 +58,7 @@ class Profile extends Component {
                         </b>
   
                     </InputGroupAddon>
-                    <span className="input-group-addon" id="basic-addon3" style={{width: "500px"}}>Am alten Markt 13a, 50825 Köln</span>
+                    <span className="input-group-addon" id="basic-addon3" style={{width: "500px"}}>Kingstraße 3, 50825 Köln</span>
   
                   </InputGroup>
                   <InputGroup className="mb-3">
@@ -70,7 +70,7 @@ class Profile extends Component {
                         </b>
   
                     </InputGroupAddon>
-                    <span className="input-group-addon" id="basic-addon3" style={{width: "500px"}}>m.mueller@gmx.de</span>
+                    <span className="input-group-addon" id="basic-addon3" style={{width: "500px"}}>KingOfPop@gmx.de</span>
   
                   </InputGroup>
                   <InputGroup className="mb-3">
@@ -82,7 +82,7 @@ class Profile extends Component {
                         </b>
   
                     </InputGroupAddon>
-                    <span className="input-group-addon" id="basic-addon3" style={{width: "500px"}}> Gymnasium Köln-Ehrenfeld</span>
+                    <span className="input-group-addon" id="basic-addon3" style={{width: "500px"}}> King - School</span>
   
                   </InputGroup>
                 </div>
@@ -112,5 +112,5 @@ class Profile extends Component {
     }
   }
   
-  export default Profile;
+  export default ProfilePop;
   
