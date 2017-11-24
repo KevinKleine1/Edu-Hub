@@ -1,11 +1,16 @@
 import React, {Component} from 'react';
+import history from '../../history';
 import {Container, Input, InputGroup, InputGroupAddon, InputGroupButton, CardGroup, Card, CardBody} from 'reactstrap';
 import {Grid, Row, Col, Clearfix} from 'react-bootstrap';
 
 class Admin extends Component {
+  changeBack(){
+    history.replace('/profil');
+  };
 
-
-    //Change static URL to relative URL
+  changeSave(){
+    history.replace('/profil');
+  };
 
   render() {
     return (
@@ -71,8 +76,8 @@ class Admin extends Component {
 
 <div className="container">
   <div className="row justify-content-md-center">
-    <a href="#" className="btn btn-info" style={{width: "150px"}}><b>speichern</b></a>
-    <a href="http://localhost:8080/#/profile" className="btn btn-secondary" style={{width: "150px"}}><b>zurück</b></a>
+    <button onClick={this.changeSave} className="btn btn-info" style={{width: "150px"}}><b>speichern</b></button>
+    <button onClick={this.changeBack} className="btn btn-secondary" style={{width: "150px"}}><b>zurück</b></button>
 </div>
 </div>
 

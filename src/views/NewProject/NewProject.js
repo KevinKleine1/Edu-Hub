@@ -9,7 +9,7 @@ const brandInfo = '#63c2de';
 const brandWarning = '#f8cb00';
 const brandDanger = '#f86c6b';
 
-// changes const and links
+// changes const 
 
 class NewProject extends Component {
   constructor(props) {

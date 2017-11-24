@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import history from '../../history';
 import {
   Container,
   Input,
@@ -10,9 +11,15 @@ import {
 import {Grid, Row, Col, Clearfix} from 'react-bootstrap';
 
 
-//change static url to relative ones
-
 class Profile extends Component {
+  changeAdmin(){
+    history.replace('/admin');
+  };
+
+  changeBack(){
+    history.replace('/dashboard');
+  };
+
     render() {
       return (<div className="container">
       <div className="row justify-content-md-center">
@@ -93,12 +100,12 @@ class Profile extends Component {
   
             <div className="container">
               <div className="row justify-content-md-center">
-                <a href="http://localhost:8080/#/admin" className="btn btn-info" style={{width: "150px"}}>
-                  <b>ändern</b>
-                </a>
-                <a href="http://localhost:8080/#/dashboard" className="btn btn-secondary" style={{width: "150px"}}>
-                  <b>zurück</b>
-                </a>
+                <button onClick={this.changeAdmin} className="btn btn-info" style={{width: "150px"}}>
+                  <b>Ändern</b>
+                </button>
+                <button onClick={this.changeBack} className="btn btn-secondary" style={{width: "150px"}}>
+                  <b>Zurück</b>
+                </button>
   
               </div>
             </div>
