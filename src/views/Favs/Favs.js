@@ -34,7 +34,7 @@ class Favs extends Component {
 
   render() {
 
-    return (<div>
+    return (<div className="animated fadeIn">
       <div className="container">
         <div className="row">
           <div className="col">

@@ -186,9 +186,95 @@ class Dashboard extends Component {
         }
         {
           !logged && (
-              <h4>
-               Du bist noch nicht eingeloggt!
-              </h4>
+            <div>
+      <div>
+        <div className="card text-center">
+          <div className="card-header">
+            Featured
+          </div>
+          <div className="card-body">
+            <h4 className="card-title">Projekt der Woche</h4>
+            <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+            <a href="#" className="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+      <div className="container">
+        <div className="row">
+          <div className="col">
+            <div className="card" style={{
+                width: "19rem"
+              }}>
+              <img className="card-img-top" src="https://i.imgur.com/ockpsKj.jpg" alt="Card image cap"></img>
+              <div className="card-body">
+                <h4 className="card-title">Bundesjugendspiele</h4>
+                <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+                <a href="#" className="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <div className="card" style={{
+                width: "19rem"
+              }}>
+              <img className="card-img-top" src="https://i.imgur.com/uk2MB1c.jpg" alt="Card image cap"></img>
+              <div className="card-body">
+                <h4 className="card-title">Bibliotheks Ausbau</h4>
+                <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+                <a href="#" className="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <div className="card" style={{
+                width: "19rem"
+              }}>
+              <img className="card-img-top" src="https://i.imgur.com/G6N2paL.jpg" alt="Card image cap"></img>
+              <div className="card-body">
+                <h4 className="card-title">Coding Kurs</h4>
+                <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+                <a href="#" className="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+            <div className="card" style={{
+                width: "19rem"
+              }}>
+              <img className="card-img-top" src="https://i.imgur.com/zGHOb6A.jpg" alt="Card image cap"></img>
+              <div className="card-body">
+                <h4 className="card-title">Lernzentrum</h4>
+                <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+                <a href="#" className="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div className="col">
+          <div className="card" style={{
+              width: "19rem"
+            }}>
+            <img className="card-img-top" src="https://i.imgur.com/KnnT5LQ.jpg" alt="Card image cap"></img>
+            <div className="card-body">
+              <h4 className="card-title">Forschungzentrum</h4>
+              <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+              <a href="#" className="btn btn-primary">Go somewhere</a>
+            </div>
+          </div></div>
+          <div className="col">
+            <div className="card" style={{
+                width: "19rem"
+              }}>
+              <img className="card-img-top" src="https://i.imgur.com/zs0xJsA.jpg" alt="Card image cap"></img>
+              <div className="card-body">
+                <h4 className="card-title">Hobby Werkstatt</h4>
+                <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+                <a href="#" className="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
             )
         }
         </div>
