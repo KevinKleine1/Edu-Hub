@@ -14,6 +14,10 @@ import Admin from '../../views/Admin/Admin';
 import ProfilePop from '../../views/Profile/ProfilePop';
 import AdminPop from '../../views/Admin/AdminPop';
 import Welcome from '../../views/Pages/Welcome/Welcome';
+import NewProject from '../../views/NewProject/NewProject';
+import NoWizard from '../../views/NoWizard/NoWizard';
+import MyProjects from '../../views/MyProjects/MyProjects';
+import Favs from '../../views/Favs/Favs';
 
 //creates the login object to handle the authentication
 const auth = new Auth();
@@ -46,6 +50,10 @@ class Full extends Component {
               <Route path="/profilpop" name="Profilpop" component={ProfilePop}/>
               <Route path="/adminpop" name="Adminpop" component={AdminPop}/>
               <Route path="/welcome" name="Welcome" component={Welcome}/>
+              <Route path="/nowizard" name="Nowizard" component={NoWizard}/>
+              <Route path="/myprojects" name="MyProjects" component={MyProjects}/>
+              <Route path="/neuesprojekt" name="NewProject" component={NewProject}/>
+              <Route path="/favs" name="Favoriten" component={Favs}/>
               <Route path="/callback" render={(props) => {
             handleAuthentication(props);
             return <Callback {...props} /> 

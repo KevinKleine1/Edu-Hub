@@ -14,7 +14,8 @@ import {Grid, Row, Col, Clearfix} from 'react-bootstrap';
 
 class Profile extends Component {
     render() {
-      return (<div className="container-fluid">
+      return (<div className="container">
+      <div className="row justify-content-md-center">
         <div className="card w-75">
           <div className="card-body">
             <div className="alert alert-info" role="alert"></div>
@@ -101,7 +102,7 @@ class Profile extends Component {
   
               </div>
             </div>
-  
+          </div>
             <br/>
   
             <div className="alert alert-info" role="alert"></div>

@@ -1,14 +1,12 @@
 export default {
   items: [
     {
-      name: 'Dashboard',
+      name: 'Home',
       url: '/dashboard',
-      icon: 'icon-speedometer',
-      badge: {
-        variant: 'info',
-        text: 'NEW'
-      }
-    }
+      icon: 'icon-home',
+    },
+    
+    
     
   ]
 };

@@ -1,10 +1,26 @@
 import React, { Component } from 'react';
-import {Input, InputGroup,InputGroupAddon, CardGroup, Container, Row, Col, Button, Modal, ModalHeader, ModalBody, ModalFooter, Card, CardHeader, CardBody} from 'reactstrap';
+import {
+  Row,
+  Col,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  CardTitle,
+  Button,
+  Label,
+  Table
+} from 'reactstrap';
 import LoginForm from "../../components/Forms/LoginForm";
 import Auth from '../../Auth/Auth';
 import {Link, Switch, Route, Redirect} from 'react-router-dom';
 import Welcome from '../Pages/Welcome/Welcome';
 
+const brandPrimary = '#20a8d8';
+const brandSuccess = '#4dbd74';
+const brandInfo = '#63c2de';
+const brandWarning = '#f8cb00';
+const brandDanger = '#f86c6b';
 
 
 const auth = new Auth();
@@ -14,13 +30,15 @@ class Dashboard extends Component {
     super(props);
     this.state = {
       modal: false,
-      isAuthenticated: true
+     dropdownOpen: false
 
     };
 
     this.toggle = this.toggle.bind(this);
   }
   
+
+  // delete
   test(){
     const a = "s256349@mvrht.net";
     const b = "s688527@mvrht.net";
@@ -33,7 +51,8 @@ class Dashboard extends Component {
 
     toggle() {
       this.setState({
-        modal: !this.state.modal
+        dropdownOpen: !this.state.dropdownOpen
+
       });
     }
 
@@ -65,10 +84,6 @@ class Dashboard extends Component {
       {
           (logged && !testo) && (
             <div>
-              <h4>
-               Du bist eingeloggt!
-               <button onClick={this.test}>Test</button>
-              </h4>
               <Redirect from="/dashboard" to="/welcome"/>
               </div>
             
@@ -77,13 +92,102 @@ class Dashboard extends Component {
        {
           logged && (
             <div>
-              <h4>
-               Du bist eingeloggt!
-               <button onClick={this.test}>Test</button>
-              </h4>
+      <div>
+        <div className="card text-center">
+          <div className="card-header">
+            Featured
+          </div>
+          <div className="card-body">
+            <h4 className="card-title">Projekt der Woche</h4>
+            <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+            <a href="#" className="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+      <table className="table">
+        <tbody>
+        <tr>
+          <td>
+            <div className="card" style={{
+                width: "19rem"
+              }}>
+              <img className="card-img-top" src="https://i.imgur.com/ockpsKj.jpg" alt="Card image cap"></img>
+              <div className="card-body">
+                <h4 className="card-title">Bundesjugendspiele</h4>
+                <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+                <a href="#" className="btn btn-primary">Go somewhere</a>
               </div>
+            </div>
+          </td>
+          <td>
+            <div className="card" style={{
+                width: "19rem"
+              }}>
+              <img className="card-img-top" src="https://i.imgur.com/uk2MB1c.jpg" alt="Card image cap"></img>
+              <div className="card-body">
+                <h4 className="card-title">Bibliotheks Ausbau</h4>
+                <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+                <a href="#" className="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div className="card" style={{
+                width: "19rem"
+              }}>
+              <img className="card-img-top" src="https://i.imgur.com/G6N2paL.jpg" alt="Card image cap"></img>
+              <div className="card-body">
+                <h4 className="card-title">Coding Kurs</h4>
+                <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+                <a href="#" className="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div className="card" style={{
+                width: "19rem"
+              }}>
+              <img className="card-img-top" src="https://i.imgur.com/zGHOb6A.jpg" alt="Card image cap"></img>
+              <div className="card-body">
+                <h4 className="card-title">Lernzentrum</h4>
+                <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+                <a href="#" className="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div className="card" style={{
+                width: "19rem"
+              }}>
+              <img className="card-img-top" src="https://i.imgur.com/KnnT5LQ.jpg" alt="Card image cap"></img>
+              <div className="card-body">
+                <h4 className="card-title">Forschungzentrum</h4>
+                <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+                <a href="#" className="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </td>
+          <td>
+            <div className="card" style={{
+                width: "19rem"
+              }}>
+              <img className="card-img-top" src="https://i.imgur.com/zs0xJsA.jpg" alt="Card image cap"></img>
+              <div className="card-body">
+                <h4 className="card-title">Hobby Werkstatt</h4>
+                <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+                <a href="#" className="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      </table>
+    </div>)
+
             
-            )
+            
         }
         {
           !logged && (

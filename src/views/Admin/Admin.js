@@ -10,7 +10,8 @@ class Admin extends Component {
   render() {
     return (
 
-<div className="container-fluid">
+<div className="container">
+      <div className="row justify-content-md-center">
 <div className="card w-75">
   <div className="card-body">
     <div className="alert alert-info" role="alert">
@@ -75,7 +76,7 @@ class Admin extends Component {
 </div>
 </div>
 
-
+</div>
 
 <br />
 <br />

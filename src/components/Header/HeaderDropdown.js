@@ -129,6 +129,8 @@ class HeaderDropdown extends React.Component {
     const maria = this.compare2();
     const testo = (this.compare1() || this.compare2());
     
+
+    //change the logged states when database is connected
     return (
       <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} nav={true}>
         <DropdownToggle nav>
