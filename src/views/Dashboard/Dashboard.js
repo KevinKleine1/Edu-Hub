@@ -104,10 +104,9 @@ class Dashboard extends Component {
           </div>
         </div>
       </div>
-      <table className="table">
-        <tbody>
-        <tr>
-          <td>
+      <div className="container">
+        <div className="row">
+          <div className="col">
             <div className="card" style={{
                 width: "19rem"
               }}>
@@ -118,8 +117,8 @@ class Dashboard extends Component {
                 <a href="#" className="btn btn-primary">Go somewhere</a>
               </div>
             </div>
-          </td>
-          <td>
+          </div>
+          <div className="col">
             <div className="card" style={{
                 width: "19rem"
               }}>
@@ -130,8 +129,8 @@ class Dashboard extends Component {
                 <a href="#" className="btn btn-primary">Go somewhere</a>
               </div>
             </div>
-          </td>
-          <td>
+          </div>
+          <div className="col">
             <div className="card" style={{
                 width: "19rem"
               }}>
@@ -142,10 +141,8 @@ class Dashboard extends Component {
                 <a href="#" className="btn btn-primary">Go somewhere</a>
               </div>
             </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
+          </div>
+          <div className="col">
             <div className="card" style={{
                 width: "19rem"
               }}>
@@ -156,20 +153,19 @@ class Dashboard extends Component {
                 <a href="#" className="btn btn-primary">Go somewhere</a>
               </div>
             </div>
-          </td>
-          <td>
-            <div className="card" style={{
-                width: "19rem"
-              }}>
-              <img className="card-img-top" src="https://i.imgur.com/KnnT5LQ.jpg" alt="Card image cap"></img>
-              <div className="card-body">
-                <h4 className="card-title">Forschungzentrum</h4>
-                <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
-                <a href="#" className="btn btn-primary">Go somewhere</a>
-              </div>
+          </div>
+          <div className="col">
+          <div className="card" style={{
+              width: "19rem"
+            }}>
+            <img className="card-img-top" src="https://i.imgur.com/KnnT5LQ.jpg" alt="Card image cap"></img>
+            <div className="card-body">
+              <h4 className="card-title">Forschungzentrum</h4>
+              <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
+              <a href="#" className="btn btn-primary">Go somewhere</a>
             </div>
-          </td>
-          <td>
+          </div></div>
+          <div className="col">
             <div className="card" style={{
                 width: "19rem"
               }}>
@@ -180,10 +176,9 @@ class Dashboard extends Component {
                 <a href="#" className="btn btn-primary">Go somewhere</a>
               </div>
             </div>
-          </td>
-        </tr>
-      </tbody>
-      </table>
+          </div>
+        </div>
+      </div>
     </div>)
 
             
