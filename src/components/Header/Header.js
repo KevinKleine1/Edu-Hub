@@ -116,7 +116,7 @@ class Header extends Component {
         {
           logged && (
             <NavbarToggler className="d-md-down-none" onClick={this.asideToggle}>
-              <span className="navbar-toggler-icon"></span>
+              <span className="fa fa-table fa-lg mt-4"></span>
             </NavbarToggler>   
             )
         }
