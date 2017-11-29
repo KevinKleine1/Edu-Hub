@@ -11,7 +11,6 @@ import {
   Label,
   Table
 } from 'reactstrap';
-import LoginForm from "../../components/Forms/LoginForm";
 import Auth from '../../Auth/Auth';
 import {Link, Switch, Route, Redirect} from 'react-router-dom';
 import Welcome from '../Pages/Welcome/Welcome';

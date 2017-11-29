@@ -29,10 +29,6 @@ import {
 } from 'reactstrap';
 import Auth0Lock from 'auth0-lock';
 
-import LoginForm from '../Forms/LoginForm';
-
-
-
 // customizing objects for the lock
 var options = {
   language: 'de',
