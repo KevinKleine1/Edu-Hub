@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Router, Route} from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory'
-import { makeMainRoutes } from './routes';
 import history from './history';
 import Auth from './Auth/Auth';
 import Test from './views/Pages/Test/Test';
