@@ -37,15 +37,6 @@ class Dashboard extends Component {
   }
   
 
-  // delete
-  test(){
-    const a = "s256349@mvrht.net";
-    const b = "s688527@mvrht.net";
-    console.log (localStorage.getItem('email') === a);
-    console.log (localStorage.getItem('email') === b);
-    console.log(localStorage.getItem('email'));
-  }
-
   
 
     toggle() {

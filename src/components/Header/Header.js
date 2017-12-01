@@ -15,9 +15,12 @@ import HeaderDropdown from './HeaderDropdown';
 class Header extends Component {
 
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+    this.state = {item: [], };
   }
+
+
 
   isAuthenticated() {
     // Check whether the current time is past the 
@@ -25,6 +28,10 @@ class Header extends Component {
     let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
   }
+
+
+
+
 
   sidebarToggle(e) {
     e.preventDefault();
@@ -48,22 +55,12 @@ class Header extends Component {
 
 
   // testfunctions to check if authentication detects different users
-  compare1(){
-    const a = 's256349@mvrht.net';
-    return localStorage.getItem('email') === a  
-  }
-  compare2(){
-    const a = 's688527@mvrht.net';
-    return localStorage.getItem('email') === a
-  }
 
 
 
   //correct this part after database connection
   render() {
     const logged = this.isAuthenticated();
-    const peter = this.compare1();
-    const maria = this.compare2();
     return (
       <header className="app-header navbar">
         <NavbarToggler className="d-lg-none" onClick={this.mobileSidebarToggle}>
@@ -98,19 +95,13 @@ class Header extends Component {
             )
         }
          {
-          (logged && maria) && (
+          logged && (
             <NavItem className="d-md-down-none">
-            Hallo, Maria!
+            Hallo, {localStorage.getItem('name')}
           </NavItem>
             )
         }
-        {
-          (logged && peter) && (
-            <NavItem className="d-md-down-none">
-            Hallo, Elvis!
-          </NavItem>
-            )
-        }
+        
           <HeaderDropdown/>
         </Nav>
         {

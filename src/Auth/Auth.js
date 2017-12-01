@@ -29,8 +29,7 @@ export default class Auth {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
-        this.showData();
-        history.replace('/dashboard');
+        history.push('/');
       } else if (err) {
         history.replace('/dashboard');
         console.log(err);
@@ -39,17 +38,26 @@ export default class Auth {
     });
   }
 
-  showData(){                                                     //Testing function will be deleted for final production
-    console.log(localStorage.getItem('access_token'));
-    console.log(localStorage.getItem('id_token'));
-    console.log(localStorage.getItem('expires_at'));
-  }
+  
 
   //find a better way to handle the decoding
   decoden(){
     var decoded = jwt.decode(localStorage.getItem('id_token'));       //decoder for JWT Token
     localStorage.setItem('email', decoded.email);
-    console.log(decoded.email);
+
+    var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))
+  
+    fetch(target)
+  
+      .then((results) =>{
+        return results.json();
+  
+        }).then((json)=>{
+        console.log(json.name);
+        localStorage.setItem('name', json.name);
+            })
+    
+   
   }
 
   setSession(authResult) {
@@ -58,8 +66,7 @@ export default class Auth {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
-    // navigate to the home route
-    history.replace('/dashboard');
+    
     this.decoden();
     
   }
@@ -70,6 +77,7 @@ export default class Auth {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     localStorage.removeItem('email');
+    localStorage.removeItem('name');
     // navigate to the home route
     history.replace('/dashboard');
   }
