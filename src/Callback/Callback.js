@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import loading from './loading.svg';
 
 class Callback extends Component {
@@ -13,14 +13,12 @@ class Callback extends Component {
       bottom: 0,
       left: 0,
       right: 0,
-      backgroundColor: 'white',
+      backgroundColor: 'white'
     }
 
-    return (
-      <div style={style}>
-        <img src={loading} alt="loading"/>
-      </div>
-    );
+    return (<div style={style}>
+      <img src={loading} alt="loading"/>
+    </div>);
   }
 }
 

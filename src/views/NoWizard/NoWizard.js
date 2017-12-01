@@ -1,11 +1,5 @@
 import React, {Component} from 'react';
-import {
-  Button,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton
-} from 'reactstrap';
+import {Button, Input, InputGroup, InputGroupAddon, InputGroupButton} from 'reactstrap';
 
 const brandPrimary = '#20a8d8';
 const brandSuccess = '#4dbd74';
@@ -49,14 +43,14 @@ class NoWizard extends Component {
           <label htmlFor="exampleFormControlFile1">Titelbild</label>
           <input type="file" className="form-control-file" id="exampleFormControlFile1"></input>
         </div>
-        </form>
-        <form>
-          <div className="form-group">
-            <label htmlFor="exampleFormControlFile1">Dokumente</label>
-            <input type="file" className="form-control-file" id="exampleFormControlFile1"></input>
-          </div>
-          </form>
-      </div>)
+      </form>
+      <form>
+        <div className="form-group">
+          <label htmlFor="exampleFormControlFile1">Dokumente</label>
+          <input type="file" className="form-control-file" id="exampleFormControlFile1"></input>
+        </div>
+      </form>
+    </div>)
   }
 }
 

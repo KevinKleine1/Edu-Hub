@@ -38,7 +38,7 @@ export default class Auth {
     });
   }
 
-  
+
 
   //find a better way to handle the decoding
   decoden(){
@@ -48,17 +48,17 @@ export default class Auth {
     var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
     //var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
     fetch(target)
-  
+
       .then((results) =>{
         return results.json();
-  
+
         }).then((json)=>{
         console.log(json.name);
         localStorage.setItem('name', json.name);
         localStorage.setItem('picture', json.bild);
             })
-    
-   
+
+
   }
 
   setSession(authResult) {
@@ -67,9 +67,9 @@ export default class Auth {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
-    
+
     this.decoden();
-    
+
   }
 
   logout() {
@@ -85,7 +85,7 @@ export default class Auth {
   }
 
   isAuthenticated() {
-    // Check whether the current time is past the 
+    // Check whether the current time is past the
     // access token's expiry time
     let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;

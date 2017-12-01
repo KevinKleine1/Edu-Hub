@@ -6,7 +6,6 @@ import history from './history';
 import Auth from './Auth/Auth';
 import Test from './views/Pages/Test/Test';
 
-
 // Styles
 // Import Font Awesome Icons Set
 import 'font-awesome/css/font-awesome.min.css';
@@ -30,10 +29,6 @@ const handleAuthentication = (nextState, replace) => {
   }
 }
 
-
-
-ReactDOM.render((
-  <Router history={history} component={Full}> 
-      <Route path="/" render={(props) => <Full auth={auth} {...props} />} /> 
-  </Router>
-), document.getElementById('root'));
+ReactDOM.render((<Router history={history} component={Full}>
+  <Route path="/" render={(props) => <Full auth={auth} {...props}/>}/>
+</Router>), document.getElementById('root'));
