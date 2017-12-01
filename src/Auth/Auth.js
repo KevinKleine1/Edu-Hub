@@ -45,8 +45,8 @@ export default class Auth {
     var decoded = jwt.decode(localStorage.getItem('id_token'));       //decoder for JWT Token
     localStorage.setItem('email', decoded.email);
 
-    var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))
-  
+    var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
+    //var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
     fetch(target)
   
       .then((results) =>{
@@ -55,6 +55,7 @@ export default class Auth {
         }).then((json)=>{
         console.log(json.name);
         localStorage.setItem('name', json.name);
+        localStorage.setItem('picture', json.bild);
             })
     
    
@@ -78,6 +79,7 @@ export default class Auth {
     localStorage.removeItem('expires_at');
     localStorage.removeItem('email');
     localStorage.removeItem('name');
+    localStorage.removeItem('picture');
     // navigate to the home route
     history.replace('/dashboard');
   }
