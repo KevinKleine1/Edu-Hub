@@ -45,17 +45,17 @@ export default class Auth {
     var decoded = jwt.decode(localStorage.getItem('id_token'));       //decoder for JWT Token
     localStorage.setItem('email', decoded.email);
 
-    //var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
-    var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
+    var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
+    //var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
     fetch(target)
 
       .then((results) =>{
         return results.json();
 
         }).then((json)=>{
-        console.log(json.name);
-        localStorage.setItem('name', json.name);
-        localStorage.setItem('picture', json.bild);
+        console.log(json[0].name);
+        localStorage.setItem('name', json[0].name);
+        localStorage.setItem('picture', json[0].bild);
             })
 
 
