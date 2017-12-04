@@ -1,7 +1,7 @@
 import React, {Component, Border} from 'react';
 import {Container, Segment, Image, Header, Icon, Button, Statistic, Label} from 'semantic-ui-react';
 import history from '../../history';
-import jwit from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 var vorname,
 name,
@@ -16,6 +16,46 @@ var karma = 800;
 //change url to relative ones
 
 class Profile extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: ""
+    };
+  }
+
+  setData(){
+    var decoded = jwt.decode(localStorage.getItem('id_token'));       //decoder for JWT Token
+    localStorage.setItem('email', decoded.email);
+
+    var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
+    //var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
+    fetch(target)
+
+      .then((results) =>{
+        return results.json();
+
+        }).then((json)=>{
+          
+          this.setState({data: {}})
+          vorname = json[0].name;
+          name = json[0].surname;
+          strasse = json[0].street;
+          stadt = json[0].city;
+          hausnummer = json[0].number;
+          postcode = json[0].postcode;
+          schule = json[0].schoolid;
+
+          
+            })
+
+
+  }
+
+  componentDidMount(){
+    this.setData(); 
+  }
 
   changeView() {
     history.replace('/test');
