@@ -46,11 +46,13 @@ class Profile extends Component {
           hausnummer = json[0].number;
           postcode = json[0].postcode;
           schule = json[0].schoolid;
+<<<<<<< HEAD
 
 
+=======
+          
+>>>>>>> af3fc20e6241ec3da67cda92c75acf048537236a
             })
-
-
   }
 
   componentDidMount(){
@@ -68,7 +70,7 @@ class Profile extends Component {
 
     render() {
       return (
-
+<div className="animated fadeIn">
  <div className="container">
       <div className="row justify-content-md-center">
         <Segment vertical style={{width: "800px"}}>
@@ -145,6 +147,7 @@ class Profile extends Component {
 </div>
 
   </div>
+</div>
 </div>
 
       )
