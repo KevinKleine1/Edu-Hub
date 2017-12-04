@@ -12,7 +12,7 @@ import {
 } from 'reactstrap';
 import {Grid, Row, Col, Clearfix} from 'react-bootstrap';
 
-class Admin extends Component {
+class Test extends Component {
   changeBack() {
     history.replace('/profil');
   };
@@ -129,4 +129,4 @@ class Admin extends Component {
   }
 }
 
-export default Admin;
+export default Test;

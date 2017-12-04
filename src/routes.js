@@ -6,6 +6,7 @@ const routes = {
   '/neuesprojekt': 'Neus Projekt',
   '/nowizard': 'Erstellen ohne Wizard',
   '/MyProjects': 'Meine Projekte',
+  '/test': 'Test',
   '/favs': 'Meine Favoriten'
 
 };
