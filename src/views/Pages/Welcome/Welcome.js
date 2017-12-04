@@ -36,7 +36,7 @@ class Welcome extends React.Component {
     
     
     fetch(
-      //'http://edu-hub-backend.azurewebsites.net/user/'                          //prod
+      //'http://edu-hub-backend.azurewebsites.net/user/'                          //prodo
       'http://localhost:8000/user/', {                                            //dev
       method: 'POST',
       headers: {
