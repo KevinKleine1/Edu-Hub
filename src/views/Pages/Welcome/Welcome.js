@@ -10,13 +10,48 @@ import {
   CardBody
 } from 'reactstrap';
 import {Grid, Row, Col, Clearfix} from 'react-bootstrap';
+import 'whatwg-fetch'
 
-class Welcome extends Component {
+class Welcome extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      Name: "",
+      Strasse: "",
 
+    };
+  }
   //Change static URL to relative URL
 
+  updateInputValue(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+
+  
+  onSubmit() {
+    
+    fetch('http://localhost:8000/user/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: localStorage.getItem("email"),
+        name: this.state.Name,
+        street: this.state.Strasse,
+      })
+    })
+    
+}
+
+  
   render() {
-    return (<div className="container-fluid">
+    return (   
+    <div className="container-fluid">
       <div className="card w-75">
         <div className="card-body">
           <div className="alert alert-info" role="alert"></div>
@@ -47,14 +82,14 @@ class Welcome extends Component {
                 <i className="icon-user"></i>
               </InputGroupAddon>
 
-              <Input type="text" placeholder="Name"/>
+              <Input value={this.state.inputValue} name="Name" onChange={(e) => this.updateInputValue(e)} type="text" placeholder="Name"/>
             </InputGroup>
             <InputGroup className="mb-3">
               <InputGroupAddon>
                 <i className="icon-location-pin"></i>
               </InputGroupAddon>
 
-              <Input type="text" placeholder="Anschrift"/>
+              <Input type="text" name="Strasse" onChange={(e) => this.updateInputValue(e)} placeholder="Anschrift"/>
             </InputGroup>
             <InputGroup className="mb-3">
               <InputGroupAddon>
@@ -74,11 +109,11 @@ class Welcome extends Component {
 
           <div className="container">
             <div className="row justify-content-md-center">
-              <a href="#" className="btn btn-info" style={{
+              <button onClick={this.onSubmit.bind(this)} className="btn btn-info" style={{
                   width: "150px"
                 }}>
                 <b>speichern</b>
-              </a>
+              </button>
               <a href="http://localhost:8080/#/profile" className="btn btn-secondary" style={{
                   width: "150px"
                 }}>
