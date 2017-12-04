@@ -1,142 +1,83 @@
 import React, {Component} from 'react';
-import history from '../../history';
-import {
-  Container,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  Label
-} from 'reactstrap';
-import {Grid, Row, Col, Clearfix} from 'react-bootstrap';
+import {Container, Segment, Image, Header, Icon, Button} from 'semantic-ui-react';
+
+
+
+
+//change url to relative ones
 
 class Profile extends Component {
-  changeAdmin() {
-    history.replace('/admin');
-  };
-
-  changeBack() {
-    history.replace('/dashboard');
-  };
-
-  render() {
-    return (<div className="container">
+    render() {
+      return (
+ <div className="container">
       <div className="row justify-content-md-center">
-        <div className="card w-75">
-          <div className="card-body">
-            <div className="alert alert-info" role="alert"></div>
-            <h4 className="card-title">
-              <b>Mein Profil</b>
-            </h4>
-            <br/>
-
-            <div className="container">
-              <div className="row justify-content-md-center">
-                <img className="img-circle" src='../img/avatars/5.jpg'></img>
-                <br/>
-              </div>
-            </div>
-            <br/>
-
-            <div className="container">
-              <div className="row justify-content-md-center">
-
-                <div className="card-text">
-
-                  <InputGroup className="mb-3">
-
-                    <InputGroupAddon style={{
-                        width: "100px"
-                      }}>
-
-                      <b>
-                        Name
-                      </b>
-
-                    </InputGroupAddon>
-                    <span className="input-group-addon" id="basic-addon3" style={{
-                        width: "500px"
-                      }}>Maria Müller</span>
-
-                  </InputGroup>
-                  <InputGroup className="mb-3">
-
-                    <InputGroupAddon style={{
-                        width: "100px"
-                      }}>
-
-                      <b>
-                        Anschrift
-                      </b>
-
-                    </InputGroupAddon>
-                    <span className="input-group-addon" id="basic-addon3" style={{
-                        width: "500px"
-                      }}>Am alten Markt 13a, 50825 Köln</span>
-
-                  </InputGroup>
-                  <InputGroup className="mb-3">
-
-                    <InputGroupAddon style={{
-                        width: "100px"
-                      }}>
-
-                      <b>
-                        Email
-                      </b>
-
-                    </InputGroupAddon>
-                    <span className="input-group-addon" id="basic-addon3" style={{
-                        width: "500px"
-                      }}>m.mueller@gmx.de</span>
-
-                  </InputGroup>
-                  <InputGroup className="mb-3">
-
-                    <InputGroupAddon style={{
-                        width: "100px"
-                      }}>
-
-                      <b>
-                        Schule
-                      </b>
-
-                    </InputGroupAddon>
-                    <span className="input-group-addon" id="basic-addon3" style={{
-                        width: "500px"
-                      }}>
-                      Gymnasium Köln-Ehrenfeld</span>
-
-                  </InputGroup>
-                </div>
-
-              </div>
-            </div>
-
-            <div className="container">
-              <div className="row justify-content-md-center">
-                <button onClick={this.changeAdmin} className="btn btn-info" style={{
-                    width: "150px"
-                  }}>
-                  <b>Ändern</b>
-                </button>
-                <button onClick={this.changeBack} className="btn btn-secondary" style={{
-                    width: "150px"
-                  }}>
-                  <b>Zurück</b>
-                </button>
-
-              </div>
-            </div>
-          </div>
-          <br/>
-
-          <div className="alert alert-info" role="alert"></div>
-
-        </div>
-      </div>
-    </div>);
+        <Segment vertical style={{width: "800px"}}>
+            <img className="img-circle" src='../img/avatars/5.jpg' style={{width: "200px"}} align="right"></img>
+          <Header as='h2'>
+    <Icon name='user outline' />
+    <Header.Content>
+      Maria Müller
+      <Header.Subheader>
+        Mein Profill
+      </Header.Subheader>
+    </Header.Content>
+  </Header>
+        <p style={{width: "580px"}}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+      </Segment>
+      <Segment vertical style={{width: "800px"}}>
+    <Header as='h3' floated='left'>
+     <b>Name</b>
+    </Header>
+    <Header as='h3' floated='right' color='grey'>
+      Maria Müller
+    </Header>
+      </Segment>
+      <Segment vertical style={{width: "800px"}}>
+    <Header as='h3' floated='left'>
+      Anschrift
+    </Header>
+    <Header as='h3' floated='right' color='grey'>
+      Alter Markt 43a, 50825 Köln
+    </Header>
+      </Segment>
+      <Segment vertical style={{width: "800px"}}>
+    <Header as='h3' floated='left'>
+      Email
+    </Header>
+    <Header as='h3' floated='right' color='grey'>
+      maria.mueller@gmx.de
+    </Header>
+      </Segment>
+      <Segment vertical style={{width: "800px"}}>
+    <Header as='h3' floated='left'>
+      Schule
+    </Header>
+    <Header as='h3' floated='right' color='grey'>
+      Gymnasium Köln-Ehrenfeld
+    </Header>
+      </Segment>
+      <div className="container">
+<div className="row justify-content-md-center">
+  <div>
+    <br/>
+    <Button animated style={{width: "150px"}} a href="http://localhost:8080/#/dashboard">
+          <Button.Content visible>bearbeiten</Button.Content>
+          <Button.Content hidden>
+            <Icon name='pencil' />
+          </Button.Content>
+        </Button>
+        <Button animated style={{width: "150px"}}>
+              <Button.Content visible>zurück</Button.Content>
+              <Button.Content hidden>
+                <Icon name='arrow left' />
+              </Button.Content>
+            </Button>
+</div>
+</div>
+</div>
+  </div>
+</div>
+      )
+    }
   }
-}
-
-export default Profile;
+  export default Profile;
