@@ -1,24 +1,74 @@
 import React, {Component} from 'react';
 import {Container, Segment, Image, Header, Icon, Button} from 'semantic-ui-react';
+import jwt from 'jsonwebtoken';
 
 
+var vorname,
+name,
+strasse,
+stadt,
+hausnummer,
+postcode,
+schule;
 
 
 //change url to relative ones
 
 class Profile extends Component {
-    render() {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      data: ""
+    };
+  }
+  
+  setData(){
+    var decoded = jwt.decode(localStorage.getItem('id_token'));       //decoder for JWT Token
+    localStorage.setItem('email', decoded.email);
+
+    var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
+    //var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
+    fetch(target)
+
+      .then((results) =>{
+        return results.json();
+
+        }).then((json)=>{
+          
+          this.setState({data: {}})
+          vorname = json[0].name;
+          name = json[0].surname;
+          strasse = json[0].street;
+          stadt = json[0].city;
+          hausnummer = json[0].number;
+          postcode = json[0].postcode;
+          schule = json[0].schoolid;
+
+          
+            })
+
+
+  }
+
+  componentDidMount(){
+    this.setData(); 
+  }
+
+    render() {      
+          
       return (
  <div className="container">
       <div className="row justify-content-md-center">
         <Segment vertical style={{width: "800px"}}>
-            <img className="img-circle" src='../img/avatars/5.jpg' style={{width: "200px"}} align="right"></img>
+            <img className="img-circle" src ={ 'img/avatars/' + localStorage.getItem("picture") }style={{width: "200px"}} align="right"></img>
           <Header as='h2'>
     <Icon name='user outline' />
     <Header.Content>
-      Maria Müller
+      {vorname} {name}
       <Header.Subheader>
-        Mein Profill
+        Mein Profil
       </Header.Subheader>
     </Header.Content>
   </Header>
@@ -29,7 +79,7 @@ class Profile extends Component {
      <b>Name</b>
     </Header>
     <Header as='h3' floated='right' color='grey'>
-      Maria Müller
+      {vorname} {name}
     </Header>
       </Segment>
       <Segment vertical style={{width: "800px"}}>
@@ -37,7 +87,7 @@ class Profile extends Component {
       Anschrift
     </Header>
     <Header as='h3' floated='right' color='grey'>
-      Alter Markt 43a, 50825 Köln
+      {strasse} {hausnummer} , {postcode} {stadt}
     </Header>
       </Segment>
       <Segment vertical style={{width: "800px"}}>
@@ -45,7 +95,7 @@ class Profile extends Component {
       Email
     </Header>
     <Header as='h3' floated='right' color='grey'>
-      maria.mueller@gmx.de
+      {localStorage.getItem("email")}
     </Header>
       </Segment>
       <Segment vertical style={{width: "800px"}}>
@@ -53,14 +103,14 @@ class Profile extends Component {
       Schule
     </Header>
     <Header as='h3' floated='right' color='grey'>
-      Gymnasium Köln-Ehrenfeld
+      {schule}
     </Header>
       </Segment>
       <div className="container">
 <div className="row justify-content-md-center">
   <div>
     <br/>
-    <Button animated style={{width: "150px"}} a href="http://localhost:8080/#/dashboard">
+    <Button animated style={{width: "150px"}} >
           <Button.Content visible>bearbeiten</Button.Content>
           <Button.Content hidden>
             <Icon name='pencil' />
