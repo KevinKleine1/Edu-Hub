@@ -30,14 +30,9 @@ export default class Auth {
   handleAuthentication() {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult);
-        var check = "check";
-        var checko = "check";
-        check = localStorage.getItem("email");
-        if(check == checko){        
-          history.replace('/welcome')          
-        } else{
-        history.push('/dashboard');}
+        this.setSession(authResult);       
+        history.replace('/dashboard')          
+     
       } else if (err) {
         history.replace('/dashboard');
         console.log(err);
@@ -60,10 +55,13 @@ export default class Auth {
       .then((results) =>{
         return results.json();
 
-        }).then((json)=>{    
+        }).then((json)=>{
+          try{    
         localStorage.setItem('name', json[0].name);
         localStorage.setItem('picture', json[0].bild);
-        
+          }catch(e){
+            history.replace('/welcome');
+          }
             })
 
 

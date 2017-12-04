@@ -50,7 +50,7 @@ class Profile extends Component {
   }
 
   componentWillMount(){
-    this.setData();
+    
   }
 
   changeView() {
@@ -63,6 +63,7 @@ class Profile extends Component {
 
 
     render() {
+      this.setData();
       return (
 <div className="animated fadeIn">
  <div className="container">
