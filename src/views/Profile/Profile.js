@@ -1,7 +1,15 @@
 import React, {Component, Border} from 'react';
 import {Container, Segment, Image, Header, Icon, Button, Statistic, Label} from 'semantic-ui-react';
 import history from '../../history';
+import jwit from 'jsonwebtoken';
 
+var vorname,
+name,
+strasse,
+stadt,
+hausnummer,
+postcode,
+schule;
 
 
 var karma = 800;
@@ -24,14 +32,13 @@ class Profile extends Component {
  <div className="container">
       <div className="row justify-content-md-center">
         <Segment vertical style={{width: "800px"}}>
-            <img className="img-circle" src='../img/avatars/5.jpg' style={{width: "200px"}} align="right"></img>
-            
+            <img className="img-circle" src ={ 'img/avatars/' + localStorage.getItem("picture") }style={{width: "200px"}} align="right"></img>
           <Header as='h2'>
     <Icon name='user outline' />
     <Header.Content>
-      Maria Müller
+      {vorname} {name}
       <Header.Subheader>
-        Mein Profill
+        Mein Profil
       </Header.Subheader>
     </Header.Content>
   </Header>
@@ -42,7 +49,7 @@ class Profile extends Component {
      <b>Name</b>
     </Header>
     <Header as='h3' floated='right' color='grey'>
-      Maria Müller
+      {vorname} {name}
     </Header>
       </Segment>
       <Segment vertical style={{width: "800px"}}>
@@ -50,7 +57,7 @@ class Profile extends Component {
       Anschrift
     </Header>
     <Header as='h3' floated='right' color='grey'>
-      Alter Markt 43a, 50825 Köln
+      {strasse} {hausnummer} , {postcode} {stadt}
     </Header>
       </Segment>
       <Segment vertical style={{width: "800px"}}>
@@ -58,7 +65,7 @@ class Profile extends Component {
       Email
     </Header>
     <Header as='h3' floated='right' color='grey'>
-      maria.mueller@gmx.de
+      {localStorage.getItem("email")}
     </Header>
       </Segment>
       <Segment vertical style={{width: "800px"}}>
@@ -66,7 +73,7 @@ class Profile extends Component {
       Schule
     </Header>
     <Header as='h3' floated='right' color='grey'>
-      Gymnasium Köln-Ehrenfeld
+      {schule}
     </Header>
       </Segment>
       <Segment vertical style={{width: "800px"}}>

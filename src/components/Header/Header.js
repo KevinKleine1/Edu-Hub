@@ -60,12 +60,12 @@ class Header extends Component {
       <NavbarToggler className="d-md-down-none mr-auto" onClick={this.sidebarToggle}>
         <span className="navbar-toggler-icon"></span>
       </NavbarToggler>
-      <Nav className="ml-auto" navbar="navbar">
+      <Nav className="ml-auto" navbar= {true}>
         {
           logged && (<NavItem className="d-md-down-none">
             <NavLink href="#">
               <i className="icon-bell"></i>
-              <Badge pill="pill" color="danger">5</Badge>
+              <Badge pill= {true} color="danger">5</Badge>
             </NavLink>
           </NavItem>)
         }

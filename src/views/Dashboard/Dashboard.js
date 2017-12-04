@@ -49,26 +49,10 @@ class Dashboard extends Component {
     return new Date().getTime() < expiresAt;
   }
 
-  // testfunction to check if the distinguishing of the accounts works
-  //delete in later version
-  compare1() {
-    const a = 's256349@mvrht.net';
-    return localStorage.getItem('email') === a
-  }
-  compare2() {
-    const a = 's688527@mvrht.net';
-    return localStorage.getItem('email') === a
-  }
 
   render() {
     const logged = this.isAuthenticated();
-    const testo = (this.compare1() || this.compare2());
-    return (<div className="animated fadeIn">
-      {
-        (logged && !testo) && (<div>
-          <Redirect from="/dashboard" to="/welcome"/>
-        </div>)
-      }
+    return (<div className="animated fadeIn"> 
       {
         logged && (<div>
           <div>

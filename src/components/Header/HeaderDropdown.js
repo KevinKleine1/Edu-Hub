@@ -111,7 +111,7 @@ class HeaderDropdown extends React.Component {
 
     //change the logged states when database is connected
     return (<Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} nav={true}>
-      <DropdownToggle nav="nav">
+      <DropdownToggle nav= {true }>
 
         {logged && (<img src={'img/avatars/' + localStorage.getItem('picture')} className="img-avatar" alt="Hallo, Maria!"/>)}
         {!logged && (<img src={'img/avatars/NotLogged.jpg'} className="img-avatar" alt="Nicht Registriert"/>)}
@@ -119,13 +119,13 @@ class HeaderDropdown extends React.Component {
       </DropdownToggle>
 
       {
-        logged && (<DropdownMenu right="right">
+        logged && (<DropdownMenu right= {true}>
           <DropdownItem onClick={this.newLogout}>
             <i className="fa fa-user"></i>Ausloggen</DropdownItem>
         </DropdownMenu>)
       }
       {
-        !logged && (<DropdownMenu right="right">
+        !logged && (<DropdownMenu right={true}>
           <DropdownItem onClick={this.lockLogin}>
             <i className="fa fa-user"></i>
             Einloggen/Registrieren</DropdownItem>
