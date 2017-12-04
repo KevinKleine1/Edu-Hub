@@ -46,12 +46,8 @@ class Profile extends Component {
           hausnummer = json[0].number;
           postcode = json[0].postcode;
           schule = json[0].schoolid;
-<<<<<<< HEAD
 
 
-=======
-          
->>>>>>> af3fc20e6241ec3da67cda92c75acf048537236a
             })
   }
 
