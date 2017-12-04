@@ -4,18 +4,16 @@ import {
   Container,
   Input,
   InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  CardGroup,
-  Card,
-  CardBody
-} from 'reactstrap';
-import {Grid, Row, Col, Clearfix} from 'react-bootstrap';
+  InputGroupAddon} from 'reactstrap';
+import {Header, Icon, Button,Card} from 'semantic-ui-react';
+
+var karma = 800;
 
 class Test extends Component {
-  changeBack() {
-    history.replace('/profil');
-  };
+
+  goBack(){
+    history.go(-1);
+  }
 
   changeSave() {
     history.replace('/profil');
@@ -24,16 +22,22 @@ class Test extends Component {
   render() {
     return (<div className="container">
       <div className="row justify-content-md-center">
-        <div className="card w-75">
-          <div className="card-body">
-            <div className="alert alert-info" role="alert"></div>
-            <h4 className="card-title">
-              <b>Profil verwalten</b>
-            </h4>
+        <Card style={{width: "800px"}}>
+          <Card.Content style={{width: "800px"}}>
+
+            <Header as='h2'>
+      <Icon name='setting' />
+      <Header.Content>
+        Profil bearbeiten
+        <Header.Subheader>
+          Maria Müller
+        </Header.Subheader>
+      </Header.Content>
+      </Header>
             <br/>
             <div className="container">
               <div className="row justify-content-md-center">
-                <img className="img-circle" src='../img/avatars/5.jpg'></img>
+                  <img className="img-circle" src='../img/avatars/5.jpg'></img>
                 <br/>
               </div>
             </div>
@@ -41,7 +45,7 @@ class Test extends Component {
             <div className="container">
               <div className="row justify-content-md-center">
                 <div className="form-group">
-                  <label htmlFor="exampleFormControlFile1">Profilfoto aktualisieren</label>
+                  <label htmlFor="exampleFormControlFile1"><b>Profilfoto aktualisieren</b></label>
                   <br/>
                   <input type="file" className="form-control-file" id="exampleFormControlFile1"></input>
                 </div>
@@ -51,43 +55,55 @@ class Test extends Component {
             <div className="card-text">
               <InputGroup className="mb-3">
                 <InputGroupAddon>
-                  <i className="icon-user"></i>
+                  <Icon name='user' />
                 </InputGroupAddon>
 
                 <Input type="text" placeholder="Name"/>
               </InputGroup>
               <InputGroup className="mb-3">
                 <InputGroupAddon>
-                  <i className="icon-location-pin"></i>
+                  <Icon name='map pin' />
                 </InputGroupAddon>
 
                 <Input type="text" placeholder="Anschrift"/>
               </InputGroup>
               <InputGroup className="mb-3">
                 <InputGroupAddon>
-                  <i className="icon-envelope-open"></i>
+                  <Icon name='mail' />
                 </InputGroupAddon>
 
                 <Input type="text" placeholder="Email"/>
               </InputGroup>
               <InputGroup className="mb-3">
                 <InputGroupAddon>
-                  <i className="icon-graduation"></i>
+                  <Icon name='student' />
                 </InputGroupAddon>
-
                 <Input type="text" placeholder="Schule"/>
               </InputGroup>
               <InputGroup className="mb-3">
                 <InputGroupAddon>
-                  <i className="icon-lock"></i>
+                  <Icon name='book' />
                 </InputGroupAddon>
+                <Input type="text" placeholder="Fächer"/>
+              </InputGroup>
+              <InputGroup className="mb-3">
+                <InputGroupAddon>
+                  <Icon name='write' />
+                </InputGroupAddon>
+                <Input type="text" placeholder="Profilbeschreibung"/>
+              </InputGroup>
+              <InputGroup className="mb-3">
+                <InputGroupAddon>
+                  <Icon name='lock' />
+                </InputGroupAddon>
+
                 <Input type="password" placeholder="altes Passwort"/>
               </InputGroup>
             </div>
             <div>
               <InputGroup className="mb-3">
                 <InputGroupAddon>
-                  <i className="icon-lock"></i>
+                  <Icon name='lock' />
                 </InputGroupAddon>
                 <Input type="password" placeholder="neues Passwort"/>
               </InputGroup>
@@ -95,35 +111,34 @@ class Test extends Component {
             <div>
               <InputGroup className="mb-3">
                 <InputGroupAddon>
-                  <i className="icon-lock"></i>
+                  <Icon name='lock' />
                 </InputGroupAddon>
                 <Input type="password" placeholder="Passwort wiederholen"/>
               </InputGroup>
+
             </div>
 
             <div className="container">
               <div className="row justify-content-md-center">
-                <button onClick={this.changeSave} className="btn btn-info" style={{
-                    width: "150px"
-                  }}>
-                  <b>speichern</b>
-                </button>
-                <button onClick={this.changeBack} className="btn btn-secondary" style={{
-                    width: "150px"
-                  }}>
-                  <b>zurück</b>
-                </button>
+                <Button animated color='teal' style={{width: "150px"}} onClick={this.changeSave}>
+                      <Button.Content hidden>speichern</Button.Content>
+                      <Button.Content visible>
+                        <Icon name='check' />
+                      </Button.Content>
+                    </Button>
+                    <Button animated color='teal' style={{width: "150px"}} onClick={this.goBack}>
+                          <Button.Content hidden>zurück</Button.Content>
+                          <Button.Content visible>
+                            <Icon name='arrow left' />
+                          </Button.Content>
+                        </Button>
               </div>
             </div>
+          
 
-          </div>
+          </Card.Content>
 
-          <br/>
-          <br/>
-
-          <div className="alert alert-info" role="alert"></div>
-
-        </div>
+        </Card>
       </div>
     </div>);
   }

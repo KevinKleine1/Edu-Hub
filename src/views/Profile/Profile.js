@@ -1,18 +1,31 @@
-import React, {Component} from 'react';
-import {Container, Segment, Image, Header, Icon, Button} from 'semantic-ui-react';
+import React, {Component, Border} from 'react';
+import {Container, Segment, Image, Header, Icon, Button, Statistic, Label} from 'semantic-ui-react';
+import history from '../../history';
 
 
 
-
+var karma = 800;
 //change url to relative ones
 
 class Profile extends Component {
+
+  changeView() {
+    history.replace('/test');
+  };
+
+  goBack(){
+    history.go(-1);
+  }
+
+
     render() {
       return (
+
  <div className="container">
       <div className="row justify-content-md-center">
         <Segment vertical style={{width: "800px"}}>
             <img className="img-circle" src='../img/avatars/5.jpg' style={{width: "200px"}} align="right"></img>
+            
           <Header as='h2'>
     <Icon name='user outline' />
     <Header.Content>
@@ -56,27 +69,37 @@ class Profile extends Component {
       Gymnasium Köln-Ehrenfeld
     </Header>
       </Segment>
+      <Segment vertical style={{width: "800px"}}>
+    <Header as='h3' floated='left'>
+      Fächer
+    </Header>
+    <Header as='h3' floated='right' color='grey'>
+      Englisch, Deutsch, Kunst
+    </Header>
+      </Segment>
       <div className="container">
 <div className="row justify-content-md-center">
   <div>
     <br/>
-    <Button animated style={{width: "150px"}} a href="http://localhost:8080/#/dashboard">
-          <Button.Content visible>bearbeiten</Button.Content>
-          <Button.Content hidden>
+    <Button animated color='teal' style={{width: "150px"}} onClick={this.changeView}>
+          <Button.Content hidden>bearbeiten</Button.Content>
+          <Button.Content visible>
             <Icon name='pencil' />
           </Button.Content>
         </Button>
-        <Button animated style={{width: "150px"}}>
-              <Button.Content visible>zurück</Button.Content>
-              <Button.Content hidden>
+        <Button animated color='teal' style={{width: "150px"}} onClick={this.goBack} >
+              <Button.Content hidden>zurück</Button.Content>
+              <Button.Content visible>
                 <Icon name='arrow left' />
               </Button.Content>
             </Button>
 </div>
 </div>
 </div>
+
   </div>
 </div>
+
       )
     }
   }
