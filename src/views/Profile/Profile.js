@@ -37,7 +37,7 @@ class Profile extends Component {
         return results.json();
 
         }).then((json)=>{
-          
+
           this.setState({data: {}})
           vorname = json[0].name;
           name = json[0].surname;
@@ -47,14 +47,14 @@ class Profile extends Component {
           postcode = json[0].postcode;
           schule = json[0].schoolid;
 
-          
+
             })
 
 
   }
 
   componentDidMount(){
-    this.setData(); 
+    this.setData();
   }
 
   changeView() {
