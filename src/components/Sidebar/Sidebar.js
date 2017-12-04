@@ -37,16 +37,6 @@ class Sidebar extends Component {
   // }
 
 
-  // change later
-  compare1(){
-    const a = 's256349@mvrht.net';
-    return localStorage.getItem('email') === a  
-  }
-  compare2(){
-    const a = 's688527@mvrht.net';
-    return localStorage.getItem('email') === a
-  }
-
   render() {
     const logged = this.isAuthenticated();
     const props = this.props;
@@ -118,9 +108,6 @@ class Sidebar extends Component {
       return items.map( (item, index) => navLink(item, index) );
     };
 
-    const peter = this.compare1();
-    const maria = this.compare2();
-
     // sidebar-nav root
     return (
       <div className="sidebar">
@@ -131,15 +118,9 @@ class Sidebar extends Component {
 
             {navList(nav.items)}
             {
-          (logged && maria) && (
+          logged && (
             navList(navuser.items)
             )
-        }
-
-        {
-          (logged && peter) && (
-            navList(navuserpop.items)
-          )
         }
              
           </Nav>

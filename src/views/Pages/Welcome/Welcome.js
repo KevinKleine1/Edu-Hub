@@ -11,6 +11,7 @@ import {
 } from 'reactstrap';
 import {Grid, Row, Col, Clearfix} from 'react-bootstrap';
 import 'whatwg-fetch'
+import history from '../../../history';
 
 class Welcome extends React.Component {
   constructor(props) {
@@ -33,7 +34,10 @@ class Welcome extends React.Component {
   
   onSubmit() {
     
-    fetch('http://localhost:8000/user/', {
+    
+    fetch(
+      //'http://edu-hub-backend.azurewebsites.net/user/'                          //prod
+      'http://localhost:8000/user/', {                                            //dev
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -45,7 +49,7 @@ class Welcome extends React.Component {
         street: this.state.Strasse,
       })
     })
-    
+    history.replace('/dashboard');
 }
 
   
