@@ -5,7 +5,7 @@ import { AUTH_CONFIG } from './auth0-variables';
 import jwt from 'jsonwebtoken';  //install jsonwebtoken
 
 
-var check = null;
+
 export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: AUTH_CONFIG.domain,
@@ -31,7 +31,10 @@ export default class Auth {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
-        if(check == null){        
+        var check = "check";
+        var checko = "check";
+        check = localStorage.getItem("email");
+        if(check == checko){        
           history.replace('/welcome')          
         } else{
         history.push('/dashboard');}
@@ -57,12 +60,10 @@ export default class Auth {
       .then((results) =>{
         return results.json();
 
-        }).then((json)=>{
-        try{
-        check = json[0].name;
-        }catch(e){}
+        }).then((json)=>{    
         localStorage.setItem('name', json[0].name);
         localStorage.setItem('picture', json[0].bild);
+        
             })
 
 

@@ -46,12 +46,10 @@ class Profile extends Component {
           hausnummer = json[0].number;
           postcode = json[0].postcode;
           schule = json[0].schoolid;
-
-
             })
   }
 
-  componentDidMount(){
+  componentWillMount(){
     this.setData();
   }
 
