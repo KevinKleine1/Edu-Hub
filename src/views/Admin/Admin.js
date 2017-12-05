@@ -10,16 +10,22 @@ class Admin extends Component {
 
       state = {
       Vorname: "",
+      VornameT: "",
       vornameError: false,
       Nachname: "",
+      NachnameT:"",
       nachnameError: false,
       Strasse: "",
+      StrasseT: "",
       strasseError: false,
       Hausnummer: "",
+      HausnummerT: "",
       hausnummerError: false,
       Stadt: "",
+      StadtT: "",
       stadtError: false,
       Postcode: "",
+      PostcodeT: "",
       postcodeError: false,
       Fehler: false,
       Erfolg: false
@@ -62,9 +68,6 @@ class Admin extends Component {
   };
 
   onSubmit() {
-    console.log(this.state.Vorname);
-    console.log(this.state.Nachname);
-    console.log(this.state.Strasse);
      fetch(
        //'http://edu-hub-backend.azurewebsites.net/user/'                          //prodo
        'http://localhost:8000/user/', {                                            //dev
