@@ -15,15 +15,22 @@ schule;
 var karma = 800;
 //change url to relative ones
 
-class Profile extends Component {
+class Profile extends React.Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      data: ""
+      Vorname: "",
+      Nachname: "",
+      Strasse: "",
+      Stadt: "",
+      Hausnummer: "",
+      Postcode: "",
+
     };
   }
+
 
   setData(){
     var decoded = jwt.decode(localStorage.getItem('id_token'));       //decoder for JWT Token
@@ -38,32 +45,30 @@ class Profile extends Component {
 
         }).then((json)=>{
 
-          this.setState({data: {}})
-          vorname = json[0].name;
-          name = json[0].surname;
-          strasse = json[0].street;
-          stadt = json[0].city;
-          hausnummer = json[0].number;
-          postcode = json[0].postcode;
-          schule = json[0].schoolid;
+          this.setState({Vorname : json[0].name});
+          this.setState({Nachname : json[0].surname});
+          this.setState({Stadt : json[0].city});
+          this.setState({Hausnummer : json[0].number});
+          this.setState({Postcode : json[0].postcode});
+          this.setState({Strasse : json[0].street});
+        
             })
   }
 
-  componentWillMount(){
-    
-  }
-
   changeView() {
-    history.replace('/test');
+    history.replace('/admin');
   };
 
   goBack(){
     history.go(-1);
   }
 
+  componentDidMount(){
+    this.setData();
+  }
+
 
     render() {
-      this.setData();
       return (
 <div className="animated fadeIn">
  <div className="container">
@@ -73,7 +78,7 @@ class Profile extends Component {
           <Header as='h2'>
     <Icon name='user outline' />
     <Header.Content>
-      {vorname} {name}
+      {this.state.Vorname} {this.state.Nachname}
       <Header.Subheader>
         Mein Profil
       </Header.Subheader>
@@ -86,7 +91,7 @@ class Profile extends Component {
      <b>Name</b>
     </Header>
     <Header as='h3' floated='right' color='grey'>
-      {vorname} {name}
+    {this.state.Vorname} {this.state.Nachname}
     </Header>
       </Segment>
       <Segment vertical style={{width: "800px"}}>
@@ -94,7 +99,7 @@ class Profile extends Component {
       Anschrift
     </Header>
     <Header as='h3' floated='right' color='grey'>
-      {strasse} {hausnummer} , {postcode} {stadt}
+      {this.state.Strasse} {this.state.Hausnummer} , {this.state.Postcode} {this.state.Stadt}
     </Header>
       </Segment>
       <Segment vertical style={{width: "800px"}}>
@@ -110,7 +115,7 @@ class Profile extends Component {
       Schule
     </Header>
     <Header as='h3' floated='right' color='grey'>
-      {schule}
+      Open-Schhol
     </Header>
       </Segment>
       <Segment vertical style={{width: "800px"}}>

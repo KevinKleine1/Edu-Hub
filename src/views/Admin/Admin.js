@@ -6,16 +6,59 @@ import {
   InputGroup,
   InputGroupAddon} from 'reactstrap';
 import {Header, Icon, Button,Card} from 'semantic-ui-react';
+import jwt from 'jsonwebtoken';
+import 'whatwg-fetch'
 
 class Admin extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      Vorname: "",
+      Nachname: "",
+      Strasse: "",
+      Hausnummer: "",
+      Stadt: "",
+      Postcode: ""
+    };
+  }
+
+  updateInputValue(e) {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  onSubmit() {
+   
+    
+    fetch(
+      //'http://edu-hub-backend.azurewebsites.net/user/'                          //prodo
+      'http://localhost:8000/user/', {                                            //dev
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: localStorage.getItem("email"),
+        name: this.state.Vorname,
+        surname: this.state.Nachname,
+        street: this.state.Strasse,
+        city: this.state.Stadt,
+        number: this.state.Hausnummer,
+        postcode: this.state.Postcode,
+      })
+    })
+    localStorage.setItem("name", this.state.Vorname);
+    history.replace("/profil");
+
+}
 
   goBack(){
     history.go(-1);
   }
-
-  changeSave() {
-    history.replace('/profil');
-  };
 
   render() {
     return (<div className="container">
@@ -56,22 +99,44 @@ class Admin extends Component {
                   <Icon name='user' />
                 </InputGroupAddon>
 
-                <Input type="text" placeholder="Name"/>
+                <Input onChange={(e) => this.updateInputValue(e)} name="Vorname" type="text" placeholder="Vorname"/>
+              </InputGroup>
+              <InputGroup className="mb-3">
+                <InputGroupAddon>
+                  <Icon name='user' />
+                </InputGroupAddon>
+
+                <Input onChange={(e) => this.updateInputValue(e)} name="Nachname" type="text" placeholder="Nachname"/>
               </InputGroup>
               <InputGroup className="mb-3">
                 <InputGroupAddon>
                   <Icon name='map pin' />
                 </InputGroupAddon>
 
-                <Input type="text" placeholder="Anschrift"/>
+                <Input onChange={(e) => this.updateInputValue(e)} name="Strasse" type="text" placeholder="Straße"/>
               </InputGroup>
               <InputGroup className="mb-3">
                 <InputGroupAddon>
-                  <Icon name='mail' />
+                  <Icon name='map pin' />
                 </InputGroupAddon>
 
-                <Input type="text" placeholder="Email"/>
+                <Input onChange={(e) => this.updateInputValue(e)} name="Hausnummer" type="int" placeholder="Hausnummer"/>
               </InputGroup>
+              <InputGroup className="mb-3">
+                <InputGroupAddon>
+                  <Icon name='map pin' />
+                </InputGroupAddon>
+
+                <Input onChange={(e) => this.updateInputValue(e)} name="Stadt" type="text" placeholder="Stadt"/>
+              </InputGroup>
+              <InputGroup className="mb-3">
+                <InputGroupAddon>
+                  <Icon name='map pin' />
+                </InputGroupAddon>
+
+                <Input onChange={(e) => this.updateInputValue(e)} name="Postcode" type="int" placeholder="Postleitzahl"/>
+              </InputGroup>
+             
               <InputGroup className="mb-3">
                 <InputGroupAddon>
                   <Icon name='student' />
@@ -80,45 +145,16 @@ class Admin extends Component {
               </InputGroup>
               <InputGroup className="mb-3">
                 <InputGroupAddon>
-                  <Icon name='book' />
-                </InputGroupAddon>
-                <Input type="text" placeholder="Fächer"/>
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
                   <Icon name='write' />
                 </InputGroupAddon>
-                <Input type="text" placeholder="Profilbeschreibung"/>
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='lock' />
-                </InputGroupAddon>
-
-                <Input type="password" placeholder="altes Passwort"/>
+                <Input onChange={(e) => this.updateInputValue(e)} type="text" placeholder="Profilbeschreibung"/>
               </InputGroup>
             </div>
-            <div>
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='lock' />
-                </InputGroupAddon>
-                <Input type="password" placeholder="neues Passwort"/>
-              </InputGroup>
-            </div>
-            <div>
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='lock' />
-                </InputGroupAddon>
-                <Input type="password" placeholder="Passwort wiederholen"/>
-              </InputGroup>
-
-            </div>
+         
 
             <div className="container">
               <div className="row justify-content-md-center">
-                <Button animated color='teal' style={{width: "150px"}} onClick={this.changeSave}>
+                <Button animated color='teal' style={{width: "150px"}} onClick={this.onSubmit.bind(this)}>
                       <Button.Content hidden>speichern</Button.Content>
                       <Button.Content visible>
                         <Icon name='check' />
