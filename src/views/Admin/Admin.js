@@ -10,22 +10,22 @@ class Admin extends Component {
 
       state = {
       Vorname: "",
-      VornameT: "",
+      VornameT: true,
       vornameError: false,
       Nachname: "",
-      NachnameT:"",
+      NachnameT:true,
       nachnameError: false,
       Strasse: "",
-      StrasseT: "",
+      StrasseT: true,
       strasseError: false,
       Hausnummer: "",
-      HausnummerT: "",
+      HausnummerT: true,
       hausnummerError: false,
       Stadt: "",
-      StadtT: "",
+      StadtT: true,
       stadtError: false,
       Postcode: "",
-      PostcodeT: "",
+      PostcodeT: true,
       postcodeError: false,
       Fehler: false,
       Erfolg: false
@@ -43,7 +43,13 @@ class Admin extends Component {
       hausnummerError: false,
       stadtError: false,
       postcodeError: false,
-      Fehler: false
+      Fehler: false,
+      VornameT: true,
+      NachnameT: true,
+      StrasseT: true,
+      HausnummerT: true,
+      StadtT: true,
+      PostcodeT: true
     };
   
     if (isNaN(this.state.Hausnummer)) {
@@ -58,6 +64,26 @@ class Admin extends Component {
       errors.Fehler =true;
     }
 
+    if (this.state.Vorname.length < 1){
+      errors.VornameT = false;
+    }
+    if (this.state.Nachname.length < 1){
+      errors.NachnameT = false;
+    }
+     if (this.state.Strasse.length < 1){
+      errors.StrasseT = false;
+    }
+    if (this.state.Hausnummer.length < 1){
+      errors.HausnummerT = false;
+     }
+    if (this.state.Stadt.length < 1){
+      errors.StadtT = false;   
+     }
+     if (this.state.Postcode.length < 1){
+        errors.PostcodeT = false;        
+     }
+
+
     if (isError){
       this.setState({
         ...this.state,
@@ -66,6 +92,8 @@ class Admin extends Component {
     }
     return isError;
   };
+
+
 
   onSubmit() {
      fetch(
