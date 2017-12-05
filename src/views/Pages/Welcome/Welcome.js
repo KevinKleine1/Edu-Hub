@@ -145,9 +145,9 @@ class Welcome extends Component {
             <Header as='h2'>
       <Icon name='setting' />
       <Header.Content>
-        Profil bearbeiten
+        Daten Vervollständigen
         <Header.Subheader>
-          Maria Müller
+          Neuer Nutzer
         </Header.Subheader>
       </Header.Content>
       </Header>
