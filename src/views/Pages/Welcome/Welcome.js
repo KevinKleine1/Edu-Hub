@@ -55,7 +55,7 @@ class Welcome extends Component {
       errors.strasseError = true;
       errors.Fehler =true;
     }
-    if (this.state.Hausnummer.length < 1) {
+    if (this.state.Hausnummer.length < 1 || isNaN(this.state.Hausnummer)) {
       isError = true;
       errors.hausnummerError = true;
       errors.Fehler =true;
@@ -65,7 +65,7 @@ class Welcome extends Component {
       errors.stadtError = true;
       errors.Fehler =true;
     }
-    if (this.state.Postcode.length < 1) {
+    if (this.state.Postcode.length < 1 || isNaN(this.state.Postcode)) {
       isError = true;
       errors.postcodeError = true;
       errors.Fehler =true;
@@ -199,7 +199,7 @@ class Welcome extends Component {
                  <Message
                     error
                     header='Fehler bei Eingabe'
-                    content='Alle Felder müssen ausgefüllt sein.'
+                    content='Alle Felder müssen ausgefüllt sein und Hausnummer und PLZ müssen Zahlen sein.'
                     /> 
                     <Message
                     success
