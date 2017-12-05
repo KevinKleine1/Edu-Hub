@@ -9,9 +9,11 @@ import {
   Card,
   CardBody
 } from 'reactstrap';
+import {Link} from 'react-router-dom';
 import {Grid, Row, Col, Clearfix} from 'react-bootstrap';
-import 'whatwg-fetch'
+import 'whatwg-fetch';
 import history from '../../../history';
+import Profile from '../../Profile/Profile';
 
 class Welcome extends React.Component {
   constructor(props) {
@@ -49,7 +51,7 @@ class Welcome extends React.Component {
         street: this.state.Strasse,
       })
     })
-    history.replace('/dashboard');
+  history.push('/dashboard');
 }
 
   
@@ -113,7 +115,7 @@ class Welcome extends React.Component {
 
           <div className="container">
             <div className="row justify-content-md-center">
-              <button onClick={this.onSubmit.bind(this)} className="btn btn-info" style={{
+              <button onClick={this.onSubmit.bind(this)} Link="/profile" className="btn btn-info" style={{
                   width: "150px"
                 }}>
                 <b>speichern</b>

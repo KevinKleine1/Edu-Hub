@@ -7,9 +7,10 @@ import {
   InputGroupAddon} from 'reactstrap';
 import {Header, Icon, Button,Card} from 'semantic-ui-react';
 import jwt from 'jsonwebtoken';
-import 'whatwg-fetch'
+import 'whatwg-fetch';
+import {Link, Switch, Route, Redirect} from 'react-router-dom';
 
-class Admin extends Component {
+class Admin extends React.Component {
 
   constructor(props) {
     super(props);
@@ -31,7 +32,7 @@ class Admin extends Component {
   }
 
   onSubmit() {
-   
+  
     
     fetch(
       //'http://edu-hub-backend.azurewebsites.net/user/'                          //prodo
@@ -52,7 +53,7 @@ class Admin extends Component {
       })
     })
     localStorage.setItem("name", this.state.Vorname);
-    history.replace("/profil");
+    
 
 }
 
@@ -65,7 +66,6 @@ class Admin extends Component {
       <div className="row justify-content-md-center">
         <Card style={{width: "800px"}}>
           <Card.Content style={{width: "800px"}}>
-
             <Header as='h2'>
       <Icon name='setting' />
       <Header.Content>
@@ -154,12 +154,14 @@ class Admin extends Component {
 
             <div className="container">
               <div className="row justify-content-md-center">
-                <Button animated color='teal' style={{width: "150px"}} onClick={this.onSubmit.bind(this)}>
+                <Link to="/profil">
+                     <Button animated color='teal' style={{width: "150px"}} onClick={this.onSubmit.bind(this)}>
                       <Button.Content hidden>speichern</Button.Content>
                       <Button.Content visible>
                         <Icon name='check' />
                       </Button.Content>
                     </Button>
+                </Link>
                     <Button animated color='teal' style={{width: "150px"}} onClick={this.goBack}>
                           <Button.Content hidden>zurück</Button.Content>
                           <Button.Content visible>

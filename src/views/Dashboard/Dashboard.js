@@ -22,7 +22,7 @@ const brandWarning = '#f8cb00';
 const brandDanger = '#f86c6b';
 
 const auth = new Auth();
-class Dashboard extends Component {
+class Dashboard extends React.Component {
 
   constructor(props) {
     super(props);
@@ -49,6 +49,9 @@ class Dashboard extends Component {
     return new Date().getTime() < expiresAt;
   }
 
+  test(){
+    history.push
+  }
 
   render() {
     const logged = this.isAuthenticated();

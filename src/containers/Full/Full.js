@@ -33,7 +33,7 @@ const handleAuthentication = (nextState, replace) => {
 
 
 //main app class where everything gets put together
-class Full extends Component {
+class Full extends React.Component {
   render() {
     return (
       <div className="app">
