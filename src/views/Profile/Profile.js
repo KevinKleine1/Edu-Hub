@@ -69,6 +69,7 @@ class Profile extends React.Component {
 
 
     render() {
+      const { Vorname, Nachname, Strasse, Hausnummer, Stadt, Postcode } = this.state
       return (
 <div className="animated fadeIn">
  <div className="container">
@@ -78,7 +79,7 @@ class Profile extends React.Component {
           <Header as='h2'>
     <Icon name='user outline' />
     <Header.Content>
-      {this.state.Vorname} {this.state.Nachname}
+      {Vorname} {Nachname}
       <Header.Subheader>
         Mein Profil
       </Header.Subheader>
@@ -91,7 +92,7 @@ class Profile extends React.Component {
      <b>Name</b>
     </Header>
     <Header as='h3' floated='right' color='grey'>
-    {this.state.Vorname} {this.state.Nachname}
+    {Vorname} {Nachname}
     </Header>
       </Segment>
       <Segment vertical style={{width: "800px"}}>
@@ -99,7 +100,7 @@ class Profile extends React.Component {
       Anschrift
     </Header>
     <Header as='h3' floated='right' color='grey'>
-      {this.state.Strasse} {this.state.Hausnummer} , {this.state.Postcode} {this.state.Stadt}
+      {Strasse} {Hausnummer} , {Postcode} {Stadt}
     </Header>
       </Segment>
       <Segment vertical style={{width: "800px"}}>
@@ -115,7 +116,7 @@ class Profile extends React.Component {
       Schule
     </Header>
     <Header as='h3' floated='right' color='grey'>
-      Open-Schhol
+      Open-School
     </Header>
       </Segment>
       <Segment vertical style={{width: "800px"}}>
