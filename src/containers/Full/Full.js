@@ -16,9 +16,13 @@ import NewProject from '../../views/NewProject/NewProject';
 import NoWizard from '../../views/NoWizard/NoWizard';
 import MyProjects from '../../views/MyProjects/MyProjects';
 import Favs from '../../views/Favs/Favs';
+<<<<<<< HEAD
+import ProjectPage from '../../views/ProjectPage/projectPage';
+=======
 import Discover from '../../views/Discover/Discover';
 import Test from '../../views/Pages/Test/Test';
 import Test2 from '../../views/Test2/Test2';
+>>>>>>> 8abb8d4e8a77a08dcd91bbc49cb4a5242a18cbcc
 
 //creates the login object to handle the authentication
 const auth = new Auth();
@@ -53,6 +57,7 @@ class Full extends React.Component {
               <Route path="/myprojects" name="MyProjects" component={MyProjects}/>
               <Route path="/neuesprojekt" name="NewProject" component={NewProject}/>
               <Route path="/favs" name="Favoriten" component={Favs}/>
+              <Route path="/projectpage" name="ProjectPage" component={ProjectPage}/>
               <Route path="/discover" name="Entdecken" component={Discover}/>
               <Route path="/test" name="Test" component={Test}/>
               <Route path="/test2" name="Test" component={Test2}/>
