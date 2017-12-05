@@ -18,6 +18,7 @@ import MyProjects from '../../views/MyProjects/MyProjects';
 import Favs from '../../views/Favs/Favs';
 import Discover from '../../views/Discover/Discover';
 import Test from '../../views/Pages/Test/Test';
+import Test2 from '../../views/Test2/Test2';
 
 //creates the login object to handle the authentication
 const auth = new Auth();
@@ -54,6 +55,7 @@ class Full extends React.Component {
               <Route path="/favs" name="Favoriten" component={Favs}/>
               <Route path="/discover" name="Entdecken" component={Discover}/>
               <Route path="/test" name="Test" component={Test}/>
+              <Route path="/test2" name="Test" component={Test2}/>
               <Route path="/callback" render={(props) => {
             handleAuthentication(props);
             return <Callback {...props} />

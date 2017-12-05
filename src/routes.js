@@ -7,6 +7,7 @@ const routes = {
   '/nowizard': 'Erstellen ohne Wizard',
   '/MyProjects': 'Meine Projekte',
   '/test': 'Test',
+  '/test2': 'Test2',
   '/favs': 'Meine Favoriten'
 
 };
