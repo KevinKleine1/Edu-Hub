@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import history from '../../../history';
 import { Container} from 'reactstrap';
-import {Header, Icon, Button,Card, Form} from 'semantic-ui-react';
+import {Header, Message, Icon, Button,Card, Form} from 'semantic-ui-react';
 import jwt from 'jsonwebtoken';
 import 'whatwg-fetch'
 
@@ -20,7 +20,8 @@ class Test extends Component {
       Stadt: "",
       stadtError: false,
       Postcode: "",
-      postcodeError: false
+      postcodeError: false,
+      Fehler: false
     };
   
 
@@ -34,32 +35,39 @@ class Test extends Component {
       strasseError: false,
       hausnummerError: false,
       stadtError: false,
-      postcodeError: false
+      postcodeError: false,
+      Fehler: false
     };
 
     if (this.state.Vorname.length < 1) {
       isError = true;
       errors.vornameError = true;
+      errors.Fehler =true;
     }
     if (this.state.Nachname.length < 1) {
       isError = true;
-      errors.vornameError = true;
+      errors.nachnameError = true;
+      errors.Fehler =true;
     }
     if (this.state.Strasse.length < 1) {
       isError = true;
-      errors.vornameError = true;
+      errors.strasseError = true;
+      errors.Fehler =true;
     }
     if (this.state.Hausnummer.length < 1) {
       isError = true;
-      errors.vornameError = true;
+      errors.hausnummerError = true;
+      errors.Fehler =true;
     }
     if (this.state.Stadt.length < 1) {
       isError = true;
-      errors.vornameError = true;
+      errors.stadtError = true;
+      errors.Fehler =true;
     }
     if (this.state.Postcode.length < 1) {
       isError = true;
-      errors.vornameError = true;
+      errors.postcodeError = true;
+      errors.Fehler =true;
     }
 
     if (isError){
@@ -84,6 +92,13 @@ class Test extends Component {
       Hausnummer: "",
       Stadt: "",
       Postcode: "",
+      vornameError: false,
+      nachnameError: false,
+      strasseError: false,
+      hausnummerError: false,
+      stadtError: false,
+      postcodeError: false,
+      Fehler: false
     });
   }}
 
@@ -151,7 +166,7 @@ class Test extends Component {
             </div>
 
             <div className="card-text">
-            <Form onSubmit={this.handleSubmit}>
+            <Form error={this.state.Fehler} onSubmit={this.handleSubmit}>
                  
                  <Form.Field>
                     <label>Vorname</label>
@@ -176,7 +191,12 @@ class Test extends Component {
                  <Form.Field>
                    <label>Postleitzahl</label>
                    <Form.Input name="Postcode" value={Postcode} onChange={this.handleChange} error={this.state.postcodeError} placeholder='Postleitzahl' />
-                 </Form.Field>             
+                 </Form.Field>
+                 <Message
+                    error
+                    header='Fehler bei Eingabe'
+                    content='Alle Felder müssen ausgefüllt sein.'
+    />             
             </Form>
             </div>
          

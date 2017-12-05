@@ -1,38 +1,110 @@
 import React, {Component} from 'react';
 import history from '../../../history';
-import {
-  Container,
-  Input,
-  InputGroup,
-  InputGroupAddon} from 'reactstrap';
-import {Header, Icon, Button,Card} from 'semantic-ui-react';
+import { Container} from 'reactstrap';
+import {Header, Message, Icon, Button,Card, Form} from 'semantic-ui-react';
 import jwt from 'jsonwebtoken';
-import 'whatwg-fetch';
-import {Link, Switch, Route, Redirect} from 'react-router-dom';
+import 'whatwg-fetch'
 
-class Welcome extends React.Component {
 
-  constructor(props) {
-    super(props);
+class Welcome extends Component {
 
-    this.state = {
+      state = {
+      Vorname: "",
+      vornameError: false,
+      Nachname: "",
+      nachnameError: false,
+      Strasse: "",
+      strasseError: false,
+      Hausnummer: "",
+      hausnummerError: false,
+      Stadt: "",
+      stadtError: false,
+      Postcode: "",
+      postcodeError: false,
+      Fehler: false,
+      Erfolg: false
+    };
+  
+
+    handleChange = (e, { name, value }) => this.setState({ [name]: value })
+
+  validate = () =>{
+    let isError = false;
+    const errors = {
+      vornameError: false,
+      nachnameError: false,
+      strasseError: false,
+      hausnummerError: false,
+      stadtError: false,
+      postcodeError: false,
+      Fehler: false
+    };
+
+    if (this.state.Vorname.length < 1) {
+      isError = true;
+      errors.vornameError = true;
+      errors.Fehler =true;
+    }
+    if (this.state.Nachname.length < 1) {
+      isError = true;
+      errors.nachnameError = true;
+      errors.Fehler =true;
+    }
+    if (this.state.Strasse.length < 1) {
+      isError = true;
+      errors.strasseError = true;
+      errors.Fehler =true;
+    }
+    if (this.state.Hausnummer.length < 1) {
+      isError = true;
+      errors.hausnummerError = true;
+      errors.Fehler =true;
+    }
+    if (this.state.Stadt.length < 1) {
+      isError = true;
+      errors.stadtError = true;
+      errors.Fehler =true;
+    }
+    if (this.state.Postcode.length < 1) {
+      isError = true;
+      errors.postcodeError = true;
+      errors.Fehler =true;
+    }
+
+    if (isError){
+      this.setState({
+        ...this.state,
+        ...errors
+      });
+    }
+    return isError;
+  };
+
+  handleSubmit(){
+    console.log(this.state.Vorname)
+    const err = this.validate();
+    if(!err){
+    onSubmit();
+
+    this.setState ( {
       Vorname: "",
       Nachname: "",
       Strasse: "",
       Hausnummer: "",
       Stadt: "",
-      Postcode: ""
-    };
-  }
-
-  updateInputValue(e) {
-    this.setState({
-      [e.target.name]: e.target.value
+      Postcode: "",
+      vornameError: false,
+      nachnameError: false,
+      strasseError: false,
+      hausnummerError: false,
+      stadtError: false,
+      postcodeError: false,
+      Fehler: false
     });
-  }
+  }}
 
   onSubmit() {
-  
+   
     
     fetch(
       //'http://edu-hub-backend.azurewebsites.net/user/'                          //prodo
@@ -53,8 +125,6 @@ class Welcome extends React.Component {
       })
     })
     localStorage.setItem("name", this.state.Vorname);
-    history.push('/dashboard');
-
 }
 
   goBack(){
@@ -62,23 +132,25 @@ class Welcome extends React.Component {
   }
 
   render() {
+    const { Vorname, Nachname, Strasse, Hausnummer, Stadt, Postcode } = this.state
     return (<div className="container">
       <div className="row justify-content-md-center">
         <Card style={{width: "800px"}}>
           <Card.Content style={{width: "800px"}}>
+
             <Header as='h2'>
       <Icon name='setting' />
       <Header.Content>
-        Daten vervollständigen
+        Profil bearbeiten
         <Header.Subheader>
-          Neuer Nutzer
+          Maria Müller
         </Header.Subheader>
       </Header.Content>
       </Header>
             <br/>
             <div className="container">
               <div className="row justify-content-md-center">
-                  <img className="img-circle" src='../img/avatars/NotLogged.jpg'></img>
+                  <img className="img-circle" src='../img/avatars/5.jpg'></img>
                 <br/>
               </div>
             </div>
@@ -86,7 +158,7 @@ class Welcome extends React.Component {
             <div className="container">
               <div className="row justify-content-md-center">
                 <div className="form-group">
-                  <label htmlFor="exampleFormControlFile1"><b>Profilfoto hinzufügen</b></label>
+                  <label htmlFor="exampleFormControlFile1"><b>Profilfoto aktualisieren</b></label>
                   <br/>
                   <input type="file" className="form-control-file" id="exampleFormControlFile1"></input>
                 </div>
@@ -94,74 +166,60 @@ class Welcome extends React.Component {
             </div>
 
             <div className="card-text">
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='user' />
-                </InputGroupAddon>
-
-                <Input onChange={(e) => this.updateInputValue(e)} name="Vorname" type="text" placeholder="Vorname"/>
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='user' />
-                </InputGroupAddon>
-
-                <Input onChange={(e) => this.updateInputValue(e)} name="Nachname" type="text" placeholder="Nachname"/>
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='map pin' />
-                </InputGroupAddon>
-
-                <Input onChange={(e) => this.updateInputValue(e)} name="Strasse" type="text" placeholder="Straße"/>
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='map pin' />
-                </InputGroupAddon>
-
-                <Input onChange={(e) => this.updateInputValue(e)} name="Hausnummer" type="int" placeholder="Hausnummer"/>
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='map pin' />
-                </InputGroupAddon>
-
-                <Input onChange={(e) => this.updateInputValue(e)} name="Stadt" type="text" placeholder="Stadt"/>
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='map pin' />
-                </InputGroupAddon>
-
-                <Input onChange={(e) => this.updateInputValue(e)} name="Postcode" type="int" placeholder="Postleitzahl"/>
-              </InputGroup>
-             
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='student' />
-                </InputGroupAddon>
-                <Input type="text" placeholder="Schule"/>
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='write' />
-                </InputGroupAddon>
-                <Input onChange={(e) => this.updateInputValue(e)} type="text" placeholder="Profilbeschreibung"/>
-              </InputGroup>
+            <Form error={this.state.Fehler} success={this.state.Erfolg} onSubmit={this.handleSubmit}>
+                 
+                 <Form.Field>
+                    <label>Vorname</label>
+                    <Form.Input name="Vorname" value={Vorname} onChange={this.handleChange} error={this.state.vornameError} placeholder='Vorname' />
+                  </Form.Field>
+                  <Form.Field>
+                   <label>Last Name</label>
+                   <Form.Input name="Nachname" value={Nachname} onChange={this.handleChange} error={this.state.nachnameError} placeholder='Nachname' />
+                  </Form.Field>
+                  <Form.Field>
+                   <label>Straße</label>
+                   <Form.Input name="Strasse" value={Strasse} onChange={this.handleChange} error={this.state.strasseError} placeholder='Straße' />
+                 </Form.Field>
+                 <Form.Field>
+                   <label>Hausnummer</label>
+                   <Form.Input name="Hausnummer" value={Hausnummer} onChange={this.handleChange} error={this.state.hausnummerError} placeholder='Hausnummer' />
+                 </Form.Field>
+                 <Form.Field>
+                   <label>Stadt</label>
+                   <Form.Input name="Stadt" value={Stadt} onChange={this.handleChange} error={this.state.stadtError} placeholder='Stadt' />
+                 </Form.Field>
+                 <Form.Field>
+                   <label>Postleitzahl</label>
+                   <Form.Input name="Postcode" value={Postcode} onChange={this.handleChange} error={this.state.postcodeError} placeholder='Postleitzahl' />
+                 </Form.Field>
+                 <Message
+                    error
+                    header='Fehler bei Eingabe'
+                    content='Alle Felder müssen ausgefüllt sein.'
+                    /> 
+                    <Message
+                    success
+                    header='Daten erfolgreich erstellt'
+                    content='Viel Spaß auf Edu-Hub.'
+                    />              
+            </Form>
             </div>
          
 
             <div className="container">
               <div className="row justify-content-md-center">
-                <Link to="/profil">
-                     <Button animated color='teal' style={{width: "150px"}} onClick={this.onSubmit.bind(this)}>
-                      <Button.Content hidden>Daten speichern</Button.Content>
+                <Button animated color='teal' style={{width: "150px"}} onClick={this.handleSubmit.bind(this)}>
+                      <Button.Content hidden>speichern</Button.Content>
                       <Button.Content visible>
                         <Icon name='check' />
                       </Button.Content>
                     </Button>
-                </Link>
+                    <Button animated color='teal' style={{width: "150px"}} onClick={this.goBack}>
+                          <Button.Content hidden>zurück</Button.Content>
+                          <Button.Content visible>
+                            <Icon name='arrow left' />
+                          </Button.Content>
+                        </Button>
               </div>
             </div>
 
