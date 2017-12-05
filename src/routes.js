@@ -8,6 +8,9 @@ const routes = {
   '/MyProjects': 'Meine Projekte',
   '/favs': 'Meine Favoriten',
   '/projectpage': 'Projekt Seite'
+  '/test': 'Test',
+  '/test2': 'Test2',
+  '/favs': 'Meine Favoriten'
 
 };
 export default routes;

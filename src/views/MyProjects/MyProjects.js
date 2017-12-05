@@ -1,8 +1,12 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
+<<<<<<< HEAD
 import {Table} from 'semantic-ui-react';
 
 //Bug: Datum wird nicht richtig sortiert
+=======
+import {Button, Table} from 'reactstrap';
+>>>>>>> 8abb8d4e8a77a08dcd91bbc49cb4a5242a18cbcc
 
 const brandPrimary = '#20a8d8';
 const brandSuccess = '#4dbd74';
@@ -51,6 +55,7 @@ class MyProjects extends React.Component {
         direction: 'ascending'
       })
 
+<<<<<<< HEAD
       return
     }
 
@@ -64,6 +69,57 @@ class MyProjects extends React.Component {
 
   render() {
     const {column, data, direction} = this.state
+=======
+    return (<div className="animated fadeIn">
+      <table className="table table-bordered table-hover table-sm">
+        <thead className="thead-dark">
+          <tr>
+            <th>#</th>
+            <th>Projekt Name</th>
+            <th>Status</th>
+            <th>Zuletzt verändert</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr className="table-success">
+            <th scope="row">1</th>
+            <td>Lernzentrum</td>
+            <td>Fertig</td>
+            <td>19.02.2017</td>
+          </tr>
+          <tr className="table-success">
+            <th scope="row">2</th>
+            <td>Bundesjugendspiele</td>
+            <td>Fertig</td>
+            <td>02.09.1945</td>
+          </tr>
+          <tr className="table-warning">
+            <th scope="row">3</th>
+            <td>Fitness Studio</td>
+            <td>In Bearbeitung</td>
+            <td>01.01.0001</td>
+          </tr>
+          <tr className="table-success">
+            <th scope="row">4</th>
+            <td>Coding Kurs</td>
+            <td>Fertig</td>
+            <td>09.08.2017</td>
+          </tr>
+          <tr className="table-warning">
+            <th scope="row">5</th>
+            <td>Forschungszentrum</td>
+            <td>In Bearbeitung</td>
+            <td>02.02.2017</td>
+          </tr>
+          <tr className="table-warning">
+            <th scope="row">6</th>
+            <td>Hobby Werkstatt</td>
+            <td>In Bearbeitung</td>
+            <td>30.12.2016</td>
+          </tr>
+        </tbody>
+      </table>
+>>>>>>> 8abb8d4e8a77a08dcd91bbc49cb4a5242a18cbcc
 
     return (<Table sortable="sortable" celled="celled" fixed="fixed" selectable="selectable">
       <Table.Header>

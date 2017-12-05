@@ -22,7 +22,8 @@ const brandWarning = '#f8cb00';
 const brandDanger = '#f86c6b';
 
 const auth = new Auth();
-class Dashboard extends React.Component {
+
+class Test2 extends React.Component {
 
   constructor(props) {
     super(props);
@@ -55,7 +56,7 @@ class Dashboard extends React.Component {
 
   render() {
     const logged = this.isAuthenticated();
-    return (<div className="animated fadeIn"> 
+    return (<div className="animated fadeIn">
       {
         logged && (<div>
           <div>
@@ -245,4 +246,4 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+export default Test2;

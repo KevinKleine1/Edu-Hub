@@ -1,117 +1,157 @@
-import React, {Component} from 'react';
-import {
-  Container,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  Label
-} from 'reactstrap';
-import {Grid, Row, Col, Clearfix} from 'react-bootstrap';
+import React, {Component, Border} from 'react';
+import {Container, Segment, Image, Header, Icon, Button, Statistic, Label} from 'semantic-ui-react';
+import history from '../../history';
+import jwt from 'jsonwebtoken';
+
+var vorname,
+name,
+strasse,
+stadt,
+hausnummer,
+postcode,
+schule;
 
 
-//change static url to relative ones
+var karma = 800;
+//change url to relative ones
 
-class Profile extends Component {
+class Profile extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      Vorname: "",
+      Nachname: "",
+      Strasse: "",
+      Stadt: "",
+      Hausnummer: "",
+      Postcode: "",
+
+    };
+  }
+
+
+  setData(){
+    var decoded = jwt.decode(localStorage.getItem('id_token'));       //decoder for JWT Token
+    localStorage.setItem('email', decoded.email);
+
+    var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
+    //var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
+    fetch(target)
+
+      .then((results) =>{
+        return results.json();
+
+        }).then((json)=>{
+
+          this.setState({Vorname : json[0].name});
+          this.setState({Nachname : json[0].surname});
+          this.setState({Stadt : json[0].city});
+          this.setState({Hausnummer : json[0].number});
+          this.setState({Postcode : json[0].postcode});
+          this.setState({Strasse : json[0].street});
+        
+            })
+  }
+
+  changeView() {
+    history.replace('/admin');
+  };
+
+  goBack(){
+    history.go(-1);
+  }
+
+  componentDidMount(){
+    this.setData();
+  }
+
+
     render() {
-      return (<div className="container">
+      const { Vorname, Nachname, Strasse, Hausnummer, Stadt, Postcode } = this.state
+      return (
+<div className="animated fadeIn">
+ <div className="container">
       <div className="row justify-content-md-center">
-        <div className="card w-75">
-          <div className="card-body">
-            <div className="alert alert-info" role="alert"></div>
-            <h4 className="card-title">
-              <b>Mein Profil</b>
-            </h4>
-            <br/>
-  
-  
-            <div className="container">
-              <div className="row justify-content-md-center">
-            <img className="img-circle" src='../img/avatars/5.jpg'></img>
-            <br/>
-          </div>
-        </div>
-        <br/>
-  
-            <div className="container">
-              <div className="row justify-content-md-center">
-  
-                <div className="card-text">
-  
-                  <InputGroup className="mb-3">
-  
-                    <InputGroupAddon style={{width: "100px"}}>
-  
-                        <b>
-                          Name
-                        </b>
-  
-                    </InputGroupAddon>
-                    <span className="input-group-addon" id="basic-addon3" style={{width: "500px"}}>Maria Müller</span>
-  
-                  </InputGroup>
-                  <InputGroup className="mb-3">
-  
-                    <InputGroupAddon style={{width: "100px"}}>
-  
-                        <b>
-                          Anschrift
-                        </b>
-  
-                    </InputGroupAddon>
-                    <span className="input-group-addon" id="basic-addon3" style={{width: "500px"}}>Am alten Markt 13a, 50825 Köln</span>
-  
-                  </InputGroup>
-                  <InputGroup className="mb-3">
-  
-                    <InputGroupAddon style={{width: "100px"}}>
-  
-                        <b>
-                          Email
-                        </b>
-  
-                    </InputGroupAddon>
-                    <span className="input-group-addon" id="basic-addon3" style={{width: "500px"}}>m.mueller@gmx.de</span>
-  
-                  </InputGroup>
-                  <InputGroup className="mb-3">
-  
-                    <InputGroupAddon style={{width: "100px"}}>
-  
-                        <b>
-                          Schule
-                        </b>
-  
-                    </InputGroupAddon>
-                    <span className="input-group-addon" id="basic-addon3" style={{width: "500px"}}> Gymnasium Köln-Ehrenfeld</span>
-  
-                  </InputGroup>
-                </div>
-  
-              </div>
-            </div>
-  
-            <div className="container">
-              <div className="row justify-content-md-center">
-                <a href="http://localhost:8080/#/admin" className="btn btn-info" style={{width: "150px"}}>
-                  <b>ändern</b>
-                </a>
-                <a href="http://localhost:8080/#/dashboard" className="btn btn-secondary" style={{width: "150px"}}>
-                  <b>zurück</b>
-                </a>
-  
-              </div>
-            </div>
-          </div>
-            <br/>
-  
-            <div className="alert alert-info" role="alert"></div>
-  
-          </div>
-        </div>
-      </div>);
+        <Segment vertical style={{width: "800px"}}>
+            <img className="img-circle" src ={ 'img/avatars/' + localStorage.getItem("picture") }style={{width: "200px"}} align="right"></img>
+          <Header as='h2'>
+    <Icon name='user outline' />
+    <Header.Content>
+      {Vorname} {Nachname}
+      <Header.Subheader>
+        Mein Profil
+      </Header.Subheader>
+    </Header.Content>
+  </Header>
+        <p style={{width: "580px"}}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+      </Segment>
+      <Segment vertical style={{width: "800px"}}>
+    <Header as='h3' floated='left'>
+     <b>Name</b>
+    </Header>
+    <Header as='h3' floated='right' color='grey'>
+    {Vorname} {Nachname}
+    </Header>
+      </Segment>
+      <Segment vertical style={{width: "800px"}}>
+    <Header as='h3' floated='left'>
+      Anschrift
+    </Header>
+    <Header as='h3' floated='right' color='grey'>
+      {Strasse} {Hausnummer} , {Postcode} {Stadt}
+    </Header>
+      </Segment>
+      <Segment vertical style={{width: "800px"}}>
+    <Header as='h3' floated='left'>
+      Email
+    </Header>
+    <Header as='h3' floated='right' color='grey'>
+      {localStorage.getItem("email")}
+    </Header>
+      </Segment>
+      <Segment vertical style={{width: "800px"}}>
+    <Header as='h3' floated='left'>
+      Schule
+    </Header>
+    <Header as='h3' floated='right' color='grey'>
+      Open-School
+    </Header>
+      </Segment>
+      <Segment vertical style={{width: "800px"}}>
+    <Header as='h3' floated='left'>
+      Fächer
+    </Header>
+    <Header as='h3' floated='right' color='grey'>
+      Englisch, Deutsch, Kunst
+    </Header>
+      </Segment>
+      <div className="container">
+<div className="row justify-content-md-center">
+  <div>
+    <br/>
+    <Button animated color='teal' style={{width: "150px"}} onClick={this.changeView}>
+          <Button.Content hidden>bearbeiten</Button.Content>
+          <Button.Content visible>
+            <Icon name='pencil' />
+          </Button.Content>
+        </Button>
+        <Button animated color='teal' style={{width: "150px"}} onClick={this.goBack} >
+              <Button.Content hidden>zurück</Button.Content>
+              <Button.Content visible>
+                <Icon name='arrow left' />
+              </Button.Content>
+            </Button>
+</div>
+</div>
+</div>
+
+  </div>
+</div>
+</div>
+
+      )
     }
   }
-  
   export default Profile;
-  

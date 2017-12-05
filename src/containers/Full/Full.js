@@ -11,14 +11,18 @@ import Dashboard from '../../views/Dashboard/';
 import Auth from '../../Auth/Auth';
 import Profile from '../../views/Profile/Profile';
 import Admin from '../../views/Admin/Admin';
-import ProfilePop from '../../views/Profile/ProfilePop';
-import AdminPop from '../../views/Admin/AdminPop';
 import Welcome from '../../views/Pages/Welcome/Welcome';
 import NewProject from '../../views/NewProject/NewProject';
 import NoWizard from '../../views/NoWizard/NoWizard';
 import MyProjects from '../../views/MyProjects/MyProjects';
 import Favs from '../../views/Favs/Favs';
+<<<<<<< HEAD
 import ProjectPage from '../../views/ProjectPage/projectPage';
+=======
+import Discover from '../../views/Discover/Discover';
+import Test from '../../views/Pages/Test/Test';
+import Test2 from '../../views/Test2/Test2';
+>>>>>>> 8abb8d4e8a77a08dcd91bbc49cb4a5242a18cbcc
 
 //creates the login object to handle the authentication
 const auth = new Auth();
@@ -34,7 +38,7 @@ const handleAuthentication = (nextState, replace) => {
 
 
 //main app class where everything gets put together
-class Full extends Component {
+class Full extends React.Component {
   render() {
     return (
       <div className="app">
@@ -48,14 +52,15 @@ class Full extends Component {
               <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
               <Route path="/profil" name="Profil" component={Profile}/>
               <Route path="/admin" name="Admin" component={Admin}/>
-              <Route path="/profilpop" name="Profilpop" component={ProfilePop}/>
-              <Route path="/adminpop" name="Adminpop" component={AdminPop}/>
               <Route path="/welcome" name="Welcome" component={Welcome}/>
               <Route path="/nowizard" name="Nowizard" component={NoWizard}/>
               <Route path="/myprojects" name="MyProjects" component={MyProjects}/>
               <Route path="/neuesprojekt" name="NewProject" component={NewProject}/>
               <Route path="/favs" name="Favoriten" component={Favs}/>
               <Route path="/projectpage" name="ProjectPage" component={ProjectPage}/>
+              <Route path="/discover" name="Entdecken" component={Discover}/>
+              <Route path="/test" name="Test" component={Test}/>
+              <Route path="/test2" name="Test" component={Test2}/>
               <Route path="/callback" render={(props) => {
             handleAuthentication(props);
             return <Callback {...props} />

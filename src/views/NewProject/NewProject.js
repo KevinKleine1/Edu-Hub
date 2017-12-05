@@ -9,7 +9,7 @@ const brandInfo = '#63c2de';
 const brandWarning = '#f8cb00';
 const brandDanger = '#f86c6b';
 
-// changes const and links
+// changes const
 
 class NewProject extends Component {
   constructor(props) {
@@ -27,8 +27,8 @@ class NewProject extends Component {
     });
   }
 
-  noWizard(){
-      history.replace('/nowizard');
+  noWizard() {
+    history.replace('/nowizard');
   }
 
   render() {
@@ -38,8 +38,10 @@ class NewProject extends Component {
         Wie möchten Sie ihr Projekt erstellen?
       </div>
       <button className="btn btn-primary btn-lg btn-block" onClick={this.noWizard}>Projekt mit Wizard erstellen</button>
-      <button className="btn btn-secondary btn-lg btn-block" onClick={this.noWizard}>Projekt 
-        <strong> ohne </strong>
+      <button className="btn btn-secondary btn-lg btn-block" onClick={this.noWizard}>Projekt
+        <strong>
+          ohne
+        </strong>
         Wizard erstellen</button>
     </div>)
   }

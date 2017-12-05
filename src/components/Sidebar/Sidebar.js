@@ -4,7 +4,6 @@ import {Badge, Nav, NavItem, NavLink as RsNavLink} from 'reactstrap';
 import classNames from 'classnames';
 import nav from './_nav';
 import navuser from './_navuser';
-import navuserpop from './_navuserpop';
 import SidebarFooter from './../SidebarFooter';
 import SidebarForm from './../SidebarForm';
 import SidebarHeader from './../SidebarHeader';
@@ -36,16 +35,6 @@ class Sidebar extends Component {
   //   return this.props.location.pathname.indexOf(routeName) > -1 ? "nav nav-second-level collapse in" : "nav nav-second-level collapse";
   // }
 
-
-  // change later
-  compare1(){
-    const a = 's256349@mvrht.net';
-    return localStorage.getItem('email') === a  
-  }
-  compare2(){
-    const a = 's688527@mvrht.net';
-    return localStorage.getItem('email') === a
-  }
 
   render() {
     const logged = this.isAuthenticated();
@@ -118,9 +107,6 @@ class Sidebar extends Component {
       return items.map( (item, index) => navLink(item, index) );
     };
 
-    const peter = this.compare1();
-    const maria = this.compare2();
-
     // sidebar-nav root
     return (
       <div className="sidebar">
@@ -131,15 +117,9 @@ class Sidebar extends Component {
 
             {navList(nav.items)}
             {
-          (logged && maria) && (
+          logged && (
             navList(navuser.items)
             )
-        }
-
-        {
-          (logged && peter) && (
-            navList(navuserpop.items)
-          )
         }
              
           </Nav>

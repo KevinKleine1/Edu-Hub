@@ -4,6 +4,8 @@ import Auth0Lock from 'auth0-lock';
 import { AUTH_CONFIG } from './auth0-variables';
 import jwt from 'jsonwebtoken';  //install jsonwebtoken
 
+
+
 export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: AUTH_CONFIG.domain,
@@ -28,9 +30,9 @@ export default class Auth {
   handleAuthentication() {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult);
-        this.showData();
-        history.replace('/dashboard');
+        this.setSession(authResult);       
+        history.replace('/dashboard')          
+     
       } else if (err) {
         history.replace('/dashboard');
         console.log(err);
@@ -39,17 +41,30 @@ export default class Auth {
     });
   }
 
-  showData(){                                                     //Testing function will be deleted for final production
-    console.log(localStorage.getItem('access_token'));
-    console.log(localStorage.getItem('id_token'));
-    console.log(localStorage.getItem('expires_at'));
-  }
+
 
   //find a better way to handle the decoding
   decoden(){
     var decoded = jwt.decode(localStorage.getItem('id_token'));       //decoder for JWT Token
     localStorage.setItem('email', decoded.email);
-    console.log(decoded.email);
+
+    var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
+    //var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
+    fetch(target)
+
+      .then((results) =>{
+        return results.json();
+
+        }).then((json)=>{
+          try{    
+        localStorage.setItem('name', json[0].name);
+        localStorage.setItem('picture', json[0].bild);
+          }catch(e){
+            history.replace('/welcome');
+          }
+            })
+
+
   }
 
   setSession(authResult) {
@@ -58,10 +73,9 @@ export default class Auth {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
-    // navigate to the home route
-    history.replace('/dashboard');
+
     this.decoden();
-    
+
   }
 
   logout() {
@@ -70,12 +84,14 @@ export default class Auth {
     localStorage.removeItem('id_token');
     localStorage.removeItem('expires_at');
     localStorage.removeItem('email');
+    localStorage.removeItem('name');
+    localStorage.removeItem('picture');
     // navigate to the home route
     history.replace('/dashboard');
   }
 
   isAuthenticated() {
-    // Check whether the current time is past the 
+    // Check whether the current time is past the
     // access token's expiry time
     let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
