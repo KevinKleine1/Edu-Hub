@@ -154,7 +154,7 @@ class Welcome extends Component {
             <br/>
             <div className="container">
               <div className="row justify-content-md-center">
-                  <img className="img-circle" src='../img/avatars/5.jpg'></img>
+                  <img className="img-circle" src='../img/avatars/NotLogged.jpg'></img>
                 <br/>
               </div>
             </div>
@@ -162,7 +162,7 @@ class Welcome extends Component {
             <div className="container">
               <div className="row justify-content-md-center">
                 <div className="form-group">
-                  <label htmlFor="exampleFormControlFile1"><b>Profilfoto aktualisieren</b></label>
+                  <label htmlFor="exampleFormControlFile1"><b>Profilfoto hinzufügen</b></label>
                   <br/>
                   <input type="file" className="form-control-file" id="exampleFormControlFile1"></input>
                 </div>
@@ -177,7 +177,7 @@ class Welcome extends Component {
                     <Form.Input name="Vorname" value={Vorname} onChange={this.handleChange} error={this.state.vornameError} placeholder='Vorname' />
                   </Form.Field>
                   <Form.Field>
-                   <label>Last Name</label>
+                   <label>Nachname</label>
                    <Form.Input name="Nachname" value={Nachname} onChange={this.handleChange} error={this.state.nachnameError} placeholder='Nachname' />
                   </Form.Field>
                   <Form.Field>
