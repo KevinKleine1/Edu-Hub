@@ -10,6 +10,7 @@ import jwt from 'jsonwebtoken';
 import 'whatwg-fetch';
 import {Link, Switch, Route, Redirect} from 'react-router-dom';
 
+
 class Admin extends React.Component {
 
   constructor(props) {
@@ -99,7 +100,7 @@ class Admin extends React.Component {
                   <Icon name='user' />
                 </InputGroupAddon>
 
-                <Input onChange={(e) => this.updateInputValue(e)} name="Vorname" type="text" placeholder="Vorname"/>
+                <Input onChange={(e) => this.updateInputValue(e)} name="Vorname" type="text"  placeholder="Vorname"/>
               </InputGroup>
               <InputGroup className="mb-3">
                 <InputGroupAddon>

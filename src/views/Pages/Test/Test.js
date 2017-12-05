@@ -1,34 +1,70 @@
 import React, {Component} from 'react';
 import history from '../../../history';
-import {
-  Container,
-  Input,
-  InputGroup,
-  InputGroupAddon} from 'reactstrap';
-import {Header, Icon, Button,Card} from 'semantic-ui-react';
+import { Container} from 'reactstrap';
+import {Header, Icon, Button,Card, Form} from 'semantic-ui-react';
 import jwt from 'jsonwebtoken';
 import 'whatwg-fetch'
 
+
 class Test extends Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
+      state = {
       Vorname: "",
+      vornameError: false,
       Nachname: "",
+      nachnameError: "",
       Strasse: "",
+      strasseError: "",
       Hausnummer: "",
+      hausnummerError: "",
       Stadt: "",
-      Postcode: ""
+      stadtError: "",
+      Postcode: "",
+      postcodeError: ""
     };
-  }
+  
 
-  updateInputValue(e) {
-    this.setState({
-      [e.target.name]: e.target.value
+    handleChange = (e, { name, value }) => this.setState({ [name]: value })
+
+  validate = () =>{
+    let isError = false;
+    const errors = {};
+
+    if (this.state.Vorname.length < 1) {
+      isError = true;
+      errors.vornameError = true;
+    }
+
+    if (isError){
+      this.setState({
+        ...this.state,
+        ...errors
+      });
+    }
+    return isError;
+  };
+
+  handleSubmit(){
+    console.log(this.state.Vorname)
+    const err = this.validate();
+    if(!err){
+    //onSubmit();
+
+    this.setState =( {
+      Vorname: "",
+      vornameError: "",
+      Nachname: "",
+      nachnameError: "",
+      Strasse: "",
+      strasseError: "",
+      Hausnummer: "",
+      hausnummerError: "",
+      Stadt: "",
+      stadtError: "",
+      Postcode: "",
+      postcodeError: ""
     });
-  }
+  }}
 
   onSubmit() {
    
@@ -60,6 +96,7 @@ class Test extends Component {
   }
 
   render() {
+    const { Vorname, Nachname, Strasse, Hausnummer, Stadt, Postcode } = this.state
     return (<div className="container">
       <div className="row justify-content-md-center">
         <Card style={{width: "800px"}}>
@@ -93,67 +130,39 @@ class Test extends Component {
             </div>
 
             <div className="card-text">
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='user' />
-                </InputGroupAddon>
-
-                <Input onChange={(e) => this.updateInputValue(e)} name="Vorname" type="text" placeholder="Vorname"/>
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='user' />
-                </InputGroupAddon>
-
-                <Input onChange={(e) => this.updateInputValue(e)} name="Nachname" type="text" placeholder="Nachname"/>
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='map pin' />
-                </InputGroupAddon>
-
-                <Input onChange={(e) => this.updateInputValue(e)} name="Strasse" type="text" placeholder="Straße"/>
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='map pin' />
-                </InputGroupAddon>
-
-                <Input onChange={(e) => this.updateInputValue(e)} name="Hausnummer" type="int" placeholder="Hausnummer"/>
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='map pin' />
-                </InputGroupAddon>
-
-                <Input onChange={(e) => this.updateInputValue(e)} name="Stadt" type="text" placeholder="Stadt"/>
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='map pin' />
-                </InputGroupAddon>
-
-                <Input onChange={(e) => this.updateInputValue(e)} name="Postcode" type="int" placeholder="Postleitzahl"/>
-              </InputGroup>
-             
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='student' />
-                </InputGroupAddon>
-                <Input type="text" placeholder="Schule"/>
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <InputGroupAddon>
-                  <Icon name='write' />
-                </InputGroupAddon>
-                <Input onChange={(e) => this.updateInputValue(e)} type="text" placeholder="Profilbeschreibung"/>
-              </InputGroup>
+            <Form onSubmit={this.handleSubmit}>
+                 
+                 <Form.Field>
+                    <label>Vorname</label>
+                    <Form.Input name="Vorname" value={Vorname} onChange={this.handleChange} error={this.state.vornameError} placeholder='Vorname' />
+                  </Form.Field>
+                  <Form.Field>
+                   <label>Last Name</label>
+                   <Form.Input name="Nachname" value={Nachname} onChange={this.handleChange} error={false} placeholder='Nachname' />
+                  </Form.Field>
+                  <Form.Field>
+                   <label>Straße</label>
+                   <Form.Input name="Strasse" value={Strasse} onChange={this.handleChange} errorText={this.state.strasseError} placeholder='Straße' />
+                 </Form.Field>
+                 <Form.Field>
+                   <label>Hausnummer</label>
+                   <Form.Input name="Hausnummer" value={Hausnummer} onChange={this.handleChange} errorText={this.state.hausnummerError} placeholder='Hausnummer' />
+                 </Form.Field>
+                 <Form.Field>
+                   <label>Stadt</label>
+                   <Form.Input name="Stadt" value={Stadt} onChange={this.handleChange} errorText={this.state.stadtError} placeholder='Stadt' />
+                 </Form.Field>
+                 <Form.Field>
+                   <label>Postleitzahl</label>
+                   <Form.Input name="Postcode" value={Postcode} onChange={this.handleChange} errorText={this.state.postcodeError} placeholder='Postleitzahl' />
+                 </Form.Field>             
+            </Form>
             </div>
          
 
             <div className="container">
               <div className="row justify-content-md-center">
-                <Button animated color='teal' style={{width: "150px"}} onClick={this.onSubmit.bind(this)}>
+                <Button animated color='teal' style={{width: "150px"}} onClick={this.handleSubmit.bind(this)}>
                       <Button.Content hidden>speichern</Button.Content>
                       <Button.Content visible>
                         <Icon name='check' />
