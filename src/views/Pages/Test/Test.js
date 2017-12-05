@@ -28,9 +28,36 @@ class Test extends Component {
 
   validate = () =>{
     let isError = false;
-    const errors = {};
+    const errors = {
+      vornameError: false,
+      nachnameError: false,
+      strasseError: false,
+      hausnummerError: false,
+      stadtError: false,
+      postcodeError: false
+    };
 
     if (this.state.Vorname.length < 1) {
+      isError = true;
+      errors.vornameError = true;
+    }
+    if (this.state.Nachname.length < 1) {
+      isError = true;
+      errors.vornameError = true;
+    }
+    if (this.state.Strasse.length < 1) {
+      isError = true;
+      errors.vornameError = true;
+    }
+    if (this.state.Hausnummer.length < 1) {
+      isError = true;
+      errors.vornameError = true;
+    }
+    if (this.state.Stadt.length < 1) {
+      isError = true;
+      errors.vornameError = true;
+    }
+    if (this.state.Postcode.length < 1) {
       isError = true;
       errors.vornameError = true;
     }
@@ -132,23 +159,23 @@ class Test extends Component {
                   </Form.Field>
                   <Form.Field>
                    <label>Last Name</label>
-                   <Form.Input name="Nachname" value={Nachname} onChange={this.handleChange} error={false} placeholder='Nachname' />
+                   <Form.Input name="Nachname" value={Nachname} onChange={this.handleChange} error={this.state.nachnameError} placeholder='Nachname' />
                   </Form.Field>
                   <Form.Field>
                    <label>Straße</label>
-                   <Form.Input name="Strasse" value={Strasse} onChange={this.handleChange} errorText={this.state.strasseError} placeholder='Straße' />
+                   <Form.Input name="Strasse" value={Strasse} onChange={this.handleChange} error={this.state.strasseError} placeholder='Straße' />
                  </Form.Field>
                  <Form.Field>
                    <label>Hausnummer</label>
-                   <Form.Input name="Hausnummer" value={Hausnummer} onChange={this.handleChange} errorText={this.state.hausnummerError} placeholder='Hausnummer' />
+                   <Form.Input name="Hausnummer" value={Hausnummer} onChange={this.handleChange} error={this.state.hausnummerError} placeholder='Hausnummer' />
                  </Form.Field>
                  <Form.Field>
                    <label>Stadt</label>
-                   <Form.Input name="Stadt" value={Stadt} onChange={this.handleChange} errorText={this.state.stadtError} placeholder='Stadt' />
+                   <Form.Input name="Stadt" value={Stadt} onChange={this.handleChange} error={this.state.stadtError} placeholder='Stadt' />
                  </Form.Field>
                  <Form.Field>
                    <label>Postleitzahl</label>
-                   <Form.Input name="Postcode" value={Postcode} onChange={this.handleChange} errorText={this.state.postcodeError} placeholder='Postleitzahl' />
+                   <Form.Input name="Postcode" value={Postcode} onChange={this.handleChange} error={this.state.postcodeError} placeholder='Postleitzahl' />
                  </Form.Field>             
             </Form>
             </div>
