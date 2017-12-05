@@ -80,11 +80,36 @@ class Welcome extends Component {
     return isError;
   };
 
+  onSubmit() {
+    console.log(this.state.Vorname);
+    console.log(this.state.Nachname);
+    console.log(this.state.Strasse);
+     fetch(
+       //'http://edu-hub-backend.azurewebsites.net/user/'                          //prodo
+       'http://localhost:8000/user/', {                                            //dev
+       method: 'POST',
+       headers: {
+         'Accept': 'application/json',
+         'Content-Type': 'application/json',
+       },
+       body: JSON.stringify({
+         email: localStorage.getItem("email"),
+         name: this.state.Vorname,
+         surname: this.state.Nachname,
+         street: this.state.Strasse,
+         city: this.state.Stadt,
+         number: this.state.Hausnummer,
+         postcode: this.state.Postcode,
+       })
+     })
+     localStorage.setItem("name", this.state.Vorname);
+ }
+
   handleSubmit(){
-    console.log(this.state.Vorname)
+   
     const err = this.validate();
     if(!err){
-    onSubmit();
+    this.onSubmit();
 
     this.setState ( {
       Vorname: "",
@@ -99,33 +124,12 @@ class Welcome extends Component {
       hausnummerError: false,
       stadtError: false,
       postcodeError: false,
-      Fehler: false
+      Fehler: false,
+      Erfolg: true
     });
   }}
 
-  onSubmit() {
-   
-    
-    fetch(
-      //'http://edu-hub-backend.azurewebsites.net/user/'                          //prodo
-      'http://localhost:8000/user/', {                                            //dev
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        email: localStorage.getItem("email"),
-        name: this.state.Vorname,
-        surname: this.state.Nachname,
-        street: this.state.Strasse,
-        city: this.state.Stadt,
-        number: this.state.Hausnummer,
-        postcode: this.state.Postcode,
-      })
-    })
-    localStorage.setItem("name", this.state.Vorname);
-}
+
 
   goBack(){
     history.go(-1);
