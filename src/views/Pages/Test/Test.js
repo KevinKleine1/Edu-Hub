@@ -12,15 +12,15 @@ class Test extends Component {
       Vorname: "",
       vornameError: false,
       Nachname: "",
-      nachnameError: "",
+      nachnameError: false,
       Strasse: "",
-      strasseError: "",
+      strasseError: false,
       Hausnummer: "",
-      hausnummerError: "",
+      hausnummerError: false,
       Stadt: "",
-      stadtError: "",
+      stadtError: false,
       Postcode: "",
-      postcodeError: ""
+      postcodeError: false
     };
   
 
@@ -50,19 +50,13 @@ class Test extends Component {
     if(!err){
     //onSubmit();
 
-    this.setState =( {
+    this.setState ( {
       Vorname: "",
-      vornameError: "",
       Nachname: "",
-      nachnameError: "",
       Strasse: "",
-      strasseError: "",
       Hausnummer: "",
-      hausnummerError: "",
       Stadt: "",
-      stadtError: "",
       Postcode: "",
-      postcodeError: ""
     });
   }}
 
