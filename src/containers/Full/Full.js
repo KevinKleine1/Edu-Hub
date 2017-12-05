@@ -18,6 +18,7 @@ import NewProject from '../../views/NewProject/NewProject';
 import NoWizard from '../../views/NoWizard/NoWizard';
 import MyProjects from '../../views/MyProjects/MyProjects';
 import Favs from '../../views/Favs/Favs';
+import ProjectPage from '../../views/ProjectPage/projectPage';
 
 //creates the login object to handle the authentication
 const auth = new Auth();
@@ -54,9 +55,10 @@ class Full extends Component {
               <Route path="/myprojects" name="MyProjects" component={MyProjects}/>
               <Route path="/neuesprojekt" name="NewProject" component={NewProject}/>
               <Route path="/favs" name="Favoriten" component={Favs}/>
+              <Route path="/projectpage" name="ProjectPage" component={ProjectPage}/>
               <Route path="/callback" render={(props) => {
             handleAuthentication(props);
-            return <Callback {...props} /> 
+            return <Callback {...props} />
           }}/>
               <Redirect from="/" to="/dashboard"/>
               </Switch>
