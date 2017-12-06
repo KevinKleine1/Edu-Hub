@@ -1,254 +1,279 @@
 import React, {Component} from 'react';
-import history from '../../../history';
-import { Container} from 'reactstrap';
-import {Header, Message, Icon, Button,Card, Form} from 'semantic-ui-react';
-import jwt from 'jsonwebtoken';
-import 'whatwg-fetch'
+import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import {
+  Card,
+  Grid,
+  Segment,
+  Image,
+  Container,
+  Header,
+  Icon,
+  Statistic,
+  Label,
+  Divider,
+  Button,
+  Popup,
+  List,
+  Input,
+  Form,
+  TextArea,
+  Message
+} from 'semantic-ui-react';
+
+const member = <div className="container">
+  <div className="row justify-content-md-center">
+    <Card.Group>
+      <Card link={true} header='Oemer' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')}/>
+      <Card link={true} header='Kevin' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')}/>
+      <Card link={true} header='Burcu' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')}/>
+      <Card link={true} header='Felix' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')}/>
+    </Card.Group>
+  </div>
+</div>;
+
+const edit = <div>
+  <div>
+    <Form>
+      <Form.Field id='form-textarea-control-opinion' control={TextArea} label='Neues Event' placeholder='Neues Event'/>
+    </Form>
+  </div><br/>
+  <div><Input icon='tag' iconPosition='left' label={{
+    tag: true,
+    content: 'Tag hinzufügen'
+  }} labelPosition='right' placeholder='Neues Tag eingeben'/></div><br/>
+  <div><Input icon='configure' iconPosition='left' label={{
+    tag: true,
+    content: 'Tag hinzufügen'
+  }} labelPosition='right' placeholder='Ressourcen hinzufügen'/></div>
+</div>
 
 
-class Welcome extends Component {
+const brandPrimary = '#20a8d8';
+const brandSuccess = '#4dbd74';
+const brandInfo = '#63c2de';
+const brandWarning = '#f8cb00';
+const brandDanger = '#f86c6b';
+const colors = [
+  'red',
+  'orange',
+  'yellow',
+  'olive',
+  'green',
+  'teal',
+  'blue',
+  'violet',
+  'purple',
+  'pink',
+  'brown',
+  'grey',
+  'black'
+]
 
-      state = {
-      Vorname: "",
-      VornameAlt: "",
-      vornameError: false,
-      Nachname: "",
-      NachnameAlt: "",
-      nachnameError: false,
-      Strasse: "",
-      StrasseAlt: "",
-      strasseError: false,
-      Hausnummer: "",
-      HausnummerAlt: "",
-      hausnummerError: false,
-      Stadt: "",
-      StadtAlt: "",
-      stadtError: false,
-      Postcode: "",
-      PostcodeAlt: "",
-      postcodeError: false,
-      Fehler: false,
-      Erfolg: false
+class ProjectPage extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+
+      modalShare: false,
+      modalMember: false,
+      modalEdit: false,
+      Name: "",
+      Text: "",
+      Karma: "",
     };
-  
+    this.toggleShare = this.toggleShare.bind(this);
+    this.toggleMember = this.toggleMember.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
 
-    setData(){
-      var decoded = jwt.decode(localStorage.getItem('id_token'));       //decoder for JWT Token
-      localStorage.setItem('email', decoded.email);
-  
-      var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
-      //var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
-      fetch(target)
-  
-        .then((results) =>{
-          return results.json();
-  
-          }).then((json)=>{
-  
-            this.setState({VornameAlt : json[0].name});
-            this.setState({NachnameAlt : json[0].surname});
-            this.setState({StadtAlt : json[0].city});
-            this.setState({HausnummerAlt : json[0].number});
-            this.setState({PostcodeAlt : json[0].postcode});
-            this.setState({StrasseAlt : json[0].street});
-              })
-    }
-
-    handleChange = (e, { name, value }) => this.setState({ [name]: value })
-
-  validate = () =>{
-    let isError = false;
-    const errors = {
-      vornameError: false,
-      nachnameError: false,
-      strasseError: false,
-      hausnummerError: false,
-      stadtError: false,
-      postcodeError: false,
-      Fehler: false
-    };
-
-    if (this.state.Vorname.length < 1) {
-      errors.Voname = this.state.VornameAlt.value;
-    }
-    if (this.state.Nachname.length < 1) {
-      errors.Nachname = this.state.NachnameAlt;
-    }
-    if (this.state.Strasse.length < 1) {
-      errors.Strasse = this.state.StrasseAlt;
-    }
-    if (this.state.Hausnummer.length < 1) {
-      errors.Hausnummer = this.state.HausnummerAlt;
-    }
-    if (this.state.Stadt.length < 1) {
-      errors.Stadt = this.state.StadtAlt;
-    }
-    if (this.state.Postcode.length < 1) {
-      errors.Postcode = this.state.PostcodeAlt;
-    }
-
-    
-      this.setState({
-        ...this.state,
-        ...errors
-      });
-    
-    return false;
-  };
-
-  onSubmit() {
-
-     fetch(
-       //'http://edu-hub-backend.azurewebsites.net/user/'                          //prodo
-       'http://localhost:8000/user/', {                                            //dev
-       method: 'POST',
-       headers: {
-         'Accept': 'application/json',
-         'Content-Type': 'application/json',
-       },
-       body: JSON.stringify({
-         email: localStorage.getItem("email"),
-         name: this.state.Vorname,
-         surname: this.state.Nachname,
-         street: this.state.Strasse,
-         city: this.state.Stadt,
-         number: this.state.Hausnummer,
-         postcode: this.state.Postcode,
-       })
-     })
-     localStorage.setItem("name", this.state.Vorname);
- }
-
-  handleSubmit(){
-    this.setData();
-    const err = this.validate();
-    if(!err){
-    //this.onSubmit();
-    console.log(this.state.Vorname);
-    console.log(this.state.VornameAlt);
-    console.log(localStorage.getItem("email"));
-    this.setState ( {
-      Vorname: "",
-      Nachname: "",
-      Strasse: "",
-      Hausnummer: "",
-      Stadt: "",
-      Postcode: "",
-      vornameError: false,
-      nachnameError: false,
-      strasseError: false,
-      hausnummerError: false,
-      stadtError: false,
-      postcodeError: false,
-      Fehler: false,
-      Erfolg: true
+  }
+  toggleShare() {
+    this.setState({
+      modalShare: !this.state.modalShare
     });
-  }}
+  }
+  toggleMember() {
+    this.setState({
+      modalMember: !this.state.modalMember
+    });
+  }
+  toggleEdit() {
+    this.setState({
+      modalEdit: !this.state.modalEdit
+    });
+  }
 
+  state = {}
 
+  handleClick = () => this.setState({
+    active: !this.state.active
+  })
 
-  goBack(){
-    history.go(-1);
+  setData(){
+
+    var target = ('http://localhost:8000/project/1')                                      //dev
+    //var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
+    fetch(target)
+
+      .then((results) =>{
+        return results.json();
+
+        }).then((json)=>{
+
+          this.setState({Name : json[0].name});
+          this.setState({Text : json[0].text});
+          this.setState({Karma : json[0].karma});
+        
+            })
+  }
+
+  componentDidMount(){
+    this.setData();
   }
 
   render() {
-    const { Vorname, Nachname, Strasse, Hausnummer, Stadt, Postcode } = this.state
-    return (<div className="container">
-      <div className="row justify-content-md-center">
-        <Card style={{width: "800px"}}>
-          <Card.Content style={{width: "800px"}}>
+    const {active} = this.state
+    return (<Grid columns={2} divided="divided" colums="equal">
+      <Grid.Row stretched="true">
+        <Grid.Column width={13}>
+          <div className="projektname">
+            <Container fluid="true" text="true">
+              <Divider horizontal="horizontal">
+                <Header as='h1'>{this.state.Name}</Header>
+              </Divider>
 
-            <Header as='h2'>
-      <Icon name='setting' />
-      <Header.Content>
-        Daten Aktualisieren
-        <Header.Subheader>
-          {Vorname} {Nachname}
-        </Header.Subheader>
-      </Header.Content>
-      </Header>
+              <p>{this.state.Text}</p>
+
+            </Container>
+
+          </div>
+          <div className="bilder">
+            <Divider horizontal="horizontal">
+              <h3>Fotos</h3>
+            </Divider>
+            <Image.Group size='small'>
+              <div>
+                <Image src={'https://i.imgur.com/KnnT5LQ.jpg'}/>
+                <Image src={'https://i.imgur.com/ockpsKj.jpg'}/>
+                <Image src={'https://i.imgur.com/zGHOb6A.jpg'}/>
+              </div>
+            </Image.Group>
+          </div>
+
+          <div className="timeline">Timeline
+          </div>
+
+        </Grid.Column>
+        <Grid.Column width={3}>
+          <br/>
+          <div className="projektfoto"><Image src='https://i.imgur.com/uk2MB1c.jpg' size='medium' bordered="true" circular="circular"/><br/></div>
+          <div className="row justify-content-md-center">
+            <div>
+              <Popup content='Füge dieses Projekt deinen Favoriten hinzu' trigger={<Button circular = "circular" color = 'grey' icon = 'bookmark' />}/>
+            </div>
+            <div>
+              <Popup content='Teile dieses Projekt mit anderen' trigger={<Button circular = "circular" color = 'grey' icon = 'share alternate square' onClick = {
+                  this.toggleShare
+                } />}/>
+              <Modal isOpen={this.state.modalShare} toggle={this.toggleShare} className={this.props.className}>
+                <ModalBody>
+                  test
+                </ModalBody>
+              </Modal>
+            </div>
+            <div>
+              <Popup content='Siehe dir die Projektteilnehmer an' trigger={<Button circular = "circular" color = 'grey' icon = 'user' onClick = {
+                  this.toggleMember
+                } />}/>
+              <Modal isOpen={this.state.modalMember} toggle={this.toggleMember} className={this.props.className} size='lg'>
+                <ModalBody>
+                  {member}
+                </ModalBody>
+              </Modal>
+            </div>
+            <div>
+              <Popup content='Füge ein Beitrag hinzu' trigger={<Button circular = "circular" color = 'grey' icon = 'edit' onClick = {
+                  this.toggleEdit
+                } />}/>
+              <Modal isOpen={this.state.modalEdit} toggle={this.toggleEdit} className={this.props.className} size='lg'>
+                <ModalBody>
+                  {edit}
+                </ModalBody>
+              </Modal>
+            </div>
             <br/>
             <div className="container">
               <div className="row justify-content-md-center">
-                  <img className="img-circle" src='../img/avatars/5.jpg'></img>
                 <br/>
+                <Statistic fluid="fluid" color='purple' size='tiny' horizontal="horizontal">
+                  <Statistic.Value>
+                    <Icon name='diamond'/> {this.state.Karma}
+                  </Statistic.Value>
+                  <Statistic.Label>Karma</Statistic.Label>
+                </Statistic>
               </div>
+            </div>
+          </div>
+          <br/>
+
+          <Button fluid toggle="toggle" active={active} onClick={this.handleClick} color={active ? 'green' : 'red'} content={active ? 'Beitreten' : 'Austreten'} />
+
+          <div className="tags">
+
+            <div className="Tags">
+              <Divider horizontal="horizontal">
+                <h3>Tags</h3>
+              </Divider>
+
+              <Label.Group size='medium' color='teal'>
+                <Label>Schüler</Label>
+                <Label>Selbstständigkeit</Label>
+                <Label>Schule</Label>
+                <Label>Bibliothek</Label>
+                <Label>...</Label>
+              </Label.Group>
             </div>
             <br/>
-            <div className="container">
-              <div className="row justify-content-md-center">
-                <div className="form-group">
-                  <label htmlFor="exampleFormControlFile1"><b>Profilfoto aktualisieren</b></label>
-                  <br/>
-                  <input type="file" className="form-control-file" id="exampleFormControlFile1"></input>
-                </div>
-              </div>
+            <div className="Ressourcen">
+              <Divider horizontal="horizontal">
+                <h3>Ressourcen</h3>
+              </Divider>
+
+              <Label.Group size='medium' color='blue'>
+                <Label>Aufsichts Person</Label>
+                <Label>Tische</Label>
+                <Label>Stühle</Label>
+                <Label>Stromversorgung</Label>
+                <Label>Super kräfte</Label>
+                <Label>...</Label>
+              </Label.Group>
             </div>
-
-            <div className="card-text">
-            <Form error={this.state.Fehler} success={this.state.Erfolg} onSubmit={this.handleSubmit}>
-                 
-                 <Form.Field>
-                    <label>Vorname</label>
-                    <Form.Input name="Vorname"  onChange={this.handleChange} error={this.state.vornameError} placeholder='Vorname' />
-                  </Form.Field>
-                  <Form.Field>
-                   <label>Last Name</label>
-                   <Form.Input name="Nachname"  onChange={this.handleChange} error={this.state.nachnameError} placeholder='Nachname' />
-                  </Form.Field>
-                  <Form.Field>
-                   <label>Straße</label>
-                   <Form.Input name="Strasse"  onChange={this.handleChange} error={this.state.strasseError} placeholder='Straße' />
-                 </Form.Field>
-                 <Form.Field>
-                   <label>Hausnummer</label>
-                   <Form.Input name="Hausnummer"  onChange={this.handleChange} error={this.state.hausnummerError} placeholder='Hausnummer' />
-                 </Form.Field>
-                 <Form.Field>
-                   <label>Stadt</label>
-                   <Form.Input name="Stadt" onChange={this.handleChange} error={this.state.stadtError} placeholder='Stadt' />
-                 </Form.Field>
-                 <Form.Field>
-                   <label>Postleitzahl</label>
-                   <Form.Input name="Postcode" onChange={this.handleChange} error={this.state.postcodeError} placeholder='Postleitzahl' />
-                 </Form.Field>
-                 <Message
-                    error
-                    header='Fehler bei Eingabe'
-                    content='Alle Felder müssen ausgefüllt sein.'
-                    /> 
-                    <Message
-                    success
-                    header='Daten erfolgreich aktualisiert'
-                    content='Viel Spaß auf Edu-Hub.'
-                    />              
-            </Form>
+            <br/>
+            <div>
+              <Divider horizontal="horizontal">
+                <h3>Anhang</h3>
+              </Divider>
+              <List divided="divided" relaxed="relaxed">
+                <List.Item>
+                  <List.Icon name='file outline' size='large' verticalAlign='middle'/>
+                  <List.Content>
+                    <List.Header as='a'>Bauplan.pdf</List.Header>
+                  </List.Content>
+                </List.Item>
+                <List.Item>
+                  <List.Icon name='file outline' size='large' verticalAlign='middle'/>
+                  <List.Content>
+                    <List.Header as='a'>Vorlage.pdf</List.Header>
+                  </List.Content>
+                </List.Item>
+              </List>
             </div>
-         
-
-            <div className="container">
-              <div className="row justify-content-md-center">
-                <Button animated color='teal' style={{width: "150px"}} onClick={this.handleSubmit.bind(this)}>
-                      <Button.Content hidden>speichern</Button.Content>
-                      <Button.Content visible>
-                        <Icon name='check' />
-                      </Button.Content>
-                    </Button>
-                    <Button animated color='teal' style={{width: "150px"}} onClick={this.goBack}>
-                          <Button.Content hidden>zurück</Button.Content>
-                          <Button.Content visible>
-                            <Icon name='arrow left' />
-                          </Button.Content>
-                        </Button>
-              </div>
-            </div>
-
-          </Card.Content>
-
-        </Card>
-      </div>
-    </div>);
+          </div>
+        </Grid.Column>
+      </Grid.Row>
+    </Grid>)
   }
 }
 
-export default Welcome;
+export default ProjectPage;

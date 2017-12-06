@@ -21,15 +21,10 @@ class Profile extends React.Component {
     super(props);
 
     this.state = {
-      Vorname: "",
-      Nachname: "",
-      Strasse: "",
-      Stadt: "",
-      Hausnummer: "",
-      Postcode: "",
-      Fach1: "",
-      Fach2: "",
-      Fach3: ""
+      Name: "",
+      Text: "",
+      Karma: "",
+  
 
     };
   }
