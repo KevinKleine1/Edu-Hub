@@ -24,16 +24,13 @@ class Profile extends React.Component {
       Name: "",
       Text: "",
       Karma: "",
-  
+      
 
     };
   }
 
 
   setData(){
-    var decoded = jwt.decode(localStorage.getItem('id_token'));       //decoder for JWT Token
-    localStorage.setItem('email', decoded.email);
-
     var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
     //var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
     fetch(target)
