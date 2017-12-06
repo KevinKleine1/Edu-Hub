@@ -67,7 +67,7 @@ class Dashboard extends React.Component {
                 <div className="row justify-content-md-center">
                   <Menu attached='top' tabular={true} size="large">
                     <Menu.Item color='teal' name='Kernprojekte' active={activeItem === 'Kernprojekte'} onClick={this.handleItemClick}/>
-                    <Menu.Item color='teal' name='Unterstützende Projekte' active={activeItem === 'Unterstützende Projekte'} onClick={this.handleItemClick}/>
+                    <Menu.Item color='teal' name='Unterst&uuml;tzende Projekte' active={activeItem === 'Unterst&uuml;tzende Projekte'} onClick={this.handleItemClick}/>
                     <Menu.Item color='teal' name='Administrative Projekte' active={activeItem === 'Administrative Projekte'} onClick={this.handleItemClick}/>
                     <Menu.Menu position='right'>
                       <Menu.Item>
