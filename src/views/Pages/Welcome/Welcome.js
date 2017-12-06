@@ -92,8 +92,9 @@ class Welcome extends Component {
 
   onSubmit() {
      fetch(
-       //'http://edu-hub-backend.azurewebsites.net/user/'                          //prodo
-       'http://localhost:8000/user/', {                                            //dev
+       //'http://localhost:8000/user/'
+                                 //prodo
+      'http://edu-hub-backend.azurewebsites.net/user/', {                                            //dev
        method: 'POST',
        headers: {
          'Accept': 'application/json',

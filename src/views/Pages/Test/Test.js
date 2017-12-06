@@ -113,8 +113,8 @@ class ProjectPage extends React.Component {
 
   setData(){
 
-    var target = ('http://localhost:8000/project/1')                                      //dev
-    //var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
+    //var target = ('http://localhost:8000/project/1')                                      //dev
+    var target = ('http://edu-hub-backend.azurewebsites.net/project/1')                     //prod
     fetch(target)
 
       .then((results) =>{

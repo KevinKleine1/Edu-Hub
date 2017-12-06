@@ -52,8 +52,8 @@ class Admin extends Component {
       var decoded = jwt.decode(localStorage.getItem('id_token'));       //decoder for JWT Token
       localStorage.setItem('email', decoded.email);
   
-      var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
-      //var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
+      //var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
+      var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
       fetch(target)
   
         .then((results) =>{
@@ -173,8 +173,9 @@ class Admin extends Component {
 
     console.log(this.state.Nachname);
      fetch(
-       //'http://edu-hub-backend.azurewebsites.net/user/'                          //prodo
-       'http://localhost:8000/user/', {                                            //dev
+       //'http://localhost:8000/user/'
+       'http://edu-hub-backend.azurewebsites.net/user/'                          //prodo
+       , {                                            //dev
        method: 'PUT',
        headers: {
          'Accept': 'application/json',
@@ -279,38 +280,38 @@ class Admin extends Component {
                  
                  <Form.Field>
                     <label>Vorname</label>
-                    <Form.Input name="Vorname" value={Vorname} onChange={this.handleChange} error={this.state.vornameError} placeholder='Vorname' />
+                    <Form.Input name="Vorname" value={Vorname} onChange={this.handleChange} error={this.state.vornameError} placeholder={this.state.VornameAlt} />
                   </Form.Field>
                   <Form.Field>
                    <label>Nachname</label>
-                   <Form.Input name="Nachname" value={Nachname} onChange={this.handleChange} error={this.state.nachnameError} placeholder='Nachname' />
+                   <Form.Input name="Nachname" value={Nachname} onChange={this.handleChange} error={this.state.nachnameError} placeholder={this.state.NachnameAlt} />
                   </Form.Field>
                   <Form.Field>
                    <label>Straße</label>
-                   <Form.Input name="Strasse" value={Strasse} onChange={this.handleChange} error={this.state.strasseError} placeholder='Straße' />
+                   <Form.Input name="Strasse" value={Strasse} onChange={this.handleChange} error={this.state.strasseError} placeholder={this.state.StrasseAlt} />
                  </Form.Field>
                  <Form.Field>
                    <label>Hausnummer</label>
-                   <Form.Input name="Hausnummer" value={Hausnummer} onChange={this.handleChange} error={this.state.hausnummerError} placeholder='Hausnummer' />
+                   <Form.Input name="Hausnummer" value={Hausnummer} onChange={this.handleChange} error={this.state.hausnummerError} placeholder={this.state.HausnummerAlt} />
                  </Form.Field>
                  <Form.Field>
                    <label>Stadt</label>
-                   <Form.Input name="Stadt" value={Stadt} onChange={this.handleChange} error={this.state.stadtError} placeholder='Stadt' />
+                   <Form.Input name="Stadt" value={Stadt} onChange={this.handleChange} error={this.state.stadtError} placeholder={this.state.StadtAlt} />
                  </Form.Field>
                  <Form.Field>
                    <label>Postleitzahl</label>
-                   <Form.Input name="Postcode" value={Postcode} onChange={this.handleChange} error={this.state.postcodeError} placeholder='Postleitzahl' />
+                   <Form.Input name="Postcode" value={Postcode} onChange={this.handleChange} error={this.state.postcodeError} placeholder={this.state.PostcodeAlt} />
                  </Form.Field>
                  <Form.Group inline>
                   <Form.Field required>
                     <label>Fächer</label>
-                   <Form.Input  name="Fach1" value={Fach1} onChange={this.handleChange} error={this.state.fachError} placeholder='Fach 1' /> 
+                   <Form.Input  name="Fach1" value={Fach1} onChange={this.handleChange} error={this.state.fachError} placeholder={this.state.Fach1Alt} /> 
                     
                    
-                   <Form.Input  name="Fach2" value={Fach2} onChange={this.handleChange} placeholder='Fach 2' />
+                   <Form.Input  name="Fach2" value={Fach2} onChange={this.handleChange} placeholder={this.state.Fach2Alt} />
                   
                   
-                   <Form.Input  name="Fach3" value={Fach3} onChange={this.handleChange} placeholder='Fach 3' />
+                   <Form.Input  name="Fach3" value={Fach3} onChange={this.handleChange} placeholder={this.state.Fach3Alt} />
                     </Form.Field>
                     </Form.Group>
                  <Message
