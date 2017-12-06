@@ -65,7 +65,7 @@ class MyProjects extends React.Component {
   render() {
     const {column, data, direction} = this.state
 
-    return (<Table sortable="sortable" celled="celled" fixed="fixed" selectable="selectable">
+    return (<Table sortable={true} celled={true} fixed={true} selectable={true}>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell sorted={column === 'Nummer'
