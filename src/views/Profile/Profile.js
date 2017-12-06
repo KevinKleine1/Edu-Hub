@@ -27,6 +27,9 @@ class Profile extends React.Component {
       Stadt: "",
       Hausnummer: "",
       Postcode: "",
+      Fach1: "",
+      Fach2: "",
+      Fach3: ""
 
     };
   }
@@ -51,6 +54,9 @@ class Profile extends React.Component {
           this.setState({Hausnummer : json[0].number});
           this.setState({Postcode : json[0].postcode});
           this.setState({Strasse : json[0].street});
+          this.setState({Fach1: json[0].subject1});
+          this.setState({Fach2: json[0].subject2});
+          this.setState({Fach3: json[0].subject3});
         
             })
   }
@@ -69,7 +75,7 @@ class Profile extends React.Component {
 
 
     render() {
-      const { Vorname, Nachname, Strasse, Hausnummer, Stadt, Postcode } = this.state
+      const { Vorname, Nachname, Strasse, Hausnummer, Stadt, Postcode, Fach1, Fach2, Fach3 } = this.state
       return (
 <div className="animated fadeIn">
  <div className="container">
@@ -124,7 +130,7 @@ class Profile extends React.Component {
       Fächer
     </Header>
     <Header as='h3' floated='right' color='grey'>
-      Englisch, Deutsch, Kunst
+      {Fach1}, {Fach2}, {Fach3}
     </Header>
       </Segment>
       <div className="container">

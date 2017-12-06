@@ -10,29 +10,70 @@ class Admin extends Component {
 
       state = {
       Vorname: "",
-      VornameT: true,
+      VornameT: "",
       vornameError: false,
       Nachname: "",
-      NachnameT:true,
+      NachnameT:"",
       nachnameError: false,
       Strasse: "",
-      StrasseT: true,
+      StrasseT: "",
       strasseError: false,
       Hausnummer: "",
-      HausnummerT: true,
+      HausnummerT: "",
       hausnummerError: false,
       Stadt: "",
-      StadtT: true,
+      StadtT: "",
       stadtError: false,
       Postcode: "",
-      PostcodeT: true,
+      PostcodeT: "",
       postcodeError: false,
       Fehler: false,
-      Erfolg: false
+      Erfolg: false,
+      VornameAlt: "",
+      NachnameAlt: "",
+      StrasseAlt: "",
+      HausnummerAlt: "",
+      StadtAlt: "",
+      PostcodeAlt: "",
+      Fach1: "",
+      Fach2: "",
+      Fach3: "",
+      Fach1Alt: "",
+      Fach2Alt: "",
+      Fach3Alt: "",
+      fachError: false
     };
   
 
     handleChange = (e, { name, value }) => this.setState({ [name]: value })
+
+
+    setData(){
+      var decoded = jwt.decode(localStorage.getItem('id_token'));       //decoder for JWT Token
+      localStorage.setItem('email', decoded.email);
+  
+      var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
+      //var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
+      fetch(target)
+  
+        .then((results) =>{
+          return results.json();
+  
+          }).then((json)=>{
+  
+            this.setState({VornameAlt : json[0].name});
+            this.setState({NachnameAlt : json[0].surname});
+            this.setState({StadtAlt : json[0].city});
+            this.setState({HausnummerAlt : json[0].number});
+            this.setState({PostcodeAlt : json[0].postcode});
+            this.setState({StrasseAlt : json[0].street});
+            this.setState({Fach1Alt: json[0].subject1});
+            this.setState({Fach2Alt: json[0].subject2});
+            this.setState({Fach3Alt: json[0].subject3});
+          
+              })
+    }
+
 
   validate = () =>{
     let isError = false;
@@ -43,13 +84,8 @@ class Admin extends Component {
       hausnummerError: false,
       stadtError: false,
       postcodeError: false,
+      fachError: false,
       Fehler: false,
-      VornameT: true,
-      NachnameT: true,
-      StrasseT: true,
-      HausnummerT: true,
-      StadtT: true,
-      PostcodeT: true
     };
   
     if (isNaN(this.state.Hausnummer)) {
@@ -64,25 +100,6 @@ class Admin extends Component {
       errors.Fehler =true;
     }
 
-    if (this.state.Vorname.length < 1){
-      errors.VornameT = false;
-    }
-    if (this.state.Nachname.length < 1){
-      errors.NachnameT = false;
-    }
-     if (this.state.Strasse.length < 1){
-      errors.StrasseT = false;
-    }
-    if (this.state.Hausnummer.length < 1){
-      errors.HausnummerT = false;
-     }
-    if (this.state.Stadt.length < 1){
-      errors.StadtT = false;   
-     }
-     if (this.state.Postcode.length < 1){
-        errors.PostcodeT = false;        
-     }
-
 
     if (isError){
       this.setState({
@@ -96,6 +113,65 @@ class Admin extends Component {
 
 
   onSubmit() {
+    const { VornameAlt, NachnameAlt, StrasseAlt, HausnummerAlt, StadtAlt, PostcodeAlt} = this.state
+    var Vorname ="";
+    var Nachname="";
+    var  Strasse="";
+    var  Hausnummer="";
+    var Stadt="";
+    var Postcode="";
+    var Fach1="";
+    var Fach2="";
+    var Fach3="";
+    console.log(NachnameAlt);
+
+    if (this.state.Vorname.length < 1){
+        Vorname = VornameAlt;
+    }else{
+        Vorname = this.state.Vorname;
+    }
+    if (this.state.Nachname.length < 1){
+      Nachname = NachnameAlt;
+    }else{
+      Nachname = this.state.Nachname;
+    }
+    if (this.state.Strasse.length < 1){
+      Strasse = StrasseAlt;
+    }else{
+      Strasse = this.state.Strasse;
+    }
+    if (this.state.Hausnummer.length < 1){
+      Hausnummer = HausnummerAlt;
+    }else{
+      Hausnummer = this.state.Hausnummer;
+    }
+    if (this.state.Stadt.length < 1){
+      Stadt = StadtAlt;
+    }else{
+      Stadt = this.state.Hausnummer;
+    }
+    if (this.state.Postcode.length < 1){
+      Postcode = PostcodeAlt;
+    }else{
+      Postcode = this.state.Postcode;
+    }
+    if (this.state.Fach1.length < 1){
+      Fach1 = Fach1Alt;
+    }else{
+      Fach1 = this.state.Fach1;
+    }
+    if (this.state.Fach2.length < 1){
+      Fach2 = Fach2Alt;
+    }else{
+      Fach2 = this.state.Fach2;
+    }
+    if (this.state.Fach3.length < 1){
+      Fach3 = Fach3Alt;
+    }else{
+      Fach3 = this.state.Fach3;
+    }
+
+    console.log(this.state.Nachname);
      fetch(
        //'http://edu-hub-backend.azurewebsites.net/user/'                          //prodo
        'http://localhost:8000/user/', {                                            //dev
@@ -106,14 +182,26 @@ class Admin extends Component {
        },
        body: JSON.stringify({
          email: localStorage.getItem("email"),
-         name: this.state.Vorname,
-         surname: this.state.Nachname,
-         street: this.state.Strasse,
-         city: this.state.Stadt,
-         number: this.state.Hausnummer,
-         postcode: this.state.Postcode,
+         name: Vorname,
+         surname: Nachname,
+         street: Strasse,
+         city: Stadt,
+         number: Hausnummer,
+         postcode: Postcode,
+         subject1: Fach1,
+         subject2: Fach2,
+         subject3: Fach3
        })
      })
+     this.setState({VornameAlt: Vorname})
+     this.setState({NachnameAlt: Nachname})
+     this.setState({StrasseAlt: Strasse})
+     this.setState({StadtAlt: Stadt})
+     this.setState({HausnummerAlt: Hausnummer})
+     this.setState({PostcodeAlt: Postcode})
+     this.setState({Fach1Alt: Fach1})
+     this.setState({Fach2Alt: Fach2})
+     this.setState({Fach3Alt: Fach3})
      localStorage.setItem("name", this.state.Vorname);
  }
 
@@ -130,6 +218,9 @@ class Admin extends Component {
       Hausnummer: "",
       Stadt: "",
       Postcode: "",
+      Fach1: "",
+      Fach2: "",
+      Fach3: "",
       vornameError: false,
       nachnameError: false,
       strasseError: false,
@@ -141,14 +232,16 @@ class Admin extends Component {
     });
   }}
 
-
+  componentDidMount(){
+    this.setData();
+  }
 
   goBack(){
     history.go(-1);
   }
 
   render() {
-    const { Vorname, Nachname, Strasse, Hausnummer, Stadt, Postcode } = this.state
+    const { Vorname, Nachname, Strasse, Hausnummer, Stadt, Postcode, Fach1, Fach2, Fach3 } = this.state
     return (<div className="container">
       <div className="row justify-content-md-center">
         <Card style={{width: "800px"}}>
@@ -208,6 +301,18 @@ class Admin extends Component {
                    <label>Postleitzahl</label>
                    <Form.Input name="Postcode" value={Postcode} onChange={this.handleChange} error={this.state.postcodeError} placeholder='Postleitzahl' />
                  </Form.Field>
+                 <Form.Group inline>
+                  <Form.Field required>
+                    <label>Fächer</label>
+                   <Form.Input  name="Fach1" value={Fach1} onChange={this.handleChange} error={this.state.fachError} placeholder='Fach 1' /> 
+                    
+                   
+                   <Form.Input  name="Fach2" value={Fach2} onChange={this.handleChange} placeholder='Fach 2' />
+                  
+                  
+                   <Form.Input  name="Fach3" value={Fach3} onChange={this.handleChange} placeholder='Fach 3' />
+                    </Form.Field>
+                    </Form.Group>
                  <Message
                     error
                     header='Fehler bei Eingabe'

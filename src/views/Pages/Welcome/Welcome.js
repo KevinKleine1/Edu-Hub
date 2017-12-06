@@ -21,6 +21,10 @@ class Welcome extends Component {
       stadtError: false,
       Postcode: "",
       postcodeError: false,
+      Fach1: "",
+      Fach2: "",
+      Fach3: "",
+      fachError: false,
       Fehler: false,
       Erfolg: false
     };
@@ -37,6 +41,7 @@ class Welcome extends Component {
       hausnummerError: false,
       stadtError: false,
       postcodeError: false,
+      fachError: false,
       Fehler: false
     };
 
@@ -70,6 +75,11 @@ class Welcome extends Component {
       errors.postcodeError = true;
       errors.Fehler =true;
     }
+    if (this.state.Fach1.length < 1 ) {
+      isError = true;
+      errors.fachError = true;
+      errors.Fehler =true;
+    }
 
     if (isError){
       this.setState({
@@ -81,9 +91,6 @@ class Welcome extends Component {
   };
 
   onSubmit() {
-    console.log(this.state.Vorname);
-    console.log(this.state.Nachname);
-    console.log(this.state.Strasse);
      fetch(
        //'http://edu-hub-backend.azurewebsites.net/user/'                          //prodo
        'http://localhost:8000/user/', {                                            //dev
@@ -100,6 +107,9 @@ class Welcome extends Component {
          city: this.state.Stadt,
          number: this.state.Hausnummer,
          postcode: this.state.Postcode,
+         subject1: this.state.Fach1,
+         subject2: this.state.Fach2,
+         subject3: this.state.Fach3
        })
      })
      localStorage.setItem("name", this.state.Vorname);
@@ -119,12 +129,16 @@ class Welcome extends Component {
       Hausnummer: "",
       Stadt: "",
       Postcode: "",
+      Fach1: "",
+      Fach2: "",
+      Fach3: "",
       vornameError: false,
       nachnameError: false,
       strasseError: false,
       hausnummerError: false,
       stadtError: false,
       postcodeError: false,
+      fachError: false,
       Fehler: false,
       Erfolg: true
     });
@@ -137,7 +151,7 @@ class Welcome extends Component {
   }
 
   render() {
-    const { Vorname, Nachname, Strasse, Hausnummer, Stadt, Postcode } = this.state
+    const { Vorname, Nachname, Strasse, Hausnummer, Stadt, Postcode, Fach1, Fach2, Fach3 } = this.state
     return (<div className="container">
       <div className="row justify-content-md-center">
         <Card style={{width: "800px"}}>
@@ -173,30 +187,42 @@ class Welcome extends Component {
             <div className="card-text">
             <Form error={this.state.Fehler} success={this.state.Erfolg} onSubmit={this.handleSubmit}>
                  
-                 <Form.Field>
+                 <Form.Field required>
                     <label>Vorname</label>
                     <Form.Input name="Vorname" value={Vorname} onChange={this.handleChange} error={this.state.vornameError} placeholder='Vorname' />
                   </Form.Field>
-                  <Form.Field>
+                  <Form.Field required>
                    <label>Nachname</label>
                    <Form.Input name="Nachname" value={Nachname} onChange={this.handleChange} error={this.state.nachnameError} placeholder='Nachname' />
                   </Form.Field>
-                  <Form.Field>
+                  <Form.Field required>
                    <label>Straße</label>
                    <Form.Input name="Strasse" value={Strasse} onChange={this.handleChange} error={this.state.strasseError} placeholder='Straße' />
                  </Form.Field>
-                 <Form.Field>
+                 <Form.Field required>
                    <label>Hausnummer</label>
                    <Form.Input name="Hausnummer" value={Hausnummer} onChange={this.handleChange} error={this.state.hausnummerError} placeholder='Hausnummer' />
                  </Form.Field>
-                 <Form.Field>
+                 <Form.Field required>
                    <label>Stadt</label>
                    <Form.Input name="Stadt" value={Stadt} onChange={this.handleChange} error={this.state.stadtError} placeholder='Stadt' />
                  </Form.Field>
-                 <Form.Field>
+                 <Form.Field required>
                    <label>Postleitzahl</label>
                    <Form.Input name="Postcode" value={Postcode} onChange={this.handleChange} error={this.state.postcodeError} placeholder='Postleitzahl' />
                  </Form.Field>
+                 <Form.Group inline>
+                  <Form.Field required>
+                    <label>Fächer</label>
+                   <Form.Input  name="Fach1" value={Fach1} onChange={this.handleChange} error={this.state.fachError} placeholder='Fach 1' /> 
+                    
+                   
+                   <Form.Input  name="Fach2" value={Fach2} onChange={this.handleChange} placeholder='Fach 2' />
+                  
+                  
+                   <Form.Input  name="Fach3" value={Fach3} onChange={this.handleChange} placeholder='Fach 3' />
+                    </Form.Field>
+                    </Form.Group>
                  <Message
                     error
                     header='Fehler bei Eingabe'
