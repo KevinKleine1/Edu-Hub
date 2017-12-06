@@ -103,6 +103,7 @@ class Welcome extends Component {
        })
      })
      localStorage.setItem("name", this.state.Vorname);
+     history.push('/dashboard');
  }
 
   handleSubmit(){
