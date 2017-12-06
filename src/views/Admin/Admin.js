@@ -113,7 +113,7 @@ class Admin extends Component {
 
 
   onSubmit() {
-    const { VornameAlt, NachnameAlt, StrasseAlt, HausnummerAlt, StadtAlt, PostcodeAlt} = this.state
+    const { VornameAlt, NachnameAlt, StrasseAlt, HausnummerAlt, StadtAlt, PostcodeAlt, Fach1Alt, Fach2Alt, Fach3Alt} = this.state
     var Vorname ="";
     var Nachname="";
     var  Strasse="";
@@ -202,7 +202,7 @@ class Admin extends Component {
      this.setState({Fach1Alt: Fach1})
      this.setState({Fach2Alt: Fach2})
      this.setState({Fach3Alt: Fach3})
-     localStorage.setItem("name", this.state.Vorname);
+     localStorage.setItem("name", Vorname);
  }
 
   handleSubmit(){
