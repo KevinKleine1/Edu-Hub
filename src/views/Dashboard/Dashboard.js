@@ -1,28 +1,29 @@
 import React, {Component} from 'react';
-import {
-  Row,
-  Col,
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CardTitle,
-  Button,
-  Label,
-  Table
-} from 'reactstrap';
 import Auth from '../../Auth/Auth';
 import {Link, Switch, Route, Redirect} from 'react-router-dom';
+import {
+  Header,
+  Icon,
+  Image,
+  Container,
+  Card,
+  Grid,
+  Button,
+  Message,
+  Input,
+  Menu,
+  Segment
+} from 'semantic-ui-react';
 import Welcome from '../Pages/Welcome/Welcome';
 
-const brandPrimary = '#20a8d8';
-const brandSuccess = '#4dbd74';
-const brandInfo = '#63c2de';
-const brandWarning = '#f8cb00';
-const brandDanger = '#f86c6b';
-
 const auth = new Auth();
+
 class Dashboard extends React.Component {
+  state = {
+    activeItem: 'bio'
+  }
+
+  handleItemClick = (e, {name}) => this.setState({activeItem: name})
 
   constructor(props) {
     super(props);
@@ -49,193 +50,674 @@ class Dashboard extends React.Component {
     return new Date().getTime() < expiresAt;
   }
 
-  test(){
+  test() {
     history.push
   }
 
   render() {
     const logged = this.isAuthenticated();
-    return (<div className="animated fadeIn"> 
+    const {activeItem} = this.state
+    return (<div className="animated fadeIn">
       {
-        logged && (<div>
-          <div>
-            <div className="card text-center">
-              <div className="card-header">
-                Featured
-              </div>
-              <div className="card-body">
-                <h4 className="card-title">Projekt der Woche</h4>
-                <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
-                <a href="#" className="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
-          <div className="container">
-            <div className="row">
-              <div className="col">
-                <div className="card" style={{
-                    width: "19rem"
-                  }}>
-                  <img className="card-img-top" src="https://i.imgur.com/ockpsKj.jpg" alt="Card image cap"></img>
-                  <div className="card-body">
-                    <h4 className="card-title">Bundesjugendspiele</h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card" style={{
-                    width: "19rem"
-                  }}>
-                  <img className="card-img-top" src="https://i.imgur.com/uk2MB1c.jpg" alt="Card image cap"></img>
-                  <div className="card-body">
-                    <h4 className="card-title">Bibliotheks Ausbau</h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card" style={{
-                    width: "19rem"
-                  }}>
-                  <img className="card-img-top" src="https://i.imgur.com/G6N2paL.jpg" alt="Card image cap"></img>
-                  <div className="card-body">
-                    <h4 className="card-title">Coding Kurs</h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card" style={{
-                    width: "19rem"
-                  }}>
-                  <img className="card-img-top" src="https://i.imgur.com/zGHOb6A.jpg" alt="Card image cap"></img>
-                  <div className="card-body">
-                    <h4 className="card-title">Lernzentrum</h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card" style={{
-                    width: "19rem"
-                  }}>
-                  <img className="card-img-top" src="https://i.imgur.com/KnnT5LQ.jpg" alt="Card image cap"></img>
-                  <div className="card-body">
-                    <h4 className="card-title">Forschungzentrum</h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card" style={{
-                    width: "19rem"
-                  }}>
-                  <img className="card-img-top" src="https://i.imgur.com/zs0xJsA.jpg" alt="Card image cap"></img>
-                  <div className="card-body">
-                    <h4 className="card-title">Hobby Werkstatt</h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                  </div>
+        logged && (<div className="container">
+          <div className="row justify-content-md-center">
+
+            <div>
+              <div className="container">
+                <div className="row justify-content-md-center">
+                  <Menu attached='top' tabular={true} size="large">
+                    <Menu.Item color='teal' name='Kernprojekte' active={activeItem === 'Kernprojekte'} onClick={this.handleItemClick}/>
+                    <Menu.Item color='teal' name='Unterstützende Projekte' active={activeItem === 'Unterstützende Projekte'} onClick={this.handleItemClick}/>
+                    <Menu.Item color='teal' name='Administrative Projekte' active={activeItem === 'Administrative Projekte'} onClick={this.handleItemClick}/>
+                    <Menu.Menu position='right'>
+                      <Menu.Item>
+                        <Input transparent={true} icon={{
+                            name: 'search',
+                            link: true
+                          }} placeholder='Projekt suchen...'/>
+                      </Menu.Item>
+                    </Menu.Menu>
+                  </Menu>
+                  <br/>
                 </div>
               </div>
             </div>
+            <div>
+              <div className="container">
+                <div className="row justify-content-md-center">
+                  <br/>
+                  <Card style={{
+                      height: "100px",
+                      width: "800px"
+                    }}>
+                    <Card.Content>
+                      <Card.Header>Edu Hub von & für Lehrer</Card.Header>
+                      <Card.Meta>Plattform für LehrerInnen</Card.Meta>
+                      <Card.Description>
+                        <b>Nach Projekten suchen, erstellen & gemeinsam entwickeln</b>
+                        <Button animated={true} floated='right' color='teal'>
+                          <Button.Content visible={true}>Projekt erstellen</Button.Content>
+                          <Button.Content hidden={true}>
+                            <Icon name='right arrow'/>
+                          </Button.Content>
+                        </Button>
+                      </Card.Description>
+
+                    </Card.Content>
+                  </Card>
+
+                  <br/>
+                </div>
+              </div>
+            </div>
+            <div className="container">
+              <div className="row justify-content-md-center">
+
+                <Grid divided='vertically'>
+                  <Grid.Row columns={4}>
+                    <Grid.Column>
+                      <Card>
+                        <Image src='../img/Landingpage/projekt1.jpg'/>
+                        <Card.Content>
+                          <Card.Header>
+                            Digitale Bibliothek
+                          </Card.Header>
+                          <Card.Meta>
+                            <span className='date'>
+                              erstellt am 05.12.2017
+                            </span>
+                          </Card.Meta>
+                          <Card.Description style={{
+                              height: "150px"
+                            }}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                          </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra={true}>
+                          <a>
+                            <Icon name='user'/>
+                            22 Mitglieder
+                          </a>
+                          <Button animated={true} floated='right' color='teal'>
+                            <Button.Content visible={true}>Details</Button.Content>
+                            <Button.Content hidden={true}>
+                              <Icon name='right arrow'/>
+                            </Button.Content>
+                          </Button>
+
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+
+                    <Grid.Column>
+                      <Card>
+                        <Image src='../img/Landingpage/projekt2.jpg'/>
+                        <Card.Content>
+                          <Card.Header>
+                            Experiment
+                          </Card.Header>
+                          <Card.Meta>
+                            <span className='date'>
+                              erstellt am 03.12.2017
+                            </span>
+
+                          </Card.Meta>
+                          <Card.Description style={{
+                              height: "150px"
+                            }}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                          </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra={true}>
+                          <a>
+                            <Icon name='user'/>
+                            5 Mitglieder
+                          </a>
+                          <Button animated={true} floated='right' color='teal'>
+                            <Button.Content visible={true}>Details</Button.Content>
+                            <Button.Content hidden={true}>
+                              <Icon name='right arrow'/>
+                            </Button.Content>
+                          </Button>
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+                    <Grid.Column>
+                      <Card>
+                        <Image src='../img/Landingpage/projekt3.jpg'/>
+                        <Card.Content>
+                          <Card.Header>
+                            Selbstlernzentrum
+                          </Card.Header>
+                          <Card.Meta>
+                            <span className='date'>
+                              erstellt am 28.11.2017
+                            </span>
+                          </Card.Meta>
+                          <Card.Description style={{
+                              height: "150px"
+                            }}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                          </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra={true}>
+                          <a>
+                            <Icon name='user'/>
+                            52 Mitglieder
+                          </a>
+                          <Button animated={true} floated='right' color='teal'>
+                            <Button.Content visible={true}>Details</Button.Content>
+                            <Button.Content hidden={true}>
+                              <Icon name='right arrow'/>
+                            </Button.Content>
+                          </Button>
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+
+                    <Grid.Column>
+                      <Card>
+                        <Image src='../img/Landingpage/projekt4.jpeg'/>
+                        <Card.Content>
+                          <Card.Header>
+                            Cafeteria
+                          </Card.Header>
+                          <Card.Meta>
+                            <span className='date'>
+                              erstellt am 05.12.2017
+                            </span>
+                          </Card.Meta>
+                          <Card.Description style={{
+                              height: "150px"
+                            }}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                          </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra={true}>
+                          <a>
+                            <Icon name='user'/>
+                            2 Mitglieder
+                          </a>
+                          <Button floated='right' animated={true} color='teal'>
+                            <Button.Content visible={true}>Details</Button.Content>
+                            <Button.Content hidden={true}>
+                              <Icon name='right arrow'/>
+                            </Button.Content>
+                          </Button>
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
+              </div>
+            </div>
+            <div className="container">
+              <div className="row justify-content-md-center">
+                <Grid divided='vertically'>
+                  <Grid.Row columns={4}>
+                    <Grid.Column>
+                      <Card>
+                        <Image src='../img/Landingpage/projekt5.jpeg'/>
+                        <Card.Content>
+                          <Card.Header>
+                            Garten AG
+                          </Card.Header>
+                          <Card.Meta>
+                            <span className='date'>
+                              erstellt am 05.12.2017
+                            </span>
+                          </Card.Meta>
+                          <Card.Description style={{
+                              height: "150px"
+                            }}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                          </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra={true}>
+                          <a>
+                            <Icon name='user'/>
+                            32 Mitglieder
+                          </a>
+                          <Button animated={true} floated='right' color='teal'>
+                            <Button.Content visible={true}>Details</Button.Content>
+                            <Button.Content hidden={true}>
+                              <Icon name='right arrow'/>
+                            </Button.Content>
+                          </Button>
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+
+                    <Grid.Column>
+                      <Card>
+                        <Image src='../img/Landingpage/projekt6.jpeg'/>
+                        <Card.Content>
+                          <Card.Header>
+                            KFZ Werkstatt
+                          </Card.Header>
+                          <Card.Meta>
+                            <span className='date'>
+                              erstellt am 03.12.2017
+                            </span>
+                          </Card.Meta>
+                          <Card.Description style={{
+                              height: "150px"
+                            }}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                          </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra={true}>
+                          <a>
+                            <Icon name='user'/>
+                            5 Mitglieder
+                          </a>
+                          <Button animated={true} floated='right' color='teal'>
+                            <Button.Content visible={true}>Details</Button.Content>
+                            <Button.Content hidden={true}>
+                              <Icon name='right arrow'/>
+                            </Button.Content>
+                          </Button>
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+                    <Grid.Column>
+                      <Card>
+                        <Image src='../img/Landingpage/projekt7.jpeg'/>
+                        <Card.Content>
+                          <Card.Header>
+                            Tablet Klasse
+                          </Card.Header>
+                          <Card.Meta>
+                            <span className='date'>
+                              erstellt am 28.11.2017
+                            </span>
+                          </Card.Meta>
+                          <Card.Description style={{
+                              height: "150px"
+                            }}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</Card.Description>
+                        </Card.Content>
+                        <Card.Content extra={true}>
+                          <a>
+                            <Icon name='user'/>
+                            20 Mitglieder
+                          </a>
+                          <Button animated={true} floated='right' color='teal'>
+                            <Button.Content visible={true}>Details</Button.Content>
+                            <Button.Content hidden={true}>
+                              <Icon name='right arrow'/>
+                            </Button.Content>
+                          </Button>
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+
+                    <Grid.Column>
+                      <Card>
+                        <Image src='../img/Landingpage/projekt8.jpeg'/>
+                        <Card.Content>
+                          <Card.Header>
+                            Erste Hilfe Seminar
+                          </Card.Header>
+                          <Card.Meta>
+                            <span className='date'>
+                              erstellt am 05.12.2017
+                            </span>
+                          </Card.Meta>
+                          <Card.Description style={{
+                              height: "150px"
+                            }}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</Card.Description>
+                        </Card.Content>
+                        <Card.Content extra={true}>
+                          <a>
+                            <Icon name='user'/>
+                            8 Mitglieder
+                          </a>
+                          <Button animated={true} floated='right' color='teal'>
+                            <Button.Content visible={true}>Details</Button.Content>
+                            <Button.Content hidden={true}>
+                              <Icon name='right arrow'/>
+                            </Button.Content>
+                          </Button>
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
+              </div>
+            </div>
+
           </div>
         </div>)
 
       }
       {
-        !logged && (<div>
-          <div>
-            <div className="card text-center">
-              <div className="card-header">
-                Featured
-              </div>
-              <div className="card-body">
-                <h4 className="card-title">Projekt der Woche</h4>
-                <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
-                <a href="#" className="btn btn-primary">Go somewhere</a>
+        !logged && (<div className="container">
+          <div className="row justify-content-md-center">
+            <div>
+              <div className="container">
+                <div className="row justify-content-md-center">
+                  <Menu attached='top' tabular={true} size="large">
+                    <Menu.Item color='teal' name='Kernprojekte' active={activeItem === 'Kernprojekte'} onClick={this.handleItemClick}/>
+                    <Menu.Item color='teal' name='Unterstützende Projekte' active={activeItem === 'Unterstützende Projekte'} onClick={this.handleItemClick}/>
+                    <Menu.Item color='teal' name='Administrative Projekte' active={activeItem === 'Administrative Projekte'} onClick={this.handleItemClick}/>
+                    <Menu.Menu position='right'>
+                      <Menu.Item>
+                        <Input transparent={true} icon={{
+                            name: 'search',
+                            link: true
+                          }} placeholder='Projekt suchen...'/>
+                      </Menu.Item>
+                    </Menu.Menu>
+                  </Menu>
+                  <br/>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="container">
-            <div className="row">
-              <div className="col">
-                <div className="card" style={{
-                    width: "19rem"
-                  }}>
-                  <img className="card-img-top" src="https://i.imgur.com/ockpsKj.jpg" alt="Card image cap"></img>
-                  <div className="card-body">
-                    <h4 className="card-title">Bundesjugendspiele</h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                  </div>
+            <div>
+              <div className="container">
+                <div className="row justify-content-md-center">
+                  <br/>
+                  <Card style={{
+                      height: "100px",
+                      width: "800px"
+                    }}>
+                    <Card.Content>
+                      <Card.Header>Edu Hub von & für Lehrer</Card.Header>
+                      <Card.Meta>Plattform für LehrerInnen</Card.Meta>
+                      <Card.Description>
+                        <b>Nach Projekten suchen, erstellen & gemeinsam entwickeln</b>
+                        <Button animated={true} floated='right' color='teal'>
+                          <Button.Content visible={true}>Projekt erstellen</Button.Content>
+                          <Button.Content hidden={true}>
+                            <Icon name='right arrow'/>
+                          </Button.Content>
+                        </Button>
+                      </Card.Description>
+
+                    </Card.Content>
+                  </Card>
+
+                  <br/>
                 </div>
               </div>
-              <div className="col">
-                <div className="card" style={{
-                    width: "19rem"
-                  }}>
-                  <img className="card-img-top" src="https://i.imgur.com/uk2MB1c.jpg" alt="Card image cap"></img>
-                  <div className="card-body">
-                    <h4 className="card-title">Bibliotheks Ausbau</h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
+            </div>
+            <div className="container">
+              <div className="row justify-content-md-center">
+
+                <Grid divided='vertically'>
+                  <Grid.Row columns={4}>
+                    <Grid.Column>
+                      <Card>
+                        <Image src='../img/Landingpage/projekt1.jpg'/>
+                        <Card.Content>
+                          <Card.Header>
+                            Digitale Bibliothek
+                          </Card.Header>
+                          <Card.Meta>
+                            <span className='date'>
+                              erstellt am 05.12.2017
+                            </span>
+                          </Card.Meta>
+                          <Card.Description style={{
+                              height: "150px"
+                            }}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                          </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra={true}>
+                          <a>
+                            <Icon name='user'/>
+                            22 Mitglieder
+                          </a>
+                          <Button animated={true} floated='right' color='teal'>
+                            <Button.Content visible={true}>Details</Button.Content>
+                            <Button.Content hidden={true}>
+                              <Icon name='right arrow'/>
+                            </Button.Content>
+                          </Button>
+
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+
+                    <Grid.Column>
+                      <Card>
+                        <Image src='../img/Landingpage/projekt2.jpg'/>
+                        <Card.Content>
+                          <Card.Header>
+                            Experiment
+                          </Card.Header>
+                          <Card.Meta>
+                            <span className='date'>
+                              erstellt am 03.12.2017
+                            </span>
+
+                          </Card.Meta>
+                          <Card.Description style={{
+                              height: "150px"
+                            }}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                          </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra={true}>
+                          <a>
+                            <Icon name='user'/>
+                            5 Mitglieder
+                          </a>
+                          <Button animated={true} floated='right' color='teal'>
+                            <Button.Content visible={true}>Details</Button.Content>
+                            <Button.Content hidden={true}>
+                              <Icon name='right arrow'/>
+                            </Button.Content>
+                          </Button>
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+                    <Grid.Column>
+                      <Card>
+                        <Image src='../img/Landingpage/projekt3.jpg'/>
+                        <Card.Content>
+                          <Card.Header>
+                            Selbstlernzentrum
+                          </Card.Header>
+                          <Card.Meta>
+                            <span className='date'>
+                              erstellt am 28.11.2017
+                            </span>
+                          </Card.Meta>
+                          <Card.Description style={{
+                              height: "150px"
+                            }}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                          </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra={true}>
+                          <a>
+                            <Icon name='user'/>
+                            52 Mitglieder
+                          </a>
+                          <Button animated={true} floated='right' color='teal'>
+                            <Button.Content visible={true}>Details</Button.Content>
+                            <Button.Content hidden={true}>
+                              <Icon name='right arrow'/>
+                            </Button.Content>
+                          </Button>
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+
+                    <Grid.Column>
+                      <Card>
+                        <Image src='../img/Landingpage/projekt4.jpeg'/>
+                        <Card.Content>
+                          <Card.Header>
+                            Cafeteria
+                          </Card.Header>
+                          <Card.Meta>
+                            <span className='date'>
+                              erstellt am 05.12.2017
+                            </span>
+                          </Card.Meta>
+                          <Card.Description style={{
+                              height: "150px"
+                            }}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                          </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra={true}>
+                          <a>
+                            <Icon name='user'/>
+                            2 Mitglieder
+                          </a>
+                          <Button floated='right' animated={true} color='teal'>
+                            <Button.Content visible={true}>Details</Button.Content>
+                            <Button.Content hidden={true}>
+                              <Icon name='right arrow'/>
+                            </Button.Content>
+                          </Button>
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
               </div>
-              <div className="col">
-                <div className="card" style={{
-                    width: "19rem"
-                  }}>
-                  <img className="card-img-top" src="https://i.imgur.com/G6N2paL.jpg" alt="Card image cap"></img>
-                  <div className="card-body">
-                    <h4 className="card-title">Coding Kurs</h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card" style={{
-                    width: "19rem"
-                  }}>
-                  <img className="card-img-top" src="https://i.imgur.com/zGHOb6A.jpg" alt="Card image cap"></img>
-                  <div className="card-body">
-                    <h4 className="card-title">Lernzentrum</h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card" style={{
-                    width: "19rem"
-                  }}>
-                  <img className="card-img-top" src="https://i.imgur.com/KnnT5LQ.jpg" alt="Card image cap"></img>
-                  <div className="card-body">
-                    <h4 className="card-title">Forschungzentrum</h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
-              </div>
-              <div className="col">
-                <div className="card" style={{
-                    width: "19rem"
-                  }}>
-                  <img className="card-img-top" src="https://i.imgur.com/zs0xJsA.jpg" alt="Card image cap"></img>
-                  <div className="card-body">
-                    <h4 className="card-title">Hobby Werkstatt</h4>
-                    <p className="card-text">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam</p>
-                    <a href="#" className="btn btn-primary">Go somewhere</a>
-                  </div>
-                </div>
+            </div>
+            <div className="container">
+              <div className="row justify-content-md-center">
+                <Grid divided='vertically'>
+                  <Grid.Row columns={4}>
+                    <Grid.Column>
+                      <Card>
+                        <Image src='../img/Landingpage/projekt5.jpeg'/>
+                        <Card.Content>
+                          <Card.Header>
+                            Garten AG
+                          </Card.Header>
+                          <Card.Meta>
+                            <span className='date'>
+                              erstellt am 05.12.2017
+                            </span>
+                          </Card.Meta>
+                          <Card.Description style={{
+                              height: "150px"
+                            }}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                          </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra={true}>
+                          <a>
+                            <Icon name='user'/>
+                            32 Mitglieder
+                          </a>
+                          <Button animated={true} floated='right' color='teal'>
+                            <Button.Content visible={true}>Details</Button.Content>
+                            <Button.Content hidden={true}>
+                              <Icon name='right arrow'/>
+                            </Button.Content>
+                          </Button>
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+
+                    <Grid.Column>
+                      <Card>
+                        <Image src='../img/Landingpage/projekt6.jpeg'/>
+                        <Card.Content>
+                          <Card.Header>
+                            KFZ Werkstatt
+                          </Card.Header>
+                          <Card.Meta>
+                            <span className='date'>
+                              erstellt am 03.12.2017
+                            </span>
+                          </Card.Meta>
+                          <Card.Description style={{
+                              height: "150px"
+                            }}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
+                          </Card.Description>
+                        </Card.Content>
+                        <Card.Content extra={true}>
+                          <a>
+                            <Icon name='user'/>
+                            5 Mitglieder
+                          </a>
+                          <Button animated={true} floated='right' color='teal'>
+                            <Button.Content visible={true}>Details</Button.Content>
+                            <Button.Content hidden={true}>
+                              <Icon name='right arrow'/>
+                            </Button.Content>
+                          </Button>
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+                    <Grid.Column>
+                      <Card>
+                        <Image src='../img/Landingpage/projekt7.jpeg'/>
+                        <Card.Content>
+                          <Card.Header>
+                            Tablet Klasse
+                          </Card.Header>
+                          <Card.Meta>
+                            <span className='date'>
+                              erstellt am 28.11.2017
+                            </span>
+                          </Card.Meta>
+                          <Card.Description style={{
+                              height: "150px"
+                            }}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</Card.Description>
+                        </Card.Content>
+                        <Card.Content extra={true}>
+                          <a>
+                            <Icon name='user'/>
+                            20 Mitglieder
+                          </a>
+                          <Button animated={true} floated='right' color='teal'>
+                            <Button.Content visible={true}>Details</Button.Content>
+                            <Button.Content hidden={true}>
+                              <Icon name='right arrow'/>
+                            </Button.Content>
+                          </Button>
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+
+                    <Grid.Column>
+                      <Card>
+                        <Image src='../img/Landingpage/projekt8.jpeg'/>
+                        <Card.Content>
+                          <Card.Header>
+                            Erste Hilfe Seminar
+                          </Card.Header>
+                          <Card.Meta>
+                            <span className='date'>
+                              erstellt am 05.12.2017
+                            </span>
+                          </Card.Meta>
+                          <Card.Description style={{
+                              height: "150px"
+                            }}>
+                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</Card.Description>
+                        </Card.Content>
+                        <Card.Content extra={true}>
+                          <a>
+                            <Icon name='user'/>
+                            8 Mitglieder
+                          </a>
+                          <Button animated={true} floated='right' color='teal'>
+                            <Button.Content visible={true}>Details</Button.Content>
+                            <Button.Content hidden={true}>
+                              <Icon name='right arrow'/>
+                            </Button.Content>
+                          </Button>
+                        </Card.Content>
+                      </Card>
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
               </div>
             </div>
           </div>
