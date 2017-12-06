@@ -21,7 +21,7 @@ import {
 } from 'semantic-ui-react';
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-
+import {Link} from 'react-router-dom';
 const member = <div className="container">
   <div className="row justify-content-md-center">
     <Card.Group>
@@ -143,7 +143,7 @@ class ProjectPage extends React.Component {
         <Grid.Column width={13}>
           <div className="projektname">
             <Container fluid="true" text="true">
-              <Divider horizontal="horizontal">
+              <Divider horizontal={true}>
                 <Header as='h1'>{this.state.Name}</Header>
               </Divider>
 
@@ -277,13 +277,13 @@ class ProjectPage extends React.Component {
     </Grid>
     <div>
     <VerticalTimeline>
+      <Link to="/dasboard">
 <VerticalTimelineElement
 className="vertical-timeline-element--work"
-date="2011 - present"
+
 iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+icon={<img src="img/clipboards.svg" />}
 animate={true}
-
-
 >
 <h3 className="vertical-timeline-element-title">Creative Director</h3>
 <h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
@@ -291,10 +291,12 @@ animate={true}
 Creative Direction, User Experience, Visual Design, Project Management, Team Leading
 </p>
 </VerticalTimelineElement>
+</Link>
 <VerticalTimelineElement
 className="vertical-timeline-element--work"
-date="2010 - 2011"
+
 iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+icon={<img src="img/clipboards.svg" />}
 animate={true}
 >
 <h3 className="vertical-timeline-element-title">Art Director</h3>
@@ -305,9 +307,10 @@ Creative Direction, User Experience, Visual Design, SEO, Online Marketing
 </VerticalTimelineElement>
 <VerticalTimelineElement
 className="vertical-timeline-element--work"
-date="2008 - 2010"
+
 iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
 animate={true}
+icon={<img src="img/clipboards.svg" />}
 position="left"
 >
 <h3 className="vertical-timeline-element-title">Web Designer</h3>
@@ -318,8 +321,9 @@ User Experience, Visual Design
 </VerticalTimelineElement>
 <VerticalTimelineElement
 className="vertical-timeline-element--work"
-date="2006 - 2008"
+
 iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+icon={<img src="img/clipboards.svg" />}
 animate={true}
 >
 <h3 className="vertical-timeline-element-title">Web Designer</h3>
@@ -330,9 +334,10 @@ User Experience, Visual Design
 </VerticalTimelineElement>
 <VerticalTimelineElement
 className="vertical-timeline-element--education"
-date="April 2013"
+
 iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
 animate={true}
+icon={<img src="img/clipboards.svg" />}
 position="left"
 >
 <h3 className="vertical-timeline-element-title">Content Marketing for Web, Mobile and Social Media</h3>
@@ -343,8 +348,9 @@ Strategy, Social Media
 </VerticalTimelineElement>
 <VerticalTimelineElement
 className="vertical-timeline-element--education"
-date="November 2012"
+
 iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
+icon={<img src="img/clipboards.svg" />}
 animate={true}
 >
 <h3 className="vertical-timeline-element-title">Agile Development Scrum Master</h3>
@@ -355,9 +361,10 @@ Creative Direction, User Experience, Visual Design
 </VerticalTimelineElement>
 <VerticalTimelineElement
 className="vertical-timeline-element--education"
-date="2002 - 2006"
+
 iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
 animate={true}
+icon={<img src="img/clipboards.svg" />}
 position="left"
 >
 <h3 className="vertical-timeline-element-title">Bachelor of Science in Interactive Digital Media Visual Imaging</h3>
