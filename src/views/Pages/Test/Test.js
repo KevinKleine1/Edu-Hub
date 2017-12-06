@@ -283,6 +283,7 @@ date="2011 - present"
 iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
 animate={true}
 
+
 >
 <h3 className="vertical-timeline-element-title">Creative Director</h3>
 <h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
