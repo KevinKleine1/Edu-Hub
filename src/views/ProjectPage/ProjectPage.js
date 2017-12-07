@@ -21,6 +21,9 @@ import {
   TextArea,
   Message
 } from 'semantic-ui-react';
+import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
+import {Link} from 'react-router-dom';
 
 var karma = 800;
 var header = 'Header';
@@ -157,7 +160,9 @@ class ProjectPage extends React.Component {
 
   render() {
     const {active} = this.state
-    return (<Grid columns={2} divided={true} colums="equal">
+    return (
+    <div clasName="animated fadeIn">
+    <Grid columns={2} divided={true} colums="equal">
       <Grid.Row stretched={true}>
         <Grid.Column width={13}>
           <div className="projektname">
@@ -176,8 +181,6 @@ class ProjectPage extends React.Component {
               <h3>Fotos</h3>
             </Divider>
             <Gallery images={IMAGES} maxRows={1} imageCountSeparator=' von ' showImageCount={true} showLightboxThumbnails={true} backdropClosesModal={true} showCloseButton={false} enableImageSelection={true}/>
-          </div>
-          <div className="timeline">Timeline
           </div>
 
         </Grid.Column>
@@ -302,7 +305,109 @@ class ProjectPage extends React.Component {
           </div>
         </Grid.Column>
       </Grid.Row>
-    </Grid>)
+    </Grid>
+    <div className="timeline">
+    <VerticalTimeline>
+      <Link to="/dasboard">
+<VerticalTimelineElement
+className="vertical-timeline-element--work"
+
+iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+
+animate={true}
+>
+<h3 className="vertical-timeline-element-title">Creative Director</h3>
+<h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
+<p>
+Creative Direction, User Experience, Visual Design, Project Management, Team Leading
+</p>
+</VerticalTimelineElement>
+</Link>
+<VerticalTimelineElement
+className="vertical-timeline-element--work"
+
+iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+
+animate={true}
+>
+<h3 className="vertical-timeline-element-title">Art Director</h3>
+<h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
+<p>
+Creative Direction, User Experience, Visual Design, SEO, Online Marketing
+</p>
+</VerticalTimelineElement>
+<VerticalTimelineElement
+className="vertical-timeline-element--work"
+
+iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+animate={true}
+
+
+>
+<h3 className="vertical-timeline-element-title">Web Designer</h3>
+<h4 className="vertical-timeline-element-subtitle">Los Angeles, CA</h4>
+<p>
+User Experience, Visual Design
+</p>
+</VerticalTimelineElement>
+<VerticalTimelineElement
+className="vertical-timeline-element--work"
+
+iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
+
+animate={true}
+>
+<h3 className="vertical-timeline-element-title">Web Designer</h3>
+<h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
+<p>
+User Experience, Visual Design
+</p>
+</VerticalTimelineElement>
+<VerticalTimelineElement
+className="vertical-timeline-element--education"
+
+iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
+animate={true}
+
+>
+<h3 className="vertical-timeline-element-title">Content Marketing for Web, Mobile and Social Media</h3>
+<h4 className="vertical-timeline-element-subtitle">Online Course</h4>
+<p>
+Strategy, Social Media
+</p>
+</VerticalTimelineElement>
+<VerticalTimelineElement
+className="vertical-timeline-element--education"
+
+iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
+
+animate={true}
+>
+<h3 className="vertical-timeline-element-title">Agile Development Scrum Master</h3>
+<h4 className="vertical-timeline-element-subtitle">Certification</h4>
+<p>
+Creative Direction, User Experience, Visual Design
+</p>
+</VerticalTimelineElement>
+<VerticalTimelineElement
+className="vertical-timeline-element--education"
+
+iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
+animate={true}
+
+>
+<h3 className="vertical-timeline-element-title">Bachelor of Science in Interactive Digital Media Visual Imaging</h3>
+<h4 className="vertical-timeline-element-subtitle">Bachelor Degree</h4>
+<p>
+Creative Direction, Visual Design
+</p>
+</VerticalTimelineElement>
+</VerticalTimeline>
+
+</div>  
+</div>
+  
+  )
   }
 }
 
