@@ -5,7 +5,6 @@ import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
 import {
   Card,
   Grid,
-  Segment,
   Image,
   Container,
   Header,
@@ -24,6 +23,7 @@ import {
 import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import {Link} from 'react-router-dom';
+import { Menu, Segment } from 'semantic-ui-react'
 
 var karma = 800;
 var header = 'Header';
@@ -129,13 +129,18 @@ class ProjectPage extends React.Component {
 
       modalShare: false,
       modalMember: false,
-      modalEdit: false
+      modalEdit: false,
+      activeItem: 'vertical'
     };
     this.toggleShare = this.toggleShare.bind(this);
     this.toggleMember = this.toggleMember.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
 
   }
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+
+
   toggleShare() {
     this.setState({
       modalShare: !this.state.modalShare
@@ -159,9 +164,9 @@ class ProjectPage extends React.Component {
   })
 
   render() {
-    const {active} = this.state
+    const {active, activeItem} = this.state
     return (
-    <div clasName="animated fadeIn">
+    <div className="animated fadeIn">
     <Grid columns={2} divided={true} colums="equal">
       <Grid.Row stretched={true}>
         <Grid.Column width={13}>
@@ -307,6 +312,12 @@ class ProjectPage extends React.Component {
       </Grid.Row>
     </Grid>
     <div className="timeline">
+    <Menu pointing secondary>
+          <Menu.Item name='vertical' active={activeItem === 'vertical'} onClick={this.handleItemClick} />
+          <Menu.Item name='horizontal' active={activeItem === 'horizontal'} onClick={this.handleItemClick} />
+        </Menu>
+
+       { (activeItem==='vertical') && (     
     <VerticalTimeline>
       <Link to="/dasboard">
 <VerticalTimelineElement
@@ -403,7 +414,7 @@ Creative Direction, Visual Design
 </p>
 </VerticalTimelineElement>
 </VerticalTimeline>
-
+       )}
 </div>  
 </div>
   
