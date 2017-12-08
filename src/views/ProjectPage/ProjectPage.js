@@ -176,12 +176,15 @@ class ProjectPage extends React.Component {
       modalEdit: !this.state.modalEdit
     });
   }
-
-  state = {}
+ 
+  componentDidMount(){
+    this.setData();
+  }
 
   handleClick = () => this.setState({
     active: !this.state.active
   })
+
 
   render() {
     const {active, activeItem, Name, Text, Karma} = this.state
