@@ -113,8 +113,8 @@ class Dashboard extends React.Component {
             <div className="container">
               <div className="row justify-content-md-center">
 
-                <Grid divided='vertically'>
-                  <Grid.Row columns={4}>
+                <Grid doubling columns={4} divided='vertically'>
+                  <Grid.Row>
                     <Grid.Column>
                       <Card>
                         <Image src='../img/Landingpage/projekt1.jpg'/>
@@ -253,8 +253,8 @@ class Dashboard extends React.Component {
             </div>
             <div className="container">
               <div className="row justify-content-md-center">
-                <Grid divided='vertically'>
-                  <Grid.Row columns={4}>
+                <Grid doubling columns={4} divided='vertically'>
+                  <Grid.Row>
                     <Grid.Column>
                       <Card>
                         <Image src='../img/Landingpage/projekt5.jpeg'/>
@@ -446,8 +446,8 @@ class Dashboard extends React.Component {
             <div className="container">
               <div className="row justify-content-md-center">
 
-                <Grid divided='vertically'>
-                  <Grid.Row columns={4}>
+                <Grid doubling columns={4} divided='vertically'>
+                  <Grid.Row>
                     <Grid.Column>
                       <Card>
                         <Image src='../img/Landingpage/projekt1.jpg'/>
@@ -586,8 +586,8 @@ class Dashboard extends React.Component {
             </div>
             <div className="container">
               <div className="row justify-content-md-center">
-                <Grid divided='vertically'>
-                  <Grid.Row columns={4}>
+                <Grid doubling columns={4} divided='vertically'>
+                  <Grid.Row>
                     <Grid.Column>
                       <Card>
                         <Image src='../img/Landingpage/projekt5.jpeg'/>
