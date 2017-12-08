@@ -260,7 +260,7 @@ class Admin extends Component {
             <br/>
             <div className="container">
               <div className="row justify-content-md-center">
-                  <img className="img-circle" src={'img/avatars/' + localStorage.getItem('picture')}></img>
+                  <img className="img-circle" src={'/img/avatars/' + localStorage.getItem('picture')}></img>
                 <br/>
               </div>
             </div>

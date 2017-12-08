@@ -82,7 +82,7 @@ const shareModal = <div className="container">
     </div>
     <div>
       <br/>
-      <Input type="text" size='small' value={currentPageUrlShort} id="InputFieldContent" style={{
+      <Input type="text" size='small' value={currentPageUrl} id="InputFieldContent" style={{
           width: '15em'
         }} action={<Button
         color = 'teal'
@@ -208,7 +208,7 @@ class ProjectPage extends React.Component {
   
 componentDidMount(){
   this.setData();
-  console.log(this.props); 
+  console.log(this.props.match.params.projectid); 
   
 }
 

@@ -64,7 +64,7 @@ class Full extends React.Component {
               <Route path="/wizard5" name="Wizard5" component={Wizard5}/>
               <Route path="/wizard6" name="Wizard6" component={Wizard6}/>
               <Route path="/favs" name="Favoriten" component={Favs}/>
-              <Route path="/projectpage" name="ProjectPage" component={ProjectPage}/>
+              <Route path="/projectpage/:projectid" name="ProjectPage" component={ProjectPage}/>
               <Route path="/discover" name="Entdecken" component={Discover}/>
               <Route path="/test" name="Test" component={Test}/>
               <Route path="/test2" name="Test" component={Test2}/>

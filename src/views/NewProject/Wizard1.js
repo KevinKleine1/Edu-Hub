@@ -87,7 +87,7 @@ wizardPage2() {
           <Message floating>
           <Header color='black'
     as='h2'
-    image='img/logo-symbol.png'
+    image='/img/logo-symbol.png'
     content='Erstelle ein Edu-Projekt'
   />
 </Message>

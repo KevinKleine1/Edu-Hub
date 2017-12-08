@@ -22,7 +22,7 @@ const auth = new Auth();
 class Dashboard extends React.Component {
   state = {
     activeItem: 'bio',
-    test: "rofl"
+   
   }
 
   handleItemClick = (e, {name}) => this.setState({activeItem: name})
@@ -31,7 +31,8 @@ class Dashboard extends React.Component {
     super(props);
     this.state = {
       modal: false,
-      dropdownOpen: false
+      dropdownOpen: false,
+      test: "rofl"
 
     };
 
@@ -472,7 +473,7 @@ class Dashboard extends React.Component {
                             <Icon name='user'/>
                             22 Mitglieder
                           </a>
-                          <Link to={{pathname: '/projectpage', hash:'?the-hash', state:{test: this.state.test}}}>
+                          <Link to={{pathname: '/projectpage', state:{test: this.state.test}}}>
                           <Button animated={true} floated='right' color='teal'>
                             <Button.Content visible={true}>Details</Button.Content>
                             <Button.Content hidden={true}>

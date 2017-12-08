@@ -37,7 +37,7 @@ var options = {
   rememberLastLogin: true,
   loginAfterSignUp: true,
   theme: {
-    logo: 'img/logo.png',
+    logo: '/img/logo.png',
     primaryColor: '#20a8d8',
     labeledSubmitButton: false
   },
@@ -113,8 +113,8 @@ class HeaderDropdown extends React.Component {
     return (<Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} nav={true}>
       <DropdownToggle nav= {true }>
 
-        {logged && (<img src={'img/avatars/' + localStorage.getItem('picture')} className="img-avatar" alt="Kein Bild" />)}
-        {!logged && (<img src={'img/avatars/NotLogged.jpg'} className="img-avatar" alt="Nicht Registriert"/>)}
+        {logged && (<img src={'/img/avatars/' + localStorage.getItem('picture')} className="img-avatar" alt="Kein Bild" />)}
+        {!logged && (<img src={'/img/avatars/NotLogged.jpg'} className="img-avatar" alt="Nicht Registriert"/>)}
 
       </DropdownToggle>
 
