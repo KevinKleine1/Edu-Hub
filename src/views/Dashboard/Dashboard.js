@@ -21,7 +21,8 @@ const auth = new Auth();
 
 class Dashboard extends React.Component {
   state = {
-    activeItem: 'bio'
+    activeItem: 'bio',
+    test: "rofl"
   }
 
   handleItemClick = (e, {name}) => this.setState({activeItem: name})
@@ -55,14 +56,16 @@ class Dashboard extends React.Component {
     return new Date().getTime() < expiresAt;
   }
 
-  test() {
-    history.push
+  testo() {
+    console.log("testo");
   }
 
   render() {
     const logged = this.isAuthenticated();
     const {activeItem} = this.state
-    return (<div className="animated fadeIn">
+    return (
+    
+    <div className="animated fadeIn">
       {
         logged && (<div className="container">
           <div className="row justify-content-md-center">
@@ -143,12 +146,14 @@ class Dashboard extends React.Component {
                             <Icon name='user'/>
                             22 Mitglieder
                           </a>
-                          <Button animated={true} floated='right' color='teal'>
-                            <Button.Content visible={true}>Details</Button.Content>
+                          
+                          <Button animated={true} floated='right' onClick={testo} color='teal'>
+                         <Button.Content  visible={true}>Details </Button.Content> 
                             <Button.Content hidden={true}>
                               <Icon name='right arrow'/>
                             </Button.Content>
                           </Button>
+                          
 
                         </Card.Content>
                       </Card>
@@ -470,12 +475,14 @@ class Dashboard extends React.Component {
                             <Icon name='user'/>
                             22 Mitglieder
                           </a>
+                          <Link to={{pathname: '/projectpage', hash:'#the-hash', state:{test: this.state.test}}}>
                           <Button animated={true} floated='right' color='teal'>
                             <Button.Content visible={true}>Details</Button.Content>
                             <Button.Content hidden={true}>
                               <Icon name='right arrow'/>
                             </Button.Content>
                           </Button>
+                          </Link>
 
                         </Card.Content>
                       </Card>

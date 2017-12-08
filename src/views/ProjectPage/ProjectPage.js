@@ -132,7 +132,8 @@ class ProjectPage extends React.Component {
       activeItem: 'vertical',
       Name: "",
       Text: "",
-      Karma: ""
+      Karma: "", 
+      test: "hallo"
 
     };
     this.toggleShare = this.toggleShare.bind(this);
@@ -179,6 +180,7 @@ class ProjectPage extends React.Component {
  
   componentDidMount(){
     this.setData(); 
+    console.log(this.props.location.state.test);
   }
 
   handleClick = () => this.setState({
@@ -319,7 +321,7 @@ class ProjectPage extends React.Component {
                 <List.Item>
                   <List.Icon name='file outline' size='large' verticalAlign='middle'/>
                   <List.Content>
-                    <List.Header as='a'>Bauplan.pdf</List.Header>
+                    <List.Header as='a'>zeitplan.pdf</List.Header>
                   </List.Content>
                 </List.Item>
                 <List.Item>
@@ -350,10 +352,10 @@ iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
 
 animate={true}
 >
-<h3 className="vertical-timeline-element-title">Creative Director</h3>
-<h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
+<h3 className="vertical-timeline-element-title">Jemand hat auf das Projekt reagiert</h3>
+<h4 className="vertical-timeline-element-subtitle">Maria</h4>
 <p>
-Creative Direction, User Experience, Visual Design, Project Management, Team Leading
+Darf ich mich auch an diesem Projekt beteiligen?
 </p>
 </VerticalTimelineElement>
 </Link>
@@ -364,37 +366,10 @@ iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
 
 animate={true}
 >
-<h3 className="vertical-timeline-element-title">Art Director</h3>
-<h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
+<h3 className="vertical-timeline-element-title"></h3>
+<h4 className="vertical-timeline-element-subtitle">Neues Projektmitglied</h4>
 <p>
-Creative Direction, User Experience, Visual Design, SEO, Online Marketing
-</p>
-</VerticalTimelineElement>
-<VerticalTimelineElement
-className="vertical-timeline-element--work"
-
-iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-animate={true}
-
-
->
-<h3 className="vertical-timeline-element-title">Web Designer</h3>
-<h4 className="vertical-timeline-element-subtitle">Los Angeles, CA</h4>
-<p>
-User Experience, Visual Design
-</p>
-</VerticalTimelineElement>
-<VerticalTimelineElement
-className="vertical-timeline-element--work"
-
-iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-
-animate={true}
->
-<h3 className="vertical-timeline-element-title">Web Designer</h3>
-<h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
-<p>
-User Experience, Visual Design
+Burcu ist in das Projekt eingetreten
 </p>
 </VerticalTimelineElement>
 <VerticalTimelineElement
@@ -404,10 +379,10 @@ iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
 animate={true}
 
 >
-<h3 className="vertical-timeline-element-title">Content Marketing for Web, Mobile and Social Media</h3>
-<h4 className="vertical-timeline-element-subtitle">Online Course</h4>
+<h3 className="vertical-timeline-element-title">Jemandem gefällt dieses Projekt</h3>
+<h4 className="vertical-timeline-element-subtitle">Oemer</h4>
 <p>
-Strategy, Social Media
+Gute Sache die ihr da macht!
 </p>
 </VerticalTimelineElement>
 <VerticalTimelineElement
@@ -417,10 +392,10 @@ iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
 
 animate={true}
 >
-<h3 className="vertical-timeline-element-title">Agile Development Scrum Master</h3>
-<h4 className="vertical-timeline-element-subtitle">Certification</h4>
+<h3 className="vertical-timeline-element-title">Zeitplan wurde hochgeladen</h3>
+<h4 className="vertical-timeline-element-subtitle">Felix</h4>
 <p>
-Creative Direction, User Experience, Visual Design
+zeitplan.pdf wurde hochgeladen
 </p>
 </VerticalTimelineElement>
 <VerticalTimelineElement
@@ -430,10 +405,10 @@ iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
 animate={true}
 
 >
-<h3 className="vertical-timeline-element-title">Bachelor of Science in Interactive Digital Media Visual Imaging</h3>
-<h4 className="vertical-timeline-element-subtitle">Bachelor Degree</h4>
+<h3 className="vertical-timeline-element-title">Projekt wurde gestartet</h3>
+<h4 className="vertical-timeline-element-subtitle">Kevin</h4>
 <p>
-Creative Direction, Visual Design
+Start des Projekts, Bundesjugendspiele
 </p>
 </VerticalTimelineElement>
 </VerticalTimeline>
