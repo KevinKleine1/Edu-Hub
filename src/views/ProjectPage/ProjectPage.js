@@ -21,13 +21,24 @@ import {
   TextArea,
   Message
 } from 'semantic-ui-react';
-import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
+import {VerticalTimeline, VerticalTimelineElement} from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import {Link} from 'react-router-dom';
 
+var EduHub = 'http://edu-hub.azurewebsites.net/' //only for testing
+var currentPageUrl = window.location.href;
+var currentPageUrlShort = window.location.host + window.location.pathname;
 var karma = 800;
 var header = 'Header';
 var descirption = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa strong. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede link mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi';
+
+//Social media redirects
+var redirectToTwitter = 'https://twitter.com/intent/tweet?text=Hey,%20schau%20dir%20dieses%20Projekt%20an:%20' + currentPageUrl
+var redirectToGooglePlus = 'https://plus.google.com/share?url=' + EduHub //change later to currentPageUrl
+var redirectToFacebook = 'https://facebook.com/sharer.php?u=' + EduHub //change later to currentPageUrl
+var redirectToMail = 'mailto:?body=' + currentPageUrl
+
+//content of the member modal
 const memberModal = <div className="container">
   <Card.Group itemsPerRow={3}>
     <Card centered={true} link={true} header='Oemer' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')}/>
@@ -37,6 +48,7 @@ const memberModal = <div className="container">
   </Card.Group>
 </div>
 
+//Conent of the edit modal
 const editModal = <div>
   <div>
     <Form>
@@ -53,23 +65,42 @@ const editModal = <div>
   }} labelPosition='right' placeholder='Ressourcen hinzufügen'/></div>
 </div>
 
+//content of the share modal
 const shareModal = <div className="container">
   <div className="row justify-content-md-center">
-    <Button color='facebook'>
-      <Icon name='facebook'/>
-      Facebook
-    </Button>
-    <Button color='twitter'>
-      <Icon name='twitter'/>
-      Twitter
-    </Button>
-    <Button color='google plus'>
-      <Icon name='google plus'/>
-      Google Plus
-    </Button>
+    <h4>Teile dieses Projekt auf deiner lieblings Plattform</h4>
+    <div>
+      <br/>
+      <Button color='facebook' href={redirectToFacebook} target="_blank">
+        <Icon name='facebook'/>
+        Facebook
+      </Button>
+      <Button color='twitter' href={redirectToTwitter}>
+        <Icon name='twitter'/>
+        Twitter
+      </Button>
+      <Button color='google plus' href={redirectToGooglePlus} target="_blank">
+        <Icon name='google plus'/>
+        Google Plus
+      </Button>
+      <Button icon='mail' color='grey' href={redirectToMail}/>
+    </div>
+    <div>
+      <br/>
+      <Input type="text" size='small' value={currentPageUrlShort} id="InputFieldContent" style={{
+          width: '15em'
+        }} action={<Button
+        color = 'teal'
+        icon = 'clipboard'
+        onClick = {
+          copyToClipboard
+        }
+        />} actionPosition='right'/>
+    </div>
   </div>
 </div>
 
+//images for gallery
 const IMAGES = [
   {
     src: "https://i.imgur.com/ockpsKj.jpg",
@@ -120,6 +151,12 @@ const colors = [
   'black'
 ]
 
+function copyToClipboard() {
+  var copyText = document.getElementById('InputFieldContent');
+  copyText.select();
+  document.execCommand('Copy');
+}
+
 class ProjectPage extends React.Component {
 
   constructor(props) {
@@ -160,254 +197,232 @@ class ProjectPage extends React.Component {
 
   render() {
     const {active} = this.state
-    return (
-    <div clasName="animated fadeIn">
-    <Grid columns={2} divided={true} colums="equal">
-      <Grid.Row stretched={true}>
-        <Grid.Column width={13}>
-          <div className="projektname">
-            <Container fluid={true} text={true}>
+    return (<div clasName="animated fadeIn">
+      <Grid columns={2} divided={true} colums="equal">
+        <Grid.Row stretched={true}>
+          <Grid.Column width={13}>
+            <div className="projektname">
+              <Container fluid={true} text={true}>
+                <Divider horizontal={true}>
+                  <Header as='h1'>{header}</Header>
+                </Divider>
+
+                <p>{descirption}</p>
+              </Container>
+
+            </div>
+            <div className="bilder">
               <Divider horizontal={true}>
-                <Header as='h1'>{header}</Header>
+                <h3>Fotos</h3>
               </Divider>
-
-              <p>{descirption}</p>
-
-            </Container>
-
-          </div>
-          <div className="bilder">
-            <Divider horizontal={true}>
-              <h3>Fotos</h3>
-            </Divider>
-            <Gallery images={IMAGES} maxRows={1} imageCountSeparator=' von ' showImageCount={true} showLightboxThumbnails={true} backdropClosesModal={true} showCloseButton={false} enableImageSelection={true}/>
-          </div>
-
-        </Grid.Column>
-        <Grid.Column width={3}>
-          <br/>
-          <div className="projektfoto"><Image src='https://i.imgur.com/uk2MB1c.jpg' size='medium' bordered={true} circular={true}/><br/></div>
-          <div className="row justify-content-md-center">
-            <div>
-              <Popup content='Füge dieses Projekt deinen Favoriten hinzu' trigger={<Button circular = {
-                  true
-                }
-                color = 'grey' icon = 'bookmark' />}/>
+              <Gallery images={IMAGES} maxRows={1} imageCountSeparator=' von ' showImageCount={true} showLightboxThumbnails={true} backdropClosesModal={true} showCloseButton={false} enableImageSelection={true}/>
             </div>
-            <div>
-              <Popup content='Teile dieses Projekt mit anderen' trigger={<Button circular = {
-                  true
-                }
-                color = 'grey' icon = 'share alternate square' onClick = {
-                  this.toggleShare
-                } />}/>
-              <Modal isOpen={this.state.modalShare} toggle={this.toggleShare} className={this.props.className}>
-                <ModalBody>
-                  {shareModal}
-                </ModalBody>
-              </Modal>
-            </div>
-            <div>
-              <Popup content='Siehe dir die Projektteilnehmer an' trigger={<Button circular = {
-                  true
-                }
-                color = 'grey' icon = 'user' onClick = {
-                  this.toggleMember
-                } />}/>
-              <Modal isOpen={this.state.modalMember} toggle={this.toggleMember} className={this.props.className} size='lg'>
-                <ModalBody>
-                  {memberModal}
-                </ModalBody>
-              </Modal>
-            </div>
-            <div>
-              <Popup content='Füge ein Beitrag hinzu' trigger={<Button circular = {
-                  true
-                }
-                color = 'grey' icon = 'edit' onClick = {
-                  this.toggleEdit
-                } />}/>
-              <Modal isOpen={this.state.modalEdit} toggle={this.toggleEdit} className={this.props.className} size='lg'>
-                <ModalBody>
-                  <div fluid="fluid">
-                    {editModal}
-                  </div>
-                </ModalBody>
-              </Modal>
-            </div>
+
+          </Grid.Column>
+          <Grid.Column width={3}>
             <br/>
-            <div className="container">
-              <div className="row justify-content-md-center">
-                <br/>
-                <Statistic fluid="true" color='purple' size='tiny' horizontal={true}>
-                  <Statistic.Value>
-                    <Icon name='diamond'/> {karma}
-                  </Statistic.Value>
-                  <Statistic.Label>Karma</Statistic.Label>
-                </Statistic>
+            <div className="projektfoto"><Image src='https://i.imgur.com/uk2MB1c.jpg' size='medium' bordered={true} circular={true}/><br/></div>
+            <div className="row justify-content-md-center">
+              <div>
+                <Popup content='Füge dieses Projekt deinen Favoriten hinzu' trigger={<Button circular = {
+                    true
+                  }
+                  color = 'grey' icon = 'bookmark' />}/>
+              </div>
+              <div>
+                <Popup content='Teile dieses Projekt mit anderen' trigger={<Button circular = {
+                    true
+                  }
+                  color = 'grey' icon = 'share alternate square' onClick = {
+                    this.toggleShare
+                  } />}/>
+                <Modal isOpen={this.state.modalShare} toggle={this.toggleShare} className={this.props.className}>
+                  <ModalBody>
+                    {shareModal}
+                  </ModalBody>
+                </Modal>
+              </div>
+              <div>
+                <Popup content='Siehe dir die Projektteilnehmer an' trigger={<Button circular = {
+                    true
+                  }
+                  color = 'grey' icon = 'user' onClick = {
+                    this.toggleMember
+                  } />}/>
+                <Modal isOpen={this.state.modalMember} toggle={this.toggleMember} className={this.props.className} size='lg'>
+                  <ModalBody>
+                    {memberModal}
+                  </ModalBody>
+                </Modal>
+              </div>
+              <div>
+                <Popup content='Füge ein Beitrag hinzu' trigger={<Button circular = {
+                    true
+                  }
+                  color = 'grey' icon = 'edit' onClick = {
+                    this.toggleEdit
+                  } />}/>
+                <Modal isOpen={this.state.modalEdit} toggle={this.toggleEdit} className={this.props.className} size='lg'>
+                  <ModalBody>
+                    <div fluid="fluid">
+                      {editModal}
+                    </div>
+                  </ModalBody>
+                </Modal>
+              </div>
+              <br/>
+              <div className="container">
+                <div className="row justify-content-md-center">
+                  <br/>
+                  <Statistic fluid="true" color='purple' size='tiny' horizontal={true}>
+                    <Statistic.Value>
+                      <Icon name='diamond'/> {karma}
+                    </Statistic.Value>
+                    <Statistic.Label>Karma</Statistic.Label>
+                  </Statistic>
+                </div>
               </div>
             </div>
-          </div>
-          <br/>
-
-          <Button fluid={true} toggle={true} active={false} onClick={this.handleClick} color={active ? 'red' :'green'} content={active? 'Austreten' : 'Beitreten'}/>
-
-          <div className="tags">
-
-            <div className="Tags">
-              <Divider horizontal={true}>
-                <h3>Tags</h3>
-              </Divider>
-
-              <Label.Group size='medium' color='teal'>
-                <Label>Schüler</Label>
-                <Label>Selbstständigkeit</Label>
-                <Label>Schule</Label>
-                <Label>Bibliothek</Label>
-                <Label>...</Label>
-              </Label.Group>
-            </div>
             <br/>
-            <div className="Ressourcen">
-              <Divider horizontal={true}>
-                <h3>Ressourcen</h3>
-              </Divider>
 
-              <Label.Group size='medium' color='blue'>
-                <Label>Aufsichts Person</Label>
-                <Label>Tische</Label>
-                <Label>Stühle</Label>
-                <Label>Stromversorgung</Label>
-                <Label>Super kräfte</Label>
-                <Label>...</Label>
-              </Label.Group>
+            <Button fluid={true} toggle={true} active={false} onClick={this.handleClick} color={active
+                ? 'red'
+                : 'green'} content={active
+                ? 'Austreten'
+                : 'Beitreten'}/>
+
+            <div className="tags">
+
+              <div className="Tags">
+                <Divider horizontal={true}>
+                  <h3>Tags</h3>
+                </Divider>
+
+                <Label.Group size='medium' color='teal'>
+                  <Label>Schüler</Label>
+                  <Label>Selbstständigkeit</Label>
+                  <Label>Schule</Label>
+                  <Label>Bibliothek</Label>
+                  <Label>...</Label>
+                </Label.Group>
+              </div>
+              <br/>
+              <div className="Ressourcen">
+                <Divider horizontal={true}>
+                  <h3>Ressourcen</h3>
+                </Divider>
+
+                <Label.Group size='medium' color='blue'>
+                  <Label>Aufsichts Person</Label>
+                  <Label>Tische</Label>
+                  <Label>Stühle</Label>
+                  <Label>Stromversorgung</Label>
+                  <Label>Super kräfte</Label>
+                  <Label>...</Label>
+                </Label.Group>
+              </div>
+              <br/>
+              <div>
+                <Divider horizontal={true}>
+                  <h3>Anhang</h3>
+                </Divider>
+                <List divided={true} relaxed={true}>
+                  <List.Item>
+                    <List.Icon name='file outline' size='large' verticalAlign='middle'/>
+                    <List.Content>
+                      <List.Header as='a'>Bauplan.pdf</List.Header>
+                    </List.Content>
+                  </List.Item>
+                  <List.Item>
+                    <List.Icon name='file outline' size='large' verticalAlign='middle'/>
+                    <List.Content>
+                      <List.Header as='a'>Vorlage.pdf</List.Header>
+                    </List.Content>
+                  </List.Item>
+                </List>
+              </div>
             </div>
-            <br/>
-            <div>
-              <Divider horizontal={true}>
-                <h3>Anhang</h3>
-              </Divider>
-              <List divided={true} relaxed={true}>
-                <List.Item>
-                  <List.Icon name='file outline' size='large' verticalAlign='middle'/>
-                  <List.Content>
-                    <List.Header as='a'>Bauplan.pdf</List.Header>
-                  </List.Content>
-                </List.Item>
-                <List.Item>
-                  <List.Icon name='file outline' size='large' verticalAlign='middle'/>
-                  <List.Content>
-                    <List.Header as='a'>Vorlage.pdf</List.Header>
-                  </List.Content>
-                </List.Item>
-              </List>
-            </div>
-          </div>
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
-    <div className="timeline">
-    <VerticalTimeline>
-      <Link to="/dasboard">
-<VerticalTimelineElement
-className="vertical-timeline-element--work"
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+      <div className="timeline">
+        <VerticalTimeline>
+          <Link to="/dasboard">
+            <VerticalTimelineElement className="vertical-timeline-element--work" iconStyle={{
+                background: 'rgb(33, 150, 243)',
+                color: '#fff'
+              }} animate={true}>
+              <h3 className="vertical-timeline-element-title">Creative Director</h3>
+              <h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
+              <p>
+                Creative Direction, User Experience, Visual Design, Project Management, Team Leading
+              </p>
+            </VerticalTimelineElement>
+          </Link>
+          <VerticalTimelineElement className="vertical-timeline-element--work" iconStyle={{
+              background: 'rgb(33, 150, 243)',
+              color: '#fff'
+            }} animate={true}>
+            <h3 className="vertical-timeline-element-title">Art Director</h3>
+            <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
+            <p>
+              Creative Direction, User Experience, Visual Design, SEO, Online Marketing
+            </p>
+          </VerticalTimelineElement>
+          <VerticalTimelineElement className="vertical-timeline-element--work" iconStyle={{
+              background: 'rgb(33, 150, 243)',
+              color: '#fff'
+            }} animate={true}>
+            <h3 className="vertical-timeline-element-title">Web Designer</h3>
+            <h4 className="vertical-timeline-element-subtitle">Los Angeles, CA</h4>
+            <p>
+              User Experience, Visual Design
+            </p>
+          </VerticalTimelineElement>
+          <VerticalTimelineElement className="vertical-timeline-element--work" iconStyle={{
+              background: 'rgb(33, 150, 243)',
+              color: '#fff'
+            }} animate={true}>
+            <h3 className="vertical-timeline-element-title">Web Designer</h3>
+            <h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
+            <p>
+              User Experience, Visual Design
+            </p>
+          </VerticalTimelineElement>
+          <VerticalTimelineElement className="vertical-timeline-element--education" iconStyle={{
+              background: 'rgb(233, 30, 99)',
+              color: '#fff'
+            }} animate={true}>
+            <h3 className="vertical-timeline-element-title">Content Marketing for Web, Mobile and Social Media</h3>
+            <h4 className="vertical-timeline-element-subtitle">Online Course</h4>
+            <p>
+              Strategy, Social Media
+            </p>
+          </VerticalTimelineElement>
+          <VerticalTimelineElement className="vertical-timeline-element--education" iconStyle={{
+              background: 'rgb(233, 30, 99)',
+              color: '#fff'
+            }} animate={true}>
+            <h3 className="vertical-timeline-element-title">Agile Development Scrum Master</h3>
+            <h4 className="vertical-timeline-element-subtitle">Certification</h4>
+            <p>
+              Creative Direction, User Experience, Visual Design
+            </p>
+          </VerticalTimelineElement>
+          <VerticalTimelineElement className="vertical-timeline-element--education" iconStyle={{
+              background: 'rgb(233, 30, 99)',
+              color: '#fff'
+            }} animate={true}>
+            <h3 className="vertical-timeline-element-title">Bachelor of Science in Interactive Digital Media Visual Imaging</h3>
+            <h4 className="vertical-timeline-element-subtitle">Bachelor Degree</h4>
+            <p>
+              Creative Direction, Visual Design
+            </p>
+          </VerticalTimelineElement>
+        </VerticalTimeline>
 
-iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-
-animate={true}
->
-<h3 className="vertical-timeline-element-title">Creative Director</h3>
-<h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
-<p>
-Creative Direction, User Experience, Visual Design, Project Management, Team Leading
-</p>
-</VerticalTimelineElement>
-</Link>
-<VerticalTimelineElement
-className="vertical-timeline-element--work"
-
-iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-
-animate={true}
->
-<h3 className="vertical-timeline-element-title">Art Director</h3>
-<h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
-<p>
-Creative Direction, User Experience, Visual Design, SEO, Online Marketing
-</p>
-</VerticalTimelineElement>
-<VerticalTimelineElement
-className="vertical-timeline-element--work"
-
-iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-animate={true}
-
-
->
-<h3 className="vertical-timeline-element-title">Web Designer</h3>
-<h4 className="vertical-timeline-element-subtitle">Los Angeles, CA</h4>
-<p>
-User Experience, Visual Design
-</p>
-</VerticalTimelineElement>
-<VerticalTimelineElement
-className="vertical-timeline-element--work"
-
-iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-
-animate={true}
->
-<h3 className="vertical-timeline-element-title">Web Designer</h3>
-<h4 className="vertical-timeline-element-subtitle">San Francisco, CA</h4>
-<p>
-User Experience, Visual Design
-</p>
-</VerticalTimelineElement>
-<VerticalTimelineElement
-className="vertical-timeline-element--education"
-
-iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-animate={true}
-
->
-<h3 className="vertical-timeline-element-title">Content Marketing for Web, Mobile and Social Media</h3>
-<h4 className="vertical-timeline-element-subtitle">Online Course</h4>
-<p>
-Strategy, Social Media
-</p>
-</VerticalTimelineElement>
-<VerticalTimelineElement
-className="vertical-timeline-element--education"
-
-iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-
-animate={true}
->
-<h3 className="vertical-timeline-element-title">Agile Development Scrum Master</h3>
-<h4 className="vertical-timeline-element-subtitle">Certification</h4>
-<p>
-Creative Direction, User Experience, Visual Design
-</p>
-</VerticalTimelineElement>
-<VerticalTimelineElement
-className="vertical-timeline-element--education"
-
-iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-animate={true}
-
->
-<h3 className="vertical-timeline-element-title">Bachelor of Science in Interactive Digital Media Visual Imaging</h3>
-<h4 className="vertical-timeline-element-subtitle">Bachelor Degree</h4>
-<p>
-Creative Direction, Visual Design
-</p>
-</VerticalTimelineElement>
-</VerticalTimeline>
-
-</div>  
-</div>
-  
-  )
+      </div>
+    </div>)
   }
 }
 
