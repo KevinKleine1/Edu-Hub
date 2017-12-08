@@ -1,14 +1,18 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
-import {Table} from 'semantic-ui-react';
+import {Table, Button} from 'semantic-ui-react';
 
 //Bug: Datum wird nicht richtig sortiert
 
-const brandPrimary = '#20a8d8';
-const brandSuccess = '#4dbd74';
-const brandInfo = '#63c2de';
-const brandWarning = '#f8cb00';
-const brandDanger = '#f86c6b';
+// formates date from database to readable
+function formatDate(date_unformatted){
+var day = date_unformatted.substr(8, 2);
+var month = date_unformatted.substr(5, 2);
+var year = date_unformatted.substr(0, 4);
+var date_formatted = day + '.' + month + '.' + year;
+return date_formatted;
+}
+
 const colors = ['blue']
 const tableData = [
   {
@@ -65,7 +69,10 @@ class MyProjects extends React.Component {
   render() {
     const {column, data, direction} = this.state
 
-    return (<Table sortable={true} celled={true} fixed={true} selectable={true}>
+    return (
+
+<div>
+      <Table sortable={true} celled={true} fixed={true} selectable={true}>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell sorted={column === 'Nummer'
@@ -100,7 +107,7 @@ class MyProjects extends React.Component {
           </Table.Row>))
         }
       </Table.Body>
-    </Table>)
+    </Table></div>)
   }
 }
 
