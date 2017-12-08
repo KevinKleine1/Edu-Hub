@@ -25,9 +25,8 @@ import 'react-vertical-timeline-component/style.min.css';
 import {Link} from 'react-router-dom';
 import { Menu, Segment } from 'semantic-ui-react'
 
-var karma = 800;
-var header = 'Header';
-var descirption = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa strong. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede link mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi';
+
+
 const memberModal = <div className="container">
   <Card.Group itemsPerRow={3}>
     <Card centered={true} link={true} header='Oemer' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')}/>
@@ -130,7 +129,11 @@ class ProjectPage extends React.Component {
       modalShare: false,
       modalMember: false,
       modalEdit: false,
-      activeItem: 'vertical'
+      activeItem: 'vertical',
+      Name: "",
+      Text: "",
+      Karma: ""
+
     };
     this.toggleShare = this.toggleShare.bind(this);
     this.toggleMember = this.toggleMember.bind(this);
@@ -140,6 +143,23 @@ class ProjectPage extends React.Component {
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
+
+  setData(){
+    //var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
+    var target = ('http://edu-hub-backend.azurewebsites.net/project/1')                   //prod
+    fetch(target)
+
+      .then((results) =>{
+        return results.json();
+
+        }).then((json)=>{
+
+          this.setState({Name : json[0].name});
+          this.setState({Text : json[0].text});
+          this.setState({Karma : json[0].karma});
+        
+            })
+  }
 
   toggleShare() {
     this.setState({
@@ -164,7 +184,7 @@ class ProjectPage extends React.Component {
   })
 
   render() {
-    const {active, activeItem} = this.state
+    const {active, activeItem, Name, Text, Karma} = this.state
     return (
     <div className="animated fadeIn">
     <Grid columns={2} divided={true} colums="equal">
@@ -173,10 +193,10 @@ class ProjectPage extends React.Component {
           <div className="projektname">
             <Container fluid={true} text={true}>
               <Divider horizontal={true}>
-                <Header as='h1'>{header}</Header>
+                <Header as='h1'>{Name}</Header>
               </Divider>
 
-              <p>{descirption}</p>
+              <p>{Text}</p>
 
             </Container>
 
@@ -246,7 +266,7 @@ class ProjectPage extends React.Component {
                 <br/>
                 <Statistic fluid="true" color='purple' size='tiny' horizontal={true}>
                   <Statistic.Value>
-                    <Icon name='diamond'/> {karma}
+                    <Icon name='diamond'/> {Karma}
                   </Statistic.Value>
                   <Statistic.Label>Karma</Statistic.Label>
                 </Statistic>

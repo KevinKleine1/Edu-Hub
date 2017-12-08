@@ -21,11 +21,6 @@ class Profile extends React.Component {
     super(props);
 
     this.state = {
-      Name: "",
-      Text: "",
-      Karma: "",
-      
-
     };
   }
 
