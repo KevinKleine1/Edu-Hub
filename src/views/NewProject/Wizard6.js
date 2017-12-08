@@ -132,7 +132,6 @@ export default class Wizard6 extends Component {
 
         </Form.Group>
       </Form>
-<br/>
         <div className="container">
           <div className="row justify-content-md-center">
         <Button animated={true} color='teal' onClick={this.wizardPage5} style={{width: "130px", height: "40px", bottom: "1px"}}>
