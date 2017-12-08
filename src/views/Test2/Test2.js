@@ -86,7 +86,7 @@ class Dashboard extends React.Component {
               <div className="container">
                 <div className="row justify-content-md-center">
                   <br/>
-                
+
                   <Card style={{
                       height: "100px",
                       width: "800px"

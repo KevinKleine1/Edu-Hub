@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Auth from '../../Auth/Auth';
+import history from '../../history';
 import {Link, Switch, Route, Redirect} from 'react-router-dom';
 import {
   Header,
@@ -42,6 +43,10 @@ class Dashboard extends React.Component {
 
     });
   }
+
+  newProject() {
+      history.replace('/wizard1');
+    }
 
   isAuthenticated() {
     // Check whether the current time is past the
@@ -95,7 +100,7 @@ class Dashboard extends React.Component {
                       <Card.Meta>Plattform für LehrerInnen</Card.Meta>
                       <Card.Description>
                         <b>Nach Projekten suchen, erstellen & gemeinsam entwickeln</b>
-                        <Button animated={true} floated='right' color='teal'>
+                        <Button animated={true} floated='right' color='teal' onClick={this.newProject}>
                           <Button.Content visible={true}>Projekt erstellen</Button.Content>
                           <Button.Content hidden={true}>
                             <Icon name='right arrow'/>
@@ -428,12 +433,6 @@ class Dashboard extends React.Component {
                       <Card.Meta>Plattform für LehrerInnen</Card.Meta>
                       <Card.Description>
                         <b>Nach Projekten suchen, erstellen & gemeinsam entwickeln</b>
-                        <Button animated={true} floated='right' color='teal'>
-                          <Button.Content visible={true}>Projekt erstellen</Button.Content>
-                          <Button.Content hidden={true}>
-                            <Icon name='right arrow'/>
-                          </Button.Content>
-                        </Button>
                       </Card.Description>
 
                     </Card.Content>
