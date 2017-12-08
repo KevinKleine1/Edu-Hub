@@ -165,7 +165,7 @@ class ProjectPage extends React.Component {
     this.setState({
       modalShare: !this.state.modalShare
     });
-  }
+  }  
   toggleMember() {
     this.setState({
       modalMember: !this.state.modalMember
@@ -178,7 +178,7 @@ class ProjectPage extends React.Component {
   }
  
   componentDidMount(){
-    this.setData();
+    this.setData(); 
   }
 
   handleClick = () => this.setState({
