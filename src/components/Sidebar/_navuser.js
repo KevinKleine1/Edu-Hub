@@ -31,9 +31,9 @@ export default {
 
         {
           name: 'Neues Projekt',
-          url: '/neuesprojekt',
+          url: '/wizard1',
           icon: 'icon-puzzle',
-    
+
         },
         {
           name: 'Meine Projekte',
@@ -49,6 +49,6 @@ export default {
           name: 'Entdecken',
           url: '/discover',
           icon: 'icon-compass',
-      }     
+      }
   ]
 };
