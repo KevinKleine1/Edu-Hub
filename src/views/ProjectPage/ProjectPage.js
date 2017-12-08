@@ -188,6 +188,8 @@ class ProjectPage extends React.Component {
     });
   }
 
+
+  //fetching the corresponding data from the server to display it on the webpage
   setData(){
     //var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
     var target = ('http://edu-hub-backend.azurewebsites.net/project/' + this.props.match.params.projectid)                   //prod
@@ -208,6 +210,8 @@ class ProjectPage extends React.Component {
   
 componentDidMount(){
   this.setData();
+
+  //Tesfunktion
   console.log(this.props.match.params.projectid); 
   
 }

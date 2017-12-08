@@ -473,7 +473,7 @@ class Dashboard extends React.Component {
                             <Icon name='user'/>
                             22 Mitglieder
                           </a>
-                          <Link to={{pathname: '/projectpage/1', state:{test: this.state.test}}}>
+                          <Link to={{pathname: '/projectpage/1 ', state:{test: this.state.test}}}>
                           <Button animated={true} floated='right' color='teal'>
                             <Button.Content visible={true}>Details</Button.Content>
                             <Button.Content hidden={true}>
@@ -542,12 +542,14 @@ class Dashboard extends React.Component {
                             <Icon name='user'/>
                             52 Mitglieder
                           </a>
+                          <Link to={{pathname: '/projectpage/2 ', state:{test: this.state.test}}}>
                           <Button animated={true} floated='right' color='teal'>
                             <Button.Content visible={true}>Details</Button.Content>
                             <Button.Content hidden={true}>
                               <Icon name='right arrow'/>
                             </Button.Content>
                           </Button>
+                          </Link>
                         </Card.Content>
                       </Card>
                     </Grid.Column>
