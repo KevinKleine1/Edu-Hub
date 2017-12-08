@@ -56,9 +56,6 @@ class Dashboard extends React.Component {
     return new Date().getTime() < expiresAt;
   }
 
-  testo() {
-    console.log("testo");
-  }
 
   render() {
     const logged = this.isAuthenticated();
@@ -147,7 +144,7 @@ class Dashboard extends React.Component {
                             22 Mitglieder
                           </a>
                           
-                          <Button animated={true} floated='right' onClick={testo} color='teal'>
+                          <Button animated={true} floated='right'color='teal'>
                          <Button.Content  visible={true}>Details </Button.Content> 
                             <Button.Content hidden={true}>
                               <Icon name='right arrow'/>
@@ -475,7 +472,7 @@ class Dashboard extends React.Component {
                             <Icon name='user'/>
                             22 Mitglieder
                           </a>
-                          <Link to={{pathname: '/projectpage', hash:'#the-hash', state:{test: this.state.test}}}>
+                          <Link to={{pathname: '/projectpage', hash:'?the-hash', state:{test: this.state.test}}}>
                           <Button animated={true} floated='right' color='teal'>
                             <Button.Content visible={true}>Details</Button.Content>
                             <Button.Content hidden={true}>

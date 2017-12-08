@@ -207,7 +207,8 @@ class ProjectPage extends React.Component {
 
   
 componentDidMount(){
-  this.setData(); 
+  this.setData();
+  console.log(this.props); 
   
 }
 
