@@ -190,7 +190,7 @@ class ProjectPage extends React.Component {
 
   setData(){
     //var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
-    var target = ('http://edu-hub-backend.azurewebsites.net/project/1')                   //prod
+    var target = ('http://edu-hub-backend.azurewebsites.net/project/' + this.props.match.params.projectid)                   //prod
     fetch(target)
 
       .then((results) =>{
