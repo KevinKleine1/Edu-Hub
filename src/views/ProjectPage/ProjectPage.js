@@ -209,11 +209,7 @@ class ProjectPage extends React.Component {
 
   
 componentDidMount(){
-  this.setData();
-
-  //Tesfunktion
-  console.log(this.props.match.params.projectid); 
-  
+  this.setData(); 
 }
 
 
