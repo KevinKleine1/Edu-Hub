@@ -1,732 +1,123 @@
-import React, {Component} from 'react';
-import Auth from '../../Auth/Auth';
-import {Link, Switch, Route, Redirect} from 'react-router-dom';
-import {
-  Header,
-  Icon,
-  Image,
-  Container,
-  Card,
-  Grid,
-  Button,
-  Message,
-  Input,
-  Menu,
-  Segment
-} from 'semantic-ui-react';
-import Welcome from '../Pages/Welcome/Welcome';
+import React, {Component, Border} from 'react';
+import {Container, Segment, Card, Grid, Image, Header, Icon, Button, Statistic, Label} from 'semantic-ui-react';
+import history from '../../history';
 
-const auth = new Auth();
 
-class Dashboard extends React.Component {
-  state = {
-    activeItem: 'bio'
-  }
 
-  handleItemClick = (e, {name}) => this.setState({activeItem: name})
+// changes const
 
+class Test2 extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      modal: false,
-      dropdownOpen: false
-
-    };
 
     this.toggle = this.toggle.bind(this);
+    this.state = {
+      dropdownOpen: false
+    };
   }
 
   toggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
-
     });
   }
-
-  isAuthenticated() {
-    // Check whether the current time is past the
-    // access token's expiry time
-    let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-    return new Date().getTime() < expiresAt;
+  goBack(){
+    history.go(-1);
   }
 
-  test() {
-    history.push
+wizardPage2() {
+    history.replace('/wizard2');
   }
 
   render() {
-    const logged = this.isAuthenticated();
-    const {activeItem} = this.state
-    return (<div className="animated fadeIn">
-      {
-        logged && (<div className="container">
-          <div className="row justify-content-md-center">
 
-            <div>
-              <div className="container">
-                <div className="row justify-content-md-center">
-                  <Menu attached='top' tabular={true} size="large">
-                    <Menu.Item color='teal' name='Kernprojekte' active={activeItem === 'Kernprojekte'} onClick={this.handleItemClick}/>
-                    <Menu.Item color='teal' name='Unterst&uuml;tzende Projekte' active={activeItem === 'Unterst&uuml;tzende Projekte'} onClick={this.handleItemClick}/>
-                    <Menu.Item color='teal' name='Administrative Projekte' active={activeItem === 'Administrative Projekte'} onClick={this.handleItemClick}/>
-                    <Menu.Menu position='right'>
-                      <Menu.Item>
-                        <Input transparent={true} icon={{
-                            name: 'search',
-                            link: true
-                          }} placeholder='Projekt suchen...'/>
-                      </Menu.Item>
-                    </Menu.Menu>
-                  </Menu>
-                  <br/>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="container">
-                <div className="row justify-content-md-center">
-                  <br/>
+    return (
 
-                  <Card style={{
-                      height: "100px",
-                      width: "800px"
-                    }}>
-                    <Card.Content>
-                      <Card.Header>Edu Hub von & für Lehrer</Card.Header>
-                      <Card.Meta>Plattform für LehrerInnen</Card.Meta>
-                      <Card.Description>
-                        <b>Nach Projekten suchen, erstellen & gemeinsam entwickeln</b>
-                        <Button animated={true} floated='right' color='teal'>
-                          <Button.Content visible={true}>Projekt erstellen</Button.Content>
-                          <Button.Content hidden={true}>
-                            <Icon name='right arrow'/>
-                          </Button.Content>
-                        </Button>
-                      </Card.Description>
+      <div className="container">
+      <div className="row justify-content-md-center">
+               <Segment vertical style={{width: "800px"}}>
 
-                    </Card.Content>
-                  </Card>
+                 <img className="img-circle" src ='/img/avatars/5.jpg' style={{width: "200px"}} align="right"></img>
+                 <Header as='h2'>
+                 <Icon name='user' />
+                 <Header.Content>
+                 Maria Müller
+                 <Header.Subheader>
+                 Profil
+                 </Header.Subheader>
+                 </Header.Content>
+                 </Header>
+                 <p style={{width: "580px"}}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+               </Segment>
+             <Segment vertical style={{width: "800px"}}>
+           <Header as='h3' floated='left'>
+            <b>Name</b>
+           </Header>
+           <Header as='h3' floated='right' color='grey'>
+           Maria Müller
+           </Header>
+             </Segment>
+             <Segment vertical style={{width: "800px"}}>
+           <Header as='h3' floated='left'>
+            <b>Schule</b>
+           </Header>
+           <Header as='h3' floated='right' color='grey'>
+           Gymnasium Köln-Ehrenfeld
+           </Header>
+             </Segment>
+             <Segment vertical style={{width: "800px"}}>
+           <Header as='h3' floated='left'>
+            <b>Mitglied seit</b>
+           </Header>
+           <Header as='h3' floated='right' color='grey'>
+           07. Dezember 2017
+           </Header>
+             </Segment>
 
+             <Segment vertical style={{width: "800px"}}>
+                    <div className="container">
+                    <div className="row justify-content-md-center">
+                      <br/>
+ <Statistic.Group>
+            <Statistic color='purple'>
+              <Statistic.Value>
+                <Icon name='diamond'/>
+                84
+              </Statistic.Value>
+              <Statistic.Label>Karma</Statistic.Label><br/>
+            </Statistic>
 
-                  <br/>
-                </div>
-              </div>
-            </div>
-            <div className="container">
-              <div className="row justify-content-md-center">
+              <br/>
+              <br/>
 
-                <Grid doubling columns={4} divided='vertically'>
-                  <Grid.Row>
-                    <Grid.Column>
-                      <Card>
-                        <Image src='../img/Landingpage/projekt1.jpg'/>
-                        <Card.Content>
-                          <Card.Header>
-                            Digitale Bibliothek
-                          </Card.Header>
-                          <Card.Meta>
-                            <span className='date'>
-                              erstellt am 05.12.2017
-                            </span>
-                          </Card.Meta>
-                          <Card.Description style={{
-                              height: "150px"
-                            }}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                          </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra={true}>
-                          <a>
-                            <Icon name='user'/>
-                            22 Mitglieder
-                          </a>
-                          <Button animated={true} floated='right' color='teal'>
-                            <Button.Content visible={true}>Details</Button.Content>
-                            <Button.Content hidden={true}>
-                              <Icon name='right arrow'/>
-                            </Button.Content>
-                          </Button>
+            <Statistic color='blue' >
+              <Statistic.Value>
+                <Icon name='edit'/>
+                2
+              </Statistic.Value>
+              <Statistic.Label>Projekte</Statistic.Label>
+            </Statistic>
 
-                        </Card.Content>
-                      </Card>
-                    </Grid.Column>
+          <br/>
+            <br/>
 
-                    <Grid.Column>
-                      <Card>
-                        <Image src='../img/Landingpage/projekt2.jpg'/>
-                        <Card.Content>
-                          <Card.Header>
-                            Experiment
-                          </Card.Header>
-                          <Card.Meta>
-                            <span className='date'>
-                              erstellt am 03.12.2017
-                            </span>
-
-                          </Card.Meta>
-                          <Card.Description style={{
-                              height: "150px"
-                            }}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                          </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra={true}>
-                          <a>
-                            <Icon name='user'/>
-                            5 Mitglieder
-                          </a>
-                          <Button animated={true} floated='right' color='teal'>
-                            <Button.Content visible={true}>Details</Button.Content>
-                            <Button.Content hidden={true}>
-                              <Icon name='right arrow'/>
-                            </Button.Content>
-                          </Button>
-                        </Card.Content>
-                      </Card>
-                    </Grid.Column>
-                    <Grid.Column>
-                      <Card>
-                        <Image src='../img/Landingpage/projekt3.jpg'/>
-                        <Card.Content>
-                          <Card.Header>
-                            Selbstlernzentrum
-                          </Card.Header>
-                          <Card.Meta>
-                            <span className='date'>
-                              erstellt am 28.11.2017
-                            </span>
-                          </Card.Meta>
-                          <Card.Description style={{
-                              height: "150px"
-                            }}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                          </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra={true}>
-                          <a>
-                            <Icon name='user'/>
-                            52 Mitglieder
-                          </a>
-                          <Button animated={true} floated='right' color='teal'>
-                            <Button.Content visible={true}>Details</Button.Content>
-                            <Button.Content hidden={true}>
-                              <Icon name='right arrow'/>
-                            </Button.Content>
-                          </Button>
-                        </Card.Content>
-                      </Card>
-                    </Grid.Column>
-
-                    <Grid.Column>
-                      <Card>
-                        <Image src='../img/Landingpage/projekt4.jpeg'/>
-                        <Card.Content>
-                          <Card.Header>
-                            Cafeteria
-                          </Card.Header>
-                          <Card.Meta>
-                            <span className='date'>
-                              erstellt am 05.12.2017
-                            </span>
-                          </Card.Meta>
-                          <Card.Description style={{
-                              height: "150px"
-                            }}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                          </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra={true}>
-                          <a>
-                            <Icon name='user'/>
-                            2 Mitglieder
-                          </a>
-                          <Button floated='right' animated={true} color='teal'>
-                            <Button.Content visible={true}>Details</Button.Content>
-                            <Button.Content hidden={true}>
-                              <Icon name='right arrow'/>
-                            </Button.Content>
-                          </Button>
-                        </Card.Content>
-                      </Card>
-                    </Grid.Column>
-                  </Grid.Row>
-                </Grid>
-              </div>
-            </div>
-            <div className="container">
-              <div className="row justify-content-md-center">
-                <Grid doubling columns={4} divided='vertically'>
-                  <Grid.Row>
-                    <Grid.Column>
-                      <Card>
-                        <Image src='../img/Landingpage/projekt5.jpeg'/>
-                        <Card.Content>
-                          <Card.Header>
-                            Garten AG
-                          </Card.Header>
-                          <Card.Meta>
-                            <span className='date'>
-                              erstellt am 05.12.2017
-                            </span>
-                          </Card.Meta>
-                          <Card.Description style={{
-                              height: "150px"
-                            }}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                          </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra={true}>
-                          <a>
-                            <Icon name='user'/>
-                            32 Mitglieder
-                          </a>
-                          <Button animated={true} floated='right' color='teal'>
-                            <Button.Content visible={true}>Details</Button.Content>
-                            <Button.Content hidden={true}>
-                              <Icon name='right arrow'/>
-                            </Button.Content>
-                          </Button>
-                        </Card.Content>
-                      </Card>
-                    </Grid.Column>
-
-                    <Grid.Column>
-                      <Card>
-                        <Image src='../img/Landingpage/projekt6.jpeg'/>
-                        <Card.Content>
-                          <Card.Header>
-                            KFZ Werkstatt
-                          </Card.Header>
-                          <Card.Meta>
-                            <span className='date'>
-                              erstellt am 03.12.2017
-                            </span>
-                          </Card.Meta>
-                          <Card.Description style={{
-                              height: "150px"
-                            }}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                          </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra={true}>
-                          <a>
-                            <Icon name='user'/>
-                            5 Mitglieder
-                          </a>
-                          <Button animated={true} floated='right' color='teal'>
-                            <Button.Content visible={true}>Details</Button.Content>
-                            <Button.Content hidden={true}>
-                              <Icon name='right arrow'/>
-                            </Button.Content>
-                          </Button>
-                        </Card.Content>
-                      </Card>
-                    </Grid.Column>
-                    <Grid.Column>
-                      <Card>
-                        <Image src='../img/Landingpage/projekt7.jpeg'/>
-                        <Card.Content>
-                          <Card.Header>
-                            Tablet Klasse
-                          </Card.Header>
-                          <Card.Meta>
-                            <span className='date'>
-                              erstellt am 28.11.2017
-                            </span>
-                          </Card.Meta>
-                          <Card.Description style={{
-                              height: "150px"
-                            }}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</Card.Description>
-                        </Card.Content>
-                        <Card.Content extra={true}>
-                          <a>
-                            <Icon name='user'/>
-                            20 Mitglieder
-                          </a>
-                          <Button animated={true} floated='right' color='teal'>
-                            <Button.Content visible={true}>Details</Button.Content>
-                            <Button.Content hidden={true}>
-                              <Icon name='right arrow'/>
-                            </Button.Content>
-                          </Button>
-                        </Card.Content>
-                      </Card>
-                    </Grid.Column>
-
-                    <Grid.Column>
-                      <Card>
-                        <Image src='../img/Landingpage/projekt8.jpeg'/>
-                        <Card.Content>
-                          <Card.Header>
-                            Erste Hilfe Seminar
-                          </Card.Header>
-                          <Card.Meta>
-                            <span className='date'>
-                              erstellt am 05.12.2017
-                            </span>
-                          </Card.Meta>
-                          <Card.Description style={{
-                              height: "150px"
-                            }}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</Card.Description>
-                        </Card.Content>
-                        <Card.Content extra={true}>
-                          <a>
-                            <Icon name='user'/>
-                            8 Mitglieder
-                          </a>
-                          <Button animated={true} floated='right' color='teal'>
-                            <Button.Content visible={true}>Details</Button.Content>
-                            <Button.Content hidden={true}>
-                              <Icon name='right arrow'/>
-                            </Button.Content>
-                          </Button>
-                        </Card.Content>
-                      </Card>
-                    </Grid.Column>
-                  </Grid.Row>
-                </Grid>
-              </div>
-            </div>
-
+            <Statistic color='green'>
+              <Statistic.Value>
+                <Icon name='users'/>
+                6
+              </Statistic.Value>
+              <Statistic.Label>Projektmitglied</Statistic.Label>
+            </Statistic>
+          </Statistic.Group>
+          <br/>
           </div>
-        </div>)
-
-      }
-      {
-        !logged && (<div className="container">
-          <div className="row justify-content-md-center">
-            <div>
-              <div className="container">
-                <div className="row justify-content-md-center">
-                  <Menu attached='top' tabular={true} size="large">
-                    <Menu.Item color='teal' name='Kernprojekte' active={activeItem === 'Kernprojekte'} onClick={this.handleItemClick}/>
-                    <Menu.Item color='teal' name='Unterstützende Projekte' active={activeItem === 'Unterstützende Projekte'} onClick={this.handleItemClick}/>
-                    <Menu.Item color='teal' name='Administrative Projekte' active={activeItem === 'Administrative Projekte'} onClick={this.handleItemClick}/>
-                    <Menu.Menu position='right'>
-                      <Menu.Item>
-                        <Input transparent={true} icon={{
-                            name: 'search',
-                            link: true
-                          }} placeholder='Projekt suchen...'/>
-                      </Menu.Item>
-                    </Menu.Menu>
-                  </Menu>
-                  <br/>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="container">
-                <div className="row justify-content-md-center">
-                  <br/>
-                  <Card style={{
-                      height: "100px",
-                      width: "800px"
-                    }}>
-                    <Card.Content>
-                      <Card.Header>Edu Hub von & für Lehrer</Card.Header>
-                      <Card.Meta>Plattform für LehrerInnen</Card.Meta>
-                      <Card.Description>
-                        <b>Nach Projekten suchen, erstellen & gemeinsam entwickeln</b>
-                        <Button animated={true} floated='right' color='teal'>
-                          <Button.Content visible={true}>Projekt erstellen</Button.Content>
-                          <Button.Content hidden={true}>
-                            <Icon name='right arrow'/>
-                          </Button.Content>
-                        </Button>
-                      </Card.Description>
-
-                    </Card.Content>
-                  </Card>
-
-                  <br/>
-                </div>
-              </div>
-            </div>
-            <div className="container">
-              <div className="row justify-content-md-center">
-
-                <Grid doubling columns={4} divided='vertically'>
-                  <Grid.Row>
-                    <Grid.Column>
-                      <Card>
-                        <Image src='../img/Landingpage/projekt1.jpg'/>
-                        <Card.Content>
-                          <Card.Header>
-                            Digitale Bibliothek
-                          </Card.Header>
-                          <Card.Meta>
-                            <span className='date'>
-                              erstellt am 05.12.2017
-                            </span>
-                          </Card.Meta>
-                          <Card.Description style={{
-                              height: "150px"
-                            }}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                          </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra={true}>
-                          <a>
-                            <Icon name='user'/>
-                            22 Mitglieder
-                          </a>
-                          <Button animated={true} floated='right' color='teal'>
-                            <Button.Content visible={true}>Details</Button.Content>
-                            <Button.Content hidden={true}>
-                              <Icon name='right arrow'/>
-                            </Button.Content>
-                          </Button>
-
-                        </Card.Content>
-                      </Card>
-                    </Grid.Column>
-
-                    <Grid.Column>
-                      <Card>
-                        <Image src='../img/Landingpage/projekt2.jpg'/>
-                        <Card.Content>
-                          <Card.Header>
-                            Experiment
-                          </Card.Header>
-                          <Card.Meta>
-                            <span className='date'>
-                              erstellt am 03.12.2017
-                            </span>
-
-                          </Card.Meta>
-                          <Card.Description style={{
-                              height: "150px"
-                            }}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                          </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra={true}>
-                          <a>
-                            <Icon name='user'/>
-                            5 Mitglieder
-                          </a>
-                          <Button animated={true} floated='right' color='teal'>
-                            <Button.Content visible={true}>Details</Button.Content>
-                            <Button.Content hidden={true}>
-                              <Icon name='right arrow'/>
-                            </Button.Content>
-                          </Button>
-                        </Card.Content>
-                      </Card>
-                    </Grid.Column>
-                    <Grid.Column>
-                      <Card>
-                        <Image src='../img/Landingpage/projekt3.jpg'/>
-                        <Card.Content>
-                          <Card.Header>
-                            Selbstlernzentrum
-                          </Card.Header>
-                          <Card.Meta>
-                            <span className='date'>
-                              erstellt am 28.11.2017
-                            </span>
-                          </Card.Meta>
-                          <Card.Description style={{
-                              height: "150px"
-                            }}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                          </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra={true}>
-                          <a>
-                            <Icon name='user'/>
-                            52 Mitglieder
-                          </a>
-                          <Button animated={true} floated='right' color='teal'>
-                            <Button.Content visible={true}>Details</Button.Content>
-                            <Button.Content hidden={true}>
-                              <Icon name='right arrow'/>
-                            </Button.Content>
-                          </Button>
-                        </Card.Content>
-                      </Card>
-                    </Grid.Column>
-
-                    <Grid.Column>
-                      <Card>
-                        <Image src='../img/Landingpage/projekt4.jpeg'/>
-                        <Card.Content>
-                          <Card.Header>
-                            Cafeteria
-                          </Card.Header>
-                          <Card.Meta>
-                            <span className='date'>
-                              erstellt am 05.12.2017
-                            </span>
-                          </Card.Meta>
-                          <Card.Description style={{
-                              height: "150px"
-                            }}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                          </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra={true}>
-                          <a>
-                            <Icon name='user'/>
-                            2 Mitglieder
-                          </a>
-                          <Button floated='right' animated={true} color='teal'>
-                            <Button.Content visible={true}>Details</Button.Content>
-                            <Button.Content hidden={true}>
-                              <Icon name='right arrow'/>
-                            </Button.Content>
-                          </Button>
-                        </Card.Content>
-                      </Card>
-                    </Grid.Column>
-                  </Grid.Row>
-                </Grid>
-              </div>
-            </div>
-            <div className="container">
-              <div className="row justify-content-md-center">
-                <Grid doubling columns={4} divided='vertically'>
-                  <Grid.Row>
-                    <Grid.Column>
-                      <Card>
-                        <Image src='../img/Landingpage/projekt5.jpeg'/>
-                        <Card.Content>
-                          <Card.Header>
-                            Garten AG
-                          </Card.Header>
-                          <Card.Meta>
-                            <span className='date'>
-                              erstellt am 05.12.2017
-                            </span>
-                          </Card.Meta>
-                          <Card.Description style={{
-                              height: "150px"
-                            }}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                          </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra={true}>
-                          <a>
-                            <Icon name='user'/>
-                            32 Mitglieder
-                          </a>
-                          <Button animated={true} floated='right' color='teal'>
-                            <Button.Content visible={true}>Details</Button.Content>
-                            <Button.Content hidden={true}>
-                              <Icon name='right arrow'/>
-                            </Button.Content>
-                          </Button>
-                        </Card.Content>
-                      </Card>
-                    </Grid.Column>
-
-                    <Grid.Column>
-                      <Card>
-                        <Image src='../img/Landingpage/projekt6.jpeg'/>
-                        <Card.Content>
-                          <Card.Header>
-                            KFZ Werkstatt
-                          </Card.Header>
-                          <Card.Meta>
-                            <span className='date'>
-                              erstellt am 03.12.2017
-                            </span>
-                          </Card.Meta>
-                          <Card.Description style={{
-                              height: "150px"
-                            }}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.
-                          </Card.Description>
-                        </Card.Content>
-                        <Card.Content extra={true}>
-                          <a>
-                            <Icon name='user'/>
-                            5 Mitglieder
-                          </a>
-                          <Button animated={true} floated='right' color='teal'>
-                            <Button.Content visible={true}>Details</Button.Content>
-                            <Button.Content hidden={true}>
-                              <Icon name='right arrow'/>
-                            </Button.Content>
-                          </Button>
-                        </Card.Content>
-                      </Card>
-                    </Grid.Column>
-                    <Grid.Column>
-                      <Card>
-                        <Image src='../img/Landingpage/projekt7.jpeg'/>
-                        <Card.Content>
-                          <Card.Header>
-                            Tablet Klasse
-                          </Card.Header>
-                          <Card.Meta>
-                            <span className='date'>
-                              erstellt am 28.11.2017
-                            </span>
-                          </Card.Meta>
-                          <Card.Description style={{
-                              height: "150px"
-                            }}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</Card.Description>
-                        </Card.Content>
-                        <Card.Content extra={true}>
-                          <a>
-                            <Icon name='user'/>
-                            20 Mitglieder
-                          </a>
-                          <Button animated={true} floated='right' color='teal'>
-                            <Button.Content visible={true}>Details</Button.Content>
-                            <Button.Content hidden={true}>
-                              <Icon name='right arrow'/>
-                            </Button.Content>
-                          </Button>
-                        </Card.Content>
-                      </Card>
-                    </Grid.Column>
-
-                    <Grid.Column>
-                      <Card>
-                        <Image src='../img/Landingpage/projekt8.jpeg'/>
-                        <Card.Content>
-                          <Card.Header>
-                            Erste Hilfe Seminar
-                          </Card.Header>
-                          <Card.Meta>
-                            <span className='date'>
-                              erstellt am 05.12.2017
-                            </span>
-                          </Card.Meta>
-                          <Card.Description style={{
-                              height: "150px"
-                            }}>
-                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</Card.Description>
-                        </Card.Content>
-                        <Card.Content extra={true}>
-                          <a>
-                            <Icon name='user'/>
-                            8 Mitglieder
-                          </a>
-                          <Button animated={true} floated='right' color='teal'>
-                            <Button.Content visible={true}>Details</Button.Content>
-                            <Button.Content hidden={true}>
-                              <Icon name='right arrow'/>
-                            </Button.Content>
-                          </Button>
-                        </Card.Content>
-                      </Card>
-                    </Grid.Column>
-                  </Grid.Row>
-                </Grid>
-              </div>
-            </div>
-          </div>
-        </div>)
-      }
-    </div>);
+        </div>
+      </Segment>
+    
+  </div>
+  </div>
+  )
   }
 }
 
-export default Dashboard;
+export default Test2;

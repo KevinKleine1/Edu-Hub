@@ -44,12 +44,12 @@ class Profile extends React.Component {
           this.setState({Fach1: json[0].subject1});
           this.setState({Fach2: json[0].subject2});
           this.setState({Fach3: json[0].subject3});
-        
+
             })
   }
 
   changeView() {
-    history.replace('/admin');
+    history.push('/admin');
   };
 
   goBack(){
@@ -141,6 +141,7 @@ class Profile extends React.Component {
 </div>
 
   </div>
+  <br/>
 </div>
 </div>
 

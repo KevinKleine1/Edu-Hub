@@ -43,7 +43,7 @@ class Admin extends Component {
       Fach3Alt: "",
       fachError: false
     };
-  
+
 
     handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
@@ -51,16 +51,16 @@ class Admin extends Component {
     setData(){
       var decoded = jwt.decode(localStorage.getItem('id_token'));       //decoder for JWT Token
       localStorage.setItem('email', decoded.email);
-  
+
       //var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
       var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
       fetch(target)
-  
+
         .then((results) =>{
           return results.json();
-  
+
           }).then((json)=>{
-  
+
             this.setState({VornameAlt : json[0].name});
             this.setState({NachnameAlt : json[0].surname});
             this.setState({StadtAlt : json[0].city});
@@ -70,7 +70,7 @@ class Admin extends Component {
             this.setState({Fach1Alt: json[0].subject1});
             this.setState({Fach2Alt: json[0].subject2});
             this.setState({Fach3Alt: json[0].subject3});
-          
+
               })
     }
 
@@ -87,13 +87,13 @@ class Admin extends Component {
       fachError: false,
       Fehler: false,
     };
-  
+
     if (isNaN(this.state.Hausnummer)) {
       isError = true;
       errors.hausnummerError = true;
       errors.Fehler =true;
     }
-  
+
     if (isNaN(this.state.Postcode)) {
       isError = true;
       errors.postcodeError = true;
@@ -207,7 +207,7 @@ class Admin extends Component {
  }
 
   handleSubmit(){
-   
+
     const err = this.validate();
     if(!err){
     this.onSubmit();
@@ -277,7 +277,7 @@ class Admin extends Component {
 
             <div className="card-text">
             <Form error={this.state.Fehler} success={this.state.Erfolg} onSubmit={this.handleSubmit}>
-                 
+
                  <Form.Field>
                     <label>Vorname</label>
                     <Form.Input name="Vorname" value={Vorname} onChange={this.handleChange} error={this.state.vornameError} placeholder={this.state.VornameAlt} />
@@ -305,12 +305,12 @@ class Admin extends Component {
                  <Form.Group inline>
                   <Form.Field required>
                     <label>Fächer</label>
-                   <Form.Input  name="Fach1" value={Fach1} onChange={this.handleChange} error={this.state.fachError} placeholder={this.state.Fach1Alt} /> 
-                    
-                   
+                   <Form.Input  name="Fach1" value={Fach1} onChange={this.handleChange} error={this.state.fachError} placeholder={this.state.Fach1Alt} />
+
+
                    <Form.Input  name="Fach2" value={Fach2} onChange={this.handleChange} placeholder={this.state.Fach2Alt} />
-                  
-                  
+
+
                    <Form.Input  name="Fach3" value={Fach3} onChange={this.handleChange} placeholder={this.state.Fach3Alt} />
                     </Form.Field>
                     </Form.Group>
@@ -318,15 +318,15 @@ class Admin extends Component {
                     error
                     header='Fehler bei Eingabe'
                     content='Hausnummer und PLZ müssen Zahlen sein.'
-                    /> 
+                    />
                     <Message
                     success
                     header='Daten erfolgreich erstellt'
                     content='Weiterhin viel Spaß auf Edu-Hub.'
-                    />              
+                    />
             </Form>
             </div>
-         
+
 
             <div className="container">
               <div className="row justify-content-md-center">
@@ -348,6 +348,7 @@ class Admin extends Component {
           </Card.Content>
 
         </Card>
+        <br/>
       </div>
     </div>);
   }
