@@ -24,6 +24,7 @@ constructor(props){
 
 render(){
   return (
+    
     <Grid.Column>
     <Card>
       <Image src='../img/Landingpage/projekt2.jpg'/>
@@ -59,6 +60,7 @@ render(){
       </Card.Content>
     </Card>
   </Grid.Column>
+ 
   );
  }
 }
