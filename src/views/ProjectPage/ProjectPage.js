@@ -90,7 +90,7 @@ const shareModal = <div className="container">
         onClick = {
           copyToClipboard
         }
-        />} actionPosition='right'/>
+        />}/>
     </div>
   </div>
 </div>

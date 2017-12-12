@@ -137,8 +137,6 @@ class Welcome extends Component {
  }
 
   handleSubmit(){
-   
-    console.log(this.state.file)
     const err = this.validate();
     if(!err){
     this.onSubmit();
