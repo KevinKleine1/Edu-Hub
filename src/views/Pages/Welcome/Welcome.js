@@ -124,9 +124,7 @@ class Welcome extends Component {
        form.append('email', localStorage.getItem('email'));
 
      fetch(
-       //'http://edu-hub-backend.azurewebsites.net/user/'
-             
-      'http://localhost:8000/user/', {                                   
+       'http://edu-hub-backend.azurewebsites.net/user/', {                                   
         method: 'POST',
         headers: {
         'Accept': 'application/json, */*',
