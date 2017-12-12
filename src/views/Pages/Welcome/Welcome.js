@@ -26,11 +26,28 @@ class Welcome extends Component {
       Fach3: "",
       fachError: false,
       Fehler: false,
-      Erfolg: false
+      Erfolg: false,
+      file: '',imagePreviewUrl: ''
     };
   
 
     handleChange = (e, { name, value }) => this.setState({ [name]: value })
+
+    _handleImageChange(e) {
+      e.preventDefault();
+  
+      let reader = new FileReader();
+      let file = e.target.files[0];
+  
+      reader.onloadend = () => {
+        this.setState({
+          file: file,
+          imagePreviewUrl: reader.result
+        });
+      }
+  
+      reader.readAsDataURL(file)
+    }
 
   validate = () =>{
     let isError = false;
@@ -91,34 +108,39 @@ class Welcome extends Component {
   };
 
   onSubmit() {
+
+    var form = new FormData();
+       form.append('foo', this.state.file);
+       form.append('name', this.state.Vorname);
+       form.append('surname', this.state.Nachname);
+       form.append('street', this.state.Strasse);
+       form.append('city', this.state.Stadt);
+       form.append('number', this.state.Hausnummer);
+       form.append('postcode', this.state.Postcode);
+       form.append('subject1', this.state.Fach1);
+       form.append('subject2', this.state.Fach2);
+       form.append('subject3', this.state.Fach3);
+       form.append('fileName', "Maria");
+       form.append('email', localStorage.getItem('email'));
+
      fetch(
-       //'http://localhost:8000/user/'
-                                 //prodo
-      'http://edu-hub-backend.azurewebsites.net/user/', {                                            //dev
-       method: 'POST',
-       headers: {
-         'Accept': 'application/json',
-         'Content-Type': 'application/json',
-       },
-       body: JSON.stringify({
-         email: localStorage.getItem("email"),
-         name: this.state.Vorname,
-         surname: this.state.Nachname,
-         street: this.state.Strasse,
-         city: this.state.Stadt,
-         number: this.state.Hausnummer,
-         postcode: this.state.Postcode,
-         subject1: this.state.Fach1,
-         subject2: this.state.Fach2,
-         subject3: this.state.Fach3
-       })
-     })
+       //'http://edu-hub-backend.azurewebsites.net/user/'
+             
+      'http://localhost:8000/user/', {                                   
+        method: 'POST',
+        headers: {
+        'Accept': 'application/json, */*',
+        },
+        body: form
+      
+     });
      localStorage.setItem("name", this.state.Vorname);
      history.push('/dashboard');
  }
 
   handleSubmit(){
    
+    console.log(this.state.file)
     const err = this.validate();
     if(!err){
     this.onSubmit();
@@ -141,7 +163,7 @@ class Welcome extends Component {
       postcodeError: false,
       fachError: false,
       Fehler: false,
-      Erfolg: true
+      Erfolg: true,
     });
   }}
 
@@ -153,6 +175,13 @@ class Welcome extends Component {
 
   render() {
     const { Vorname, Nachname, Strasse, Hausnummer, Stadt, Postcode, Fach1, Fach2, Fach3 } = this.state
+    let {imagePreviewUrl} = this.state;
+    let $imagePreview = null;
+    if (imagePreviewUrl) {
+      $imagePreview = (<img className="img-circle" src={imagePreviewUrl} />);
+    } else {
+      $imagePreview = (<img className="img-circle" src='../img/avatars/NotLogged.jpg' />);
+    }
     return (<div className="container">
       <div className="row justify-content-md-center">
         <Card style={{width: "800px"}}>
@@ -170,7 +199,7 @@ class Welcome extends Component {
             <br/>
             <div className="container">
               <div className="row justify-content-md-center">
-                  <img className="img-circle" src='../img/avatars/NotLogged.jpg'></img>
+                        {$imagePreview}
                 <br/>
               </div>
             </div>
@@ -178,9 +207,9 @@ class Welcome extends Component {
             <div className="container">
               <div className="row justify-content-md-center">
                 <div className="form-group">
-                  <label htmlFor="exampleFormControlFile1"><b>Profilfoto hinzufügen</b></label>
+                  <label htmlFor="foo"><b>Profilfoto hinzufügen</b></label>
                   <br/>
-                  <input type="file" className="form-control-file" id="exampleFormControlFile1"></input>
+                  <input type="file" onChange={(e) => this._handleImageChange(e)} className="form-control-file" name = "foo" id="foo"></input>
                 </div>
               </div>
             </div>
