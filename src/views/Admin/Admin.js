@@ -41,11 +41,28 @@ class Admin extends Component {
       Fach1Alt: "",
       Fach2Alt: "",
       Fach3Alt: "",
-      fachError: false
+      fachError: false,
+      file: '',imagePreviewUrl: ''
     };
 
 
     handleChange = (e, { name, value }) => this.setState({ [name]: value })
+
+    _handleImageChange(e) {
+      e.preventDefault();
+  
+      let reader = new FileReader();
+      let file = e.target.files[0];
+  
+      reader.onloadend = () => {
+        this.setState({
+          file: file,
+          imagePreviewUrl: reader.result
+        });
+      }
+  
+      reader.readAsDataURL(file)
+    }
 
 
     setData(){
@@ -170,6 +187,7 @@ class Admin extends Component {
     }else{
       Fach3 = this.state.Fach3;
     }
+    
 
     console.log(this.state.Nachname);
      fetch(
@@ -243,6 +261,13 @@ class Admin extends Component {
 
   render() {
     const { Vorname, Nachname, Strasse, Hausnummer, Stadt, Postcode, Fach1, Fach2, Fach3 } = this.state
+    let {imagePreviewUrl} = this.state;
+    let $imagePreview = null;
+    if (imagePreviewUrl) {
+      $imagePreview = (<img className="img-circle" src={imagePreviewUrl} />);
+    } else {
+      $imagePreview = (<img className="img-circle" src={'http://edu-hub-backend.azurewebsites.net/' + localStorage.getItem('picture')} />);
+    }
     return (<div className="container">
       <div className="row justify-content-md-center">
         <Card style={{width: "800px"}}>
@@ -260,7 +285,7 @@ class Admin extends Component {
             <br/>
             <div className="container">
               <div className="row justify-content-md-center">
-                  <img className="img-circle" src={'/img/avatars/' + localStorage.getItem('picture')}></img>
+                  {$imagePreview}
                 <br/>
               </div>
             </div>
@@ -270,7 +295,7 @@ class Admin extends Component {
                 <div className="form-group">
                   <label htmlFor="exampleFormControlFile1"><b>Profilfoto Aktualisieren</b></label>
                   <br/>
-                  <input type="file" className="form-control-file" id="exampleFormControlFile1"></input>
+                  <input type="file" onChange={(e) => this._handleImageChange(e)} className="form-control-file" id="exampleFormControlFile1"></input>
                 </div>
               </div>
             </div>

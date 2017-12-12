@@ -79,7 +79,7 @@ class Profile extends React.Component {
       </Header.Subheader>
     </Header.Content>
   </Header>
-        <p style={{width: "580px"}}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+        <p style={{width: "580px"}}>Hier könnte ihre Beschreibung stehen!</p>
       </Segment>
       <Segment vertical style={{width: "800px"}}>
     <Header as='h3' floated='left'>
