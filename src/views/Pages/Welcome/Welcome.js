@@ -131,7 +131,7 @@ class Welcome extends Component {
         },
         body: form
       
-     });
+     })
 
      localStorage.setItem("name", this.state.Vorname);
      history.push('/dashboard');
