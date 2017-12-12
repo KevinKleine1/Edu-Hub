@@ -30,6 +30,7 @@ class Test extends React.Component {
       modal: false,
       activeItem: '',
       dropdownOpen: false,
+      activeItem: "Kernprojekte",
       Data: []
 
     };
@@ -100,9 +101,7 @@ class Test extends React.Component {
     
     return (
     
-    <div className="animated fadeIn">
-     
-      
+    <div className="animated fadeIn"> 
         <div className="container">
           <div className="row justify-content-md-center">
             <div>
@@ -139,10 +138,8 @@ class Test extends React.Component {
                       <Card.Description>
                         <b>Nach Projekten suchen, erstellen & gemeinsam entwickeln</b>
                       </Card.Description>
-
                     </Card.Content>
                   </Card>
-
                   <br/>
                 </div>
               </div>

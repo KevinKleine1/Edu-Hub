@@ -58,7 +58,7 @@ export default class Auth {
         }).then((json)=>{
           try{    
         localStorage.setItem('name', json[0].name);
-        localStorage.setItem('picture', json[0].bild);
+        localStorage.setItem('picture', json[0].profilpic);
           }catch(e){
             history.replace('/welcome');
           }

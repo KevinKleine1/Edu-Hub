@@ -44,6 +44,7 @@ class Profile extends React.Component {
           this.setState({Fach1: json[0].subject1});
           this.setState({Fach2: json[0].subject2});
           this.setState({Fach3: json[0].subject3});
+          this.setState({Bild: json[0].profilpic});
 
             })
   }
@@ -62,13 +63,13 @@ class Profile extends React.Component {
 
 
     render() {
-      const { Vorname, Nachname, Strasse, Hausnummer, Stadt, Postcode, Fach1, Fach2, Fach3 } = this.state
+      const { Vorname, Nachname, Strasse, Hausnummer, Stadt, Postcode, Fach1, Fach2, Fach3, Bild } = this.state
       return (
 <div className="animated fadeIn">
  <div className="container">
       <div className="row justify-content-md-center">
         <Segment vertical style={{width: "800px"}}>
-            <img className="img-circle" src ={ 'img/avatars/' + localStorage.getItem("picture") }style={{width: "200px"}} align="right"></img>
+            <img className="img-circle" src ={ 'http://localhost:8000/' +  localStorage.getItem('picture') } style={{width: "200px"}} align="right"></img>
           <Header as='h2'>
     <Icon name='user outline' />
     <Header.Content>
