@@ -113,7 +113,7 @@ class HeaderDropdown extends React.Component {
     return (<Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} nav={true}>
       <DropdownToggle nav= {true }>
 
-        {logged && (<img src={ 'http://localhost:8000/' + localStorage.getItem('picture')} className="img-avatar" alt="Kein Bild" />)}
+        {logged && (<img src={ 'http://edu-hub-backend.azurewebsites.net/' + localStorage.getItem('picture')} className="img-avatar" alt="Kein Bild" />)}
         {!logged && (<img src={'/img/avatars/NotLogged.jpg'} className="img-avatar" alt="Nicht Registriert"/>)}
 
       </DropdownToggle>

@@ -69,7 +69,7 @@ class Profile extends React.Component {
  <div className="container">
       <div className="row justify-content-md-center">
         <Segment vertical style={{width: "800px"}}>
-            <img className="img-circle" src ={ 'http://localhost:8000/' +  localStorage.getItem('picture') } style={{width: "200px"}} align="right"></img>
+            <img className="img-circle" src ={ 'http://edu-hub-backend.azurewebsites.net/' +  localStorage.getItem('picture') } style={{width: "200px"}} align="right"></img>
           <Header as='h2'>
     <Icon name='user outline' />
     <Header.Content>
