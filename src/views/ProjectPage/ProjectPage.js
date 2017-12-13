@@ -190,6 +190,7 @@ class ProjectPage extends React.Component {
       Name: "",
       Text: "",
       Karma: "",
+      Erstellt:"",
       Data: []
 
     };
@@ -258,6 +259,7 @@ class ProjectPage extends React.Component {
           this.setState({Text : json[0].project_text});
           this.setState({Karma : json[0].project_karma});
           this.setState({Bild : json[0].project_imagepath});
+          this.setState({Erstellt: json[0].project_created_at})
 
             })
   }
@@ -269,6 +271,13 @@ componentDidMount(){
 }
 
 
+formatDate(date_unformatted){
+  var day = date_unformatted.substr(8, 2);
+  var month = date_unformatted.substr(5, 2);
+  var year = date_unformatted.substr(0, 4);
+  var date_formatted = day + '.' + month + '.' + year;
+  return date_formatted;
+  }
 
   handleClick = () => this.setState({
     active: !this.state.active
@@ -276,6 +285,8 @@ componentDidMount(){
 
   render() {
     const {active, activeItem, Name, Text, Karma} = this.state
+    var org = this.state.Erstellt;
+    var Erstellt = this.formatDate(org);
     return (
     <div className="animated fadeIn">
     <Grid columns={2} divided={true} colums="equal">
@@ -427,6 +438,19 @@ componentDidMount(){
 
     <VerticalTimeline>
       {this.createNodes(this.state.Data)}
+      <VerticalTimelineElement
+      className="vertical-timeline-element--education"
+
+        iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
+        animate={true}>
+        <h3 className="vertical-timeline-element-title">Projekt wurde erstellt</h3>
+
+        <h4 className="vertical-timeline-element-subtitle">Insert Creator Here!!</h4>
+
+          <p>
+            Das Projekt wurde am {Erstellt} erstellt.
+          </p>
+    </VerticalTimelineElement>
     </VerticalTimeline>
 
 </div>
