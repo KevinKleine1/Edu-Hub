@@ -140,7 +140,6 @@ class Admin extends Component {
     var Fach1="";
     var Fach2="";
     var Fach3="";
-    console.log(NachnameAlt);
 
     if (this.state.Vorname.length < 1){
         Vorname = VornameAlt;
@@ -189,7 +188,6 @@ class Admin extends Component {
     }
     
 
-    console.log(this.state.Nachname);
      fetch(
        //'http://localhost:8000/user/'
        'http://edu-hub-backend.azurewebsites.net/user/'                          //prodo

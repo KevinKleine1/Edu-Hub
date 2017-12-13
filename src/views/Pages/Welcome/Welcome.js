@@ -138,7 +138,6 @@ class Welcome extends Component {
       }).then((json)=>{
           this.setState({Bild: json[0].profilpic}, function(){
             localStorage.setItem('picture', this.state.Bild);
-            console.log(localStorage.getItem("picture"));
             localStorage.setItem("name", this.state.Vorname);
             history.push('/dashboard');
           });
