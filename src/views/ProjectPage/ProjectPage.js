@@ -19,7 +19,8 @@ import {
   Input,
   Form,
   TextArea,
-  Message
+  Message,
+  Tab
 } from 'semantic-ui-react';
 import {VerticalTimeline, VerticalTimelineElement} from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
@@ -44,22 +45,45 @@ const memberModal = <div className="container">
   </Card.Group>
 </div>
 
+//constant for form.select in edit modal
+const options = [
+{ key: '1', text: 'Wenn man das wählt wird Timeline blau', value: 'blau' },
+{ key: '2', text: 'Wenn man das wählt wird Timeline gelb', value: 'gelb'},
+]
+
+//tabs for edit modal
+const panes = [
+
+  { menuItem: 'Aktivität', render: () => <Tab.Pane>
+    <h3>Neue Aktivität</h3>
+    <Form>
+    <Form.Field required>
+          <label>Was ist die neue Aktivität?</label>
+          <input placeholder='Aktivitäts Titel' />
+          <Form.Field required control={TextArea} label='Worum geht es bei dieser Aktivität' placeholder='Aktivitäts Beschreibung' />
+
+    </Form.Field>
+    <Form.Group grouped>
+    <Form.Select required label='Die ist ein ' options={options} placeholder='Gender' />
+    <label>Hast du dich an einem anderen Projekt orientiert?</label>
+    <Form.Field required label='Nein' control='input' type='radio' name='htmlRadios' />
+    <Form.Field required label='Ja' control='input' type='radio' name='htmlRadios' />
+  </Form.Group>
+  </Form>
+
+</Tab.Pane> },
+  { menuItem: 'Datein', render: () => <Tab.Pane>Bearbeiten</Tab.Pane> },
+  { menuItem: 'Fotos', render: () => <Tab.Pane><div className="form-group">
+    <label htmlFor="exampleFormControlFile1"><b>Füge fotos der Gallery hinzu</b></label>
+    <br/>
+    <input type="file" className="form-control-file" id="exampleFormControlFile1"></input>
+  </div></Tab.Pane> },
+]
+
 //Conent of the edit modal
 const editModal = <div>
-  <div>
-    <Form>
-      <Form.Field id='form-textarea-control-opinion' control={TextArea} label='Neues Event' placeholder='Neues Event'/>
-    </Form>
-  </div><br/>
-  <div><Input icon='tag' iconPosition='left' label={{
-    tag: true,
-    content: 'Tag hinzufügen'
-  }} labelPosition='right' placeholder='Neues Tag eingeben'/></div><br/>
-  <div><Input icon='configure' iconPosition='left' label={{
-    tag: true,
-    content: 'Tag hinzufügen'
-  }} labelPosition='right' placeholder='Ressourcen hinzufügen'/></div>
-</div>
+  <Tab panes={panes} />
+  <br /></div>
 
 //content of the share modal
 const shareModal = <div className="container">
@@ -191,7 +215,7 @@ class ProjectPage extends React.Component {
   }
 
   getReactions(){
-    var target = ('http://edu-hub-backend.azurewebsites.net/project/getReactions/' + this.props.match.params.projectid)               
+    var target = ('http://edu-hub-backend.azurewebsites.net/project/getReactions/' + this.props.match.params.projectid)
     fetch(target)
 
       .then((results) =>{
@@ -200,7 +224,7 @@ class ProjectPage extends React.Component {
         }).then((json)=>{
 
           this.setState(
-            {Data: json}, 
+            {Data: json},
             function () {
               }
             )
@@ -211,12 +235,12 @@ class ProjectPage extends React.Component {
   createNode(node) {
     return <TimelineComponent name={node.name} author={node.author} text={node.text} key={node.projectid} />;
     }
-    
-  
+
+
   createNodes(nodes) {
 
       return nodes.map(this.createNode);
-      
+
     }
 
 
@@ -235,14 +259,14 @@ class ProjectPage extends React.Component {
           this.setState({Text : json[0].text});
           this.setState({Karma : json[0].karma});
           this.setState({Bild : json[0].imagepath});
-        
+
             })
   }
 
-  
+
 componentDidMount(){
   this.getReactions();
-  this.setData(); 
+  this.setData();
 }
 
 
@@ -400,15 +424,15 @@ componentDidMount(){
       </Grid.Row>
     </Grid>
     <div className="timeline">
-    
-        
+
+
     <VerticalTimeline>
       {this.createNodes(this.state.Data)}
     </VerticalTimeline>
-       
-</div>  
+
 </div>
-  
+</div>
+
   )
   }
 }
