@@ -3,8 +3,8 @@ import {Container, Segment, Card, Grid, Image, Header, Form, Icon, Button, Comme
 import history from '../../history';
 import ListItems from '../../components/ListItems/ListItems';
 
-var redirectToMail = 'mailto:?body=' 
-// changes const
+'mailto:?body=' 
+
 
 class User extends Component {
   constructor(props) {
@@ -147,7 +147,7 @@ const {Name, Vorname, Bild} = this.state
 <div className="container">
      <div className="row justify-content-md-center">
        <div><br/>
-<Button animated color='teal' href={redirectToMail} style={{width: "200px", height: "40px", top: "1px"}}>
+<Button animated color='teal' href={'mailto:' + this.props.match.params.usermail} style={{width: "200px", height: "40px", top: "1px"}}>
 <Button.Content visible>Nachricht schreiben</Button.Content>
 <Button.Content hidden>
   <Icon name='mail' />
