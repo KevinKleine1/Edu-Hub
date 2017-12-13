@@ -3,9 +3,6 @@ import {Container, Segment, Card, Grid, Image, Header, Form, Icon, Button, Comme
 import history from '../../history';
 import ListItems from '../../components/ListItems/ListItems';
 
-'mailto:?body=' 
-
-
 class User extends Component {
   constructor(props) {
     super(props);
@@ -17,10 +14,12 @@ class User extends Component {
       Vorname: "",
       Bild: "",
       Id: "",
+      Erstellt:"",
       Data: []
 
     };
   }
+
     //fetching the corresponding data from the server to display it on the webpage
   setData(){
     var target = ('http://edu-hub-backend.azurewebsites.net/user/' + this.props.match.params.usermail)   
@@ -34,8 +33,17 @@ class User extends Component {
           this.setState({Name : json[0].surname});
           this.setState({Vorname: json[0].forename})
           this.setState({Bild : json[0].profilpic});
+          this.setState({Erstellt: json[0].user_created_at});
             })
   }
+
+  formatDate(date_unformatted){
+    var day = date_unformatted.substr(8, 2);
+    var month = date_unformatted.substr(5, 2);
+    var year = date_unformatted.substr(0, 4);
+    var date_formatted = day + '.' + month + '.' + year;
+    return date_formatted;
+    }
 
   getProjects(){
     var target = ('http://edu-hub-backend.azurewebsites.net/user/getmyproject/' + this.props.location.state.userid)
@@ -82,6 +90,7 @@ class User extends Component {
 
   render() {
 const {Name, Vorname, Bild} = this.state
+var Erstellt = this.formatDate(this.state.Erstellt);
     return (
       <div className="animated fadeIn">
         <Grid stackable columns={2} divided>
@@ -123,7 +132,7 @@ const {Name, Vorname, Bild} = this.state
             <b>Mitglied seit</b>
            </Header>
            <Header as='h3' floated='right' color='grey'>
-           07. Dezember 2017
+           {Erstellt}
            </Header>
 </Segment>
 <Segment vertical style={{width: "800px"}}>

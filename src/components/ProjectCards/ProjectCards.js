@@ -21,10 +21,32 @@ constructor(props){
    
 }
 
+formatDate(date_unformatted){
+  var day = date_unformatted.substr(8, 2);
+  var month = date_unformatted.substr(5, 2);
+  var year = date_unformatted.substr(0, 4);
+  var date_formatted = day + '.' + month + '.' + year;
+  return date_formatted;
+  }
 
 render(){
   var org = this.props.text;
-  var text = org.substring(0, 280);
+  if(org.length > 280){
+    var text = org.substring(0, 280);
+    text = text + "...";
+  }else{
+    var text = org;
+  }
+  var gro = this.props.name;
+  if(gro.length > 25){
+    var title = gro.substring(0,28);
+    title = title + "...";
+  }else{
+    var title = gro;
+  }
+
+  var Erstellt = this.formatDate(this.props.erstellt);
+
   return (
     
     <Grid.Column>
@@ -32,18 +54,18 @@ render(){
       <Image src={'http://edu-hub-backend.azurewebsites.net/' + this.props.bild}/>
       <Card.Content>
         <Card.Header>
-         {this.props.name}
+         {title}
         </Card.Header>
         <Card.Meta>
           <span className='date'>
-            erstellt am {this.props.erstellt}
+            erstellt am {Erstellt}
           </span>
 
         </Card.Meta>
         <Card.Description style={{
             height: "150px"
           }}>
-         {text}...
+         {text}
         </Card.Description>
       </Card.Content>
       <Card.Content extra={true}>
