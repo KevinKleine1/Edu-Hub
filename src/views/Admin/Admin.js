@@ -78,7 +78,7 @@ class Admin extends Component {
 
           }).then((json)=>{
 
-            this.setState({VornameAlt : json[0].name});
+            this.setState({VornameAlt : json[0].forename});
             this.setState({NachnameAlt : json[0].surname});
             this.setState({StadtAlt : json[0].city});
             this.setState({HausnummerAlt : json[0].number});
@@ -201,7 +201,7 @@ class Admin extends Component {
        },
        body: JSON.stringify({
          email: localStorage.getItem("email"),
-         name: Vorname,
+         forename: Vorname,
          surname: Nachname,
          street: Strasse,
          city: Stadt,

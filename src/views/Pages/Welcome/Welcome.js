@@ -112,7 +112,7 @@ class Welcome extends Component {
 
     var form = new FormData();
        form.append('foo', this.state.file);
-       form.append('name', this.state.Vorname);
+       form.append('forename', this.state.Vorname);
        form.append('surname', this.state.Nachname);
        form.append('street', this.state.Strasse);
        form.append('city', this.state.Stadt);

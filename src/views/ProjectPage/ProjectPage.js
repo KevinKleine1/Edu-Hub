@@ -233,7 +233,7 @@ class ProjectPage extends React.Component {
   }
 
   createNode(node) {
-    return <TimelineComponent name={node.name} author={node.author} text={node.text} key={node.projectid} />;
+    return <TimelineComponent name={node.project_name} author={node.project_author} text={node.project_text} key={node.projectid} />;
     }
 
 
@@ -255,10 +255,10 @@ class ProjectPage extends React.Component {
 
         }).then((json)=>{
 
-          this.setState({Name : json[0].name});
-          this.setState({Text : json[0].text});
-          this.setState({Karma : json[0].karma});
-          this.setState({Bild : json[0].imagepath});
+          this.setState({Name : json[0].project_name});
+          this.setState({Text : json[0].project_text});
+          this.setState({Karma : json[0].project_karma});
+          this.setState({Bild : json[0].project_imagepath});
 
             })
   }

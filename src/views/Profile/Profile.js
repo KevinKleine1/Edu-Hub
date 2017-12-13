@@ -34,7 +34,7 @@ class Profile extends React.Component {
 
         }).then((json)=>{
 
-          this.setState({Vorname : json[0].name});
+          this.setState({Vorname : json[0].forename});
           this.setState({Nachname : json[0].surname});
           this.setState({Stadt : json[0].city});
           this.setState({Hausnummer : json[0].number});
