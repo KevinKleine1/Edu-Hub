@@ -23,6 +23,8 @@ constructor(props){
 
 
 render(){
+  var org = this.props.text;
+  var text = org.substring(0, 280);
   return (
     
     <Grid.Column>
@@ -41,7 +43,7 @@ render(){
         <Card.Description style={{
             height: "150px"
           }}>
-         {this.props.text}
+         {text}...
         </Card.Description>
       </Card.Content>
       <Card.Content extra={true}>
