@@ -40,7 +40,7 @@ class Test extends React.Component {
 
  
   createImage(image) {
-  return <ProjectCards name={image.name} text={image.text} erstellt={image.created_at} link={image.projectid}  key={image.projectid} />;
+  return <ProjectCards name={image.name} text={image.text} bild={image.imagepath} erstellt={image.created_at} link={image.projectid}  key={image.projectid} />;
   }
   
 
@@ -97,7 +97,7 @@ class Test extends React.Component {
  
   render() {
     const logged = this.isAuthenticated();
-    const {activeItem, Dobo} = this.state;
+    const {activeItem} = this.state;
     
     return (
     

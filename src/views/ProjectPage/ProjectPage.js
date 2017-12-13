@@ -24,6 +24,7 @@ import {
 import {VerticalTimeline, VerticalTimelineElement} from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import {Link} from 'react-router-dom';
+import TimelineComponent from '../../components/TimelineComponent/TimelineComponent';
 
 var currentPageUrl = window.location.href;
 var currentPageUrlShort = window.location.host + window.location.pathname;
@@ -164,7 +165,8 @@ class ProjectPage extends React.Component {
       modalEdit: false,
       Name: "",
       Text: "",
-      Karma: ""
+      Karma: "",
+      Data: []
 
     };
     this.toggleShare = this.toggleShare.bind(this);
@@ -188,6 +190,35 @@ class ProjectPage extends React.Component {
     });
   }
 
+  getReactions(){
+    var target = ('http://edu-hub-backend.azurewebsites.net/project/getReactions/' + this.props.match.params.projectid)               
+    fetch(target)
+
+      .then((results) =>{
+        return results.json();
+
+        }).then((json)=>{
+
+          this.setState(
+            {Data: json}, 
+            function () {
+              }
+            )
+
+            })
+  }
+
+  createNode(node) {
+    return <TimelineComponent name={node.name} text={node.text} key={node.projectid} />;
+    }
+    
+  
+  createNodes(nodes) {
+
+      return nodes.map(this.createNode);
+      
+    }
+
 
   //fetching the corresponding data from the server to display it on the webpage
   setData(){
@@ -203,12 +234,14 @@ class ProjectPage extends React.Component {
           this.setState({Name : json[0].name});
           this.setState({Text : json[0].text});
           this.setState({Karma : json[0].karma});
+          this.setState({Bild : json[0].imagepath});
         
             })
   }
 
   
 componentDidMount(){
+  this.getReactions();
   this.setData(); 
 }
 
@@ -246,7 +279,7 @@ componentDidMount(){
         </Grid.Column>
         <Grid.Column width={3}>
           <br/>
-          <div className="projektfoto"><Image src='https://i.imgur.com/uk2MB1c.jpg' size='medium' bordered={true} circular={true}/><br/></div>
+          <div className="projektfoto"><Image src={'http://edu-hub-backend.azurewebsites.net' + this.state.Bild} size='medium' bordered={true} circular={true}/><br/></div>
           <div className="row justify-content-md-center">
             <div>
               <Popup content='Füge dieses Projekt deinen Favoriten hinzu' trigger={<Button circular = {
@@ -370,74 +403,8 @@ componentDidMount(){
     
         
     <VerticalTimeline>
-      <Link to="/dasboard">
-<VerticalTimelineElement
-className="vertical-timeline-element--work"
-
-iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-
-animate={true}
->
-<h3 className="vertical-timeline-element-title">Jemand hat auf das Projekt reagiert</h3>
-<h4 className="vertical-timeline-element-subtitle">Maria</h4>
-<p>
-Darf ich mich auch an diesem Projekt beteiligen?
-</p>
-</VerticalTimelineElement>
-</Link>
-<VerticalTimelineElement
-className="vertical-timeline-element--work"
-
-iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-
-animate={true}
->
-<h3 className="vertical-timeline-element-title"></h3>
-<h4 className="vertical-timeline-element-subtitle">Neues Projektmitglied</h4>
-<p>
-Burcu ist in das Projekt eingetreten
-</p>
-</VerticalTimelineElement>
-<VerticalTimelineElement
-className="vertical-timeline-element--education"
-
-iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-animate={true}
-
->
-<h3 className="vertical-timeline-element-title">Jemandem gefällt dieses Projekt</h3>
-<h4 className="vertical-timeline-element-subtitle">Oemer</h4>
-<p>
-Gute Sache die ihr da macht!
-</p>
-</VerticalTimelineElement>
-<VerticalTimelineElement
-className="vertical-timeline-element--education"
-
-iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-
-animate={true}
->
-<h3 className="vertical-timeline-element-title">Zeitplan wurde hochgeladen</h3>
-<h4 className="vertical-timeline-element-subtitle">Felix</h4>
-<p>
-zeitplan.pdf wurde hochgeladen
-</p>
-</VerticalTimelineElement>
-<VerticalTimelineElement
-className="vertical-timeline-element--education"
-
-iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
-animate={true}
-
->
-<h3 className="vertical-timeline-element-title">Projekt wurde gestartet</h3>
-<h4 className="vertical-timeline-element-subtitle">Kevin</h4>
-<p>
-Start des Projekts, Bundesjugendspiele
-</p>
-</VerticalTimelineElement>
-</VerticalTimeline>
+      {this.createNodes(this.state.Data)}
+    </VerticalTimeline>
        
 </div>  
 </div>

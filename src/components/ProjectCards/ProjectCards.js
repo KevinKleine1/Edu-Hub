@@ -27,7 +27,7 @@ render(){
     
     <Grid.Column>
     <Card>
-      <Image src='../img/Landingpage/projekt2.jpg'/>
+      <Image src={'http://edu-hub-backend.azurewebsites.net' + this.props.bild}/>
       <Card.Content>
         <Card.Header>
          {this.props.name}
