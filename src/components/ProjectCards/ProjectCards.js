@@ -49,7 +49,7 @@ render(){
       <Card.Content extra={true}>
         <a>
           <Icon name='user'/>
-          5 Mitglieder
+          {this.props.members} Mitglieder
         </a>
         <Link to={{pathname: '/projectpage/' + this.props.link ,}}>
         <Button animated={true} floated='right' color='teal'>

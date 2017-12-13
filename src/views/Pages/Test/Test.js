@@ -40,7 +40,7 @@ class Test extends React.Component {
 
  
   createImage(image) {
-  return <ProjectCards name={image.project_name} text={image.project_text} bild={image.project_imagepath} erstellt={image.project_created_at} link={image.projectid}  key={image.projectid} />;
+  return <ProjectCards name={image.project_name} members={image.project_membercount} text={image.project_text} bild={image.project_imagepath} erstellt={image.project_created_at} link={image.projectid}  key={image.projectid} />;
   }
   
 
