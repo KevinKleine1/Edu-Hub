@@ -1,60 +1,18 @@
 import React, {Component, Border} from 'react';
 import PropTypes from 'prop-types';
-import {Container, Card, Tab, Table, Divider, Input, Select, Checkbox, Radio, TextArea, Dropdown, Header, Form, Step, Grid, Icon, Button, Label, Menu} from 'semantic-ui-react';
+import {Container, Card, Tab, Table, Divider, Popup, Visibility, Input, Select, Checkbox, Radio, TextArea, Dropdown, Header, Form, Step, Grid, Icon, Button, Label, Menu} from 'semantic-ui-react';
 import history from '../../history';
 
-const Fach = [ { key: 'Mathe', value: 'Mathe', text: 'Mathe' },
-{ key: 'Deutsch', value: 'Deutsch', text: 'Deutsch' },
-{ key: 'Englisch', value: 'Englisch', text: 'Englisch' },
-{ key: 'Physik', value: 'Physik', text: 'Physik' },
-{ key: 'Chemie', value: 'Chemie', text: 'Chemie' },
-{ key: 'Erdkunde', value: 'Erdkunde', text: 'Erdkunde' },
-{ key: 'Sport', value: 'Sport', text: 'Sport' },
-{ key: 'Kunst', value: 'Kunst', text: 'Kunst' },
-{ key: 'Französisch', value: 'Französisch', text: 'Französisch' },
-{ key: 'Spanisch', value: 'Spanisch', text: 'Spanisch' },
-{ key: 'Italienisch', value: 'Italienisch', text: 'Italienisch' },
-{ key: 'BWL', value: 'BWL', text: 'BWL' },
-{ key: 'VWL', value: 'VWL', text: 'VWL' },
-{ key: 'Informatik', value: 'Informatik', text: 'Informatik' },
-{ key: 'Pädagogik', value: 'Pädagogik', text: 'Pädagogik' },
-{ key: 'Politik', value: 'Politik', text: 'Politik' },
-{ key: 'Sonstiges', value: 'Sonstiges', text: 'Sonstiges' },
-{ key: 'Kein Fach', value: 'Kein Fach', text: 'Kein Fach' },
-
-]
-
-const Klasse = [ { key: '1', value: '1', text: '1' },
-{ key: '2', value: '2', text: '2' },
-{ key: '3', value: '3', text: '3' },
-{ key: '4', value: '4', text: '4' },
-{ key: '5', value: '5', text: '5' },
-{ key: '6', value: '6', text: '6' },
-{ key: '7', value: '7', text: '7' },
-{ key: '8', value: '8', text: '8' },
-{ key: '9', value: '9', text: '9' },
-{ key: '10', value: '10', text: '10' },
-{ key: '11', value: '11', text: '11' },
-{ key: '12', value: '12', text: '12' },
-{ key: '13', value: '13', text: '13' },
-
-]
-
-const Sonstiges = [ { key: 'Mathe', value: 'Mathe', text: 'Mathe' },
-{ key: 'Englisch', value: 'Englisch', text: 'Englisch' },
-{ key: 'Physik', value: 'Physik', text: 'Physik' },
-
-]
 
 const panes = [
-  { menuItem: { key: 'step1', icon: 'book', content: 'Step 1'}, render: () => <Tab.Pane attached={false}>
+  { menuItem : { key: 'step1', icon: 'book', content: 'Step 1'}, render: () => <Tab.Pane attached={false}>
     <div className="container">
       <div className="row justify-content-md-center">
     <Table singleLine>
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>
-      <Header as='h2' color='black' textAlign='center' size='large' >An welcher Schuler willst du dein Projekt durchführen?</Header>
+      <Header as='h2' color='black' textAlign='center' size='large' >Was ist der Fokus deines Projekts?</Header>
       </Table.HeaderCell>
       </Table.Row>
       </Table.Header>
@@ -62,32 +20,39 @@ const panes = [
         <Table.Row>
           <Table.Cell>
      <Form size='big'>
-      <Form.Field>
-      <Input placeholder='Schule' />
-      </Form.Field>
+       <Form.Group grouped>
+       <Form.Field> <Radio label='Ich möchte mit meinem Projekt für den Lehr-und Lernprozess in der Schule beitragen' control='input' type='radio' name='htmlRadios' />
+       <Popup
+         trigger={<Icon name='question'/>}
+          wide='very'
+         content='Das Kernziel einer Schule ist die Wissensvermittlung. Dazu gehören Projekte die den Unterricht fördern und neu gestalten können wie z.B Sportwoche, Theater AG oder Projekte wie „Effiziente Nutzung von Strom und Wasser im Alltag'/>
+     </Form.Field>
+      <br/>
+
+        <Form.Field> <Radio label='Ich möchte koordinieren und organisieren' control='input' type='radio' name='htmlRadios' />
+        <Popup
+          trigger={<Icon name='question'/>}
+           wide='very'
+          content='z. B digitales Klassenbuch. Planung, Organisiation und Durchführung der Unterstützungsprojekte und Lehr-bzw Lernprojekte.'/>
+        </Form.Field><br/>
+       <Form.Field> <Radio label='Ich möchte ein Projekt erstellen um die Ziele der Schule zu unterstützen' control='input' type='radio' name='htmlRadios' />
+       <Popup
+         trigger={<Icon name='question'/>}
+          wide='very'
+         content='Unterstützende Tätigikeiten wie z. B Infrastruktur der Schule verbessern oder Fundraising für eine Finanzierung.'/>
+     </Form.Field>
+     </Form.Group>
     </Form>
+
     </Table.Cell>
     </Table.Row>
 
-    <Table.Row>
-          <Table.Cell>
-          <div className="container">
-        <div className="row justify-content-md-center">
-  <Label as='a' color="grey" size='medium' style={{width: "110px"}} tag>Gesamtschule</Label>
-  <Label as='a' color='grey'size='medium' style={{width: "110px"}} tag>Realschule</Label>
-  <Label as='a' color='grey'size='medium' style={{width: "110px"}} tag>Berufskolleg</Label>
-  <Label as='a' color='grey' size='medium' style={{width: "110px"}} tag>Gymnasium</Label>
-  <Label as='a' color='grey'size='medium' style={{width: "110px"}} tag>Förderschule</Label>
-  <Label as='a' color='grey' size='medium' style={{width: "110px"}} tag>. . .</Label>
-  </div>
-  </div>
-  </Table.Cell>
-  </Table.Row>
       </Table.Body>
     </Table>
   </div></div>
+
 </Tab.Pane> },
-  { menuItem: { key: 'step2', icon: 'bookmark', content: 'Step 2' }, render: () => <Tab.Pane attached={false}>
+  { menuItem: { key: 'step2', icon: 'bookmark', content: 'Lehr und Lernprozess'}, render: () => <Tab.Pane attached={false}>
       <div className="container">
         <div className="row justify-content-md-center">
     <Table singleLine>
@@ -95,35 +60,26 @@ const panes = [
         <Table.Row>
           <Table.HeaderCell>
 
-      <Header as='h2' color='black' textAlign='center' >Welche Eigenschaft trifft auf dein Projekt zu?</Header>
+      <Header as='h2' color='black' textAlign='center' >Was sind deine Kompentenzen für das Projekt?</Header>
       </Table.HeaderCell>
       </Table.Row>
       </Table.Header>
-
       <Table.Body>
         <Table.Row>
           <Table.Cell>
+            <Form.Group grouped>
+            <Form.Field label='Suchen, Verarbeiten und Aufbewahren' control='input' type='checkbox'  />
+             <Form.Field label='Kommunizieren und Kooperieren' control='input' type='checkbox'  />
+             <Form.Field label='Produzieren und Präsentieren' control='input' type='checkbox'  />
+              <Form.Field label='Schützen und sicher agieren' control='input' type='checkbox'  />
+              <Form.Field label='Probleme lösen und Handeln' control='input' type='checkbox'  />
+            <Form.Field label='Analysieren und Reflektieren' control='input' type='checkbox' />
+          </Form.Group>
+          </Table.Cell>
+          </Table.Row>
 
-          <Form>
-          <div className="container">
-        <div className="row justify-content-md-center">
-          <Form.Group grouped>
+            </Table.Body>
 
-        <Form.Radio label='Lern-und Lehrprozesse' name='size' type='radio'/>
-
-
-        <Form.Radio label='Koordination und Organisation' name='size' type='radio'/>
-
-
-        <Form.Radio label='Unterstützungsprozesse' name='size' type='radio'/>
-      </Form.Group>
-      </div>
-      </div>
-      </Form>
-
-    </Table.Cell>
-    </Table.Row>
-  </Table.Body>
   </Table>
 </div>
     </div>
@@ -133,53 +89,177 @@ const panes = [
       <Table.Header>
         <Table.Row>
           <Table.HeaderCell>
-      <Header as='h2' color='black' textAlign='center' >Welches Fach?</Header>
+      <Header as='h2' color='black' textAlign='center' >Was sind die Zielgruppen?</Header>
       </Table.HeaderCell>
       </Table.Row>
       </Table.Header>
-  <Table.Body>
+      <Table.Body>
         <Table.Row>
           <Table.Cell>
-<Dropdown placeholder='Unterrichtsfach' fluid search selection options={Fach} />
-</Table.Cell>
-    </Table.Row>
-<Table.Row>
-            <Table.Cell>
-            <div className="container">
-          <div className="row justify-content-md-center">
-    <Label as='a' color = "grey" size='medium' style={{width: "130px"}} tag>Dig. Klassenbuch</Label>
-    <Label as='a' color="grey" size='medium' style={{width: "130px"}} tag>Lernzentrum</Label>
-    <Label as='a' color='grey'size='medium' style={{width: "130px"}} tag>Sprachkurs</Label>
-    <Label as='a' color='grey' size='medium' style={{width: "130px"}} tag>IT Organisation</Label>
-    <Label as='a' color='grey' size='medium'  style={{width: "110px"}} tag>. . .</Label>
-    </div>
-    </div>
-    </Table.Cell>
-    </Table.Row>
-    </Table.Body>
+            <Form.Group grouped>
+            <Form.Field label='Kita/Vorschule' control='input' type='checkbox'  />
+             <Form.Field label='Grundschule' control='input' type='checkbox'  />
+             <Form.Field label='Sekundarstufe 1' control='input' type='checkbox' />
+              <Form.Field label='Sekundarstufe 2' control='input' type='checkbox'  />
+              <Form.Field label='Höhere Handelschule (Fachabi)' control='input' type='checkbox'  />
+            <Form.Field label='Handelschule' control='input' type='checkbox'  />
+          </Form.Group>
+          </Table.Cell>
+          </Table.Row>
+
+            </Table.Body>
+
     </Table>
     </div>
     </div>
+    <div className="container">
+      <div className="row justify-content-md-center">
+  <Table singleLine>
+    <Table.Header>
+      <Table.Row>
+        <Table.HeaderCell>
+
+    <Header as='h2' color='black' textAlign='center' >Fächergruppen?</Header>
+    </Table.HeaderCell>
+    </Table.Row>
+    </Table.Header>
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell>
+          <Form.Group grouped>
+          <Form.Field label='Sprachen' control='input' type='checkbox' />
+           <Form.Field label='Kulturelle Bildung' control='input' type='checkbox'  />
+           <Form.Field label='Geschichte/ Gesellschaft' control='input' type='checkbox'/>
+            <Form.Field label='Naturwissenschaften' control='input' type='checkbox' />
+            <Form.Field label='Informatik/ technische Bildung' control='input' type='checkbox'  />
+        </Form.Group>
+        </Table.Cell>
+        </Table.Row>
+
+          </Table.Body>
+
+</Table>
+</div>
+  </div>
+  <div className="container">
+        <div className="row justify-content-md-center">
+  <Table singleLine>
+    <Table.Header>
+      <Table.Row>
+        <Table.HeaderCell>
+    <Header as='h2' color='black' textAlign='center' >Fächer?</Header>
+    </Table.HeaderCell>
+    </Table.Row>
+    </Table.Header>
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell>
+          <Form.Group grouped>
+          <Form.Field label='Mathematik' control='input' type='checkbox' />
+           <Form.Field label='Deutsch' control='input' type='checkbox'  />
+           <Form.Field label='Englisch' control='input' type='checkbox'/>
+            <Form.Field label='Physik' control='input' type='checkbox' />
+            <Form.Field label='Chemie' control='input' type='checkbox'  />
+            <Form.Field label='Erdkunde' control='input' type='checkbox' />
+             <Form.Field label='Sport' control='input' type='checkbox'  />
+             <Form.Field label='Kunst' control='input' type='checkbox'/>
+              <Form.Field label='Französisch' control='input' type='checkbox' />
+              <Form.Field label='Spanisch' control='input' type='checkbox'  />
+              <Form.Field label='Italienisch' control='input' type='checkbox' />
+               <Form.Field label='BWL' control='input' type='checkbox'  />
+               <Form.Field label='VWL' control='input' type='checkbox'/>
+                <Form.Field label='Informatik' control='input' type='checkbox' />
+                <Form.Field label='Pädagogik' control='input' type='checkbox'  />
+                <Form.Field label='Politik' control='input' type='checkbox' />
+                 <Form.Field label='Sonstiges' control='input' type='checkbox'  />
+        </Form.Group>
+        </Table.Cell>
+        </Table.Row>
+
+          </Table.Body>
+
+  </Table>
+  </div>
+  </div>
+  <div className="container">
+    <div className="row justify-content-md-center">
+<Table singleLine>
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell>
+
+  <Header as='h2' color='black' textAlign='center' >Medieneinsatz?</Header>
+  </Table.HeaderCell>
+  </Table.Row>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>
+        <Form.Group grouped>
+        <Form.Field label='Kein Internet' control='input' type='checkbox' />
+         <Form.Field label='PC/Laptop' control='input' type='checkbox'  />
+         <Form.Field label='Tablet/Smartphone' control='input' type='checkbox'/>
+          <Form.Field label='Hardware/Basteln' control='input' type='checkbox' />
+          <Form.Field label='Videos/Filme' control='input' type='checkbox'  />
+        </Form.Group>
+      </Table.Cell>
+      </Table.Row>
+
+        </Table.Body>
+
+</Table>
+</div>
+</div>
+<div className="container">
+      <div className="row justify-content-md-center">
+<Table singleLine>
+  <Table.Header>
+    <Table.Row>
+      <Table.HeaderCell>
+  <Header as='h2' color='black' textAlign='center' >Dauer des Projekts?</Header>
+  </Table.HeaderCell>
+  </Table.Row>
+  </Table.Header>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>
+        <Form.Group grouped>
+        <Form.Field label='Unterrichstreihe' control='input' type='checkbox' />
+         <Form.Field label='Stunde' control='input' type='checkbox'  />
+         <Form.Field label='Doppelstunde' control='input' type='checkbox'/>
+          <Form.Field label='Flexibel  ' control='input' type='checkbox' />
+          <Form.Field label='Sonstiges' control='input' type='checkbox'  />
+        </Form.Group>
+      </Table.Cell>
+      </Table.Row>
+
+        </Table.Body>
+
+</Table>
+</div>
+</div>
   </Tab.Pane> },
-  { menuItem: { key: 'step3', icon: 'child', content: 'Step 3' }, render: () => <Tab.Pane attached={false}>
+  { menuItem: { key: 'step3', icon: 'child', content: 'Management'}, render: () => <Tab.Pane attached={false}>
     <div className="container">
           <div className="row justify-content-md-center">
       <Table singleLine>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>
-        <Header as='h2' color='black' textAlign='center' >Wie viele Schüler?</Header>
+        <Header as='h2' color='black' textAlign='center' >Auf welcher organisatorischen Ebene wird das Projekt durchgeführt?</Header>
         </Table.HeaderCell>
         </Table.Row>
         </Table.Header>
         <Table.Body>
           <Table.Row>
             <Table.Cell>
-              <Form size='small'>
-               <Form.Field>
-              <Input placeholder='Anzahl Schüler' />
-               </Form.Field>
-             </Form>
+              <Form.Group grouped>
+              <Form.Field label='Klasse' control='input' type='checkbox' />
+               <Form.Field label='Schule' control='input' type='checkbox'  />
+               <Form.Field label='Fachlich' control='input' type='checkbox'/>
+                <Form.Field label='Lehrer  ' control='input' type='checkbox' />
+                <Form.Field label='Elternvertretung' control='input' type='checkbox'  />
+              </Form.Group>
       </Table.Cell>
       </Table.Row>
         </Table.Body>
@@ -194,104 +274,123 @@ const panes = [
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>
-        <Header as='h2' color='black' textAlign='center' >Welche Klassenstufe?</Header>
+        <Header as='h2' color='black' textAlign='center' >Was ist dein Ziel für das Projekt?</Header>
         </Table.HeaderCell>
         </Table.Row>
         </Table.Header>
         <Table.Body>
           <Table.Row>
             <Table.Cell>
+              <Form.Group grouped>
+              <Form.Field label='Zeitmanagement besser planen' control='input' type='checkbox' />
+               <Form.Field label='Budget/Finanzierung' control='input' type='checkbox'  />
+               <Form.Field label='Bildung/ Wissenvermittlung' control='input' type='checkbox'/>
+                <Form.Field label='Unterricht neu gestalten' control='input' type='checkbox' />
+                <Form.Field label='Verwaltung verbessern' control='input' type='checkbox'  />
+                <Form.Field label='Konfliktmanagement' control='input' type='checkbox' />
+                <Form.Field label='•Sonstige strategische Ziele' control='input' type='checkbox'  />
+              </Form.Group>
 
-            <Dropdown placeholder='Klassestufe' fluid search selection options={Klasse} />
       </Table.Cell>
       </Table.Row>
+  </Table.Body>
+      </Table>
 
-      <Table.Row>
-            <Table.Cell>
-            <div className="container">
+    </div>
+    </div>
+    <div className="container">
           <div className="row justify-content-md-center">
-    <Label as='a' color="grey" size='medium' style={{width: "110px"}} tag >Sekundär</Label>
+    <Table singleLine>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>
+        <Header as='h2' color='black' textAlign='center' >Dauer des Projekts?</Header>
+        </Table.HeaderCell>
+        </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell>
+              <Form.Group grouped>
+              <Form.Field label='Tage' control='input' type='checkbox' />
+               <Form.Field label='Wochen' control='input' type='checkbox'  />
+               <Form.Field label='Monate' control='input' type='checkbox'/>
+                <Form.Field label='Sonstiges' control='input' type='checkbox' />
+              </Form.Group>
 
-    <Label as='a' color='grey'size='medium' style={{width: "110px"}} tag>Primär</Label>
-    <Label as='a' color='grey' size='medium' style={{width: "110px"}} tag>Oberstufe</Label>
-    <Label as='a' color='grey' size='medium' style={{width: "110px"}} tag>22 </Label>
-    <Label as='a' color='grey'size='medium' style={{width: "110px"}} tag>Kurs</Label>
-    <Label as='a' color='grey' size='medium' style={{width: "110px"}} tag>...</Label>
-    </div>
-    </div>
-    </Table.Cell>
-    </Table.Row>
-        </Table.Body>
+      </Table.Cell>
+      </Table.Row>
+  </Table.Body>
       </Table>
 
     </div>
     </div>
   </Tab.Pane> },
-  { menuItem: { key: 'step4', icon: 'resize horizontal', content: 'Step 4' }, render: () => <Tab.Pane attached={false}>
+  { menuItem: { key: 'step4', icon: 'resize horizontal', content: 'Unterstützungsprozesse' }, render: () => <Tab.Pane attached={false}>
+    <div className="container">
+          <div className="row justify-content-md-center">
     <Table singleLine>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>
 
-        <Header as='h2' color='black' textAlign='center' >Auf welcher Ebene wird das Projekt durchgeführt?</Header>
-
-
-        </Table.HeaderCell>
+        <Header as='h2' color='black' textAlign='center' >Auf welcher organisatorischen Ebene wird das Projekt durchgeführt?</Header>
+  </Table.HeaderCell>
         </Table.Row>
         </Table.Header>
-
-
         <Table.Body>
           <Table.Row>
             <Table.Cell>
+              <Form.Group grouped>
+              <Form.Field label='Klasse' control='input' type='checkbox' />
+               <Form.Field label='Schule' control='input' type='checkbox'  />
+               <Form.Field label='Fachlich' control='input' type='checkbox'/>
+                <Form.Field label='Lehrer' control='input' type='checkbox' />
+                <Form.Field label='Eltern' control='input' type='checkbox' />
+                <Form.Field label='Stadt/Gemeinde' control='input' type='checkbox' />
+              </Form.Group>
 
-            <div className="container">
-          <div className="row justify-content-md-center">
-
-
-            <Form.Group >
-            <div className="container">
-          <div className="row justify-content-md-center">
-            <Form.Field>
-
-          <Checkbox  label='Klasse' type='radio'/><br/>
-          <Checkbox  label='Schule'  type='radio'/><br/>
-          <Checkbox label='Fachlich' type='radio'/><br/>
-          <Checkbox  label='Lehrer' type='radio'/><br/>
-          <Checkbox  label='Eltern' type='radio'/><br/>
-          <Checkbox  label='Bundesweit' type='radio'/><br/>
-            <Checkbox label='Praxispartner' type='radio'/><br/>
-      <Checkbox  label='Sonstiges' type='radio'/>
-
-          </Form.Field>
-          </div>
-          </div>
-        </Form.Group>
-          </div>
-          </div>
       </Table.Cell>
       </Table.Row>
-
-
-
-      <Table.Row>
-            <Table.Cell>
-            <div className="container">
-          <div className="row justify-content-md-center">
-            <Label as='a' color="grey" size='medium' style={{width: "110px"}} tag>Klasse</Label>
-            <Label as='a' color='grey'size='medium' style={{width: "110px"}} tag>Eltern</Label>
-            <Label as='a' color='grey'size='medium' style={{width: "110px"}} tag>Schüler</Label>
-            <Label as='a' color='grey' size='medium' style={{width: "110px"}} tag>gemischt</Label>
-            <Label as='a' color='grey'size='medium' style={{width: "110px"}} tag>Lehrer</Label>
-            <Label as='a' color='grey' size='medium' style={{width: "110px"}} tag>. . .</Label>
-    </div>
-    </div>
-    </Table.Cell>
-    </Table.Row>
-        </Table.Body>
+  </Table.Body>
       </Table>
+    </div>
+    </div>
+    <div className="container">
+          <div className="row justify-content-md-center">
+    <Table singleLine>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell>
+
+        <Header as='h2' color='black' textAlign='center' >Welcher Fokus wird in deinem Projekt gelegt?</Header>
+  </Table.HeaderCell>
+        </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          <Table.Row>
+            <Table.Cell>
+              <Form.Group grouped>
+              <Form.Field label='Personal' control='input' type='checkbox' />
+               <Form.Field label='Schüler' control='input' type='checkbox'  />
+               <Form.Field label='Sport' control='input' type='checkbox'/>
+                <Form.Field label='Bildung' control='input' type='checkbox' />
+                <Form.Field label='Schulische Ausstatung' control='input' type='checkbox' />
+                <Form.Field label='IT, technischer Support' control='input' type='checkbox' />
+                <Form.Field label='Verpflegung in der Schule' control='input' type='checkbox' />
+                 <Form.Field label='Finazierung' control='input' type='checkbox'  />
+                 <Form.Field label='Soziales Engagement' control='input' type='checkbox'/>
+                  <Form.Field label='Sonstiges' control='input' type='checkbox' />
+              </Form.Group>
+
+      </Table.Cell>
+      </Table.Row>
+  </Table.Body>
+      </Table>
+    </div>
+    </div>
   </Tab.Pane> },
-  { menuItem: { key: 'step5', icon: 'edit', content: 'Step 5' }, render: () => <Tab.Pane attached={false}>
+  { menuItem: { key: 'step5', icon: 'edit', content: 'Projektinformationen'}, render: () => <Tab.Pane attached={false}>
 
     <Table singleLine>
         <Table.Header>
@@ -358,7 +457,8 @@ class Test2 extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      dropdownOpen: false
+      dropdownOpen: false,
+      activeIndex: 0
     };
   }
 
@@ -368,18 +468,40 @@ class Test2 extends Component {
     });
   }
 
+  goBack(){
+    history.go(-1);
+  }
 
+  changeTab() {
+    this.setState({activeIndex: (this.state.activeIndex + 1)});
+  };
 
   render() {
-
+    const {activeIndex} = this.state
 
     return (
 
        <div className="container">
             <div className="row justify-content-md-center">
               <Container fluid>
-        <Tab menu={{ fluid: true, tabular: 'right'}} panes={panes} />
+        <Tab menu={{ fluid: true, tabular: 'right'}} panes={panes} activeIndex={activeIndex}/><br/>
         </Container>
+        <div className="container">
+          <div className="row justify-content-md-center">
+            <Button animated color='teal' style={{width: "150px"}} onClick={this.changeTab.bind(this)}>
+                  <Button.Content hidden>speichern</Button.Content>
+                  <Button.Content visible>
+                    <Icon name='check' />
+                  </Button.Content>
+                </Button>
+                <Button animated color='teal' style={{width: "150px"}} onClick={this.goBack}>
+                      <Button.Content hidden>zurück</Button.Content>
+                      <Button.Content visible>
+                        <Icon name='arrow left' />
+                      </Button.Content>
+                    </Button>
+          </div>
+        </div>
               <br/>
 
           </div></div>
