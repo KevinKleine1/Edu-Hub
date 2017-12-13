@@ -83,6 +83,7 @@ class User extends Component {
   render() {
 const {Name, Vorname, Bild} = this.state
     return (
+      <div className="animated fadeIn">
         <Grid stackable columns={2} divided>
           <Grid.Row>
      <Grid.Column width={13}>
@@ -189,7 +190,7 @@ const {Name, Vorname, Bild} = this.state
     </Grid.Column>
              </Grid.Row>
               </Grid>
-
+          </div>
 
   )
   }
