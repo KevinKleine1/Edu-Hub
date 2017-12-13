@@ -27,7 +27,8 @@ class Welcome extends Component {
       fachError: false,
       Fehler: false,
       Erfolg: false,
-      file: '',imagePreviewUrl: ''
+      file: '',imagePreviewUrl: '',
+      Laden: false
     };
   
 
@@ -131,19 +132,27 @@ class Welcome extends Component {
         },
         body: form
       
-     })
+     }).then((response) =>{
+      return response.json();
 
-     localStorage.setItem("name", this.state.Vorname);
-     history.push('/dashboard');
+      }).then((json)=>{
+          this.setState({Bild: json[0].profilpic}, function(){
+            localStorage.setItem('picture', this.state.Bild);
+            console.log(localStorage.getItem("picture"));
+            localStorage.setItem("name", this.state.Vorname);
+            history.push('/dashboard');
+          });
+          });
+     
  }
 
   handleSubmit(){
+    this.setState({Laden: true});
     const err = this.validate();
     if(!err){
     this.onSubmit();
 
     this.setState ( {
-      Vorname: "",
       Nachname: "",
       Strasse: "",
       Hausnummer: "",
@@ -212,7 +221,7 @@ class Welcome extends Component {
             </div>
 
             <div className="card-text">
-            <Form error={this.state.Fehler} success={this.state.Erfolg} onSubmit={this.handleSubmit}>
+            <Form loading = {this.state.Laden} error={this.state.Fehler} onSubmit={this.handleSubmit}>
                  
                  <Form.Field required>
                     <label>Vorname</label>
@@ -240,26 +249,21 @@ class Welcome extends Component {
                  </Form.Field>
                  <Form.Group inline>
                   <Form.Field required>
-                    <label>Fächer</label>
-                   <Form.Input  name="Fach1" value={Fach1} onChange={this.handleChange} error={this.state.fachError} placeholder='Fach 1' /> 
+                    <label>Interessen</label>
+                   <Form.Input  name="Fach1" value={Fach1} onChange={this.handleChange} error={this.state.fachError} placeholder='Interesse 1' /> 
                     
                    
-                   <Form.Input  name="Fach2" value={Fach2} onChange={this.handleChange} placeholder='Fach 2' />
+                   <Form.Input  name="Fach2" value={Fach2} onChange={this.handleChange} placeholder='Interesse 2' />
                   
                   
-                   <Form.Input  name="Fach3" value={Fach3} onChange={this.handleChange} placeholder='Fach 3' />
+                   <Form.Input  name="Fach3" value={Fach3} onChange={this.handleChange} placeholder='Interesse 3' />
                     </Form.Field>
                     </Form.Group>
                  <Message
                     error
                     header='Fehler bei Eingabe'
                     content='Alle Felder müssen ausgefüllt sein und Hausnummer und PLZ müssen Zahlen sein.'
-                    /> 
-                    <Message
-                    success
-                    header='Daten erfolgreich erstellt'
-                    content='Viel Spaß auf Edu-Hub.'
-                    />              
+                    />             
             </Form>
             </div>
          
