@@ -352,7 +352,7 @@ const panes = [
   </Tab.Pane> },
 ]
 
-class Test2 extends Component {
+class Wizard extends Component {
   constructor(props) {
     super(props);
 
@@ -390,4 +390,4 @@ class Test2 extends Component {
   }
 }
 
-export default Test2;
+export default Wizard;
