@@ -29,7 +29,7 @@ render(){
     
     <Grid.Column>
     <Card>
-      <Image src={'http://edu-hub-backend.azurewebsites.net' + this.props.bild}/>
+      <Image src={'http://edu-hub-backend.azurewebsites.net/' + this.props.bild}/>
       <Card.Content>
         <Card.Header>
          {this.props.name}

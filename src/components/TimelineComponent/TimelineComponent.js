@@ -17,10 +17,12 @@ className="vertical-timeline-element--education"
 
 iconStyle={{ background: 'rgb(233, 30, 99)', color: '#fff' }}
 animate={true}
-
 >
+
 <h3 className="vertical-timeline-element-title">{this.props.name}</h3>
-<h4 className="vertical-timeline-element-subtitle">Oemer</h4>
+<Link to={{pathname: '/user/' + this.props.authormail, state: {userid: this.props.userid} }}>
+<h4 className="vertical-timeline-element-subtitle">{this.props.authorvorname} {this.props.authorname}</h4>
+</Link>
 <p>
 {this.props.text}
 </p>

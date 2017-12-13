@@ -49,7 +49,7 @@ class Full extends React.Component {
               <Switch>
               <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
               <Route path="/profil" name="Profil" component={Profile}/>
-              <Route path="/user" name="User" component={User}/>
+              <Route path="/user/:usermail" name="User" component={User}/>
               <Route path="/admin" name="Admin" component={Admin}/>
               <Route path="/welcome" name="Welcome" component={Welcome}/>
               <Route path="/nowizard" name="Nowizard" component={NoWizard}/>

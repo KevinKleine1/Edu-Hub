@@ -1,9 +1,9 @@
 import React, {Component, Border} from 'react';
 import {Container, Segment, Card, Grid, Image, Header, Form, Icon, Button, Comment, Statistic, Label, List} from 'semantic-ui-react';
 import history from '../../history';
+import ListItems from '../../components/ListItems/ListItems';
 
-
-var redirectToMail = 'mailto:?body='
+var redirectToMail = 'mailto:?body=' 
 // changes const
 
 class User extends Component {
@@ -12,9 +12,59 @@ class User extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      dropdownOpen: false
+      dropdownOpen: false,
+      Name: "",
+      Vorname: "",
+      Bild: "",
+      Id: "",
+      Data: []
+
     };
   }
+    //fetching the corresponding data from the server to display it on the webpage
+  setData(){
+    var target = ('http://edu-hub-backend.azurewebsites.net/user/' + this.props.match.params.usermail)   
+    fetch(target)
+
+      .then((results) =>{
+        return results.json();
+
+        }).then((json)=>{
+
+          this.setState({Name : json[0].surname});
+          this.setState({Vorname: json[0].forename})
+          this.setState({Bild : json[0].profilpic});
+            })
+  }
+
+  getProjects(){
+    var target = ('http://edu-hub-backend.azurewebsites.net/user/getmyproject/' + this.props.location.state.userid)
+    fetch(target)
+
+      .then((results) =>{
+        return results.json();
+
+        }).then((json)=>{
+
+          this.setState(
+            {Data: json},
+            function () {
+              }
+            )
+
+            })
+  }
+
+  createList(item) {
+    return <ListItems titel={item.project_name} erstellt={item.project_created_at} link={item.projectid} key={item.projectid} />;
+    }
+
+
+  createLists(items) {
+
+      return items.map(this.createList);
+
+    }
 
   toggle() {
     this.setState({
@@ -25,8 +75,13 @@ class User extends Component {
     history.go(-1);
   }
 
-  render() {
+  componentDidMount(){
+    this.setData();
+    this.getProjects();
+  }
 
+  render() {
+const {Name, Vorname, Bild} = this.state
     return (
         <Grid stackable columns={2} divided>
           <Grid.Row>
@@ -37,7 +92,7 @@ class User extends Component {
                  <Header as='h2'>
                  <Icon name='user outline' />
                  <Header.Content>
-                 Maria Müller
+                 {Vorname} {Name}
                  <Header.Subheader>
                  Profil
                  </Header.Subheader>
@@ -51,7 +106,7 @@ class User extends Component {
            </Header>
 
            <Header as='h3' floated='right' color='grey'>
-           Maria Müller
+           {Vorname} {Name}
            </Header>
 </Segment>
 <Segment vertical style={{width: "800px"}}>
@@ -86,7 +141,7 @@ class User extends Component {
                       <Grid.Column width={3}>
                         <div className="container">
                              <div className="row justify-content-md-center">
-<img className="img-circle" src ='/img/avatars/5.jpg' align="center" style={{width: "200px", height: "200px"}}></img>
+<img className="img-circle" src ={'http://edu-hub-backend.azurewebsites.net/' + Bild} align="center" style={{width: "200px", height: "200px"}}></img>
 <div></div>
 <div className="container">
      <div className="row justify-content-md-center">
@@ -127,28 +182,8 @@ class User extends Component {
                  </Statistic.Value>
                     <Statistic.Label>Eigene Projekte</Statistic.Label>
                     </Statistic>
-               <List divided relaxed>
-    <List.Item>
-      <List.Icon name='star' size='large' color='blue' verticalAlign='middle' />
-      <List.Content>
-        <List.Header as='a'>Selbstlernzentrum</List.Header>
-        <List.Description as='a'>erstellt am 28.11.2017</List.Description>
-      </List.Content>
-    </List.Item>
-    <List.Item>
-      <List.Icon name='star' size='large' color='blue' verticalAlign='middle' />
-      <List.Content>
-        <List.Header as='a'>Bundesjugendspiele</List.Header>
-        <List.Description as='a'>erstellt am 03.12.2017</List.Description>
-      </List.Content>
-    </List.Item>
-    <List.Item>
-      <List.Icon name='star' size='large' color='blue' verticalAlign='middle' />
-      <List.Content>
-        <List.Header as='a'>Digitale Bibliothek</List.Header>
-        <List.Description as='a'>erstellt am 05.12.2017</List.Description>
-      </List.Content>
-    </List.Item>
+    <List divided relaxed>
+    {this.createLists(this.state.Data)}
   </List>
 </div></div>
     </Grid.Column>

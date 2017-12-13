@@ -31,7 +31,7 @@ class Test extends React.Component {
       activeItem: '',
       dropdownOpen: false,
       activeItem: "Kernprojekte",
-      Data: []
+      Data: [],
 
     };
 

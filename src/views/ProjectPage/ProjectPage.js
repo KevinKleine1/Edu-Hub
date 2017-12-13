@@ -233,7 +233,7 @@ class ProjectPage extends React.Component {
   }
 
   createNode(node) {
-    return <TimelineComponent name={node.project_name} author={node.project_author} text={node.project_text} key={node.projectid} />;
+    return <TimelineComponent name={node.project_name} authorname={node.surname} authorvorname={node.forename} authormail={node.email} text={node.project_text} userid={node.userid}  key={node.projectid} />;
     }
 
 
@@ -246,8 +246,7 @@ class ProjectPage extends React.Component {
 
   //fetching the corresponding data from the server to display it on the webpage
   setData(){
-    //var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
-    var target = ('http://edu-hub-backend.azurewebsites.net/project/' + this.props.match.params.projectid)                   //prod
+    var target = ('http://edu-hub-backend.azurewebsites.net/project/' + this.props.match.params.projectid)   
     fetch(target)
 
       .then((results) =>{
@@ -303,7 +302,7 @@ componentDidMount(){
         </Grid.Column>
         <Grid.Column width={3}>
           <br/>
-          <div className="projektfoto"><Image src={'http://edu-hub-backend.azurewebsites.net' + this.state.Bild} size='medium' bordered={true} circular={true}/><br/></div>
+          <div className="projektfoto"><Image src={'http://edu-hub-backend.azurewebsites.net/' + this.state.Bild} size='medium' bordered={true} circular={true}/><br/></div>
           <div className="row justify-content-md-center">
             <div>
               <Popup content='Füge dieses Projekt deinen Favoriten hinzu' trigger={<Button circular = {
