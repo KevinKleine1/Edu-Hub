@@ -86,6 +86,8 @@ export default class Auth {
     localStorage.removeItem('email');
     localStorage.removeItem('name');
     localStorage.removeItem('picture');
+    localStorage.removeItem('userid');
+    localStorage.removeItem('projectid');
     // navigate to the home route
     history.replace('/dashboard');
   }

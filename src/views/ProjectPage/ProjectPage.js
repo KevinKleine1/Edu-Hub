@@ -39,6 +39,7 @@ class ProjectPage extends React.Component {
       modalMember: false,
       modalEdit: false,
       modalInfo: false,
+      NutzerId: "",
       Name: "",
       Text: "",
       Karma: "",
@@ -125,9 +126,23 @@ class ProjectPage extends React.Component {
 
     })
   }
+   //fetching the corresponding data from the server to display it on the webpage
+   setUser() {
+    var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({NutzerId: json[0].userid}, function(){
+        localStorage.setItem('userid', this.state.NutzerId);
+      });
+    })
+  }
 
   //fetching the corresponding data from the server to display it on the webpage
   setMembers() {
+    localStorage.setItem('projectid', this.props.match.params.projectid);
     var target = ('http://edu-hub-backend.azurewebsites.net/project/members/' + this.props.match.params.projectid)
     fetch(target).then((results) => {
       return results.json();
@@ -141,16 +156,36 @@ class ProjectPage extends React.Component {
     })
   }
 
+  joinProject(){
+    var user = localStorage.getItem('userid');
+    var project = localStorage.getItem('projectid');
+
+    fetch('http://edu-hub-backend.azurewebsites.net/useraddsproject/beMember' , {                                            
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        uhp_iduser: user,
+        uhp_idproject: project
+        
+      })
+    })
+  }
+
   componentDidMount() {
     this.getReactions();
     this.setData();
     this.setMembers();
+    this.setUser();
   }
   //try to get this to work with one click
   componentWillReceiveProps(nextProps) {
     this.getReactions();
     this.setData();
     this.setMembers();
+    this.setUser();
   }
 
   //formats date
@@ -447,7 +482,7 @@ class ProjectPage extends React.Component {
             </div>
             <br/>
 
-            <Button fluid={true} toggle={true} active={false} onClick={this.handleClick} color={active
+            <Button fluid={true} toggle={true} active={false} onClick={this.joinProject} color={active
                 ? 'red'
                 : 'green'} content={active
                 ? 'Austreten'

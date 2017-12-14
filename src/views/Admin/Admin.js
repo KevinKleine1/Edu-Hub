@@ -189,9 +189,7 @@ class Admin extends Component {
     
 
      fetch(
-       //'http://localhost:8000/user/'
-       'http://edu-hub-backend.azurewebsites.net/user/'                          //prodo
-       , {                                            //dev
+'http://edu-hub-backend.azurewebsites.net/user/', {                                            
        method: 'PUT',
        headers: {
          'Accept': 'application/json',

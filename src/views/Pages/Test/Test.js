@@ -44,9 +44,9 @@ class Test extends React.Component {
   }
   
 
-  createImages(images, start, end) {
-    var Plist = images.slice(start, end)
-    return Plist.map(this.createImage);
+  createImages(images) {
+
+    return images.map(this.createImage);
     
   }
   handleItemClick = (e, {name}) => this.setState({activeItem: name})
@@ -145,18 +145,18 @@ class Test extends React.Component {
               </div>
             </div>
             <div className="container">
-              <div className="row justify-content-md-center">
-              <Grid doubling columns={4} divided='vertically'>
-                <Grid.Row>
-                {this.createImages(this.state.Data,0,4)}
-                </Grid.Row>
-              </Grid>
-              <Grid doubling columns={4} divided='vertically'>
-                <Grid.Row>
-                {this.createImages(this.state.Data,4,8)}
-                </Grid.Row>
-              </Grid>
-              </div>
+            <div className="row justify-content-md-center">
+            <Grid doubling columns={4} divided='vertically'>
+              <Grid.Row>
+              {this.createImages(this.state.Data)}
+              </Grid.Row>
+            </Grid>
+            <Grid doubling columns={4} divided='vertically'>
+              <Grid.Row>
+              {this.createImages(this.state.Data)}
+              </Grid.Row>
+            </Grid>
+            </div>
             </div>
           </div>
         </div>
