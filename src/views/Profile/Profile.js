@@ -13,7 +13,6 @@ schule;
 
 
 var karma = 800;
-//change url to relative ones
 
 class Profile extends React.Component {
 
@@ -37,6 +36,7 @@ class Profile extends React.Component {
           this.setState({Vorname : json[0].forename});
           this.setState({Nachname : json[0].surname});
           this.setState({Stadt : json[0].city});
+          this.setState({Beschreibung: json[0].user_description});
           this.setState({Hausnummer : json[0].number});
           this.setState({Postcode : json[0].postcode});
           this.setState({Strasse : json[0].street});
@@ -62,7 +62,7 @@ class Profile extends React.Component {
 
 
     render() {
-      const { Vorname, Nachname, Strasse, Hausnummer, Stadt, Postcode, Fach1, Fach2, Fach3, Bild } = this.state
+      const { Vorname, Nachname, Strasse, Hausnummer, Stadt, Postcode, Fach1, Fach2, Fach3, Bild, Beschreibung } = this.state
       return (
 <div className="animated fadeIn">
  <div className="container">
@@ -78,7 +78,7 @@ class Profile extends React.Component {
       </Header.Subheader>
     </Header.Content>
   </Header>
-        <p style={{width: "580px"}}>Hier könnte ihre Beschreibung stehen!</p>
+        <p style={{width: "580px"}}>{Beschreibung}</p>
       </Segment>
       <Segment vertical style={{width: "800px"}}>
     <Header as='h3' floated='left'>
