@@ -283,12 +283,12 @@ const panes = [
             <Table.Cell>
               <Form.Group grouped>
               <Form.Field label='Zeitmanagement besser planen' control='input' type='checkbox' />
-               <Form.Field label='Budget/Finanzierung' control='input' type='checkbox'  />
+               <Form.Field label='Budget/ Finanzierung' control='input' type='checkbox'  />
                <Form.Field label='Bildung/ Wissenvermittlung' control='input' type='checkbox'/>
                 <Form.Field label='Unterricht neu gestalten' control='input' type='checkbox' />
                 <Form.Field label='Verwaltung verbessern' control='input' type='checkbox'  />
                 <Form.Field label='Konfliktmanagement' control='input' type='checkbox' />
-                <Form.Field label='•Sonstige strategische Ziele' control='input' type='checkbox'  />
+                <Form.Field label='Sonstige strategische Ziele' control='input' type='checkbox'  />
               </Form.Group>
 
       </Table.Cell>
@@ -347,7 +347,7 @@ const panes = [
                <Form.Field label='Fachlich' control='input' type='checkbox'/>
                 <Form.Field label='Lehrer' control='input' type='checkbox' />
                 <Form.Field label='Eltern' control='input' type='checkbox' />
-                <Form.Field label='Stadt/Gemeinde' control='input' type='checkbox' />
+                <Form.Field label='Stadt/ Gemeinde' control='input' type='checkbox' />
               </Form.Group>
 
       </Table.Cell>
@@ -413,6 +413,9 @@ const panes = [
            <Form.Group widths='equal' >
             <Form.TextArea rows={2} placeholder='Projektbeschreibung'/>
          </Form.Group>
+         <Form.Group widths='equal' >
+          <Form.TextArea rows={2} placeholder='Wie soll die Zielerreichung gemessen werden?'/>
+       </Form.Group>
         <div>
            <Input
      icon='tags'
@@ -421,7 +424,7 @@ const panes = [
      labelPosition='right'
      placeholder='Tags'/></div>  <br/>
 
-<div>
+     <div>
     <Input
     icon='tags'
     iconPosition='left'
@@ -468,10 +471,6 @@ class Wizard extends Component {
     });
   }
 
-  goBack(){
-    history.go(-1);
-  }
-
   changeTab() {
     this.setState({activeIndex: (this.state.activeIndex + 1)});
   };
@@ -494,17 +493,16 @@ class Wizard extends Component {
                     <Icon name='check' />
                   </Button.Content>
                 </Button>
-                <Button animated color='teal' style={{width: "150px"}} onClick={this.goBack}>
+                <Button animated color='teal' style={{width: "150px"}}>
                       <Button.Content hidden>zurück</Button.Content>
                       <Button.Content visible>
                         <Icon name='arrow left' />
                       </Button.Content>
                     </Button>
+
           </div>
         </div>
-              <br/>
-
-          </div></div>
+          </div><br/></div>
 
 
 

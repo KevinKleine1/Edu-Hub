@@ -413,6 +413,8 @@ const panes = [
            <Form.Group widths='equal' >
             <Form.TextArea rows={2} placeholder='Projektbeschreibung'/>
          </Form.Group>
+         <Form.Group widths = 'equal' > <Form.TextArea rows={2} placeholder='Wie soll die Zielerreichung gemessen werden?'/>
+</Form.Group>
         <div>
            <Input
      icon='tags'
