@@ -38,6 +38,7 @@ class ProjectPage extends React.Component {
       modalShare: false,
       modalMember: false,
       modalEdit: false,
+      modalInfo: false,
       Name: "",
       Text: "",
       Karma: "",
@@ -50,6 +51,7 @@ class ProjectPage extends React.Component {
     this.toggleShare = this.toggleShare.bind(this);
     this.toggleMember = this.toggleMember.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
+    this.toggleInfo = this.toggleInfo.bind(this);
 
   }
   toggleShare() {
@@ -65,6 +67,11 @@ class ProjectPage extends React.Component {
   toggleEdit() {
     this.setState({
       modalEdit: !this.state.modalEdit
+    });
+  }
+  toggleInfo() {
+    this.setState({
+      modalInfo: !this.state.modalInfo
     });
   }
 
@@ -196,6 +203,12 @@ class ProjectPage extends React.Component {
       </Card.Group>
     </div>
 
+    //content of info modal
+    const infoModal = <div className="container">
+      bla bla bla bla bla bla
+      mehr bla bla bla bla bla bla
+    </div>
+
     //tabs for edit modal
     const panes = [
 
@@ -263,7 +276,7 @@ class ProjectPage extends React.Component {
         </div>
         <div>
           <br/>
-          <Input type="text" size='small' value={currentPageUrl} id="InputFieldContent" style={{
+          <Input type="text" size='small' value={currentPageUrlShort} id="InputFieldContent" style={{
               width: '15em'
             }} action={<Button
             color = 'teal'
@@ -400,6 +413,21 @@ class ProjectPage extends React.Component {
                   <ModalBody>
                     <div fluid="fluid">
                       {editModal}
+                    </div>
+                  </ModalBody>
+                </Modal>
+              </div>
+              <div>
+                <Popup content='Informationen zu diesem Projekt' trigger={<Button circular = {
+                    true
+                  }
+                  color = 'grey' icon = 'info' onClick = {
+                    this.toggleInfo
+                  } />}/>
+                <Modal isOpen={this.state.modalInfo} toggle={this.toggleInfo} className={this.props.className} size='lg'>
+                  <ModalBody>
+                    <div fluid="fluid">
+                      {infoModal}
                     </div>
                   </ModalBody>
                 </Modal>
