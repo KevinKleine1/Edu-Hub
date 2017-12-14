@@ -37,13 +37,38 @@ class User extends Component {
             })
   }
 
-  formatDate(date_unformatted){
+  formatDateMonthName(date_unformatted){
     var day = date_unformatted.substr(8, 2);
     var month = date_unformatted.substr(5, 2);
     var year = date_unformatted.substr(0, 4);
-    var date_formatted = day + '.' + month + '.' + year;
-    return date_formatted;
+    var monthNamed = null;
+    if(month == '01'){
+      monthNamed = 'Januar';
+    }else if(month == '02'){
+      monthNamed = 'Februar';
+    }else if(month == '03'){
+      monthNamed = 'März';
+    }else if(month == '04'){
+      monthNamed = 'April';
+    }else if(month == '05'){
+      monthNamed = 'Mai';
+    }else if(month == '06'){
+      monthNamed = 'Juni';
+    }else if(month == '07'){
+      monthNamed = 'Juli';
+    }else if(month == '08'){
+      monthNamed = 'August';
+    }else if(month == '09'){
+      monthNamed = 'September';
+    }else if(month == '10'){
+      monthNamed = 'Oktober';
+    }else if(month == '11'){
+      monthNamed = 'November';
+    }else{
+      monthNamed = 'Dezember';
     }
+    return day + '.' + monthNamed + '.' + year;
+  }
 
   getProjects(){
     var target = ('http://edu-hub-backend.azurewebsites.net/user/getmyproject/' + this.props.location.state.userid)
@@ -90,7 +115,7 @@ class User extends Component {
 
   render() {
 const {Name, Vorname, Bild} = this.state
-var Erstellt = this.formatDate(this.state.Erstellt);
+var Erstellt = this.formatDateMonthName(this.state.Erstellt);
     return (
       <div className="animated fadeIn">
         <Grid stackable columns={2} divided>

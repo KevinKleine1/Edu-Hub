@@ -26,6 +26,7 @@ import {VerticalTimeline, VerticalTimelineElement} from 'react-vertical-timeline
 import 'react-vertical-timeline-component/style.min.css';
 import {Link} from 'react-router-dom';
 import TimelineComponent from '../../components/TimelineComponent/TimelineComponent';
+import UserCard from '../../components/UserCard/UserCard';
 
 var currentPageUrl = window.location.href;
 var currentPageUrlShort = window.location.host + window.location.pathname;
@@ -38,7 +39,7 @@ var redirectToMail = 'mailto:?body=' + currentPageUrl
 //content of the member modal
 const memberModal = <div className="container">
   <Card.Group itemsPerRow={3}>
-    <Card centered={true} link={true} header='Oemer' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')}/>
+    <Card link={true} header='Oemer' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')}/>
     <Card link={true} header='Kevin' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')}/>
     <Card link={true} header='Burcu' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')}/>
     <Card link={true} header='Felix' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')}/>
@@ -191,7 +192,8 @@ class ProjectPage extends React.Component {
       Text: "",
       Karma: "",
       Erstellt:"",
-      Data: []
+      Data: [],
+      Members: []
 
     };
     this.toggleShare = this.toggleShare.bind(this);
@@ -244,6 +246,17 @@ class ProjectPage extends React.Component {
 
     }
 
+  createCard(card) {
+     return <UserCard vorname={card.forename} nachname={card.surname} description={card.user_description} usermail={card.email} id={card.userid}  key={card.userid} />;
+      }
+  
+  
+   createCards(cards) {
+  
+      return cards.map(this.createCard);
+  
+      }
+
 
   //fetching the corresponding data from the server to display it on the webpage
   setData(){
@@ -264,10 +277,30 @@ class ProjectPage extends React.Component {
             })
   }
 
+    //fetching the corresponding data from the server to display it on the webpage
+    setMembers(){
+      var target = ('http://edu-hub-backend.azurewebsites.net/project/members/' + this.props.match.params.projectid)   
+      fetch(target)
+      
+            .then((results) =>{
+              return results.json();
+      
+              }).then((json)=>{
+      
+                this.setState(
+                  {Members: json},
+                  function () {
+                    }
+                  )
+      
+                  })
+    }
+
 
 componentDidMount(){
   this.getReactions();
   this.setData();
+  this.setMembers();
 }
 
 
@@ -284,7 +317,7 @@ formatDate(date_unformatted){
   })
 
   render() {
-    const {active, activeItem, Name, Text, Karma} = this.state
+    const {active, activeItem, Name, Text, Karma, Members} = this.state
     var org = this.state.Erstellt;
     var Erstellt = this.formatDate(org);
     return (
@@ -343,7 +376,11 @@ formatDate(date_unformatted){
                 } />}/>
               <Modal isOpen={this.state.modalMember} toggle={this.toggleMember} className={this.props.className} size='lg'>
                 <ModalBody>
-                  {memberModal}
+                <div className="container">
+                    <Card.Group itemsPerRow={3}>
+                        {this.createCards(Members)}
+                     </Card.Group>
+                </div>
                 </ModalBody>
               </Modal>
             </div>
