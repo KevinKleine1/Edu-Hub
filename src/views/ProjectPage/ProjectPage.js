@@ -46,11 +46,6 @@ const memberModal = <div className="container">
   </Card.Group>
 </div>
 
-//constant for form.select in edit modal
-const options = [
-{ key: '1', text: 'Wenn man das wählt wird Timeline blau', value: 'blau' },
-{ key: '2', text: 'Wenn man das wählt wird Timeline gelb', value: 'gelb'},
-]
 
 //tabs for edit modal
 const panes = [
@@ -58,27 +53,29 @@ const panes = [
   { menuItem: 'Aktivität', render: () => <Tab.Pane>
     <h3>Neue Aktivität</h3>
     <Form>
-    <Form.Field required>
+    <Form.Field>
           <label>Was ist die neue Aktivität?</label>
           <input placeholder='Aktivitäts Titel' />
-          <Form.Field required control={TextArea} label='Worum geht es bei dieser Aktivität' placeholder='Aktivitäts Beschreibung' />
-
+          <Form.Field  control={TextArea} label='Worum geht es bei dieser Aktivität' placeholder='Aktivitäts Beschreibung' />
+          <label>Aktivitätsbeginn</label>
+          <Form.Input style={{width: "200px"}} type='date' placeholder='Aktivitätsbeginn' icon='calendar' iconPosition='left'/>
     </Form.Field>
     <Form.Group grouped>
-    <Form.Select required label='Die ist ein ' options={options} placeholder='Gender' />
     <label>Hast du dich an einem anderen Projekt orientiert?</label>
-    <Form.Field required label='Nein' control='input' type='radio' name='htmlRadios' />
-    <Form.Field required label='Ja' control='input' type='radio' name='htmlRadios' />
+    <Form.Field  label='Nein' control='input' type='radio' name='htmlRadios' />
+    <Form.Field  label='Ja' control='input' type='radio' name='htmlRadios' />
   </Form.Group>
   </Form>
-
+  <br />
+  <div className="row justify-content-md-center">
+  <Button color='green'>
+  <Icon name='checkmark'/>
+  Absenden
+  </Button>
+</div>
 </Tab.Pane> },
-  { menuItem: 'Datein', render: () => <Tab.Pane>Bearbeiten</Tab.Pane> },
-  { menuItem: 'Fotos', render: () => <Tab.Pane><div className="form-group">
-    <label htmlFor="exampleFormControlFile1"><b>Füge fotos der Gallery hinzu</b></label>
-    <br/>
-    <input type="file" className="form-control-file" id="exampleFormControlFile1"></input>
-  </div></Tab.Pane> },
+  { menuItem: 'Bearbeiten', render: () => <Tab.Pane>Bearbeiten</Tab.Pane> },
+  { menuItem: 'Fotos', render: () => <Tab.Pane>Lade Fotos für die Gallery hoch</Tab.Pane> },
 ]
 
 //Conent of the edit modal
@@ -249,18 +246,18 @@ class ProjectPage extends React.Component {
   createCard(card) {
      return <UserCard vorname={card.forename} nachname={card.surname} description={card.user_description} usermail={card.email} id={card.userid}  key={card.userid} />;
       }
-  
-  
+
+
    createCards(cards) {
-  
+
       return cards.map(this.createCard);
-  
+
       }
 
 
   //fetching the corresponding data from the server to display it on the webpage
   setData(){
-    var target = ('http://edu-hub-backend.azurewebsites.net/project/' + this.props.match.params.projectid)   
+    var target = ('http://edu-hub-backend.azurewebsites.net/project/' + this.props.match.params.projectid)
     fetch(target)
 
       .then((results) =>{
@@ -279,20 +276,20 @@ class ProjectPage extends React.Component {
 
     //fetching the corresponding data from the server to display it on the webpage
     setMembers(){
-      var target = ('http://edu-hub-backend.azurewebsites.net/project/members/' + this.props.match.params.projectid)   
+      var target = ('http://edu-hub-backend.azurewebsites.net/project/members/' + this.props.match.params.projectid)
       fetch(target)
-      
+
             .then((results) =>{
               return results.json();
-      
+
               }).then((json)=>{
-      
+
                 this.setState(
                   {Members: json},
                   function () {
                     }
                   )
-      
+
                   })
     }
 
