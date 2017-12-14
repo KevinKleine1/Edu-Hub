@@ -233,7 +233,7 @@ class ProjectPage extends React.Component {
   }
 
   createNode(node) {
-    return <TimelineComponent name={node.project_name} authorname={node.surname} authorvorname={node.forename} authormail={node.email} text={node.project_text} userid={node.userid}  key={node.projectid} />;
+    return <TimelineComponent name={node.project_name} authorname={node.surname} authorvorname={node.forename} authormail={node.email} text={node.project_text} userid={node.userid} projectid={node.projectid}  key={node.projectid} />;
     }
 
 
