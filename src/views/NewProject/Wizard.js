@@ -471,6 +471,10 @@ class Wizard extends Component {
     });
   }
 
+  goBack(){
+    this.setState({activeIndex: (this.state.activeIndex - 1)});
+
+  }
   changeTab() {
     this.setState({activeIndex: (this.state.activeIndex + 1)});
   };
@@ -493,7 +497,7 @@ class Wizard extends Component {
                     <Icon name='check' />
                   </Button.Content>
                 </Button>
-                <Button animated color='teal' style={{width: "150px"}}>
+                <Button animated color='teal' style={{width: "150px"}} onClick={this.goBack.bind(this)}>
                       <Button.Content hidden>zurück</Button.Content>
                       <Button.Content visible>
                         <Icon name='arrow left' />

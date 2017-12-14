@@ -460,7 +460,7 @@ class Test2 extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       dropdownOpen: false,
-      activeIndex: 0
+      activeIndex: 0,
     };
   }
 
@@ -471,12 +471,15 @@ class Test2 extends Component {
   }
 
   goBack(){
-    history.go(-1);
+    this.setState({activeIndex: (this.state.activeIndex - 1)});
+
   }
 
   changeTab() {
     this.setState({activeIndex: (this.state.activeIndex + 1)});
   };
+
+
 
   render() {
     const {activeIndex} = this.state
@@ -496,7 +499,7 @@ class Test2 extends Component {
                     <Icon name='check' />
                   </Button.Content>
                 </Button>
-                <Button animated color='teal' style={{width: "150px"}} onClick={this.goBack}>
+                <Button animated color='teal' style={{width: "150px"}} onClick={this.goBack.bind(this)}>
                       <Button.Content hidden>zurück</Button.Content>
                       <Button.Content visible>
                         <Icon name='arrow left' />
