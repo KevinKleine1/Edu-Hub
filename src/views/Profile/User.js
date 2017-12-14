@@ -116,6 +116,7 @@ class User extends Component {
   render() {
 const {Name, Vorname, Bild} = this.state
 var Erstellt = this.formatDateMonthName(this.state.Erstellt);
+var Projekte = this.state.Data.length;
     return (
       <div className="animated fadeIn">
         <Grid stackable columns={2} divided>
@@ -201,7 +202,7 @@ var Erstellt = this.formatDateMonthName(this.state.Erstellt);
         <Statistic color='violet'>
           <Statistic.Value>
             <Icon name='puzzle'/>
-            5
+            {Projekte}
           </Statistic.Value>
              <Statistic.Label>Projektmitglied</Statistic.Label>
              <br/>
