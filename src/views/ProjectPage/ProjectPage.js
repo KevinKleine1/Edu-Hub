@@ -300,12 +300,14 @@ componentDidMount(){
   this.setData();
   this.setMembers();
 }
-
+//try to get this to work with one click
 componentWillReceiveProps(nextProps){
   this.getReactions();
   this.setData();
   this.setMembers();
 }
+
+
 
 
 formatDate(date_unformatted){
