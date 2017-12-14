@@ -190,7 +190,8 @@ class ProjectPage extends React.Component {
       Karma: "",
       Erstellt:"",
       Data: [],
-      Members: []
+      Members: [],
+      ProjectID: ""
 
     };
     this.toggleShare = this.toggleShare.bind(this);
@@ -295,6 +296,12 @@ class ProjectPage extends React.Component {
 
 
 componentDidMount(){
+  this.getReactions();
+  this.setData();
+  this.setMembers();
+}
+
+componentWillReceiveProps(nextProps){
   this.getReactions();
   this.setData();
   this.setMembers();
