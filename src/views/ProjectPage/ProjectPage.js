@@ -250,21 +250,23 @@ class ProjectPage extends React.Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
     this.getReactions();
     this.setData();
     this.setMembers();
     this.setUser();
     this.setMembership();
   }
-  //try to get this to work with one click
-  componentWillReceiveProps(nextProps, nextState) {
+ 
+  componentDidUpdate(prevProps){
+    if(this.props.match.params.projectid !== prevProps.match.params.projectid){
     this.getReactions();
     this.setData();
     this.setMembers();
     this.setUser();
     this.setMembership();
+    }
   }
-
 
   
 
