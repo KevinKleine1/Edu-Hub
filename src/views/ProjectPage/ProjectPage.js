@@ -34,7 +34,7 @@ class ProjectPage extends React.Component {
     super(props);
 
     this.state = {
-      active: false,
+      joined: null,
       modalShare: false,
       modalMember: false,
       modalEdit: false,
@@ -156,6 +156,47 @@ class ProjectPage extends React.Component {
     })
   }
 
+  setMembership(){
+    var target = ('http://edu-hub-backend.azurewebsites.net/useraddsproject/amIMember/' + localStorage.getItem('projectid') + '/' + localStorage.getItem('userid'))
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      if(json.response == 1){
+      this.setState({joined: false}, function(){
+        console.log(this.state.joined);
+        localStorage.setItem('joined', false)
+      });
+    } else if(json.response == 0 ){
+      this.setState({joined: true}, function(){
+        console.log(this.state.joined);
+        localStorage.setItem('joined', false)
+      });
+    }
+    })
+  }
+
+  
+  //handles the click on the toggle (join/leave) Button
+  handleClick = () => this.setState({
+    joined: !this.state.joined, function(){
+      localStorage.setItem('joined', this.state.joined);
+    }
+  })
+  
+  handleJoin(){
+
+    var joined = localStorage.getItem('joined');
+    if(joined){
+      this.joinProject();
+    }else{
+      this.leaveProject();
+    }
+    this.handleClick();
+  }
+
+
   joinProject(){
     var user = localStorage.getItem('userid');
     var project = localStorage.getItem('projectid');
@@ -171,7 +212,23 @@ class ProjectPage extends React.Component {
         uhp_idproject: project
         
       })
-    })
+    });
+  }
+
+  leaveProject(){
+    var user = localStorage.getItem('userid');
+    var project = localStorage.getItem('projectid');
+    var form = new FormData();
+       form.append('uhp_iduser', user);
+       form.append('uhp_idproject', project);
+   return fetch(
+      'http://edu-hub-backend.azurewebsites.net/useraddsproject/cancelMembership', {                                            
+             method: 'delete',
+             headers: {
+              'Accept': 'application/json, */*',
+             },
+             body: form
+           }).then(response => response.json());
   }
 
   componentDidMount() {
@@ -179,6 +236,7 @@ class ProjectPage extends React.Component {
     this.setData();
     this.setMembers();
     this.setUser();
+    this.setMembership();
   }
   //try to get this to work with one click
   componentWillReceiveProps(nextProps) {
@@ -186,6 +244,7 @@ class ProjectPage extends React.Component {
     this.setData();
     this.setMembers();
     this.setUser();
+    this.setMembership();
   }
 
   //formats date
@@ -196,11 +255,6 @@ class ProjectPage extends React.Component {
     return day + '.' + month + '.' + year;
   }
 
-  //handles the click on the toggle (join/leave) Button
-  handleClick = () => this.setState({
-    active: !this.state.active
-  })
-
   //function to copy text from an inputfield to the clipboard
   copyToClipboard() {
     var copyText = document.getElementById('InputFieldContent');
@@ -210,7 +264,7 @@ class ProjectPage extends React.Component {
 
   render() {
     const {
-      active,
+      joined,
       activeItem,
       Name,
       Text,
@@ -482,11 +536,11 @@ class ProjectPage extends React.Component {
             </div>
             <br/>
 
-            <Button fluid={true} toggle={true} active={this.state.active} onClick={this.joinProject} color={active
-                ? 'red'
-                : 'green'} content={active
-                ? 'Austreten'
-                : 'Beitreten'}/>
+            <Button fluid={true} toggle={true} onClick={this.handleJoin.bind(this)} color={joined
+                ? 'green'
+                : 'red'} content={joined
+                ? 'Beitreten'
+                : 'Austreten'}/>
 
             <div className="tags">
 
