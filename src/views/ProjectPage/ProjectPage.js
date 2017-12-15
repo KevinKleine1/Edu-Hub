@@ -34,6 +34,7 @@ class ProjectPage extends React.Component {
     super(props);
 
     this.state = {
+      key: "4234234",
       joined: null,
       modalShare: false,
       modalMember: false,
@@ -165,12 +166,12 @@ class ProjectPage extends React.Component {
 
       if(json.response == 1){
       this.setState({joined: false}, function(){
-        console.log(this.state.joined);
+       
     
       });
     } else if(json.response == 0 ){
       this.setState({joined: true}, function(){
-        console.log(this.state.joined);
+      
       });
     }
     })
@@ -180,7 +181,6 @@ class ProjectPage extends React.Component {
   //handles the click on the toggle (join/leave) Button
   handleClick = () => this.setState({
     joined: !this.state.joined, function(){
-
     }
   })
   
@@ -193,6 +193,8 @@ class ProjectPage extends React.Component {
       this.leaveProject();
     }
     this.handleClick();
+    this.setMembers();
+    this.setState({key: Math.random()});
   }
 
 
@@ -200,7 +202,7 @@ class ProjectPage extends React.Component {
     var user = localStorage.getItem('userid');
     var project = localStorage.getItem('projectid');
 
-    fetch('http://edu-hub-backend.azurewebsites.net/useraddsproject/beMember' , {                                            
+    fetch(  'http://edu-hub-backend.azurewebsites.net/useraddsproject/beMember' , {                                            
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -209,9 +211,17 @@ class ProjectPage extends React.Component {
       body: JSON.stringify({
         uhp_iduser: user,
         uhp_idproject: project
-        
       })
-    });
+    }).then((response) =>{
+      return response.json();
+
+      }).then((json)=>{
+          this.setState({key: Math.random()}, function(){
+            this.setMembers();
+            this.getReactions();
+          });
+          });
+    
   }
 
   leaveProject(){
@@ -227,7 +237,16 @@ class ProjectPage extends React.Component {
               'Accept': 'application/json, */*',
              },
              body: form
-           }).then(response => response.json());
+            }).then((response) =>{
+              return response.json();
+        
+              }).then((json)=>{
+                  this.setState({key: Math.random()}, function(){
+                    this.setMembers();
+                    this.getReactions();
+                  });
+                  });
+      
   }
 
   componentDidMount() {
@@ -238,13 +257,16 @@ class ProjectPage extends React.Component {
     this.setMembership();
   }
   //try to get this to work with one click
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps, nextState) {
     this.getReactions();
     this.setData();
     this.setMembers();
     this.setUser();
     this.setMembership();
   }
+
+
+  
 
   //formats date
   formatDate(date_unformatted) {
@@ -473,7 +495,7 @@ class ProjectPage extends React.Component {
                   </ModalBody>
                 </Modal>
               </div>
-              <div>
+              <div key={this.state.key}>
                 <Popup content='Siehe dir die Projektteilnehmer an' trigger={<Button circular = {
                     true
                   }
