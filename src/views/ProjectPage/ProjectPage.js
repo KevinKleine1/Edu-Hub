@@ -166,12 +166,11 @@ class ProjectPage extends React.Component {
       if(json.response == 1){
       this.setState({joined: false}, function(){
         console.log(this.state.joined);
-        localStorage.setItem('joined', false)
+    
       });
     } else if(json.response == 0 ){
       this.setState({joined: true}, function(){
         console.log(this.state.joined);
-        localStorage.setItem('joined', false)
       });
     }
     })
@@ -181,16 +180,16 @@ class ProjectPage extends React.Component {
   //handles the click on the toggle (join/leave) Button
   handleClick = () => this.setState({
     joined: !this.state.joined, function(){
-      localStorage.setItem('joined', this.state.joined);
+
     }
   })
   
   handleJoin(){
 
-    var joined = localStorage.getItem('joined');
+    var joined = this.state.joined;
     if(joined){
       this.joinProject();
-    }else{
+    }else {
       this.leaveProject();
     }
     this.handleClick();
