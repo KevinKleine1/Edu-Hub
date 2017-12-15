@@ -34,7 +34,7 @@ class ProjectPage extends React.Component {
     super(props);
 
     this.state = {
-
+      active: false,
       modalShare: false,
       modalMember: false,
       modalEdit: false,
@@ -482,7 +482,7 @@ class ProjectPage extends React.Component {
             </div>
             <br/>
 
-            <Button fluid={true} toggle={true} active={false} onClick={this.joinProject} color={active
+            <Button fluid={true} toggle={true} active={this.state.active} onClick={this.joinProject} color={active
                 ? 'red'
                 : 'green'} content={active
                 ? 'Austreten'
