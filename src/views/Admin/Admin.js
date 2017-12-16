@@ -352,8 +352,8 @@ class Admin extends Component {
                   <label>Postleitzahl</label>
                   <Form.Input name="Postcode" value={Postcode} onChange={this.handleChange} error={this.state.postcodeError} placeholder={this.state.PostcodeAlt}/>
                 </Form.Field>
-                <Form.Group inline="inline">
-                  <Form.Field required="required">
+                <Form.Group inline={true}>
+                  <Form.Field required={true}>
                     <label>Fächer</label>
                     <Form.Input name="Fach1" value={Fach1} onChange={this.handleChange} error={this.state.fachError} placeholder={this.state.Fach1Alt}/>
 
@@ -362,26 +362,26 @@ class Admin extends Component {
                     <Form.Input name="Fach3" value={Fach3} onChange={this.handleChange} placeholder={this.state.Fach3Alt}/>
                   </Form.Field>
                 </Form.Group>
-                <Message error="error" header='Fehler bei Eingabe' content='Hausnummer und PLZ müssen Zahlen sein.'/>
-                <Message success="success" header='Daten erfolgreich erstellt' content='Weiterhin viel Spaß auf Edu-Hub.'/>
+                <Message error={true} header='Fehler bei Eingabe' content='Hausnummer und PLZ müssen Zahlen sein.'/>
+                <Message success={true} header='Daten erfolgreich aktualisiert' content='Weiterhin viel Spaß auf Edu-Hub.'/>
               </Form>
             </div>
 
             <div className="container">
               <div className="row justify-content-md-center">
-                <Button animated="animated" color='teal' style={{
+                <Button animated={true} color='teal' style={{
                     width: "150px"
                   }} onClick={this.handleSubmit.bind(this)}>
-                  <Button.Content hidden="hidden">speichern</Button.Content>
-                  <Button.Content visible="visible">
+                  <Button.Content hidden={true}>speichern</Button.Content>
+                  <Button.Content visible={true}>
                     <Icon name='check'/>
                   </Button.Content>
                 </Button>
-                <Button animated="animated" color='teal' style={{
+                <Button animated={true} color='teal' style={{
                     width: "150px"
                   }} onClick={this.goBack}>
-                  <Button.Content hidden="hidden">zurück</Button.Content>
-                  <Button.Content visible="visible">
+                  <Button.Content hidden={true}>zurück</Button.Content>
+                  <Button.Content visible={true}>
                     <Icon name='arrow left'/>
                   </Button.Content>
                 </Button>

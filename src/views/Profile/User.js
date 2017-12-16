@@ -131,19 +131,18 @@ class User extends Component {
     var Erstellt = this.formatDateMonthName(this.state.Erstellt);
     var Projekte = this.state.Data.length;
     return (<div className="animated fadeIn">
-      <Grid stackable="stackable" columns={2} divided="divided">
+      <Grid stackable={true} columns={2} divided={true}>
         <Grid.Row>
           <Grid.Column width={13}>
             <div className="container">
               <div className="row justify-content-md-center">
-                <Segment vertical="vertical" style={{
+                <Segment vertical={true} style={{
                     width: "800px"
                   }}>
                   <Header as='h2'>
                     <Icon name='user outline'/>
                     <Header.Content>
-                      {Vorname}
-                      {Name}
+                      {Vorname} {Name}
                       <Header.Subheader>
                         Profil
                       </Header.Subheader>
@@ -153,7 +152,7 @@ class User extends Component {
                       width: "800px"
                     }}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
                 </Segment>
-                <Segment vertical="vertical" style={{
+                <Segment vertical={true} style={{
                     width: "800px"
                   }}>
                   <Header as='h3' floated='left'>
@@ -161,11 +160,10 @@ class User extends Component {
                   </Header>
 
                   <Header as='h3' floated='right' color='grey'>
-                    {Vorname}
-                    {Name}
+                    {Vorname} {Name}
                   </Header>
                 </Segment>
-                <Segment vertical="vertical" style={{
+                <Segment vertical={true} style={{
                     width: "800px"
                   }}>
                   <Header as='h3' floated='left'>
@@ -175,7 +173,7 @@ class User extends Component {
                     Gymnasium Köln-Ehrenfeld
                   </Header>
                 </Segment>
-                <Segment vertical="vertical" style={{
+                <Segment vertical={true} style={{
                     width: "800px"
                   }}>
                   <Header as='h3' floated='left'>
@@ -185,17 +183,17 @@ class User extends Component {
                     {Erstellt}
                   </Header>
                 </Segment>
-                <Segment vertical="vertical" style={{
+                <Segment vertical={true} style={{
                     width: "800px"
                   }}>
                   <div className="container">
                     <div className="row justify-content-md-center">
-                      <Button animated="animated" color='teal' onClick={this.goBack} style={{
+                      <Button animated={true} color='teal' onClick={this.goBack} style={{
                           width: "130px",
                           height: "40px"
                         }}>
-                        <Button.Content visible="visible">Zurück</Button.Content>
-                        <Button.Content hidden="hidden">
+                        <Button.Content visible={true}>Zurück</Button.Content>
+                        <Button.Content hidden={true}>
                           <Icon name='arrow left'/>
                         </Button.Content>
                       </Button>
@@ -217,13 +215,13 @@ class User extends Component {
                 <div className="container">
                   <div className="row justify-content-md-center">
                     <div><br/>
-                      <Button animated="animated" color='teal' href={'mailto:' + this.props.match.params.usermail} style={{
+                      <Button animated={true} color='teal' href={'mailto:' + this.props.match.params.usermail} style={{
                           width: "200px",
                           height: "40px",
                           top: "1px"
                         }}>
-                        <Button.Content visible="visible">Nachricht schreiben</Button.Content>
-                        <Button.Content hidden="hidden">
+                        <Button.Content visible={true}>Nachricht schreiben</Button.Content>
+                        <Button.Content hidden={true}>
                           <Icon name='mail'/>
                         </Button.Content>
                       </Button>
@@ -261,7 +259,7 @@ class User extends Component {
                   </Statistic.Value>
                   <Statistic.Label>Eigene Projekte</Statistic.Label>
                 </Statistic>
-                <List divided="divided" relaxed="relaxed">
+                <List divided={true} relaxed={true}>
                   {this.createLists(this.state.Data)}
                 </List>
               </div>

@@ -73,7 +73,7 @@ class Wizard extends Component {
         render: () => <Tab.Pane attached={false}>
             <div className="container">
               <div className="row justify-content-md-center">
-                <Table singleLine="singleLine">
+                <Table singleLine={true}>
                   <Table.Header>
                     <Table.Row>
                       <Table.HeaderCell>
@@ -85,7 +85,7 @@ class Wizard extends Component {
                     <Table.Row>
                       <Table.Cell>
                         <Form size='big'>
-                          <Form.Group grouped="grouped">
+                          <Form.Group grouped={true}>
                             <Form.Field>
                               <Radio label='Ich möchte mit meinem Projekt für den Lehr-und Lernprozess in der Schule beitragen' control='input' value='option1' onChange={this.handleChange} type='radio' checked={this.state.value === 'option1'} name='htmlRadios'/>
                               <Popup trigger={<Icon name = 'question' />} wide='very' content='Das Kernziel einer Schule ist die Wissensvermittlung. Dazu gehören Projekte die den Unterricht fördern und neu gestalten können wie z.B Sportwoche, Theater AG oder Projekte wie „Effiziente Nutzung von Strom und Wasser im Alltag'/>
@@ -121,7 +121,7 @@ class Wizard extends Component {
         render: () => <Tab.Pane attached={false}>
             <div className="container">
               <div className="row justify-content-md-center">
-                <Table singleLine="singleLine">
+                <Table singleLine={true}>
                   <Table.Header>
                     <Table.Row>
                       <Table.HeaderCell>
@@ -133,7 +133,7 @@ class Wizard extends Component {
                   <Table.Body>
                     <Table.Row>
                       <Table.Cell>
-                        <Form.Group grouped="grouped">
+                        <Form.Group grouped={true}>
                           <Form.Field label='Suchen, Verarbeiten und Aufbewahren' control='input' type='checkbox'/>
                           <Form.Field label='Kommunizieren und Kooperieren' control='input' type='checkbox'/>
                           <Form.Field label='Produzieren und Präsentieren' control='input' type='checkbox'/>
@@ -151,7 +151,7 @@ class Wizard extends Component {
             </div>
             <div className="container">
               <div className="row justify-content-md-center">
-                <Table singleLine="singleLine">
+                <Table singleLine={true}>
                   <Table.Header>
                     <Table.Row>
                       <Table.HeaderCell>
@@ -162,7 +162,7 @@ class Wizard extends Component {
                   <Table.Body>
                     <Table.Row>
                       <Table.Cell>
-                        <Form.Group grouped="grouped">
+                        <Form.Group grouped={true}>
                           <Form.Field label='Kita/Vorschule' control='input' type='checkbox'/>
                           <Form.Field label='Grundschule' control='input' type='checkbox'/>
                           <Form.Field label='Sekundarstufe 1' control='input' type='checkbox'/>
@@ -180,7 +180,7 @@ class Wizard extends Component {
             </div>
             <div className="container">
               <div className="row justify-content-md-center">
-                <Table singleLine="singleLine">
+                <Table singleLine={true}>
                   <Table.Header>
                     <Table.Row>
                       <Table.HeaderCell>
@@ -192,7 +192,7 @@ class Wizard extends Component {
                   <Table.Body>
                     <Table.Row>
                       <Table.Cell>
-                        <Form.Group grouped="grouped">
+                        <Form.Group grouped={true}>
                           <Form.Field label='Sprachen' control='input' type='checkbox'/>
                           <Form.Field label='Kulturelle Bildung' control='input' type='checkbox'/>
                           <Form.Field label='Geschichte/ Gesellschaft' control='input' type='checkbox'/>
@@ -209,7 +209,7 @@ class Wizard extends Component {
             </div>
             <div className="container">
               <div className="row justify-content-md-center">
-                <Table singleLine="singleLine">
+                <Table singleLine={true}>
                   <Table.Header>
                     <Table.Row>
                       <Table.HeaderCell>
@@ -220,7 +220,7 @@ class Wizard extends Component {
                   <Table.Body>
                     <Table.Row>
                       <Table.Cell>
-                        <Form.Group grouped="grouped">
+                        <Form.Group grouped={true}>
                           <Form.Field label='Mathematik' control='input' type='checkbox'/>
                           <Form.Field label='Deutsch' control='input' type='checkbox'/>
                           <Form.Field label='Englisch' control='input' type='checkbox'/>
@@ -249,7 +249,7 @@ class Wizard extends Component {
             </div>
             <div className="container">
               <div className="row justify-content-md-center">
-                <Table singleLine="singleLine">
+                <Table singleLine={true}>
                   <Table.Header>
                     <Table.Row>
                       <Table.HeaderCell>
@@ -261,7 +261,7 @@ class Wizard extends Component {
                   <Table.Body>
                     <Table.Row>
                       <Table.Cell>
-                        <Form.Group grouped="grouped">
+                        <Form.Group grouped={true}>
                           <Form.Field label='Kein Internet' control='input' type='checkbox'/>
                           <Form.Field label='PC/Laptop' control='input' type='checkbox'/>
                           <Form.Field label='Tablet/Smartphone' control='input' type='checkbox'/>
@@ -278,7 +278,7 @@ class Wizard extends Component {
             </div>
             <div className="container">
               <div className="row justify-content-md-center">
-                <Table singleLine="singleLine">
+                <Table singleLine={true}>
                   <Table.Header>
                     <Table.Row>
                       <Table.HeaderCell>
@@ -289,7 +289,7 @@ class Wizard extends Component {
                   <Table.Body>
                     <Table.Row>
                       <Table.Cell>
-                        <Form.Group grouped="grouped">
+                        <Form.Group grouped={true}>
                           <Form.Field label='Unterrichstreihe' control='input' type='checkbox'/>
                           <Form.Field label='Stunde' control='input' type='checkbox'/>
                           <Form.Field label='Doppelstunde' control='input' type='checkbox'/>
@@ -314,7 +314,7 @@ class Wizard extends Component {
         render: () => <Tab.Pane attached={false}>
             <div className="container">
               <div className="row justify-content-md-center">
-                <Table singleLine="singleLine">
+                <Table singleLine={true}>
                   <Table.Header>
                     <Table.Row>
                       <Table.HeaderCell>
@@ -325,7 +325,7 @@ class Wizard extends Component {
                   <Table.Body>
                     <Table.Row>
                       <Table.Cell>
-                        <Form.Group grouped="grouped">
+                        <Form.Group grouped={true}>
                           <Form.Field label='Klasse' control='input' type='checkbox'/>
                           <Form.Field label='Schule' control='input' type='checkbox'/>
                           <Form.Field label='Fachlich' control='input' type='checkbox'/>
@@ -342,7 +342,7 @@ class Wizard extends Component {
 
             <div className="container">
               <div className="row justify-content-md-center">
-                <Table singleLine="singleLine">
+                <Table singleLine={true}>
                   <Table.Header>
                     <Table.Row>
                       <Table.HeaderCell>
@@ -353,7 +353,7 @@ class Wizard extends Component {
                   <Table.Body>
                     <Table.Row>
                       <Table.Cell>
-                        <Form.Group grouped="grouped">
+                        <Form.Group grouped={true}>
                           <Form.Field label='Zeitmanagement besser planen' control='input' type='checkbox'/>
                           <Form.Field label='Budget/ Finanzierung' control='input' type='checkbox'/>
                           <Form.Field label='Bildung/ Wissenvermittlung' control='input' type='checkbox'/>
@@ -372,7 +372,7 @@ class Wizard extends Component {
             </div>
             <div className="container">
               <div className="row justify-content-md-center">
-                <Table singleLine="singleLine">
+                <Table singleLine={true}>
                   <Table.Header>
                     <Table.Row>
                       <Table.HeaderCell>
@@ -383,7 +383,7 @@ class Wizard extends Component {
                   <Table.Body>
                     <Table.Row>
                       <Table.Cell>
-                        <Form.Group grouped="grouped">
+                        <Form.Group grouped={true}>
                           <Form.Field label='Tage' control='input' type='checkbox'/>
                           <Form.Field label='Wochen' control='input' type='checkbox'/>
                           <Form.Field label='Monate' control='input' type='checkbox'/>
@@ -407,7 +407,7 @@ class Wizard extends Component {
         render: () => <Tab.Pane attached={false}>
             <div className="container">
               <div className="row justify-content-md-center">
-                <Table singleLine="singleLine">
+                <Table singleLine={true}>
                   <Table.Header>
                     <Table.Row>
                       <Table.HeaderCell>
@@ -419,7 +419,7 @@ class Wizard extends Component {
                   <Table.Body>
                     <Table.Row>
                       <Table.Cell>
-                        <Form.Group grouped="grouped">
+                        <Form.Group grouped={true}>
                           <Form.Field label='Klasse' control='input' type='checkbox'/>
                           <Form.Field label='Schule' control='input' type='checkbox'/>
                           <Form.Field label='Fachlich' control='input' type='checkbox'/>
@@ -436,7 +436,7 @@ class Wizard extends Component {
             </div>
             <div className="container">
               <div className="row justify-content-md-center">
-                <Table singleLine="singleLine">
+                <Table singleLine={true}>
                   <Table.Header>
                     <Table.Row>
                       <Table.HeaderCell>
@@ -448,7 +448,7 @@ class Wizard extends Component {
                   <Table.Body>
                     <Table.Row>
                       <Table.Cell>
-                        <Form.Group grouped="grouped">
+                        <Form.Group grouped={true}>
                           <Form.Field label='Personal' control='input' type='checkbox'/>
                           <Form.Field label='Schüler' control='input' type='checkbox'/>
                           <Form.Field label='Sport' control='input' type='checkbox'/>
@@ -476,7 +476,7 @@ class Wizard extends Component {
         },
         render: () => <Tab.Pane attached={false}>
 
-            <Table singleLine="singleLine">
+            <Table singleLine={true}>
               <Table.Header>
                 <Table.Row>
                   <Table.HeaderCell>
@@ -555,7 +555,7 @@ class Wizard extends Component {
     ]
     return (<div className="container">
       <div className="row justify-content-md-center">
-        <Container fluid="fluid">
+        <Container fluid={true}>
           <Tab menu={{
               fluid: true,
               tabular: 'right'
@@ -563,19 +563,19 @@ class Wizard extends Component {
         </Container>
         <div className="container">
           <div className="row justify-content-md-center">
-            <Button animated="animated" color='teal' style={{
+            <Button animated={true} color='teal' style={{
                 width: "150px"
               }} onClick={this.changeTab.bind(this)}>
-              <Button.Content hidden="hidden">speichern</Button.Content>
-              <Button.Content visible="visible">
+              <Button.Content hidden={true}>speichern</Button.Content>
+              <Button.Content visible={true}>
                 <Icon name='check'/>
               </Button.Content>
             </Button>
-            <Button animated="animated" color='teal' style={{
+            <Button animated={true} color='teal' style={{
                 width: "150px"
               }} onClick={this.goBack.bind(this)}>
-              <Button.Content hidden="hidden">zurück</Button.Content>
-              <Button.Content visible="visible">
+              <Button.Content hidden={true}>zurück</Button.Content>
+              <Button.Content visible={true}>
                 <Icon name='arrow left'/>
               </Button.Content>
             </Button>

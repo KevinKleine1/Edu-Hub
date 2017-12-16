@@ -71,8 +71,7 @@ class ProjectCards extends React.Component {
         </Card.Content>
         <Card.Content extra={true}>
           <a>
-            <Icon name='user'/> {this.props.members}
-            Mitglieder
+            <Icon name='user'/> {this.props.members} Mitglieder
           </a>
           <Link to={{
               pathname: '/projectpage/' + this.props.link

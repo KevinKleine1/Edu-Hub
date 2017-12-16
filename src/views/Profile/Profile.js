@@ -85,7 +85,7 @@ class Profile extends React.Component {
     <div className="animated fadeIn">
       <div className="container">
         <div className="row justify-content-md-center">
-          <Segment vertical="vertical" style={{
+          <Segment vertical={true} style={{
               width: "800px"
             }}>
             <img className="img-circle" src={ 'http://edu-hub-backend.azurewebsites.net/' +  localStorage.getItem('picture') } style={{
@@ -94,8 +94,7 @@ class Profile extends React.Component {
             <Header as='h2'>
               <Icon name='user outline'/>
               <Header.Content>
-                {Vorname}
-                {Nachname}
+                {Vorname} {Nachname}
                 <Header.Subheader>
                   Mein Profil
                 </Header.Subheader>
@@ -105,31 +104,27 @@ class Profile extends React.Component {
                 width: "580px"
               }}>{Beschreibung}</p>
           </Segment>
-          <Segment vertical="vertical" style={{
+          <Segment vertical={true} style={{
               width: "800px"
             }}>
             <Header as='h3' floated='left'>
               <b>Name</b>
             </Header>
             <Header as='h3' floated='right' color='grey'>
-              {Vorname}
-              {Nachname}
+              {Vorname} {Nachname}
             </Header>
           </Segment>
-          <Segment vertical="vertical" style={{
+          <Segment vertical={true} style={{
               width: "800px"
             }}>
             <Header as='h3' floated='left'>
               Anschrift
             </Header>
             <Header as='h3' floated='right' color='grey'>
-              {Strasse}
-              {Hausnummer}
-              , {Postcode}
-              {Stadt}
+              {Strasse} {Hausnummer}, {Postcode} {Stadt}
             </Header>
           </Segment>
-          <Segment vertical="vertical" style={{
+          <Segment vertical={true} style={{
               width: "800px"
             }}>
             <Header as='h3' floated='left'>
@@ -139,7 +134,7 @@ class Profile extends React.Component {
               {localStorage.getItem("email")}
             </Header>
           </Segment>
-          <Segment vertical="vertical" style={{
+          <Segment vertical={true} style={{
               width: "800px"
             }}>
             <Header as='h3' floated='left'>
@@ -149,7 +144,7 @@ class Profile extends React.Component {
               Open-School
             </Header>
           </Segment>
-          <Segment vertical="vertical" style={{
+          <Segment vertical={true} style={{
               width: "800px"
             }}>
             <Header as='h3' floated='left'>
@@ -163,19 +158,19 @@ class Profile extends React.Component {
             <div className="row justify-content-md-center">
               <div>
                 <br/>
-                <Button animated="animated" color='teal' style={{
+                <Button animated={true} color='teal' style={{
                     width: "150px"
                   }} onClick={this.changeView}>
-                  <Button.Content hidden="hidden">bearbeiten</Button.Content>
-                  <Button.Content visible="visible">
+                  <Button.Content hidden={true}>bearbeiten</Button.Content>
+                  <Button.Content visible={true}>
                     <Icon name='pencil'/>
                   </Button.Content>
                 </Button>
-                <Button animated="animated" color='teal' style={{
+                <Button animated={true} color='teal' style={{
                     width: "150px"
                   }} onClick={this.goBack}>
-                  <Button.Content hidden="hidden">zurück</Button.Content>
-                  <Button.Content visible="visible">
+                  <Button.Content hidden={true}>zurück</Button.Content>
+                  <Button.Content visible={true}>
                     <Icon name='arrow left'/>
                   </Button.Content>
                 </Button>

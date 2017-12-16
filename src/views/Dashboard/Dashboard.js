@@ -146,12 +146,12 @@ class Dashboard extends React.Component {
           </div>
           <div className="container">
             <div className="row justify-content-md-center">
-              <Grid doubling="doubling" columns={4} divided='vertically'>
+              <Grid doubling={true} columns={4} divided='vertically'>
                 <Grid.Row>
                   {this.createImages(this.state.Data, 0, 4)}
                 </Grid.Row>
               </Grid>
-              <Grid doubling="doubling" columns={4} divided='vertically'>
+              <Grid doubling={true} columns={4} divided='vertically'>
                 <Grid.Row>
                   {this.createImages(this.state.Data, 4, 8)}
                 </Grid.Row>

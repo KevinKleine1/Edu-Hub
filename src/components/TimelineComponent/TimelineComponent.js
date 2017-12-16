@@ -26,8 +26,7 @@ class TimelineComponent extends React.Component {
             userid: this.props.userid
           }
         }}>
-        <h4 className="vertical-timeline-element-subtitle">{this.props.authorvorname}
-          {this.props.authorname}</h4>
+        <h4 className="vertical-timeline-element-subtitle">{this.props.authorvorname} {this.props.authorname}</h4>
       </Link>
       <p>
         {this.props.text}
