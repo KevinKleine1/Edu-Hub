@@ -42,41 +42,41 @@ class MyProjects extends React.Component {
 }*/
 
   // formates date with time
-  formatDateWithTime(date_unformatted){
-  var day = date_unformatted.substr(8, 2);
-  var month = date_unformatted.substr(5, 2);
-  var year = date_unformatted.substr(0, 4);
-  var time = date_unformatted.substr(11, 5);
-  var monthNamed = null;
-  if(month == '01'){
-    monthNamed = 'Jan';
-  }else if(month == '02'){
-    monthNamed = 'Feb';
-  }else if(month == '03'){
-    monthNamed = 'Mrz';
-  }else if(month == '04'){
-    monthNamed = 'Apr';
-  }else if(month == '05'){
-    monthNamed = 'Mai';
-  }else if(month == '06'){
-    monthNamed = 'Jun';
-  }else if(month == '07'){
-    monthNamed = 'Jul';
-  }else if(month == '08'){
-    monthNamed = 'Aug';
-  }else if(month == '09'){
-    monthNamed = 'Sep';
-  }else if(month == '10'){
-    monthNamed = 'Okt';
-  }else if(month == '11'){
-    monthNamed = 'Nov';
-  }else{
-    monthNamed = 'Dez';
-  }
-  return day + '. ' + monthNamed + '. ' + year + ' ' + time
+  formatDateWithTime(date_unformatted) {
+    var day = date_unformatted.substr(8, 2);
+    var month = date_unformatted.substr(5, 2);
+    var year = date_unformatted.substr(0, 4);
+    var time = date_unformatted.substr(11, 5);
+    var monthNamed = null;
+    if (month == '01') {
+      monthNamed = 'Jan';
+    } else if (month == '02') {
+      monthNamed = 'Feb';
+    } else if (month == '03') {
+      monthNamed = 'Mrz';
+    } else if (month == '04') {
+      monthNamed = 'Apr';
+    } else if (month == '05') {
+      monthNamed = 'Mai';
+    } else if (month == '06') {
+      monthNamed = 'Jun';
+    } else if (month == '07') {
+      monthNamed = 'Jul';
+    } else if (month == '08') {
+      monthNamed = 'Aug';
+    } else if (month == '09') {
+      monthNamed = 'Sep';
+    } else if (month == '10') {
+      monthNamed = 'Okt';
+    } else if (month == '11') {
+      monthNamed = 'Nov';
+    } else {
+      monthNamed = 'Dez';
+    }
+    return day + '. ' + monthNamed + '. ' + year + ' ' + time
   }
 
-//sorts column
+  //sorts column
   handleSort = clickedColumn => () => {
     const {column, data, direction} = this.state
 
@@ -101,45 +101,44 @@ class MyProjects extends React.Component {
   render() {
     const {column, data, direction} = this.state
 
-    return (
-
-<div>
+    return (<div>
       <Table sortable={true} celled={true} fixed={true} selectable={true} size='large'>
-      <Table.Header>
-        <Table.Row>
-          <Table.HeaderCell sorted={column === 'Nummer'
-              ? direction
-              : null} onClick={this.handleSort('Nummer')}>
-            #
-          </Table.HeaderCell>
-          <Table.HeaderCell sorted={column === 'ProjektName'
-              ? direction
-              : null} onClick={this.handleSort('ProjektName')}>
-            Projekt Name
-          </Table.HeaderCell>
-          <Table.HeaderCell sorted={column === 'Status'
-              ? direction
-              : null} onClick={this.handleSort('Status')}>
-            Status
-          </Table.HeaderCell>
-          <Table.HeaderCell sorted={column === 'ZuletztVeraendert'
-              ? direction
-              : null} onClick={this.handleSort('ZuletztVeraendert')}>
-            Zuletzt Verändert
-          </Table.HeaderCell>
-        </Table.Row>
-      </Table.Header>
-      <Table.Body>
-        {
-          _.map(data, ({ProjektName, Status, Nummer, ZuletztVeraendert}) => (<Table.Row key={Nummer}>
-            <Table.Cell>{Nummer}</Table.Cell>
-            <Table.Cell>{ProjektName}</Table.Cell>
-            <Table.Cell>{Status}</Table.Cell>
-            <Table.Cell>{this.formatDateWithTime(ZuletztVeraendert)}</Table.Cell>
-          </Table.Row>))
-        }
-      </Table.Body>
-    </Table></div>)
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell sorted={column === 'Nummer'
+                ? direction
+                : null} onClick={this.handleSort('Nummer')}>
+              #
+            </Table.HeaderCell>
+            <Table.HeaderCell sorted={column === 'ProjektName'
+                ? direction
+                : null} onClick={this.handleSort('ProjektName')}>
+              Projekt Name
+            </Table.HeaderCell>
+            <Table.HeaderCell sorted={column === 'Status'
+                ? direction
+                : null} onClick={this.handleSort('Status')}>
+              Status
+            </Table.HeaderCell>
+            <Table.HeaderCell sorted={column === 'ZuletztVeraendert'
+                ? direction
+                : null} onClick={this.handleSort('ZuletztVeraendert')}>
+              Zuletzt Verändert
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {
+            _.map(data, ({ProjektName, Status, Nummer, ZuletztVeraendert}) => (<Table.Row key={Nummer}>
+              <Table.Cell>{Nummer}</Table.Cell>
+              <Table.Cell>{ProjektName}</Table.Cell>
+              <Table.Cell>{Status}</Table.Cell>
+              <Table.Cell>{this.formatDateWithTime(ZuletztVeraendert)}</Table.Cell>
+            </Table.Row>))
+          }
+        </Table.Body>
+      </Table>
+    </div>)
   }
 }
 

@@ -21,7 +21,6 @@ import 'whatwg-fetch'
 
 const auth = new Auth();
 
-
 class Dashboard extends React.Component {
 
   constructor(props) {
@@ -31,23 +30,20 @@ class Dashboard extends React.Component {
       activeItem: '',
       dropdownOpen: false,
       activeItem: "Kernprojekte",
-      Data: [],
-
+      Data: []
     };
 
     this.toggle = this.toggle.bind(this);
   }
 
- 
   createImage(image) {
-  return <ProjectCards name={image.project_name} members={image.project_membercount} text={image.project_text} bild={image.project_imagepath} erstellt={image.project_created_at} link={image.projectid}  key={image.projectid} />;
+    return <ProjectCards name={image.project_name} members={image.project_membercount} text={image.project_text} bild={image.project_imagepath} erstellt={image.project_created_at} link={image.projectid} key={image.projectid}/>;
   }
-  
 
   createImages(images, start, end) {
     var Plist = images.slice(start, end)
     return Plist.map(this.createImage);
-    
+
   }
   handleItemClick = (e, {name}) => this.setState({activeItem: name})
 
@@ -58,30 +54,27 @@ class Dashboard extends React.Component {
     });
   }
 
-  getProjects(){
-    var target = ('http://edu-hub-backend.azurewebsites.net/project/')               
-    fetch(target)
+  getProjects() {
+    var target = ('http://edu-hub-backend.azurewebsites.net/project/')
+    fetch(target).then((results) => {
+      return results.json();
 
-      .then((results) =>{
-        return results.json();
+    }).then((json) => {
 
-        }).then((json)=>{
+      this.setState({
+        Data: json
+      }, function() {
+        this.setState({
+          Id: this.state.Data.map((elem) => elem.projectid)
+        }, function() {});
+      })
 
-          this.setState(
-            {Data: json}, 
-            function () {
-               this.setState({Id: this.state.Data.map((elem) => elem.projectid)},
-             function(){
-                });
-              }
-            )
-
-            })
+    })
   }
- 
+
   newProject() {
-      history.replace('/wizard1');
-    }
+    history.replace('/wizard1');
+  }
 
   isAuthenticated() {
     // Check whether the current time is past the
@@ -90,76 +83,74 @@ class Dashboard extends React.Component {
     return new Date().getTime() < expiresAt;
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getProjects();
- 
+
   }
- 
+
   render() {
     const logged = this.isAuthenticated();
     const {activeItem} = this.state;
-    
-    return (
-    
-    <div className="animated fadeIn"> 
-        <div className="container">
-          <div className="row justify-content-md-center">
-            <div>
-              <div className="container">
-                <div className="row justify-content-md-center">
-                  <Menu attached='top' tabular={true} size="large">
-                    <Menu.Item color='teal' name='Kernprojekte' active={activeItem === 'Kernprojekte'} onClick={this.handleItemClick}/>
-                    <Menu.Item color='teal' name='Unterstützende Projekte' active={activeItem === 'Unterstützende Projekte'} onClick={this.handleItemClick}/>
-                    <Menu.Item color='teal' name='Administrative Projekte' active={activeItem === 'Administrative Projekte'} onClick={this.handleItemClick}/>
-                    <Menu.Menu position='right'>
-                      <Menu.Item>
-                        <Input transparent={true} icon={{
-                            name: 'search',
-                            link: true
-                          }} placeholder='Projekt suchen...'/>
-                      </Menu.Item>
-                    </Menu.Menu>
-                  </Menu>
-                  <br/>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="container">
-                <div className="row justify-content-md-center">
-                  <br/>
-                  <Card style={{
-                      height: "100px",
-                      width: "800px"
-                    }}>
-                    <Card.Content>
-                      <Card.Header>Edu Hub von & für Lehrer</Card.Header>
-                      <Card.Meta>Plattform für LehrerInnen</Card.Meta>
-                      <Card.Description>
-                        <b>Nach Projekten suchen, erstellen & gemeinsam entwickeln</b>
-                      </Card.Description>
-                    </Card.Content>
-                  </Card>
-                  <br/>
-                </div>
-              </div>
-            </div>
+
+    return (<div className="animated fadeIn">
+      <div className="container">
+        <div className="row justify-content-md-center">
+          <div>
             <div className="container">
               <div className="row justify-content-md-center">
-              <Grid doubling columns={4} divided='vertically'>
-                <Grid.Row>
-                {this.createImages(this.state.Data,0,4)}
-                </Grid.Row>
-              </Grid>
-              <Grid doubling columns={4} divided='vertically'>
-                <Grid.Row>
-                {this.createImages(this.state.Data,4,8)}
-                </Grid.Row>
-              </Grid>
+                <Menu attached='top' tabular={true} size="large">
+                  <Menu.Item color='teal' name='Kernprojekte' active={activeItem === 'Kernprojekte'} onClick={this.handleItemClick}/>
+                  <Menu.Item color='teal' name='Unterstützende Projekte' active={activeItem === 'Unterstützende Projekte'} onClick={this.handleItemClick}/>
+                  <Menu.Item color='teal' name='Administrative Projekte' active={activeItem === 'Administrative Projekte'} onClick={this.handleItemClick}/>
+                  <Menu.Menu position='right'>
+                    <Menu.Item>
+                      <Input transparent={true} icon={{
+                          name: 'search',
+                          link: true
+                        }} placeholder='Projekt suchen...'/>
+                    </Menu.Item>
+                  </Menu.Menu>
+                </Menu>
+                <br/>
               </div>
             </div>
           </div>
+          <div>
+            <div className="container">
+              <div className="row justify-content-md-center">
+                <br/>
+                <Card style={{
+                    height: "100px",
+                    width: "800px"
+                  }}>
+                  <Card.Content>
+                    <Card.Header>Edu Hub von & für Lehrer</Card.Header>
+                    <Card.Meta>Plattform für LehrerInnen</Card.Meta>
+                    <Card.Description>
+                      <b>Nach Projekten suchen, erstellen & gemeinsam entwickeln</b>
+                    </Card.Description>
+                  </Card.Content>
+                </Card>
+                <br/>
+              </div>
+            </div>
+          </div>
+          <div className="container">
+            <div className="row justify-content-md-center">
+              <Grid doubling="doubling" columns={4} divided='vertically'>
+                <Grid.Row>
+                  {this.createImages(this.state.Data, 0, 4)}
+                </Grid.Row>
+              </Grid>
+              <Grid doubling="doubling" columns={4} divided='vertically'>
+                <Grid.Row>
+                  {this.createImages(this.state.Data, 4, 8)}
+                </Grid.Row>
+              </Grid>
+            </div>
+          </div>
         </div>
+      </div>
     </div>);
   }
 }
