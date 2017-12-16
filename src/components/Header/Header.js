@@ -20,6 +20,7 @@ class Header extends Component {
     };
   }
 
+  
   isAuthenticated() {
     // Check whether the current time is past the
     // access token's expiry time

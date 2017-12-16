@@ -12,6 +12,9 @@ import {
 import jwt from 'jsonwebtoken';
 import 'whatwg-fetch'
 
+//page where every new registered user will be redirected to, so he can complete his data, functionality is the same as on the admin page
+//TODO: fix the hickup if no picture will be uploded
+
 class Welcome extends Component {
 
   state = {
@@ -38,6 +41,8 @@ class Welcome extends Component {
     Laden: false
   };
 
+
+  //handler functions for the changes
   handleChange = (e, {name, value}) => this.setState({[name]: value})
 
   _handleImageChange(e) {
@@ -53,6 +58,7 @@ class Welcome extends Component {
     reader.readAsDataURL(file)
   }
 
+  //Validation if every field is used and the requirements are ok
   validate = () => {
     let isError = false;
     const errors = {
@@ -111,6 +117,7 @@ class Welcome extends Component {
     return isError;
   };
 
+  //onsubmit as Formdata since we need to send an image
   onSubmit() {
 
     var form = new FormData();
@@ -149,6 +156,7 @@ class Welcome extends Component {
 
   }
 
+  //complete submit function with validation and a loading state while it works
   handleSubmit() {
     this.setState({Laden: true});
     const err = this.validate();

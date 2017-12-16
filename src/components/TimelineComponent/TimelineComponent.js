@@ -3,6 +3,8 @@ import {VerticalTimeline, VerticalTimelineElement} from 'react-vertical-timeline
 import 'react-vertical-timeline-component/style.min.css';
 import {Link} from 'react-router-dom';
 
+//Class which creates the nodes in our timeline
+
 class TimelineComponent extends React.Component {
   constructor(props) {
     super(props);

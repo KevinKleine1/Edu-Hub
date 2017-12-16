@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import {Link} from 'react-router-dom';
 import {Card, Button} from 'semantic-ui-react';
 
+//displays a usercard on the projectpage
+
 export default class UserCard extends Component {
 
     constructor(props){

@@ -30,6 +30,8 @@ class Profile extends React.Component {
     this.state = {};
   }
 
+
+  //calls db for a fetch of the user data
   setData() {
     var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))
     fetch(target).then((results) => {
@@ -60,6 +62,7 @@ class Profile extends React.Component {
     history.go(-1);
   }
 
+  //initial fetch call
   componentDidMount() {
     this.setData();
   }
@@ -78,13 +81,14 @@ class Profile extends React.Component {
       Bild,
       Beschreibung
     } = this.state
-    return (<div className="animated fadeIn">
+    return (
+    <div className="animated fadeIn">
       <div className="container">
         <div className="row justify-content-md-center">
           <Segment vertical="vertical" style={{
               width: "800px"
             }}>
-            <img className="img-circle" src="src" ={ 'http://edu-hub-backend.azurewebsites.net/' +  localStorage.getItem('picture') } style={{
+            <img className="img-circle" src={ 'http://edu-hub-backend.azurewebsites.net/' +  localStorage.getItem('picture') } style={{
                 width: "200px"
               }} align="right"></img>
             <Header as='h2'>
@@ -182,7 +186,8 @@ class Profile extends React.Component {
         </div>
         <br/>
       </div>
-    </div>)
+    </div>
+    )
   }
 }
 export default Profile;

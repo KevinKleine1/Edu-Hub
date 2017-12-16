@@ -17,6 +17,8 @@ import {
 import history from '../../history';
 import ListItems from '../../components/ListItems/ListItems';
 
+
+//this is the page which gets displayed when you visit an external profile
 class User extends Component {
   constructor(props) {
     super(props);
@@ -49,6 +51,7 @@ class User extends Component {
     })
   }
 
+  //date formatting function
   formatDateMonthName(date_unformatted) {
     var day = date_unformatted.substr(8, 2);
     var month = date_unformatted.substr(5, 2);
@@ -82,6 +85,7 @@ class User extends Component {
     return day + '.' + monthNamed + '.' + year;
   }
 
+  //set the projects of the user you are watching
   getProjects() {
     var target = ('http://edu-hub-backend.azurewebsites.net/user/getmyproject/' + this.props.location.state.userid)
     fetch(target).then((results) => {
@@ -96,6 +100,7 @@ class User extends Component {
     })
   }
 
+  //creates the list of the Projectitems 
   createList(item) {
     return <ListItems titel={item.project_name} erstellt={item.project_created_at} link={item.projectid} key={item.projectid}/>;
   }
@@ -115,6 +120,7 @@ class User extends Component {
     history.go(-1);
   }
 
+  //initial mount call
   componentDidMount() {
     this.setData();
     this.getProjects();
@@ -203,7 +209,7 @@ class User extends Component {
           <Grid.Column width={3}>
             <div className="container">
               <div className="row justify-content-md-center">
-                <img className="img-circle" src="src" ={'http://edu-hub-backend.azurewebsites.net/' + Bild} align="center" style={{
+                <img className="img-circle" src={'http://edu-hub-backend.azurewebsites.net/' + Bild} align="center" style={{
                     width: "200px",
                     height: "200px"
                   }}></img>

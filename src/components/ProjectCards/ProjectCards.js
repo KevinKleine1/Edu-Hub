@@ -14,13 +14,15 @@ import {
 } from 'semantic-ui-react';
 import {Link, Switch, Route, Redirect} from 'react-router-dom';
 
+//Represents the projectcards we see on the dashboard and the project search
+
 class ProjectCards extends React.Component {
 
   constructor(props) {
     super(props);
 
   }
-
+//formats the date string we get from the sql timestamp to a useable view
   formatDate(date_unformatted) {
     var day = date_unformatted.substr(8, 2);
     var month = date_unformatted.substr(5, 2);
@@ -30,6 +32,7 @@ class ProjectCards extends React.Component {
   }
 
   render() {
+    //limitation functions for the amount of displayed text on our cards
     var org = this.props.text;
     if (org.length > 280) {
       var text = org.substring(0, 280);

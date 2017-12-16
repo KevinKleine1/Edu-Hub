@@ -21,6 +21,8 @@ import 'whatwg-fetch'
 
 const auth = new Auth();
 
+
+//dashboard class where we can see up to date project and which is in general our landing page
 class Dashboard extends React.Component {
 
   constructor(props) {
@@ -36,17 +38,22 @@ class Dashboard extends React.Component {
     this.toggle = this.toggle.bind(this);
   }
 
+
+  //Class to create a new project card with all the necessary data
   createImage(image) {
     return <ProjectCards name={image.project_name} members={image.project_membercount} text={image.project_text} bild={image.project_imagepath} erstellt={image.project_created_at} link={image.projectid} key={image.projectid}/>;
   }
 
+  //this is the mapping class which uses createImage on every content of the array
   createImages(images, start, end) {
     var Plist = images.slice(start, end)
     return Plist.map(this.createImage);
 
   }
+  //handler for the menu on top to change categories
   handleItemClick = (e, {name}) => this.setState({activeItem: name})
 
+  //dropdown handler
   toggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
@@ -54,6 +61,7 @@ class Dashboard extends React.Component {
     });
   }
 
+  //fetch call to get all projects we have available atm TODO: Remove subprojects, make it dynamically, have some kind of sorting 
   getProjects() {
     var target = ('http://edu-hub-backend.azurewebsites.net/project/')
     fetch(target).then((results) => {
@@ -72,6 +80,7 @@ class Dashboard extends React.Component {
     })
   }
 
+  
   newProject() {
     history.replace('/wizard1');
   }
@@ -82,7 +91,7 @@ class Dashboard extends React.Component {
     let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
     return new Date().getTime() < expiresAt;
   }
-
+  //inital call after component did render
   componentDidMount() {
     this.getProjects();
 

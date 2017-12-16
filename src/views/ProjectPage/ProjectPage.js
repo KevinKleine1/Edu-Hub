@@ -91,6 +91,7 @@ class ProjectPage extends React.Component {
     })
   }
 
+  //creates the nodes for our timeline
   createNode(node) {
     return <TimelineComponent name={node.project_name} authorname={node.surname} authorvorname={node.forename} authormail={node.email} text={node.project_text} userid={node.userid} projectid={node.projectid} key={node.projectid}/>;
   }
@@ -101,6 +102,7 @@ class ProjectPage extends React.Component {
 
   }
 
+  //creates the user cards to check who in in the projcet
   createCard(card) {
     return <UserCard vorname={card.forename} nachname={card.surname} description={card.user_description} usermail={card.email} id={card.userid} key={card.userid}/>;
   }
@@ -184,6 +186,7 @@ class ProjectPage extends React.Component {
     function() {}
   })
 
+  //checks if the user is a member of the project or not and the calls the correct function to either leave the project or join it
   handleJoin() {
 
     var joined = this.state.joined;
@@ -247,9 +250,8 @@ class ProjectPage extends React.Component {
     });
 
   }
-
+  //initial mount call for all data getting functions
   componentDidMount() {
-    console.log(this.props);
     this.getReactions();
     this.setData();
     this.setMembers();
@@ -257,6 +259,7 @@ class ProjectPage extends React.Component {
     this.setMembership();
   }
 
+  //updates the projectpage if the url match changes, so we can easily swap between projects without having to reload the page
   componentDidUpdate(prevProps) {
     if (this.props.match.params.projectid !== prevProps.match.params.projectid) {
       this.getReactions();

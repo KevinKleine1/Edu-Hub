@@ -3,6 +3,8 @@ import {Route, Link} from 'react-router-dom';
 import {Breadcrumb, BreadcrumbItem} from 'reactstrap';
 import routes from '../../routes';
 
+//TODO Make the Breadcrumb routing better
+
 const findRouteName = url => routes[url];
 
 const getPaths = (pathname) => {

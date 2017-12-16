@@ -81,11 +81,6 @@ class HeaderDropdown extends React.Component {
     return new Date().getTime() < expiresAt;
   }
 
-  newLogin() {
-    const auth = new Auth(); //deprecated, will be removed in later versions
-    auth.login();
-  }
-
   // function to show the login modal
   lockLogin() {
     lock.show();
@@ -108,8 +103,6 @@ class HeaderDropdown extends React.Component {
   //drops the header nav
   dropAccnt() {
     const logged = this.isAuthenticated();
-
-    //change the logged states when database is connected
     return (<Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle} nav={true}>
       <DropdownToggle nav= {true }>
 

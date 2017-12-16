@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import loading from './loading.svg';
 
+//Callback page with a loading icon
+
 class Callback extends Component {
   render() {
     const style = {

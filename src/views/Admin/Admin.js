@@ -12,6 +12,8 @@ import {
 import jwt from 'jsonwebtoken';
 import 'whatwg-fetch'
 
+//Admin class which is used to change the own profile datas
+
 class Admin extends Component {
 
   state = {
@@ -52,8 +54,11 @@ class Admin extends Component {
     imagePreviewUrl: ''
   };
 
+  //handler for change events in the textfields
   handleChange = (e, {name, value}) => this.setState({[name]: value})
 
+
+  //handler for the image change, if a new one is uploaded
   _handleImageChange(e) {
     e.preventDefault();
 
@@ -67,12 +72,12 @@ class Admin extends Component {
     reader.readAsDataURL(file)
   }
 
+  //function retrieves the actual data from the db to display them as current values
   setData() {
     var decoded = jwt.decode(localStorage.getItem('id_token')); //decoder for JWT Token
     localStorage.setItem('email', decoded.email);
-
-    //var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      dev
-    var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email')) //prod
+                                
+    var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email')) 
     fetch(target).then((results) => {
       return results.json();
 
@@ -91,6 +96,7 @@ class Admin extends Component {
     })
   }
 
+  //Checks if the fields fit the requirements for the input
   validate = () => {
     let isError = false;
     const errors = {
@@ -124,7 +130,7 @@ class Admin extends Component {
     }
     return isError;
   };
-
+//submit function which checks if a field is used and only then pushes the changes as new data in the db
   onSubmit() {
     const {
       VornameAlt,
@@ -224,6 +230,7 @@ class Admin extends Component {
     localStorage.setItem("name", Vorname);
   }
 
+  //the called function for the button which includes validation and data setting
   handleSubmit() {
 
     const err = this.validate();
@@ -252,10 +259,11 @@ class Admin extends Component {
     }
   }
 
+  //inital call after the component rendered so the data is displayed
   componentDidMount() {
     this.setData();
   }
-
+//goback
   goBack() {
     history.go(-1);
   }
