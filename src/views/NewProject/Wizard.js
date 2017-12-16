@@ -40,6 +40,15 @@ class Wizard extends Component {
     else if (this.state.value ==="option3"){
     this.setState({activeIndex: 3});
     }
+    if(this.state.activeIndex =="1"){
+    this.setState({activeIndex: (this.state.activeIndex + 3)});
+    }
+    else if (this.state.activeIndex =="2"){
+      this.setState({activeIndex: (this.state.activeIndex + 2)});
+    }
+    else if (this.state.activeIndex =="3"){
+      this.setState({activeIndex: (this.state.activeIndex + 1)});
+    }
   };
 
 
