@@ -1,3 +1,5 @@
+//Variables for the authentication service
+
 export const AUTH_CONFIG = {
   domain: 'kevkle.eu.auth0.com',
   clientId: 'TAzP3VaJ1PJgDR2S5zTV0c4inUpt9A9J',

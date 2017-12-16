@@ -91,6 +91,7 @@ class ProjectPage extends React.Component {
     })
   }
 
+  //creates the nodes for our timeline
   createNode(node) {
     return <TimelineComponent name={node.project_name} authorname={node.surname} authorvorname={node.forename} authormail={node.email} text={node.project_text} userid={node.userid} projectid={node.projectid} key={node.projectid}/>;
   }
@@ -101,6 +102,7 @@ class ProjectPage extends React.Component {
 
   }
 
+  //creates the user cards to check who in in the projcet
   createCard(card) {
     return <UserCard vorname={card.forename} nachname={card.surname} description={card.user_description} usermail={card.email} id={card.userid} key={card.userid}/>;
   }
@@ -127,15 +129,17 @@ class ProjectPage extends React.Component {
 
     })
   }
-   //fetching the corresponding data from the server to display it on the webpage
-   setUser() {
+  //fetching the corresponding data from the server to display it on the webpage
+  setUser() {
     var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))
     fetch(target).then((results) => {
       return results.json();
 
     }).then((json) => {
 
-      this.setState({NutzerId: json[0].userid}, function(){
+      this.setState({
+        NutzerId: json[0].userid
+      }, function() {
         localStorage.setItem('userid', this.state.NutzerId);
       });
     })
@@ -157,39 +161,38 @@ class ProjectPage extends React.Component {
     })
   }
 
-  setMembership(){
+  setMembership() {
     var target = ('http://edu-hub-backend.azurewebsites.net/useraddsproject/amIMember/' + localStorage.getItem('projectid') + '/' + localStorage.getItem('userid'))
     fetch(target).then((results) => {
       return results.json();
 
     }).then((json) => {
 
-      if(json.response == 1){
-      this.setState({joined: false}, function(){
-       
-    
-      });
-    } else if(json.response == 0 ){
-      this.setState({joined: true}, function(){
-      
-      });
-    }
+      if (json.response == 1) {
+        this.setState({
+          joined: false
+        }, function() {});
+      } else if (json.response == 0) {
+        this.setState({
+          joined: true
+        }, function() {});
+      }
     })
   }
 
-  
   //handles the click on the toggle (join/leave) Button
   handleClick = () => this.setState({
-    joined: !this.state.joined, function(){
-    }
+    joined: !this.state.joined,
+    function() {}
   })
-  
-  handleJoin(){
+
+  //checks if the user is a member of the project or not and the calls the correct function to either leave the project or join it
+  handleJoin() {
 
     var joined = this.state.joined;
-    if(joined){
+    if (joined) {
       this.joinProject();
-    }else {
+    } else {
       this.leaveProject();
     }
     this.handleClick();
@@ -197,78 +200,75 @@ class ProjectPage extends React.Component {
     this.setState({key: Math.random()});
   }
 
-
-  joinProject(){
+  joinProject() {
     var user = localStorage.getItem('userid');
     var project = localStorage.getItem('projectid');
 
-    fetch(  'http://edu-hub-backend.azurewebsites.net/useraddsproject/beMember' , {                                            
+    fetch('http://edu-hub-backend.azurewebsites.net/useraddsproject/beMember', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        uhp_iduser: user,
-        uhp_idproject: project
-      })
-    }).then((response) =>{
+      body: JSON.stringify({uhp_iduser: user, uhp_idproject: project})
+    }).then((response) => {
       return response.json();
 
-      }).then((json)=>{
-          this.setState({key: Math.random()}, function(){
-            this.setMembers();
-            this.getReactions();
-          });
-          });
-    
+    }).then((json) => {
+      this.setState({
+        key: Math.random()
+      }, function() {
+        this.setMembers();
+        this.getReactions();
+      });
+    });
+
   }
 
-  leaveProject(){
+  leaveProject() {
     var user = localStorage.getItem('userid');
     var project = localStorage.getItem('projectid');
     var form = new FormData();
-       form.append('uhp_iduser', user);
-       form.append('uhp_idproject', project);
-   return fetch(
-      'http://edu-hub-backend.azurewebsites.net/useraddsproject/cancelMembership', {                                            
-             method: 'delete',
-             headers: {
-              'Accept': 'application/json, */*',
-             },
-             body: form
-            }).then((response) =>{
-              return response.json();
-        
-              }).then((json)=>{
-                  this.setState({key: Math.random()}, function(){
-                    this.setMembers();
-                    this.getReactions();
-                  });
-                  });
-      
+    form.append('uhp_iduser', user);
+    form.append('uhp_idproject', project);
+    return fetch('http://edu-hub-backend.azurewebsites.net/useraddsproject/cancelMembership', {
+      method: 'delete',
+      headers: {
+        'Accept': 'application/json, */*'
+      },
+      body: form
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+      this.setState({
+        key: Math.random()
+      }, function() {
+        this.setMembers();
+        this.getReactions();
+      });
+    });
+
+  }
+  //initial mount call for all data getting functions
+  componentDidMount() {
+    this.getReactions();
+    this.setData();
+    this.setMembers();
+    this.setUser();
+    this.setMembership();
   }
 
-  componentDidMount() {
-    console.log(this.props);
-    this.getReactions();
-    this.setData();
-    this.setMembers();
-    this.setUser();
-    this.setMembership();
-  }
- 
-  componentDidUpdate(prevProps){
-    if(this.props.match.params.projectid !== prevProps.match.params.projectid){
-    this.getReactions();
-    this.setData();
-    this.setMembers();
-    this.setUser();
-    this.setMembership();
+  //updates the projectpage if the url match changes, so we can easily swap between projects without having to reload the page
+  componentDidUpdate(prevProps) {
+    if (this.props.match.params.projectid !== prevProps.match.params.projectid) {
+      this.getReactions();
+      this.setData();
+      this.setMembers();
+      this.setUser();
+      this.setMembership();
     }
   }
-
-  
 
   //formats date
   formatDate(date_unformatted) {
@@ -317,8 +317,7 @@ class ProjectPage extends React.Component {
 
     //content of info modal
     const infoModal = <div className="container">
-      bla bla bla bla bla bla
-      mehr bla bla bla bla bla bla
+      bla bla bla bla bla bla mehr bla bla bla bla bla bla
     </div>
 
     //tabs for edit modal

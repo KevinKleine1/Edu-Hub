@@ -27,6 +27,8 @@ export default class Auth {
     this.auth0.authorize();
   }
 
+
+  // catches the answered access token and sets the data for the session
   handleAuthentication() {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {

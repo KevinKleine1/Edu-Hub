@@ -1,5 +1,5 @@
 import createHistory from 'history/createBrowserHistory'
 
-//delete in the future if the we stick with the normal react-router
+//keep here or program ded
 
 export default createHistory()

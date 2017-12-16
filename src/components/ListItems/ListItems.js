@@ -2,12 +2,16 @@ import React, { Component, Border } from 'react'
 import {Container, Segment, Card, Grid, Image, Header, Form, Icon, Button, Comment, Statistic, Label, List} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 
+//Class for the creation of Projectlinks in the userpages
+
 export default class ListItems extends Component {
 
 constructor(props) {
     super(props);
 }
 
+
+//formats the date string we get from the sql timestamp to a useable view
 formatDate(date_unformatted){
     var day = date_unformatted.substr(8, 2);
     var month = date_unformatted.substr(5, 2);
@@ -19,8 +23,6 @@ formatDate(date_unformatted){
 
   render() {
   var Erstellt = this.formatDate(this.props.erstellt);
-
-
     return (
 <Link to={{pathname: '/projectpage/' + this.props.link }}>
      <List.Item>

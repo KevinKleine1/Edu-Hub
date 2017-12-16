@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {TabContent, TabPane, Nav, NavItem, NavLink, Progress, Label, Input} from 'reactstrap';
 import classnames from 'classnames';
 
+//TODO Come up with some function for this part
+
 class Aside extends Component {
   constructor(props) {
     super(props);
