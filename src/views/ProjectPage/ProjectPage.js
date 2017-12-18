@@ -39,6 +39,7 @@ class ProjectPage extends React.Component {
       modalShare: false,
       modalMember: false,
       modalEdit: false,
+      modalChange: false,
       modalInfo: false,
       NutzerId: "",
       Name: "",
@@ -53,6 +54,7 @@ class ProjectPage extends React.Component {
     this.toggleShare = this.toggleShare.bind(this);
     this.toggleMember = this.toggleMember.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
+    this.toggleChange = this.toggleChange.bind(this);
     this.toggleInfo = this.toggleInfo.bind(this);
 
   }
@@ -69,6 +71,11 @@ class ProjectPage extends React.Component {
   toggleEdit() {
     this.setState({
       modalEdit: !this.state.modalEdit
+    });
+  }
+  toggleChange() {
+    this.setState({
+      modalChange: !this.state.modalChange
     });
   }
   toggleInfo() {
@@ -322,6 +329,23 @@ class ProjectPage extends React.Component {
 
     //tabs for edit modal
     const panes = [
+      {
+        menuItem: 'Aktivitätstyp',
+        render: () => <Tab.Pane>
+            <div className="row justify-content-md-center">
+          <Button.Group vertical>
+            <Button style={{width: "300px", height:"170px", background: "#e6f2ff"}} ><h2>Kommentar</h2></Button>
+            <Button style={{width: "300px", height:"170px", background: "#b3d9ff"}}><h2>Termin</h2></Button>
+            <Button style={{width: "300px", height:"170px", background: "#80bfff"}}><h2>Foto</h2></Button>
+        </Button.Group>
+        <Button.Group vertical>
+          <Button style={{width: "300px", height:"170px", background: "#cce6ff" }}><h2>Dokument</h2></Button>
+          <Button style={{width: "300px", height:"170px", background: "#99ccff" }}><h2>Ressourcen</h2></Button>
+          <Button style={{width: "300px", height:"170px", background: "#66b3ff" }}><h2>Tags</h2></Button>
+      </Button.Group>
+    </div>
+        </Tab.Pane>
+      },
 
       {
         menuItem: 'Aktivität',
@@ -329,10 +353,32 @@ class ProjectPage extends React.Component {
             <h3>Neue Aktivität</h3>
             <Form>
               <Form.Field>
-                <label>Was ist die neue Aktivität?</label>
-                <input placeholder='Aktivitäts Titel'/>
-                <Form.Field control={TextArea} label='Worum geht es bei dieser Aktivität' placeholder='Aktivitäts Beschreibung'/>
-                <label>Aktivitätsbeginn</label>
+                <Form.Field style={{
+                    width: "200px"
+                  }} label='Aktivitätstyp' control='select'>
+                  <option value='k'>Kommentar</option>
+                  <option value='t'>Termin</option>
+                  <option value='f'>Foto</option>
+                    <option value='d'>Dokument</option>
+                </Form.Field>
+                <Form.Group><Form.Input placeholder='Aktivitätstitel' style={{
+                    width: "600px"
+                  }}/><br/></Form.Group>
+                <Form.Field control={TextArea} label='Worum geht es bei dieser Aktivität' placeholder='Aktivitätsbeschreibung'/>
+                <label>
+                  <b>Dokument</b>
+                </label>
+                <input type="file" style={{
+                    width: "400px"
+                  }} className="form-control-file" id="exampleFormControlFile1"></input>
+                  <br/><label>
+                <b>Foto</b>
+              </label>
+              <input type="file" style={{
+                  width: "400px"
+                }} className="form-control-file" id="exampleFormControlFile1"></input>
+
+              <label>Aktivitätsbeginn</label>
                 <Form.Input style={{
                     width: "200px"
                   }} type='date' placeholder='Aktivitätsbeginn' icon='calendar' iconPosition='left'/>
@@ -343,20 +389,62 @@ class ProjectPage extends React.Component {
                 <Form.Field label='Ja' control='input' type='radio' name='htmlRadios'/>
               </Form.Group>
             </Form>
-            <br/>
             <div className="row justify-content-md-center">
-              <Button color='green'>
-                <Icon name='checkmark'/>
-                Absenden
-              </Button>
-            </div>
+            <Button animated={true} color='teal' style={{
+                width: "130px"
+              }}>
+              <Button.Content visible={true}>Absenden</Button.Content>
+              <Button.Content hidden={true}>
+                <Icon name='check'/>
+              </Button.Content>
+            </Button>
+          </div>
           </Tab.Pane>
-      }, {
+      }
+    ]
+
+    const tabs = [
+      {
         menuItem: 'Bearbeiten',
-        render: () => <Tab.Pane>Bearbeiten</Tab.Pane>
-      }, {
-        menuItem: 'Fotos',
-        render: () => <Tab.Pane>Lade Fotos für die Gallery hoch</Tab.Pane>
+        render: () => <Tab.Pane>
+        <Form>
+          <h3> Projektdaten Aktualisieren </h3>
+          <Form.Group widths='equal'>
+            <Form.Input placeholder='Titel' icon='user' iconPosition='left'/>
+          </Form.Group>
+          <Form.Group widths='equal'>
+            <Form.TextArea rows={2} placeholder='Projektbeschreibung'/>
+          </Form.Group>
+          <Form.Group widths='equal'>
+            <Form.TextArea rows={2} placeholder='Zielerreichung'/>
+          </Form.Group>
+          <label>
+            <b>Titelbild aktualisieren</b>
+          </label>
+          <input type="file" style={{
+              width: "400px"
+            }} className="form-control-file" id="exampleFormControlFile1"></input>
+          <div className="form-group"><br/>
+            <Form.Field style={{
+                width: "200px"
+              }} label='Privatsphäre' control='select'>
+              <option value='p'>privat</option>
+              <option value='o'>&ouml;ffentlich</option>
+            </Form.Field>
+          </div>
+          <div className="row justify-content-md-center">
+          <Button animated={true} color='teal' style={{
+              width: "130px"
+            }}>
+            <Button.Content visible={true}>Speichern</Button.Content>
+            <Button.Content hidden={true}>
+              <Icon name='check'/>
+            </Button.Content>
+          </Button>
+        </div>
+
+        </Form>
+          </Tab.Pane>
       }
     ]
 
@@ -364,6 +452,10 @@ class ProjectPage extends React.Component {
     const editModal = <div>
       <Tab panes={panes}/>
       <br/></div>
+
+      const changeModal = <div>
+        <Tab panes={tabs}/>
+        <br/></div>
 
     //content of the share modal
     const shareModal = <div className="container">
@@ -399,6 +491,7 @@ class ProjectPage extends React.Component {
         </div>
       </div>
     </div>
+
 
     //images for gallery (need to be generated dynamicly later)
     const IMAGES = [
@@ -514,7 +607,7 @@ class ProjectPage extends React.Component {
                 </Modal>
               </div>
               <div>
-                <Popup content='Füge ein Beitrag hinzu' trigger={<Button circular = {
+                <Popup content='Füge einen Beitrag hinzu' trigger={<Button circular = {
                     true
                   }
                   color = 'grey' icon = 'edit' onClick = {
@@ -528,6 +621,22 @@ class ProjectPage extends React.Component {
                   </ModalBody>
                 </Modal>
               </div>
+              <div>
+                <Popup content='Bearbeite dein Projekt' trigger={<Button circular = {
+                    true
+                  }
+                  color = 'grey' icon = 'setting' onClick = {
+                    this.toggleChange
+                  } />}/>
+                <Modal isOpen={this.state.modalChange} toggle={this.toggleChange} className={this.props.className} size='lg'>
+                  <ModalBody>
+                    <div fluid="fluid">
+                      {changeModal}
+                    </div>
+                  </ModalBody>
+                </Modal>
+              </div>
+
               <div>
                 <Popup content='Informationen zu diesem Projekt' trigger={<Button circular = {
                     true

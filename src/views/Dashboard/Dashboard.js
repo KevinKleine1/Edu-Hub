@@ -100,7 +100,8 @@ class Dashboard extends React.Component {
     const {activeItem} = this.state;
 
     return (<div className="animated fadeIn">
-      <Container fluid={true}>
+<div className="row justify-content-md-center">
+
         <img src='../img/eduhub.png' style={{
             width: "100%",
             height: 'auto'
@@ -115,7 +116,7 @@ class Dashboard extends React.Component {
           <b>registrieren</b>
         </Button>
         <Divider hidden={true}/>
-      </Container>
+    </div>
       <Divider hidden={true}/>
       <div className="container">
         <div className="row justify-content-md-center">
