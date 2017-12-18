@@ -30,8 +30,9 @@ const tableData = [
 class MyProjects extends React.Component {
   state = {
     column: null,
-    data: tableData,
-    direction: null
+    data: [],
+    direction: null,
+    user: ""
   }
   /* formates date from database to readable | currently unused in this view
   formatDate(date_unformatted){
@@ -76,6 +77,34 @@ class MyProjects extends React.Component {
     return day + '. ' + monthNamed + '. ' + year + ' ' + time
   }
 
+  setData() {
+    var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({user: json[0].userid}
+      , function(){
+        this.getProjects();
+      });
+    })
+  }
+
+  getProjects() {
+    var target = ('http://edu-hub-backend.azurewebsites.net/user/getmyproject/' + this.state.user)
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({
+        data: json
+      }, function() {})
+
+    })
+  }
+
   //sorts column
   handleSort = clickedColumn => () => {
     const {column, data, direction} = this.state
@@ -96,6 +125,10 @@ class MyProjects extends React.Component {
         ? 'descending'
         : 'ascending'
     })
+  }
+
+  componentDidMount(){
+    this.setData();
   }
 
   render() {
@@ -129,11 +162,11 @@ class MyProjects extends React.Component {
         </Table.Header>
         <Table.Body>
           {
-            _.map(data, ({ProjektName, Status, Nummer, ZuletztVeraendert}) => (<Table.Row key={Nummer}>
-              <Table.Cell>{Nummer}</Table.Cell>
-              <Table.Cell>{ProjektName}</Table.Cell>
-              <Table.Cell>{Status}</Table.Cell>
-              <Table.Cell>{this.formatDateWithTime(ZuletztVeraendert)}</Table.Cell>
+            _.map(data, ({project_name, project_projecttype, projectid, project_updated_at}) => (<Table.Row key={projectid}>
+              <Table.Cell>{projectid}</Table.Cell>
+              <Table.Cell>{project_name}</Table.Cell>
+              <Table.Cell>{project_projecttype}</Table.Cell>
+              <Table.Cell>{this.formatDateWithTime(project_updated_at)}</Table.Cell>
             </Table.Row>))
           }
         </Table.Body>
