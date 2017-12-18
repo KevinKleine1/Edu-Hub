@@ -329,20 +329,6 @@ class Test2 extends React.Component {
 
     //tabs for edit modal
     const panes = [
-    {  menuItem: 'Typ',
-      render: () => <Tab.Pane>
-<div className="row justify-content-md-center">
-        <Button.Group>
-        <Button style={{width: "200px", height: "100px"}}><h3>Kommentar</h3></Button>
-        <Button style={{width: "200px", height: "100px"}}><h3>Dokument</h3></Button>
-        <Button style={{width: "200px", height: "100px"}}><h3>Termin</h3></Button>
-        </Button.Group><Button.Group>
-          <Button style={{width: "200px", height: "100px"}}><h3>Foto</h3></Button>
-          <Button style={{width: "200px", height: "100px"}}><h3>Ressourcen</h3></Button>
-          <Button style={{width: "200px", height: "100px"}}><h3>Tags</h3></Button>
-        </Button.Group></div>
-        </Tab.Pane>
-    },
 
       {
         menuItem: 'Kommentar',
@@ -350,142 +336,139 @@ class Test2 extends React.Component {
             <Form>
               <Form.Field>
                 <Form.Group><Form.Input placeholder='Titel' style={{
-                    width: "600px"
-                  }}/><br/></Form.Group>
+              width: "600px"
+            }}/><br/></Form.Group>
                 <Form.Field control={TextArea} placeholder='Kommentar einfügen'/>
               </Form.Field>
               <br/>
             </Form>
             <div className="row justify-content-md-center">
-            <Button animated={true} color='teal' style={{
-                width: "130px"
-              }}>
-              <Button.Content visible={true}>Absenden</Button.Content>
-              <Button.Content hidden={true}>
-                <Icon name='check'/>
-              </Button.Content>
-            </Button>
-          </div>
+              <Button animated={true} color='teal' style={{
+                  width: "130px"
+                }}>
+                <Button.Content visible={true}>Absenden</Button.Content>
+                <Button.Content hidden={true}>
+                  <Icon name='check'/>
+                </Button.Content>
+              </Button>
+            </div>
           </Tab.Pane>
-      },
-      {
+      }, {
         menuItem: 'Dokument',
         render: () => <Tab.Pane>
             <Form>
               <Form.Field>
                 <Form.Group><Form.Input placeholder='Titel' style={{
-                    width: "600px"
-                  }}/><br/></Form.Group>
+              width: "600px"
+            }}/><br/></Form.Group>
                 <Form.Field control={TextArea} placeholder='Beschreibung'/>
-                <label>
-                  <b>Dokument hinzufügen</b>
-                </label>
-                <input type="file" style={{
-                    width: "400px"
-                  }} className="form-control-file" id="exampleFormControlFile1"></input>
+                <Form.Field>
+                  <label>
+                    Dokument hinzufügen<Popup trigger={<Icon name = 'question' color = 'grey' />} wide='very' content='Nur .pdf Format erlaubt'/>
+                  </label>
+                  <input type="file" style={{
+                      width: "400px"
+                    }} className="form-control-file" id="exampleFormControlFile1"></input>
+                </Form.Field>
               </Form.Field>
-                <br/>
+              <br/>
             </Form>
             <div className="row justify-content-md-center">
-            <Button animated={true} color='teal' style={{
-                width: "130px"
-              }}>
-              <Button.Content visible={true}>Absenden</Button.Content>
-              <Button.Content hidden={true}>
-                <Icon name='check'/>
-              </Button.Content>
-            </Button>
-          </div>
+              <Button animated={true} color='teal' style={{
+                  width: "130px"
+                }}>
+                <Button.Content visible={true}>Absenden</Button.Content>
+                <Button.Content hidden={true}>
+                  <Icon name='check'/>
+                </Button.Content>
+              </Button>
+            </div>
           </Tab.Pane>
-      },
-      {
+      }, {
         menuItem: 'Termin',
         render: () => <Tab.Pane>
 
             <Form>
               <Form.Field>
                 <Form.Group><Form.Input placeholder='Titel' style={{
-                    width: "600px"
-                  }}/><br/></Form.Group>
+              width: "600px"
+            }}/><br/></Form.Group>
                 <Form.Field control={TextArea} placeholder='Beschreibung'/>
                 <Form.Field>
                   <label>Termin</label><Form.Input style={{
-                    width: "200px"
-                  }} type='date' placeholder='Datum' icon='calendar' iconPosition='left'/></Form.Field>
+              width: "200px"
+            }} type='date' placeholder='Datum' icon='calendar' iconPosition='left'/></Form.Field>
               </Form.Field><br/>
             </Form>
             <div className="row justify-content-md-center">
-            <Button animated={true} color='teal' style={{
-                width: "130px"
-              }}>
-              <Button.Content visible={true}>Absenden</Button.Content>
-              <Button.Content hidden={true}>
-                <Icon name='check'/>
-              </Button.Content>
-            </Button>
-          </div>
+              <Button animated={true} color='teal' style={{
+                  width: "130px"
+                }}>
+                <Button.Content visible={true}>Absenden</Button.Content>
+                <Button.Content hidden={true}>
+                  <Icon name='check'/>
+                </Button.Content>
+              </Button>
+            </div>
           </Tab.Pane>
-      },
-      {
+      }, {
         menuItem: 'Foto',
         render: () => <Tab.Pane>
 
-          <Form>
-            <Form.Field>
-              <Form.Group><Form.Input placeholder='Titel' style={{
-                  width: "600px"
-                }}/><br/></Form.Group>
-              <Form.Field control={TextArea} placeholder='Beschreibung'/>
-              <label>
-                <b>Foto hinzufügen</b>
-              </label>
-              <input type="file" style={{
-                  width: "400px"
-                }} className="form-control-file" id="exampleFormControlFile1"></input>
-            </Form.Field>
+            <Form>
+              <Form.Field>
+                <Form.Group><Form.Input placeholder='Titel' style={{
+              width: "600px"
+            }}/><br/></Form.Group>
+                <Form.Field control={TextArea} placeholder='Beschreibung'/>
+                <label>
+                  Foto hinzufügen
+                </label>
+                <input type="file" style={{
+                    width: "400px"
+                  }} className="form-control-file" id="exampleFormControlFile1"></input>
+              </Form.Field>
               <br/>
-          </Form>
-          <div className="row justify-content-md-center">
-          <Button animated={true} color='teal' style={{
-              width: "130px"
-            }}>
-            <Button.Content visible={true}>Absenden</Button.Content>
-            <Button.Content hidden={true}>
-              <Icon name='check'/>
-            </Button.Content>
-          </Button>
-        </div>
-        </Tab.Pane>
-      },
-      {
+            </Form>
+            <div className="row justify-content-md-center">
+              <Button animated={true} color='teal' style={{
+                  width: "130px"
+                }}>
+                <Button.Content visible={true}>Absenden</Button.Content>
+                <Button.Content hidden={true}>
+                  <Icon name='check'/>
+                </Button.Content>
+              </Button>
+            </div>
+          </Tab.Pane>
+      }, {
         menuItem: 'Ressourcen',
         render: () => <Tab.Pane>
 
             <Form>
               <Form.Field>
 
-                  <Input icon='tags' iconPosition='left' label={{
-                      tag: true,
-                      content: 'Add Tag',
-                      color: 'grey'
-                    }} labelPosition='right' placeholder='Ressourcen'/>
+                <Input icon='tags' iconPosition='left' label={{
+                    tag: true,
+                    content: 'Add Tag',
+                    color: 'grey'
+                  }} labelPosition='right' placeholder='Ressourcen'/>
 
               </Form.Field>
               <br/>
             </Form>
             <div className="row justify-content-md-center">
-            <Button animated={true} color='teal' style={{
-                width: "130px"
-              }}>
-              <Button.Content visible={true}>Absenden</Button.Content>
-              <Button.Content hidden={true}>
-                <Icon name='check'/>
-              </Button.Content>
-            </Button>
-          </div>
+              <Button animated={true} color='teal' style={{
+                  width: "130px"
+                }}>
+                <Button.Content visible={true}>Absenden</Button.Content>
+                <Button.Content hidden={true}>
+                  <Icon name='check'/>
+                </Button.Content>
+              </Button>
+            </div>
           </Tab.Pane>
-      },
-      {
+      }, {
         menuItem: 'Tags',
         render: () => <Tab.Pane>
 
@@ -499,15 +482,15 @@ class Test2 extends React.Component {
               </Form.Field><br/>
             </Form>
             <div className="row justify-content-md-center">
-            <Button animated={true} color='teal' style={{
-                width: "130px"
-              }}>
-              <Button.Content visible={true}>Absenden</Button.Content>
-              <Button.Content hidden={true}>
-                <Icon name='check'/>
-              </Button.Content>
-            </Button>
-          </div>
+              <Button animated={true} color='teal' style={{
+                  width: "130px"
+                }}>
+                <Button.Content visible={true}>Absenden</Button.Content>
+                <Button.Content hidden={true}>
+                  <Icon name='check'/>
+                </Button.Content>
+              </Button>
+            </div>
           </Tab.Pane>
       }
     ]
@@ -516,43 +499,47 @@ class Test2 extends React.Component {
       {
         menuItem: 'Bearbeiten',
         render: () => <Tab.Pane>
-        <Form>
-          <h3> Projektdaten Aktualisieren </h3>
-          <Form.Group widths='equal'>
-            <Form.Input placeholder='Titel' icon='user' iconPosition='left'/>
-          </Form.Group>
-          <Form.Group widths='equal'>
-            <Form.TextArea rows={2} placeholder='Projektbeschreibung'/>
-          </Form.Group>
-          <Form.Group widths='equal'>
-            <Form.TextArea rows={2} placeholder='Zielerreichung'/>
-          </Form.Group>
-          <label>
-            <b>Titelbild aktualisieren</b>
-          </label>
-          <input type="file" style={{
-              width: "400px"
-            }} className="form-control-file" id="exampleFormControlFile1"></input>
-          <div className="form-group"><br/>
-            <Form.Field style={{
-                width: "200px"
-              }} label='Privatsphäre' control='select'>
-              <option value='p'>privat</option>
-              <option value='o'>&ouml;ffentlich</option>
-            </Form.Field>
-          </div>
-          <div className="row justify-content-md-center">
-          <Button animated={true} color='teal' style={{
-              width: "130px"
-            }}>
-            <Button.Content visible={true}>Speichern</Button.Content>
-            <Button.Content hidden={true}>
-              <Icon name='check'/>
-            </Button.Content>
-          </Button>
-        </div>
+            <Form>
+              <h3>
+                Projektdaten Aktualisieren
+              </h3>
+              <Form.Group widths='equal'>
+                <Form.Input placeholder='Titel' icon='user' iconPosition='left'/>
+              </Form.Group>
+              <Form.Group widths='equal'>
+                <Form.TextArea rows={2} placeholder='Projektbeschreibung'/>
+              </Form.Group>
+              <Form.Group widths='equal'>
+                <Form.TextArea rows={2} placeholder='Zielerreichung'/>
+              </Form.Group>
+              <Form.Field>
+                <label>
+                  Titelbild aktualisieren
+                </label>
+                <input type="file" style={{
+                    width: "400px"
+                  }} className="form-control-file" id="exampleFormControlFile1"></input>
+              </Form.Field>
+              <div className="form-group">
+                <Form.Field style={{
+                    width: "200px"
+                  }} label='Privatsphäre' control='select'>
+                  <option value='p'>privat</option>
+                  <option value='o'>&ouml;ffentlich</option>
+                </Form.Field>
+              </div>
+              <div className="row justify-content-md-center">
+                <Button animated={true} color='teal' style={{
+                    width: "130px"
+                  }}>
+                  <Button.Content visible={true}>Speichern</Button.Content>
+                  <Button.Content hidden={true}>
+                    <Icon name='check'/>
+                  </Button.Content>
+                </Button>
+              </div>
 
-        </Form>
+            </Form>
           </Tab.Pane>
       }
     ]
@@ -562,9 +549,9 @@ class Test2 extends React.Component {
       <Tab panes={panes}/>
       <br/></div>
 
-      const changeModal = <div>
-        <Tab panes={tabs}/>
-        <br/></div>
+    const changeModal = <div>
+      <Tab panes={tabs}/>
+      <br/></div>
 
     //content of the share modal
     const shareModal = <div className="container">
@@ -600,7 +587,6 @@ class Test2 extends React.Component {
         </div>
       </div>
     </div>
-
 
     //images for gallery (need to be generated dynamicly later)
     const IMAGES = [
