@@ -249,32 +249,32 @@ class Welcome extends Component {
             <div className="card-text">
               <Form loading={this.state.Laden} error={this.state.Fehler} onSubmit={this.handleSubmit}>
 
-                <Form.Field required="required">
+                <Form.Field required={true}>
                   <label>Vorname</label>
                   <Form.Input name="Vorname" value={Vorname} onChange={this.handleChange} error={this.state.vornameError} placeholder='Vorname'/>
                 </Form.Field>
-                <Form.Field required="required">
+                <Form.Field required={true}>
                   <label>Nachname</label>
                   <Form.Input name="Nachname" value={Nachname} onChange={this.handleChange} error={this.state.nachnameError} placeholder='Nachname'/>
                 </Form.Field>
-                <Form.Field required="required">
+                <Form.Field required={true}>
                   <label>Straße</label>
                   <Form.Input name="Strasse" value={Strasse} onChange={this.handleChange} error={this.state.strasseError} placeholder='Straße'/>
                 </Form.Field>
-                <Form.Field required="required">
+                <Form.Field required={true}>
                   <label>Hausnummer</label>
                   <Form.Input name="Hausnummer" value={Hausnummer} onChange={this.handleChange} error={this.state.hausnummerError} placeholder='Hausnummer'/>
                 </Form.Field>
-                <Form.Field required="required">
+                <Form.Field required={true}>
                   <label>Stadt</label>
                   <Form.Input name="Stadt" value={Stadt} onChange={this.handleChange} error={this.state.stadtError} placeholder='Stadt'/>
                 </Form.Field>
-                <Form.Field required="required">
+                <Form.Field required={true}>
                   <label>Postleitzahl</label>
                   <Form.Input name="Postcode" value={Postcode} onChange={this.handleChange} error={this.state.postcodeError} placeholder='Postleitzahl'/>
                 </Form.Field>
-                <Form.Group inline="inline">
-                  <Form.Field required="required">
+                <Form.Group inline={true}>
+                  <Form.Field required={true}>
                     <label>Interessen</label>
                     <Form.Input name="Fach1" value={Fach1} onChange={this.handleChange} error={this.state.fachError} placeholder='Interesse 1'/>
 
@@ -283,25 +283,25 @@ class Welcome extends Component {
                     <Form.Input name="Fach3" value={Fach3} onChange={this.handleChange} placeholder='Interesse 3'/>
                   </Form.Field>
                 </Form.Group>
-                <Message error="error" header='Fehler bei Eingabe' content='Alle Felder müssen ausgefüllt sein und Hausnummer und PLZ müssen Zahlen sein.'/>
+                <Message error={true} header='Fehler bei Eingabe' content='Alle Felder müssen ausgefüllt sein und Hausnummer und PLZ müssen Zahlen sein.'/>
               </Form>
             </div>
 
             <div className="container">
               <div className="row justify-content-md-center">
-                <Button animated="animated" color='teal' style={{
+                <Button animated={true} color='teal' style={{
                     width: "150px"
                   }} onClick={this.handleSubmit.bind(this)}>
-                  <Button.Content hidden="hidden">speichern</Button.Content>
-                  <Button.Content visible="visible">
+                  <Button.Content hidden={true}>speichern</Button.Content>
+                  <Button.Content visible={true}>
                     <Icon name='check'/>
                   </Button.Content>
                 </Button>
-                <Button animated="animated" color='teal' style={{
+                <Button animated={true} color='teal' style={{
                     width: "150px"
                   }} onClick={this.goBack}>
-                  <Button.Content hidden="hidden">zurück</Button.Content>
-                  <Button.Content visible="visible">
+                  <Button.Content hidden={true}>zurück</Button.Content>
+                  <Button.Content visible={true}>
                     <Icon name='arrow left'/>
                   </Button.Content>
                 </Button>
