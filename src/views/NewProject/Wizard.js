@@ -46,11 +46,24 @@ class Wizard extends Component {
   handleChange = (e, {value}) => this.setState({value})
 
   goBack() {
-    this.setState({
-      activeIndex: (this.state.activeIndex - 1)
-    });
+    if (this.state.value === "option1") {
+      this.setState({activeIndex: 1});
+    } else if (this.state.value === "option2") {
+      this.setState({activeIndex: 2});
+    } else if (this.state.value === "option3") {
+      this.setState({activeIndex: 3});
+    }
+    if(this.state.activeIndex =="1"){
+    this.setState({activeIndex: (this.state.activeIndex - 1)});
+    }
+    else if (this.state.activeIndex =="2"){
+      this.setState({activeIndex: (this.state.activeIndex - 2)});
+    }
+    else if (this.state.activeIndex =="3"){
+      this.setState({activeIndex: (this.state.activeIndex - 3)});
+    }
+  };
 
-  }
   changeTab() {
     if (this.state.value === "option1") {
       this.setState({activeIndex: 1});
@@ -246,7 +259,6 @@ class Wizard extends Component {
                           <Form.Field label='Informatik' control='input' type='checkbox'/>
                           <Form.Field label='Pädagogik' control='input' type='checkbox'/>
                           <Form.Field label='Politik' control='input' type='checkbox'/>
-                          <Form.Field label='Sonstiges' control='input' type='checkbox'/>
                         </Form.Group>
                       </Table.Cell>
                     </Table.Row>
@@ -303,7 +315,6 @@ class Wizard extends Component {
                           <Form.Field label='Stunde' control='input' type='checkbox'/>
                           <Form.Field label='Doppelstunde' control='input' type='checkbox'/>
                           <Form.Field label='Flexibel  ' control='input' type='checkbox'/>
-                          <Form.Field label='Sonstiges' control='input' type='checkbox'/>
                         </Form.Group>
                       </Table.Cell>
                     </Table.Row>
@@ -396,7 +407,6 @@ class Wizard extends Component {
                           <Form.Field label='Tage' control='input' type='checkbox'/>
                           <Form.Field label='Wochen' control='input' type='checkbox'/>
                           <Form.Field label='Monate' control='input' type='checkbox'/>
-                          <Form.Field label='Sonstiges' control='input' type='checkbox'/>
                         </Form.Group>
 
                       </Table.Cell>
@@ -465,9 +475,8 @@ class Wizard extends Component {
                           <Form.Field label='Schulische Ausstatung' control='input' type='checkbox'/>
                           <Form.Field label='IT, technischer Support' control='input' type='checkbox'/>
                           <Form.Field label='Verpflegung in der Schule' control='input' type='checkbox'/>
-                          <Form.Field label='Finazierung' control='input' type='checkbox'/>
+                          <Form.Field label='Finanzierung' control='input' type='checkbox'/>
                           <Form.Field label='Soziales Engagement' control='input' type='checkbox'/>
-                          <Form.Field label='Sonstiges' control='input' type='checkbox'/>
                         </Form.Group>
 
                       </Table.Cell>
