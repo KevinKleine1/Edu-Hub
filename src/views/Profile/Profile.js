@@ -33,7 +33,7 @@ class Profile extends React.Component {
 
   //calls db for a fetch of the user data
   setData() {
-    var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))
+    var target = ('http://backend-edu.azurewebsites.net/user/' + localStorage.getItem('email'))
     fetch(target).then((results) => {
       return results.json();
 
@@ -88,7 +88,7 @@ class Profile extends React.Component {
           <Segment vertical={true} style={{
               width: "800px"
             }}>
-            <img className="img-circle" src={ 'http://edu-hub-backend.azurewebsites.net/' +  localStorage.getItem('picture') } style={{
+            <img className="img-circle" src={ 'http://backend-edu.azurewebsites.net/' +  localStorage.getItem('picture') } style={{
                 width: "200px"
               }} align="right"></img>
             <Header as='h2'>

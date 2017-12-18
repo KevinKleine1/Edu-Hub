@@ -85,7 +85,7 @@ class Test2 extends React.Component {
   }
 
   getReactions() {
-    var target = ('http://edu-hub-backend.azurewebsites.net/project/getReactions/' + this.props.match.params.projectid)
+    var target = ('http://backend-edu.azurewebsites.net/project/getReactions/' + this.props.match.params.projectid)
     fetch(target).then((results) => {
       return results.json();
 
@@ -122,7 +122,7 @@ class Test2 extends React.Component {
 
   //fetching the corresponding data from the server to display it on the webpage
   setData() {
-    var target = ('http://edu-hub-backend.azurewebsites.net/project/' + this.props.match.params.projectid)
+    var target = ('http://backend-edu.azurewebsites.net/project/' + this.props.match.params.projectid)
     fetch(target).then((results) => {
       return results.json();
 
@@ -138,7 +138,7 @@ class Test2 extends React.Component {
   }
   //fetching the corresponding data from the server to display it on the webpage
   setUser() {
-    var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))
+    var target = ('http://backend-edu.azurewebsites.net/user/' + localStorage.getItem('email'))
     fetch(target).then((results) => {
       return results.json();
 
@@ -155,7 +155,7 @@ class Test2 extends React.Component {
   //fetching the corresponding data from the server to display it on the webpage
   setMembers() {
     localStorage.setItem('projectid', this.props.match.params.projectid);
-    var target = ('http://edu-hub-backend.azurewebsites.net/project/members/' + this.props.match.params.projectid)
+    var target = ('http://backend-edu.azurewebsites.net/project/members/' + this.props.match.params.projectid)
     fetch(target).then((results) => {
       return results.json();
 
@@ -169,7 +169,7 @@ class Test2 extends React.Component {
   }
 
   setMembership() {
-    var target = ('http://edu-hub-backend.azurewebsites.net/useraddsproject/amIMember/' + localStorage.getItem('projectid') + '/' + localStorage.getItem('userid'))
+    var target = ('http://backend-edu.azurewebsites.net/useraddsproject/amIMember/' + localStorage.getItem('projectid') + '/' + localStorage.getItem('userid'))
     fetch(target).then((results) => {
       return results.json();
 
@@ -211,7 +211,7 @@ class Test2 extends React.Component {
     var user = localStorage.getItem('userid');
     var project = localStorage.getItem('projectid');
 
-    fetch('http://edu-hub-backend.azurewebsites.net/useraddsproject/beMember', {
+    fetch('http://backend-edu.azurewebsites.net/useraddsproject/beMember', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -238,7 +238,7 @@ class Test2 extends React.Component {
     var form = new FormData();
     form.append('uhp_iduser', user);
     form.append('uhp_idproject', project);
-    return fetch('http://edu-hub-backend.azurewebsites.net/useraddsproject/cancelMembership', {
+    return fetch('http://backend-edu.azurewebsites.net/useraddsproject/cancelMembership', {
       method: 'delete',
       headers: {
         'Accept': 'application/json, */*'
@@ -677,7 +677,7 @@ class Test2 extends React.Component {
           </Grid.Column>
           <Grid.Column width={3}>
             <br/>
-            <div className="projektfoto"><Image src={'http://edu-hub-backend.azurewebsites.net/' + this.state.Bild} size='medium' bordered={true} circular={true}/><br/></div>
+            <div className="projektfoto"><Image src={'http://backend-edu.azurewebsites.net/' + this.state.Bild} size='medium' bordered={true} circular={true}/><br/></div>
             <div className="row justify-content-md-center">
               <div>
                 <Popup content='Füge dieses Projekt deinen Favoriten hinzu' trigger={<Button circular = {

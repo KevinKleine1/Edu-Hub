@@ -51,7 +51,7 @@ export default class Auth {
     localStorage.setItem('email', decoded.email);
 
     //var target = ('http://localhost:8000/user/' + localStorage.getItem('email'))                                      //dev
-    var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
+    var target = ('http://backend-edu.azurewebsites.net/user/' + localStorage.getItem('email'))                   //prod
     fetch(target)
 
       .then((results) =>{

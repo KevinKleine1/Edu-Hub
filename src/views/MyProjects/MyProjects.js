@@ -78,7 +78,7 @@ class MyProjects extends React.Component {
   }
 
   setData() {
-    var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email'))
+    var target = ('http://backend-edu.azurewebsites.net/user/' + localStorage.getItem('email'))
     fetch(target).then((results) => {
       return results.json();
 
@@ -92,7 +92,7 @@ class MyProjects extends React.Component {
   }
 
   getProjects() {
-    var target = ('http://edu-hub-backend.azurewebsites.net/user/getmyproject/' + this.state.user)
+    var target = ('http://backend-edu.azurewebsites.net/user/getmyproject/' + this.state.user)
     fetch(target).then((results) => {
       return results.json();
 

@@ -33,7 +33,8 @@ class Wizard extends Component {
     this.state = {
       dropdownOpen: false,
       activeIndex: 0,
-      selectedOption: 'option1'
+      selectedOption: 'option1',
+      
     };
   }
 

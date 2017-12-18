@@ -59,7 +59,7 @@ class Test extends React.Component {
   }
 
   getProjects(){
-    var target = ('http://edu-hub-backend.azurewebsites.net/project/')               
+    var target = ('http://backend-edu.azurewebsites.net/project/')               
     fetch(target)
 
       .then((results) =>{

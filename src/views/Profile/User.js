@@ -38,7 +38,7 @@ class User extends Component {
 
   //fetching the corresponding data from the server to display it on the webpage
   setData() {
-    var target = ('http://edu-hub-backend.azurewebsites.net/user/' + this.props.match.params.usermail)
+    var target = ('http://backend-edu.azurewebsites.net/user/' + this.props.match.params.usermail)
     fetch(target).then((results) => {
       return results.json();
 
@@ -87,7 +87,7 @@ class User extends Component {
 
   //set the projects of the user you are watching
   getProjects() {
-    var target = ('http://edu-hub-backend.azurewebsites.net/user/getmyproject/' + this.props.location.state.userid)
+    var target = ('http://backend-edu.azurewebsites.net/user/getmyproject/' + this.props.location.state.userid)
     fetch(target).then((results) => {
       return results.json();
 
@@ -207,7 +207,7 @@ class User extends Component {
           <Grid.Column width={3}>
             <div className="container">
               <div className="row justify-content-md-center">
-                <img className="img-circle" src={'http://edu-hub-backend.azurewebsites.net/' + Bild} align="center" style={{
+                <img className="img-circle" src={'http://backend-edu.azurewebsites.net/' + Bild} align="center" style={{
                     width: "200px",
                     height: "200px"
                   }}></img>

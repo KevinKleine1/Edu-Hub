@@ -77,7 +77,7 @@ class Admin extends Component {
     var decoded = jwt.decode(localStorage.getItem('id_token')); //decoder for JWT Token
     localStorage.setItem('email', decoded.email);
                                 
-    var target = ('http://edu-hub-backend.azurewebsites.net/user/' + localStorage.getItem('email')) 
+    var target = ('http://backend-edu.azurewebsites.net/user/' + localStorage.getItem('email')) 
     fetch(target).then((results) => {
       return results.json();
 
@@ -199,7 +199,7 @@ class Admin extends Component {
       Fach3 = this.state.Fach3;
     }
 
-    fetch('http://edu-hub-backend.azurewebsites.net/user/', {
+    fetch('http://backend-edu.azurewebsites.net/user/', {
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -285,7 +285,7 @@ class Admin extends Component {
     if (imagePreviewUrl) {
       $imagePreview = (<img className="img-circle" src={imagePreviewUrl}/>);
     } else {
-      $imagePreview = (<img className="img-circle" src={'http://edu-hub-backend.azurewebsites.net/' + localStorage.getItem('picture')}/>);
+      $imagePreview = (<img className="img-circle" src={'http://backend-edu.azurewebsites.net/' + localStorage.getItem('picture')}/>);
     }
     return (<div className="container">
       <div className="row justify-content-md-center">

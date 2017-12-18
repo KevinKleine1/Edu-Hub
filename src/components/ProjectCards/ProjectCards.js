@@ -52,7 +52,7 @@ class ProjectCards extends React.Component {
 
     return (<Grid.Column>
       <Card>
-        <Image src={'http://edu-hub-backend.azurewebsites.net/' + this.props.bild}/>
+        <Image src={'http://backend-edu.azurewebsites.net/' + this.props.bild}/>
         <Card.Content>
           <Card.Header>
             {title}
