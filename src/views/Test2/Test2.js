@@ -23,7 +23,6 @@ import 'whatwg-fetch'
 
 const auth = new Auth();
 
-
 class Test2 extends React.Component {
 
   constructor(props) {
@@ -33,18 +32,15 @@ class Test2 extends React.Component {
       activeItem: '',
       dropdownOpen: false,
       activeItem: "Kernprojekte",
-      Data: [],
-
+      Data: []
     };
 
     this.toggle = this.toggle.bind(this);
   }
 
-
   createImage(image) {
-  return <ProjectCards name={image.project_name} members={image.project_membercount} text={image.project_text} bild={image.project_imagepath} erstellt={image.project_created_at} link={image.projectid}  key={image.projectid} />;
+    return <ProjectCards name={image.project_name} members={image.project_membercount} text={image.project_text} bild={image.project_imagepath} erstellt={image.project_created_at} link={image.projectid} key={image.projectid}/>;
   }
-
 
   createImages(images, start, end) {
     var Plist = images.slice(start, end)
@@ -60,30 +56,27 @@ class Test2 extends React.Component {
     });
   }
 
-  getProjects(){
+  getProjects() {
     var target = ('http://edu-hub-backend.azurewebsites.net/project/')
-    fetch(target)
+    fetch(target).then((results) => {
+      return results.json();
 
-      .then((results) =>{
-        return results.json();
+    }).then((json) => {
 
-        }).then((json)=>{
+      this.setState({
+        Data: json
+      }, function() {
+        this.setState({
+          Id: this.state.Data.map((elem) => elem.projectid)
+        }, function() {});
+      })
 
-          this.setState(
-            {Data: json},
-            function () {
-               this.setState({Id: this.state.Data.map((elem) => elem.projectid)},
-             function(){
-                });
-              }
-            )
-
-            })
+    })
   }
 
   newProject() {
-      history.replace('/wizard1');
-    }
+    history.replace('/wizard1');
+  }
 
   isAuthenticated() {
     // Check whether the current time is past the
@@ -92,7 +85,7 @@ class Test2 extends React.Component {
     return new Date().getTime() < expiresAt;
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.getProjects();
 
   }
@@ -101,37 +94,42 @@ class Test2 extends React.Component {
     const logged = this.isAuthenticated();
     const {activeItem} = this.state;
 
-    return (
-      <div className="animated fadeIn">
-          <Container fluid>
-
-          <img src='../img/eduhub.png' style={{ width: "100%", height: 'auto'}} />
-        <Button basic color='grey' style={{
-          position: 'absolute',
-          left: '324px',
-          top: '470px',
-        }}><b>registrieren</b></Button>
-          <Divider hidden/>
-        </Container>
-        <Divider hidden/>
-            <div className="container">
-              <div className="row justify-content-md-center">
-              <Grid doubling columns={4} divided='vertically'>
-                <Header as='h2' color='grey' floated='left'>
-                   Projekte entdecken
-                 </Header>
-                <Grid.Row>
-                {this.createImages(this.state.Data,0,4)}
-                </Grid.Row>
-              </Grid>
-              <Grid doubling columns={4} divided='vertically'>
-                <Grid.Row>
-                {this.createImages(this.state.Data,4,8)}
-                </Grid.Row>
-              </Grid>
-              </div>
-            </div>
-          </div>);
+    return (<div className="animated fadeIn">
+      <Container fluid="fluid">
+        <img src='../img/eduhub.png' style={{
+            width: "100%",
+            height: 'auto'
+          }}/>
+        <Button basic="basic" color='grey' style={{
+            position: 'absolute',
+            width: '15%',
+            height: 'auto',
+            left: '324px',
+            top: '470px'
+          }}>
+          <b>registrieren</b>
+        </Button>
+        <Divider hidden="hidden"/>
+      </Container>
+      <Divider hidden="hidden"/>
+      <div className="container">
+        <div className="row justify-content-md-center">
+          <Grid doubling="doubling" columns={4} divided='vertically'>
+            <Header as='h2' color='grey' floated='left'>
+              Projekte entdecken
+            </Header>
+            <Grid.Row>
+              {this.createImages(this.state.Data, 0, 4)}
+            </Grid.Row>
+          </Grid>
+          <Grid doubling="doubling" columns={4} divided='vertically'>
+            <Grid.Row>
+              {this.createImages(this.state.Data, 4, 8)}
+            </Grid.Row>
+          </Grid>
+        </div>
+      </div>
+    </div>);
   }
 }
 

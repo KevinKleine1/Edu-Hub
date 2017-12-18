@@ -13,14 +13,14 @@ import {
   Message,
   Input,
   Menu,
-  Segment
+  Segment,
+  Divider
 } from 'semantic-ui-react';
 import Welcome from '../Pages/Welcome/Welcome';
 import ProjectCards from '../../components/ProjectCards/ProjectCards';
 import 'whatwg-fetch'
 
 const auth = new Auth();
-
 
 //dashboard class where we can see up to date project and which is in general our landing page
 class Dashboard extends React.Component {
@@ -37,7 +37,6 @@ class Dashboard extends React.Component {
 
     this.toggle = this.toggle.bind(this);
   }
-
 
   //Class to create a new project card with all the necessary data
   createImage(image) {
@@ -61,7 +60,7 @@ class Dashboard extends React.Component {
     });
   }
 
-  //fetch call to get all projects we have available atm TODO: Remove subprojects, make it dynamically, have some kind of sorting 
+  //fetch call to get all projects we have available atm TODO: Remove subprojects, make it dynamically, have some kind of sorting
   getProjects() {
     var target = ('http://edu-hub-backend.azurewebsites.net/project/')
     fetch(target).then((results) => {
@@ -80,7 +79,6 @@ class Dashboard extends React.Component {
     })
   }
 
-  
   newProject() {
     history.replace('/wizard1');
   }
@@ -102,62 +100,38 @@ class Dashboard extends React.Component {
     const {activeItem} = this.state;
 
     return (<div className="animated fadeIn">
+      <Container fluid={true}>
+        <img src='../img/eduhub.png' style={{
+            width: "100%",
+            height: 'auto'
+          }}/>
+        <Button basic={true} color='grey' style={{
+            position: 'absolute',
+            width: '15%',
+            height: 'auto',
+            left: '324px',
+            top: '470px'
+          }}>
+          <b>registrieren</b>
+        </Button>
+        <Divider hidden={true}/>
+      </Container>
+      <Divider hidden={true}/>
       <div className="container">
         <div className="row justify-content-md-center">
-          <div>
-            <div className="container">
-              <div className="row justify-content-md-center">
-                <Menu attached='top' tabular={true} size="large">
-                  <Menu.Item color='teal' name='Kernprojekte' active={activeItem === 'Kernprojekte'} onClick={this.handleItemClick}/>
-                  <Menu.Item color='teal' name='Unterstützende Projekte' active={activeItem === 'Unterstützende Projekte'} onClick={this.handleItemClick}/>
-                  <Menu.Item color='teal' name='Administrative Projekte' active={activeItem === 'Administrative Projekte'} onClick={this.handleItemClick}/>
-                  <Menu.Menu position='right'>
-                    <Menu.Item>
-                      <Input transparent={true} icon={{
-                          name: 'search',
-                          link: true
-                        }} placeholder='Projekt suchen...'/>
-                    </Menu.Item>
-                  </Menu.Menu>
-                </Menu>
-                <br/>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div className="container">
-              <div className="row justify-content-md-center">
-                <br/>
-                <Card style={{
-                    height: "100px",
-                    width: "800px"
-                  }}>
-                  <Card.Content>
-                    <Card.Header>Edu Hub von & für Lehrer</Card.Header>
-                    <Card.Meta>Plattform für LehrerInnen</Card.Meta>
-                    <Card.Description>
-                      <b>Nach Projekten suchen, erstellen & gemeinsam entwickeln</b>
-                    </Card.Description>
-                  </Card.Content>
-                </Card>
-                <br/>
-              </div>
-            </div>
-          </div>
-          <div className="container">
-            <div className="row justify-content-md-center">
-              <Grid doubling={true} columns={4} divided='vertically'>
-                <Grid.Row>
-                  {this.createImages(this.state.Data, 0, 4)}
-                </Grid.Row>
-              </Grid>
-              <Grid doubling={true} columns={4} divided='vertically'>
-                <Grid.Row>
-                  {this.createImages(this.state.Data, 4, 8)}
-                </Grid.Row>
-              </Grid>
-            </div>
-          </div>
+          <Grid doubling={true} columns={4} divided='vertically'>
+            <Header as='h2' color='grey' floated='left'>
+              Projekte entdecken
+            </Header>
+            <Grid.Row>
+              {this.createImages(this.state.Data, 0, 4)}
+            </Grid.Row>
+          </Grid>
+          <Grid doubling={true} columns={4} divided='vertically'>
+            <Grid.Row>
+              {this.createImages(this.state.Data, 4, 8)}
+            </Grid.Row>
+          </Grid>
         </div>
       </div>
     </div>);
