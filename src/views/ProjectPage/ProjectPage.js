@@ -50,7 +50,8 @@ class ProjectPage extends React.Component {
       Members: [],
       ProjectID: "",
       title: "",
-      description: ""
+      description: "",
+      Laden: false
 
     };
     this.toggleShare = this.toggleShare.bind(this);
@@ -180,9 +181,11 @@ class ProjectPage extends React.Component {
     }).then((json) => {
       this.setState({key: Math.random()}, function(){
         this.setData();
+        this.setState({Laden: false});
+        this.toggleChange();
       });
     });
-    this.toggleChange();
+    
   }
 
   changeDescription(){
@@ -204,9 +207,11 @@ class ProjectPage extends React.Component {
     }).then((json) => {
       this.setState({key: Math.random()}, function(){
         this.setData();
+        this.setState({Laden: false});
+        this.toggleChange();
       });
     });
-    this.toggleChange();
+    
   }
 
   changePicture(){
@@ -259,12 +264,17 @@ class ProjectPage extends React.Component {
   }
 
   handleProject(){
+    this.setState({Laden: true});
     if(this.state.title.length > 0){
       this.changeTitle();
     }
     if(this.state.description.length > 0){
       this.changeDescription();
     }
+    this.setState({
+      title: "",
+      description: ""
+    })
   }
 
   //handles the click on the toggle (join/leave) Button
@@ -615,7 +625,7 @@ class ProjectPage extends React.Component {
                 </Form.Field>
               </div>
               <div className="row justify-content-md-center">
-                <Button onClick={this.handleProject} animated={true} color='teal' style={{
+                <Button loading={this.state.Laden} onClick={this.handleProject} animated={true} color='teal' style={{
                     width: "130px"
                   }}>
                   <Button.Content visible={true}>Speichern</Button.Content>
