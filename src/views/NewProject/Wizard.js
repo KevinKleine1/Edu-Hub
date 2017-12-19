@@ -34,7 +34,78 @@ class Wizard extends Component {
       dropdownOpen: false,
       activeIndex: 0,
       selectedOption: 'option1',
-      
+      lehrundlernProjekt: true,
+      managementProjekt: false,
+      unterstuetzendesProjekt: false,
+      SuchenVerarbeitenundAufbewahren: false,
+      KommunizierenundKooperieren: false,
+      ProduzierenundPräsentieren: false,
+      Schützenundsicheragieren: false,
+      ProblemelösenundHandeln: false,
+      AnalysierenundReflektieren: false,
+      KitaVorschule: false,
+      Grundschule: false,
+      Sekundarstufe1: false,
+      Sekundarstufe2: false,
+      HoehereHandelschule: false,
+      Handelschule: false,
+      Sprachen: false,
+      KulturelleBildung: false,
+      GeschichteGesellschaft: false,
+      Naturwissenschaften: false,
+      InformatiktechnischeBildung: false,
+      Mathematik: false,
+      Deutsch: false,
+      Englisch: false,
+      Physik: false,
+      Chemie: false,
+      Erdkunde: false,
+      Sport: false,
+      Kunst: false,
+      Französisch: false,
+      Spanisch: false,
+      Italienisch: false,
+      Bwl: false,
+      Vwl: false,
+      Informatik: false,
+      Pädagogik: false,
+      Politik: false,
+      KeinInternet: false,
+      PCLaptop: false,
+      TabletSmartphone: false,
+      HardwareBasteln: false,
+      VideosFilme: false,
+      Unterrichstreihe: false,
+      Stunde: false,
+      Doppelstunde: false,
+      Flexibel: false,
+      Klasse: false,
+      Schule: false,
+      Fachlich: false,
+      Lehrer: false,
+      Elternvertretung: false,
+      Zeitmanagementbesserplanen: false,
+      BudgetFinanzierung: false,
+      BildungWissenvermittlung: false,
+      Unterrichtneugestalten: false,
+      Verwaltungverbessern: false,
+      Konfliktmanagement: false,
+      SonstigestrategischeZiele: false,
+      Tage: false,
+      Wochen: false,
+      Monate: false,
+      StadtGemeinde: false,
+      Personal: false,
+      Schueler: false,
+      Bildung: false,
+      SchulischeAusstatung: false,
+      ITtechnischerSupport: false,
+      VerpflegunginderSchule: false,
+      Finanzierung: false,
+      SozialesEngagement: false,
+      Titel: "",
+      Projektbeschreibung: ""
+
     };
   }
 
@@ -45,6 +116,207 @@ class Wizard extends Component {
   }
 
   handleChange = (e, {value}) => this.setState({value})
+  handleText = (e, {name, value}) => this.setState({[name]: value})
+
+  handleSuchenVerarbeitenundAufbewahren = (e) => this.setState({SuchenVerarbeitenundAufbewahren : !this.state.SuchenVerarbeitenundAufbewahren})
+  handleKommunizierenundKooperieren = (e) => this.setState({KommunizierenundKooperieren : !this.state.KommunizierenundKooperieren})
+  handleProduzierenundPräsentieren = (e) => this.setState({ProduzierenundPräsentieren : !this.state.ProduzierenundPräsentieren})
+  handleSchützenundsicheragieren = (e) => this.setState({Schützenundsicheragieren : !this.state.Schützenundsicheragieren})
+  handleProblemelösenundHandeln = (e) => this.setState({ProblemelösenundHandeln : !this.state.ProblemelösenundHandeln})
+  handleAnalysierenundReflektieren = (e) => this.setState({AnalysierenundReflektieren : !this.state.AnalysierenundReflektieren})
+  handleKitaVorschule = (e) => this.setState({KitaVorschule : !this.state.KitaVorschule})
+  handleGrundschule = (e) => this.setState({Grundschule : !this.state.Grundschule})
+  handleSekundarstufe1 = (e) => this.setState({Sekundarstufe1 : !this.state.Sekundarstufe1})
+  handleSekundarstufe2 = (e) => this.setState({Sekundarstufe2 : !this.state.Sekundarstufe2})
+  handleHoehereHandelschule = (e) => this.setState({HoehereHandelschule : !this.state.HoehereHandelschule})
+  handleHandelschule = (e) => this.setState({Handelschule : !this.state.Handelschule})
+  handleSprachen = (e) => this.setState({Sprachen : !this.state.Sprachen})
+  handleKulturelleBildung = (e) => this.setState({KulturelleBildung : !this.state.KulturelleBildung})
+  handleGeschichteGesellschaft = (e) => this.setState({GeschichteGesellschaft : !this.state.GeschichteGesellschaft})
+  handleNaturwissenschaften = (e) => this.setState({Naturwissenschaften : !this.state.Naturwissenschaften})
+  handleInformatiktechnischeBildung = (e) => this.setState({InformatiktechnischeBildung : !this.state.InformatiktechnischeBildung})
+  handleMathematik = (e) => this.setState({Mathematik : !this.state.Mathematik})
+  handleDeutsch = (e) => this.setState({Deutsch : !this.state.Deutsch})
+  handleEnglisch = (e) => this.setState({Englisch : !this.state.Englisch})
+  handlePhysik = (e) => this.setState({Physik : !this.state.Physik})
+  handleChemie = (e) => this.setState({Chemie : !this.state.Chemie})
+  handleErdkunde = (e) => this.setState({Erdkunde : !this.state.Erdkunde})
+  handleSport = (e) => this.setState({Sport : !this.state.Sport})
+  handleKunst = (e) => this.setState({Kunst : !this.state.Kunst})
+  handleFranzösisch = (e) => this.setState({Französisch : !this.state.Französisch})
+  handleSpanisch = (e) => this.setState({Spanisch : !this.state.Spanisch})
+  handleItalienisch = (e) => this.setState({Italienisch : !this.state.Italienisch})
+  handleBwl = (e) => this.setState({Bwl : !this.state.Bwl})
+  handleVwl = (e) => this.setState({Vwl : !this.state.Vwl})
+  handleInformatik = (e) => this.setState({Informatik : !this.state.Informatik})
+  handlePädagogik = (e) => this.setState({Pädagogik : !this.state.Pädagogik})
+  handlePolitik = (e) => this.setState({Politik : !this.state.Politik})
+  handleKeinInternet = (e) => this.setState({KeinInternet : !this.state.KeinInternet})
+  handlePCLaptop = (e) => this.setState({PCLaptop : !this.state.PCLaptop})
+  handleTabletSmartphone = (e) => this.setState({TabletSmartphone : !this.state.TabletSmartphone})
+  handleHardwareBasteln = (e) => this.setState({HardwareBasteln : !this.state.HardwareBasteln})
+  handleVideosFilme = (e) => this.setState({VideosFilme : !this.state.VideosFilme})
+  handleUnterrichstreihe = (e) => this.setState({Unterrichstreihe : !this.state.Unterrichstreihe})
+  handleStunde = (e) => this.setState({Stunde : !this.state.Stunde})
+  handleDoppelstunde = (e) => this.setState({Doppelstunde : !this.state.Doppelstunde})
+  handleFlexibel = (e) => this.setState({Flexibel : !this.state.Flexibel})
+  handleKlasse = (e) => this.setState({Klasse : !this.state.Klasse})
+  handleSchule = (e) => this.setState({Schule : !this.state.Schule})
+  handleFachlich = (e) => this.setState({Fachlich : !this.state.Fachlich})
+  handleLehrer = (e) => this.setState({Lehrer : !this.state.Lehrer})
+  handleElternvertretung = (e) => this.setState({Elternvertretung : !this.state.Elternvertretung})
+  handleZeitmanagementbesserplanen = (e) => this.setState({Zeitmanagementbesserplanen : !this.state.Zeitmanagementbesserplanen})
+  handleBudgetFinanzierung = (e) => this.setState({BudgetFinanzierung : !this.state.BudgetFinanzierung})
+  handleBildungWissenvermittlung = (e) => this.setState({BildungWissenvermittlung : !this.state.BildungWissenvermittlung})
+  handleUnterrichtneugestalten = (e) => this.setState({Unterrichtneugestalten : !this.state.Unterrichtneugestalten})
+  handleVerwaltungverbessern = (e) => this.setState({Verwaltungverbessern : !this.state.Verwaltungverbessern})
+  handleKonfliktmanagement = (e) => this.setState({Konfliktmanagement : !this.state.Konfliktmanagement})
+  handleSonstigestrategischeZiele = (e) => this.setState({SonstigestrategischeZiele : !this.state.SonstigestrategischeZiele})
+  handleTage = (e) => this.setState({Tage : !this.state.Tage})
+  handleWochen = (e) => this.setState({Wochen : !this.state.Wochen})
+  handleMonate = (e) => this.setState({Monate : !this.state.Monate})
+  handleStadtGemeinde = (e) => this.setState({StadtGemeinde : !this.state.StadtGemeinde})
+  handlePersonal = (e) => this.setState({Personal : !this.state.Personal})
+  handleSchueler = (e) => this.setState({Schueler : !this.state.Schueler})
+  handleBildung = (e) => this.setState({Bildung : !this.state.Bildung})
+  handleSchulischeAusstatung = (e) => this.setState({SchulischeAusstatung : !this.state.SchulischeAusstatung})
+  handleITtechnischerSupport = (e) => this.setState({ITtechnischerSupport : !this.state.ITtechnischerSupport})
+  handleVerpflegunginderSchule = (e) => this.setState({VerpflegunginderSchule : !this.state.VerpflegunginderSchule})
+  handleFinanzierung = (e) => this.setState({Finanzierung : !this.state.Finanzierung})
+  handleSozialesEngagement = (e) => this.setState({SozialesEngagement : !this.state.SozialesEngagement})
+
+
+
+  newProject(){
+
+    var form = new FormData();
+    form.append('foo', this.state.file);
+    form.append('forename', this.state.Vorname);
+    form.append('surname', this.state.Nachname);
+    form.append('street', this.state.Strasse);
+    form.append('city', this.state.Stadt);
+    form.append('number', this.state.Hausnummer);
+    form.append('postcode', this.state.Postcode);
+    form.append('subject1', this.state.Fach1);
+    form.append('subject2', this.state.Fach2);
+    form.append('subject3', this.state.Fach3);
+    form.append('fileName', "Maria");
+    form.append('foo', this.state.file);
+    form.append('forename', this.state.Vorname);
+    form.append('surname', this.state.Nachname);
+    form.append('street', this.state.Strasse);
+    form.append('city', this.state.Stadt);
+    form.append('number', this.state.Hausnummer);
+    form.append('postcode', this.state.Postcode);
+    form.append('subject1', this.state.Fach1);
+    form.append('subject2', this.state.Fach2);
+    form.append('subject3', this.state.Fach3);
+    form.append('fileName', "Maria");
+    form.append('foo', this.state.file);
+    form.append('forename', this.state.Vorname);
+    form.append('surname', this.state.Nachname);
+    form.append('street', this.state.Strasse);
+    form.append('city', this.state.Stadt);
+    form.append('number', this.state.Hausnummer);
+    form.append('postcode', this.state.Postcode);
+    form.append('subject1', this.state.Fach1);
+    form.append('subject2', this.state.Fach2);
+    form.append('subject3', this.state.Fach3);
+    form.append('fileName', "Maria");
+    form.append('foo', this.state.file);
+    form.append('forename', this.state.Vorname);
+    form.append('surname', this.state.Nachname);
+    form.append('street', this.state.Strasse);
+    form.append('city', this.state.Stadt);
+    form.append('number', this.state.Hausnummer);
+    form.append('postcode', this.state.Postcode);
+    form.append('subject1', this.state.Fach1);
+    form.append('subject2', this.state.Fach2);
+    form.append('subject3', this.state.Fach3);
+    form.append('fileName', "Maria");
+
+
+    fetch('http://backend-edu.azurewebsites.net/wizardctrl/newProject', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        SuchenVerarbeitenundAufbewahren: this.state.SuchenVerarbeitenundAufbewahren,
+        KommunizierenundKooperieren: this.state.KommunizierenundKooperieren,
+        ProduzierenundPräsentieren: this.state.ProduzierenundPräsentieren,
+        Schützenundsicheragieren: this.state.Schützenundsicheragieren,
+        ProblemelösenundHandeln: this.state.ProblemelösenundHandeln,
+        AnalysierenundReflektieren: this.state.AnalysierenundReflektieren,
+        KitaVorschule: this.state.KitaVorschule,
+        Grundschule: this.state.Grundschule,
+        Sekundarstufe1: this.state.Sekundarstufe1,
+        Sekundarstufe2: this.state.Sekundarstufe2,
+        HoehereHandelschule: this.state.HoehereHandelschule,
+        Handelschule: this.state.Handelschule,
+        Sprachen: this.state.Sprachen,
+        KulturelleBildung: this.state.KulturelleBildung,
+        GeschichteGesellschaft: this.state.GeschichteGesellschaft,
+        Naturwissenschaften: this.state.Naturwissenschaften,
+        InformatiktechnischeBildung: this.state.InformatiktechnischeBildung,
+        Mathematik: this.state.Mathematik,
+        Deutsch: this.state.Deutsch,
+        Englisch: this.state.Englisch,
+        Physik: this.state.Physik,
+        Chemie: this.state.Chemie,
+        Erdkunde: this.state.Erdkunde,
+        Sport: this.state.Sport,
+        Kunst: this.state.Kunst,
+        Französisch: this.state.Französisch,
+        Spanisch: this.state.Spanisch,
+        Italienisch: this.state.Italienisch,
+        Bwl: this.state.Bwl,
+        Vwl: this.state.Vwl,
+        Informatik: this.state.Informatik,
+        Pädagogik: this.state.Pädagogik,
+        Politik: this.state.Politik,
+        KeinInternet: this.state.KeinInternet,
+        PCLaptop: this.state.PCLaptop,
+        TabletSmartphone: this.state.TabletSmartphone,
+        HardwareBasteln: this.state.HardwareBasteln,
+        VideosFilme: this.state.VideosFilme,
+        Unterrichstreihe: this.state.Unterrichstreihe,
+        Stunde: this.state.Stunde,
+        Doppelstunde: this.state.Doppelstunde,
+        Flexibel: this.state.Flexibel,
+        Klasse: this.state.Klasse,
+        Schule: this.state.Schule,
+        Fachlich: this.state.Fachlich,
+        Lehrer: this.state.Lehrer,
+        Elternvertretung: this.state.Elternvertretung,
+        Zeitmanagementbesserplanen: this.state.Zeitmanagementbesserplanen,
+        BudgetFinanzierung: this.state.BudgetFinanzierung,
+        BildungWissenvermittlung: this.state.BildungWissenvermittlung,
+        Unterrichtneugestalten: this.state.Unterrichtneugestalten,
+        Verwaltungverbessern: this.state.Verwaltungverbessern,
+        Konfliktmanagement: this.state.Konfliktmanagement,
+        SonstigestrategischeZiele: this.state.SonstigestrategischeZiele,
+        Tage: this.state.Tage,
+        Wochen: this.state.Wochen,
+        Monate: this.state.Monate,
+        StadtGemeinde: this.state.StadtGemeinde,
+        Personal: this.state.Personal,
+        Schueler: this.state.Schueler,
+        Bildung: this.state.Bildung,
+        SchulischeAusstatung: this.state.SchulischeAusstatung,
+        ITtechnischerSupport: this.state.ITtechnischerSupport,
+        VerpflegunginderSchule: this.state.VerpflegunginderSchule,
+        Finanzierung: this.state.Finanzierung,
+        SozialesEngagement: this.state.SozialesEngagement,
+        Titel: "",
+        Projektbeschreibung: ""
+      })
+    })
+  }
+
+
+
 
   goBack() {
     if (this.state.value === "option1") {
@@ -66,6 +338,13 @@ class Wizard extends Component {
   };
 
   changeTab() {
+    if(this.state.activeIndex == "4"){
+      console.log("Checked");
+      console.log(this.state.Projektbeschreibung);
+      console.log(this.state.Titel);
+      this.newProject();
+    }else{
+
     if (this.state.value === "option1") {
       this.setState({activeIndex: 1});
     } else if (this.state.value === "option2") {
@@ -81,6 +360,8 @@ class Wizard extends Component {
     }
     else if (this.state.activeIndex =="3"){
       this.setState({activeIndex: (this.state.activeIndex + 1)});
+    }
+    
     }
   };
 
@@ -157,12 +438,12 @@ class Wizard extends Component {
                     <Table.Row>
                       <Table.Cell>
                         <Form.Group grouped={true}>
-                          <Form.Field label='Suchen, Verarbeiten und Aufbewahren' control='input' type='checkbox'/>
-                          <Form.Field label='Kommunizieren und Kooperieren' control='input' type='checkbox'/>
-                          <Form.Field label='Produzieren und Präsentieren' control='input' type='checkbox'/>
-                          <Form.Field label='Schützen und sicher agieren' control='input' type='checkbox'/>
-                          <Form.Field label='Probleme lösen und Handeln' control='input' type='checkbox'/>
-                          <Form.Field label='Analysieren und Reflektieren' control='input' type='checkbox'/>
+                          <Form.Field label='Suchen, Verarbeiten und Aufbewahren' onChange={this.handleSuchenVerarbeitenundAufbewahren} checked={this.state.SuchenVerarbeitenundAufbewahren} control='input' type='checkbox'/>
+                          <Form.Field label='Kommunizieren und Kooperieren' onChange={this.handleKommunizierenundKooperieren} checked={this.state.KommunizierenundKooperieren} control='input' type='checkbox'/>
+                          <Form.Field label='Produzieren und Präsentieren' onChange={this.handleProduzierenundPräsentieren} checked={this.state.ProduzierenundPräsentieren} control='input' type='checkbox'/>
+                          <Form.Field label='Schützen und sicher agieren' onChange={this.handleSchützenundsicheragieren} checked={this.state.Schützenundsicheragieren} control='input' type='checkbox'/>
+                          <Form.Field label='Probleme lösen und Handeln' onChange={this.handleProblemelösenundHandeln} checked={this.state.ProblemelösenundHandeln} control='input' type='checkbox'/>
+                          <Form.Field label='Analysieren und Reflektieren' onChange={this.handleAnalysierenundReflektieren} checked={this.state.AnalysierenundReflektieren} control='input' type='checkbox'/>
                         </Form.Group>
                       </Table.Cell>
                     </Table.Row>
@@ -186,12 +467,12 @@ class Wizard extends Component {
                     <Table.Row>
                       <Table.Cell>
                         <Form.Group grouped={true}>
-                          <Form.Field label='Kita/Vorschule' control='input' type='checkbox'/>
-                          <Form.Field label='Grundschule' control='input' type='checkbox'/>
-                          <Form.Field label='Sekundarstufe 1' control='input' type='checkbox'/>
-                          <Form.Field label='Sekundarstufe 2' control='input' type='checkbox'/>
-                          <Form.Field label='Höhere Handelschule (Fachabi)' control='input' type='checkbox'/>
-                          <Form.Field label='Handelschule' control='input' type='checkbox'/>
+                          <Form.Field label='Kita/Vorschule' onChange={this.handleKitaVorschule} checked={this.state.KitaVorschule} control='input' type='checkbox'/>
+                          <Form.Field label='Grundschule' onChange={this.handleGrundschule} checked={this.state.Grundschule} control='input' type='checkbox'/>
+                          <Form.Field label='Sekundarstufe 1' onChange={this.handleSekundarstufe1} checked={this.state.Sekundarstufe1} control='input' type='checkbox'/>
+                          <Form.Field label='Sekundarstufe 2' onChange={this.handleSekundarstufe2} checked={this.state.Sekundarstufe2} control='input' type='checkbox'/>
+                          <Form.Field label='Höhere Handelschule (Fachabi)' onChange={this.handleHoehereHandelschule} checked={this.state.HoehereHandelschule} control='input' type='checkbox'/>
+                          <Form.Field label='Handelschule' onChange={this.handleHandelschule} checked={this.state.Handelschule} control='input' type='checkbox'/>
                         </Form.Group>
                       </Table.Cell>
                     </Table.Row>
@@ -216,11 +497,11 @@ class Wizard extends Component {
                     <Table.Row>
                       <Table.Cell>
                         <Form.Group grouped={true}>
-                          <Form.Field label='Sprachen' control='input' type='checkbox'/>
-                          <Form.Field label='Kulturelle Bildung' control='input' type='checkbox'/>
-                          <Form.Field label='Geschichte/ Gesellschaft' control='input' type='checkbox'/>
-                          <Form.Field label='Naturwissenschaften' control='input' type='checkbox'/>
-                          <Form.Field label='Informatik/ technische Bildung' control='input' type='checkbox'/>
+                          <Form.Field label='Sprachen' onChange={this.handleSprachen} checked={this.state.Sprachen} control='input' type='checkbox'/>
+                          <Form.Field label='Kulturelle Bildung' onChange={this.handleKulturelleBildung} checked={this.state.KulturelleBildung} control='input' type='checkbox'/>
+                          <Form.Field label='Geschichte/ Gesellschaft' onChange={this.handleGeschichteGesellschaft} checked={this.state.GeschichteGesellschaft} control='input' type='checkbox'/>
+                          <Form.Field label='Naturwissenschaften' onChange={this.handleNaturwissenschaften} checked={this.state.Naturwissenschaften} control='input' type='checkbox'/>
+                          <Form.Field label='Informatik/ technische Bildung' onChange={this.handleInformatiktechnischeBildung} checked={this.state.InformatiktechnischeBildung} control='input' type='checkbox'/>
                         </Form.Group>
                       </Table.Cell>
                     </Table.Row>
@@ -244,22 +525,22 @@ class Wizard extends Component {
                     <Table.Row>
                       <Table.Cell>
                         <Form.Group grouped={true}>
-                          <Form.Field label='Mathematik' control='input' type='checkbox'/>
-                          <Form.Field label='Deutsch' control='input' type='checkbox'/>
-                          <Form.Field label='Englisch' control='input' type='checkbox'/>
-                          <Form.Field label='Physik' control='input' type='checkbox'/>
-                          <Form.Field label='Chemie' control='input' type='checkbox'/>
-                          <Form.Field label='Erdkunde' control='input' type='checkbox'/>
-                          <Form.Field label='Sport' control='input' type='checkbox'/>
-                          <Form.Field label='Kunst' control='input' type='checkbox'/>
-                          <Form.Field label='Französisch' control='input' type='checkbox'/>
-                          <Form.Field label='Spanisch' control='input' type='checkbox'/>
-                          <Form.Field label='Italienisch' control='input' type='checkbox'/>
-                          <Form.Field label='BWL' control='input' type='checkbox'/>
-                          <Form.Field label='VWL' control='input' type='checkbox'/>
-                          <Form.Field label='Informatik' control='input' type='checkbox'/>
-                          <Form.Field label='Pädagogik' control='input' type='checkbox'/>
-                          <Form.Field label='Politik' control='input' type='checkbox'/>
+                          <Form.Field label='Mathematik' onChange={this.handleMathematik} checked={this.state.Mathematik} control='input' type='checkbox'/>
+                          <Form.Field label='Deutsch' onChange={this.handleDeutsch} checked={this.state.Deutsch} control='input' type='checkbox'/>
+                          <Form.Field label='Englisch' onChange={this.handleEnglisch} checked={this.state.Englisch} control='input' type='checkbox'/>
+                          <Form.Field label='Physik' onChange={this.handlePhysik} checked={this.state.Physik} control='input' type='checkbox'/>
+                          <Form.Field label='Chemie' onChange={this.handleChemie} checked={this.state.Chemie} control='input' type='checkbox'/>
+                          <Form.Field label='Erdkunde' onChange={this.handleErdkunde} checked={this.state.Erdkunde} control='input' type='checkbox'/>
+                          <Form.Field label='Sport' onChange={this.handleSport} checked={this.state.Sport} control='input' type='checkbox'/>
+                          <Form.Field label='Kunst' onChange={this.handleKunst} checked={this.state.Kunst} control='input' type='checkbox'/>
+                          <Form.Field label='Französisch' onChange={this.handleFranzösisch} checked={this.state.Französisch} control='input' type='checkbox'/>
+                          <Form.Field label='Spanisch' onChange={this.handleSpanisch} checked={this.state.Spanisch} control='input' type='checkbox'/>
+                          <Form.Field label='Italienisch' onChange={this.handleItalienisch} checked={this.state.Italienisch} control='input' type='checkbox'/>
+                          <Form.Field label='BWL' onChange={this.handleBwl} checked={this.state.Bwl} control='input' type='checkbox'/>
+                          <Form.Field label='VWL' onChange={this.handleVwl} checked={this.state.Vwl} control='input' type='checkbox'/>
+                          <Form.Field label='Informatik' onChange={this.handleInformatik} checked={this.state.Informatik} control='input' type='checkbox'/>
+                          <Form.Field label='Pädagogik' onChange={this.handlePädagogik} checked={this.state.Pädagogik} control='input' type='checkbox'/>
+                          <Form.Field label='Politik' onChange={this.handlePolitik} checked={this.state.Politik} control='input' type='checkbox'/>
                         </Form.Group>
                       </Table.Cell>
                     </Table.Row>
@@ -284,11 +565,11 @@ class Wizard extends Component {
                     <Table.Row>
                       <Table.Cell>
                         <Form.Group grouped={true}>
-                          <Form.Field label='Kein Internet' control='input' type='checkbox'/>
-                          <Form.Field label='PC/Laptop' control='input' type='checkbox'/>
-                          <Form.Field label='Tablet/Smartphone' control='input' type='checkbox'/>
-                          <Form.Field label='Hardware/Basteln' control='input' type='checkbox'/>
-                          <Form.Field label='Videos/Filme' control='input' type='checkbox'/>
+                          <Form.Field label='Kein Internet' onChange={this.handleKeinInternet} checked={this.state.KeinInternet} control='input' type='checkbox'/>
+                          <Form.Field label='PC/Laptop' onChange={this.handlePCLaptop} checked={this.state.PCLaptop} control='input' type='checkbox'/>
+                          <Form.Field label='Tablet/Smartphone' onChange={this.handleTabletSmartphone} checked={this.state.TabletSmartphone} control='input' type='checkbox'/>
+                          <Form.Field label='Hardware/Basteln' onChange={this.handleHardwareBasteln} checked={this.state.HardwareBasteln} control='input' type='checkbox'/>
+                          <Form.Field label='Videos/Filme' onChange={this.handleVideosFilme} checked={this.state.VideosFilme} control='input' type='checkbox'/>
                         </Form.Group>
                       </Table.Cell>
                     </Table.Row>
@@ -312,10 +593,10 @@ class Wizard extends Component {
                     <Table.Row>
                       <Table.Cell>
                         <Form.Group grouped={true}>
-                          <Form.Field label='Unterrichstreihe' control='input' type='checkbox'/>
-                          <Form.Field label='Stunde' control='input' type='checkbox'/>
-                          <Form.Field label='Doppelstunde' control='input' type='checkbox'/>
-                          <Form.Field label='Flexibel  ' control='input' type='checkbox'/>
+                          <Form.Field label='Unterrichstreihe' onChange={this.handleUnterrichstreihe} checked={this.state.Unterrichstreihe} control='input' type='checkbox'/>
+                          <Form.Field label='Stunde' onChange={this.handleStunde} checked={this.state.Stunde} control='input' type='checkbox'/>
+                          <Form.Field label='Doppelstunde' onChange={this.handleDoppelstunde} checked={this.state.Doppelstunde} control='input' type='checkbox'/>
+                          <Form.Field label='Flexibel' onChange={this.handleFlexibel} checked={this.state.Flexibel} control='input' type='checkbox'/>
                         </Form.Group>
                       </Table.Cell>
                     </Table.Row>
@@ -347,11 +628,11 @@ class Wizard extends Component {
                     <Table.Row>
                       <Table.Cell>
                         <Form.Group grouped={true}>
-                          <Form.Field label='Klasse' control='input' type='checkbox'/>
-                          <Form.Field label='Schule' control='input' type='checkbox'/>
-                          <Form.Field label='Fachlich' control='input' type='checkbox'/>
-                          <Form.Field label='Lehrer  ' control='input' type='checkbox'/>
-                          <Form.Field label='Elternvertretung' control='input' type='checkbox'/>
+                          <Form.Field label='Klasse' onChange={this.handleKlasse} checked={this.state.Klasse} control='input' type='checkbox'/>
+                          <Form.Field label='Schule' onChange={this.handleSchule} checked={this.state.Schule} control='input' type='checkbox'/>
+                          <Form.Field label='Fachlich' onChange={this.handleFachlich} checked={this.state.Fachlich} control='input' type='checkbox'/>
+                          <Form.Field label='Lehrer  ' onChange={this.handleLehrer} checked={this.state.Lehrer} control='input' type='checkbox'/>
+                          <Form.Field label='Elternvertretung' onChange={this.handleElternvertretung} checked={this.state.Elternvertretung} control='input' type='checkbox'/>
                         </Form.Group>
                       </Table.Cell>
                     </Table.Row>
@@ -375,13 +656,13 @@ class Wizard extends Component {
                     <Table.Row>
                       <Table.Cell>
                         <Form.Group grouped={true}>
-                          <Form.Field label='Zeitmanagement besser planen' control='input' type='checkbox'/>
-                          <Form.Field label='Budget/ Finanzierung' control='input' type='checkbox'/>
-                          <Form.Field label='Bildung/ Wissenvermittlung' control='input' type='checkbox'/>
-                          <Form.Field label='Unterricht neu gestalten' control='input' type='checkbox'/>
-                          <Form.Field label='Verwaltung verbessern' control='input' type='checkbox'/>
-                          <Form.Field label='Konfliktmanagement' control='input' type='checkbox'/>
-                          <Form.Field label='Sonstige strategische Ziele' control='input' type='checkbox'/>
+                          <Form.Field label='Zeitmanagement besser planen' onChange={this.handleZeitmanagementbesserplanen} checked={this.state.Zeitmanagementbesserplanen} control='input' type='checkbox'/>
+                          <Form.Field label='Budget/ Finanzierung' onChange={this.handleBudgetFinanzierung} checked={this.state.BudgetFinanzierung} control='input' type='checkbox'/>
+                          <Form.Field label='Bildung/ Wissenvermittlung' onChange={this.handleBildungWissenvermittlung} checked={this.state.BildungWissenvermittlung} control='input' type='checkbox'/>
+                          <Form.Field label='Unterricht neu gestalten' onChange={this.handleUnterrichtneugestalten} checked={this.state.Unterrichtneugestalten} control='input' type='checkbox'/>
+                          <Form.Field label='Verwaltung verbessern' onChange={this.handleVerwaltungverbessern} checked={this.state.Verwaltungverbessern} control='input' type='checkbox'/>
+                          <Form.Field label='Konfliktmanagement' onChange={this.handleKonfliktmanagement} checked={this.state.Konfliktmanagement} control='input' type='checkbox'/>
+                          <Form.Field label='Sonstige strategische Ziele' onChange={this.handleSonstigestrategischeZiele} checked={this.state.SonstigestrategischeZiele} control='input' type='checkbox'/>
                         </Form.Group>
 
                       </Table.Cell>
@@ -405,9 +686,9 @@ class Wizard extends Component {
                     <Table.Row>
                       <Table.Cell>
                         <Form.Group grouped={true}>
-                          <Form.Field label='Tage' control='input' type='checkbox'/>
-                          <Form.Field label='Wochen' control='input' type='checkbox'/>
-                          <Form.Field label='Monate' control='input' type='checkbox'/>
+                          <Form.Field label='Tage' onChange={this.handleTage} checked={this.state.Tage} control='input' type='checkbox'/>
+                          <Form.Field label='Wochen' onChange={this.handleWochen} checked={this.state.Wochen} control='input' type='checkbox'/>
+                          <Form.Field label='Monate' onChange={this.handleMonate} checked={this.state.Monate} control='input' type='checkbox'/>
                         </Form.Group>
 
                       </Table.Cell>
@@ -441,8 +722,8 @@ class Wizard extends Component {
                       <Table.Cell>
                         <Form.Group grouped={true}>
                           <Form.Field label='Klasse' control='input' type='checkbox'/>
-                          <Form.Field label='Schule' control='input' type='checkbox'/>
-                          <Form.Field label='Fachlich' control='input' type='checkbox'/>
+                          <Form.Field label='Schule'  control='input' type='checkbox'/>
+                          <Form.Field label='Fachlich'  control='input' type='checkbox'/>
                           <Form.Field label='Lehrer' control='input' type='checkbox'/>
                           <Form.Field label='Eltern' control='input' type='checkbox'/>
                           <Form.Field label='Stadt/ Gemeinde' control='input' type='checkbox'/>
@@ -469,15 +750,15 @@ class Wizard extends Component {
                     <Table.Row>
                       <Table.Cell>
                         <Form.Group grouped={true}>
-                          <Form.Field label='Personal' control='input' type='checkbox'/>
-                          <Form.Field label='Schüler' control='input' type='checkbox'/>
-                          <Form.Field label='Sport' control='input' type='checkbox'/>
-                          <Form.Field label='Bildung' control='input' type='checkbox'/>
-                          <Form.Field label='Schulische Ausstatung' control='input' type='checkbox'/>
-                          <Form.Field label='IT, technischer Support' control='input' type='checkbox'/>
-                          <Form.Field label='Verpflegung in der Schule' control='input' type='checkbox'/>
-                          <Form.Field label='Finanzierung' control='input' type='checkbox'/>
-                          <Form.Field label='Soziales Engagement' control='input' type='checkbox'/>
+                          <Form.Field label='Personal' onChange={this.handlePersonal} checked={this.state.Personal} control='input' type='checkbox'/>
+                          <Form.Field label='Schüler' onChange={this.handleSchueler} checked={this.state.Schueler} control='input' type='checkbox'/>
+                          <Form.Field label='Sport' onChange={this.handleSport} checked={this.state.Sport} control='input' type='checkbox'/>
+                          <Form.Field label='Bildung' onChange={this.handleBildung} checked={this.state.Bildung} control='input' type='checkbox'/>
+                          <Form.Field label='Schulische Ausstatung' onChange={this.handleSchulischeAusstatung} checked={this.state.SchulischeAusstatung} control='input' type='checkbox'/>
+                          <Form.Field label='IT, technischer Support' onChange={this.handleITtechnischerSupport} checked={this.state.ITtechnischerSupport} control='input' type='checkbox'/>
+                          <Form.Field label='Verpflegung in der Schule' onChange={this.handleVerpflegunginderSchule} checked={this.state.VerpflegunginderSchule} control='input' type='checkbox'/>
+                          <Form.Field label='Finanzierung' onChange={this.handleFinanzierung} checked={this.state.Finanzierung} control='input' type='checkbox'/>
+                          <Form.Field label='Soziales Engagement' onChange={this.handleSozialesEngagement} checked={this.state.SozialesEngagement} control='input' type='checkbox'/>
                         </Form.Group>
 
                       </Table.Cell>
@@ -512,10 +793,10 @@ class Wizard extends Component {
                       <Form.Group>
                         <Form.Input style={{
                             width: "600px"
-                          }} placeholder='Titel' icon='user' iconPosition='left'/>
+                          }} placeholder='Titel' onChange={this.handleText} value={this.state.Titel} name="Titel" icon='user' iconPosition='left'/>
                       </Form.Group>
                       <Form.Group widths='equal'>
-                        <Form.TextArea rows={2} placeholder='Projektbeschreibung'/>
+                        <Form.TextArea rows={2} onChange={this.handleText} value={this.state.Projektbeschreibung} name='Projektbeschreibung' placeholder='Projektbeschreibung'/>
                       </Form.Group>
                       <Form.Group widths='equal'>
                         <Form.TextArea rows={2} placeholder='Wie soll die Zielerreichung gemessen werden?'/>
