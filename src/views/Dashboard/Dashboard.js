@@ -101,23 +101,19 @@ class Dashboard extends React.Component {
 
     return (<div className="animated fadeIn">
 <div className="row justify-content-md-center">
+  <div className="position-relative">
 
-        <img src='../img/eduhub.png' style={{
-            width: "100%",
-            height: 'auto'
-          }}/>
+        <img className="banner" src='../img/eduhub.png'/>
         <Button basic={true} color='grey' style={{
-            position: 'absolute',
+          position: 'relative',
             width: '15%',
             height: 'auto',
             left: '324px',
-            top: '470px'
+            bottom: '130px'
           }}>
           <b>registrieren</b>
-        </Button>
-        <Divider hidden={true}/>
+        </Button></div>
     </div>
-      <Divider hidden={true}/>
       <div className="container">
         <div className="row justify-content-md-center">
           <Grid doubling={true} columns={4} divided='vertically'>
