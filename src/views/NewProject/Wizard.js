@@ -104,7 +104,8 @@ class Wizard extends Component {
       Finanzierung: false,
       SozialesEngagement: false,
       Titel: "",
-      Projektbeschreibung: ""
+      Projektbeschreibung: "",
+      Laden: false
 
     };
   }
@@ -789,7 +790,7 @@ class Wizard extends Component {
               <Table.Body>
                 <Table.Row>
                   <Table.Cell>
-                    <Form>
+                    <Form loading={this.state.Laden}>
                       <Form.Group>
                         <Form.Input style={{
                             width: "600px"
