@@ -131,7 +131,7 @@ class Welcome extends Component {
     form.append('subject1', this.state.Fach1);
     form.append('subject2', this.state.Fach2);
     form.append('subject3', this.state.Fach3);
-    form.append('fileName', "Maria");
+    form.append('fileName', "Profil");
     form.append('email', localStorage.getItem('email'));
 
     fetch('http://backend-edu.azurewebsites.net/user/', {

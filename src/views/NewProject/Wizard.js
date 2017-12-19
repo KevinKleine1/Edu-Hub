@@ -105,7 +105,8 @@ class Wizard extends Component {
       SozialesEngagement: false,
       Titel: "",
       Projektbeschreibung: "",
-      Laden: false
+      Laden: false,
+      file: ''
 
     };
   }
@@ -114,6 +115,19 @@ class Wizard extends Component {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
+  }
+
+  _handleImageChange(e) {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({file: file});
+    }
+
+    reader.readAsDataURL(file)
   }
 
   handleChange = (e, {value}) => this.setState({value})
@@ -842,7 +856,7 @@ class Wizard extends Component {
                       <label>
                         <b>Fotos</b>
                       </label>
-                      <input type="file" style={{
+                      <input type="file" name='foo' id='foo' onChange={(e) => this._handleImageChange(e)} style={{
                           width: "400px"
                         }} className="form-control-file" id="exampleFormControlFile1"></input>
 
