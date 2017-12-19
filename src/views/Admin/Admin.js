@@ -51,7 +51,9 @@ class Admin extends Component {
     Fach3Alt: "",
     fachError: false,
     file: '',
-    imagePreviewUrl: ''
+    imagePreviewUrl: '',
+    key: "",
+    Laden: false
   };
 
   //handler for change events in the textfields
@@ -132,6 +134,7 @@ class Admin extends Component {
   };
 //submit function which checks if a field is used and only then pushes the changes as new data in the db
   onSubmit() {
+    this.setState({Laden: true});
     const {
       VornameAlt,
       NachnameAlt,
@@ -232,7 +235,17 @@ class Admin extends Component {
 
 
   changePicture(){
-    
+    var forma = new FormData();
+    forma.append('foo', this.state.file);
+    forma.append('email', localStorage.getItem('email'));
+
+    fetch('http://backend-edu.azurewebsites.net/user/changepicture', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json, */*'
+      },
+      body: forma
+    })
   }
 
 
@@ -242,7 +255,7 @@ class Admin extends Component {
     const err = this.validate();
     if (!err) {
       this.onSubmit();
-
+      this.changePicture();
       this.setState({
         Vorname: "",
         Nachname: "",
@@ -262,6 +275,7 @@ class Admin extends Component {
         Fehler: false,
         Erfolg: true
       });
+      this.setState({Laden: false});
     }
   }
 
@@ -332,7 +346,7 @@ class Admin extends Component {
             </div>
 
             <div className="card-text">
-              <Form error={this.state.Fehler} success={this.state.Erfolg} onSubmit={this.handleSubmit}>
+              <Form loading={this.state.Laden} error={this.state.Fehler} success={this.state.Erfolg} onSubmit={this.handleSubmit}>
 
                 <Form.Field>
                   <label>Vorname</label>

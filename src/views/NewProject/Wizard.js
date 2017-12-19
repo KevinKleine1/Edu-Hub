@@ -218,74 +218,462 @@ class Wizard extends Component {
 
   newProject(){
 
+    if(this.state.lehrundlernProjekt){
+      var lehrundlernProjekt = 1;
+    }else{
+      var lehrundlernProjekt = 0;
+    }
+    if(this.state.managementProjekt){
+      var managementProjekt = 1;
+    }else{
+      var managementProjekt = 0;
+    }
+    if(this.state.unterstuetzendesProjekt){
+      var unterstuetzendesProjekt = 1;
+    }else{
+      var unterstuetzendesProjekt = 0;
+    }
+    if(this.state.ProduzierenundPräsentieren){
+      var ProduzierenundPräsentieren = 1;
+    }else{
+      var ProduzierenundPräsentieren = 0;
+    }
+
+    if(this.state.SuchenVerarbeitenundAufbewahren){
+      var SuchenVerarbeitenundAufbewahren = 1;
+    }else{
+      var SuchenVerarbeitenundAufbewahren = 0;
+    }
+    if(this.state.KommunizierenundKooperieren){
+      var KommunizierenundKooperieren = 1;
+    }else{
+      var KommunizierenundKooperieren = 0;
+    }
+
+    if(this.state.Schützenundsicheragieren){
+      var Schützenundsicheragieren = 1;
+    }else{
+      var Schützenundsicheragieren = 0;
+    }
+
+    if(this.state.ProblemelösenundHandeln){
+      var ProblemelösenundHandeln = 1;
+    }else{
+      var ProblemelösenundHandeln = 0;
+    }
+
+    if(this.state.AnalysierenundReflektieren){
+      var AnalysierenundReflektieren = 1;
+    }else{
+      var AnalysierenundReflektieren = 0;
+    }
+
+    if(this.state.KitaVorschule){
+      var KitaVorschule = 1;
+    }else{
+      var KitaVorschule = 0;
+    }
+    if(this.state.Grundschule){
+      var Grundschule = 1;
+    }else{
+      var Grundschule = 0;
+    }
+    if(this.state.Sekundarstufe1){
+      var Sekundarstufe1 = 1;
+    }else{
+      var Sekundarstufe1 = 0;
+    }
+    if(this.state.Sekundarstufe2){
+      var Sekundarstufe2 = 1;
+    }else{
+      var Sekundarstufe2 = 0;
+    }
+    if(this.state.HoehereHandelschule){
+      var HoehereHandelschule = 1;
+    }else{
+      var HoehereHandelschule = 0;
+    }
+    if(this.state.Handelschule){
+      var Handelschule = 1;
+    }else{
+      var Handelschule = 0;
+    }
+    if(this.state.Sprachen){
+      var Sprachen = 1;
+    }else{
+      var Sprachen = 0;
+    }
+    if(this.state.KulturelleBildung){
+      var KulturelleBildung = 1;
+    }else{
+      var KulturelleBildung = 0;
+    }
+    if(this.state.GeschichteGesellschaft){
+      var GeschichteGesellschaft = 1;
+    }else{
+      var GeschichteGesellschaft = 0;
+    }
+    if(this.state.Naturwissenschaften){
+      var Naturwissenschaften = 1;
+    }else{
+      var Naturwissenschaften = 0;
+    }
+    if(this.state.InformatiktechnischeBildung){
+      var InformatiktechnischeBildung = 1;
+    }else{
+      var InformatiktechnischeBildung = 0;
+    }
+    if(this.state.Mathematik){
+      var Mathematik = 1;
+    }else{
+      var Mathematik = 0;
+    }
+    if(this.state.Deutsch){
+      var Deutsch = 1;
+    }else{
+      var Deutsch = 0;
+    }
+    if(this.state.Englisch){
+      var Englisch = 1;
+    }else{
+      var Englisch = 0;
+    }
+    if(this.state.Physik){
+      var Physik = 1;
+    }else{
+      var Physik = 0;
+    }
+    if(this.state.Chemie){
+      var Chemie = 1;
+    }else{
+      var Chemie = 0;
+    }
+    if(this.state.Erdkunde){
+      var Erdkunde = 1;
+    }else{
+      var Erdkunde = 0;
+    }
+    if(this.state.Sport){
+      var Sport = 1;
+    }else{
+      var Sport = 0;
+    }
+    if(this.state.Kunst){
+      var Kunst = 1;
+    }else{
+      var Kunst = 0;
+    }
+    if(this.state.Französisch){
+      var Französisch = 1;
+    }else{
+      var Französisch = 0;
+    }
+    if(this.state.Spanisch){
+      var Spanisch = 1;
+    }else{
+      var Spanisch = 0;
+    }
+    if(this.state.Italienisch){
+      var Italienisch = 1;
+    }else{
+      var Italienisch = 0;
+    }
+    if(this.state.Bwl){
+      var Bwl = 1;
+    }else{
+      var Bwl = 0;
+    }
+    if(this.state.Vwl){
+      var Vwl = 1;
+    }else{
+      var Vwl = 0;
+    }
+    if(this.state.Informatik){
+      var Informatik = 1;
+    }else{
+      var Informatik = 0;
+    }
+    if(this.state.Pädagogik){
+      var Pädagogik = 1;
+    }else{
+      var Pädagogik = 0;
+    }
+    if(this.state.Politik){
+      var Politik = 1;
+    }else{
+      var Politik = 0;
+    }
+    if(this.state.KeinInternet){
+      var KeinInternet = 1;
+    }else{
+      var KeinInternet = 0;
+    }
+    if(this.state.PCLaptop){
+      var PCLaptop = 1;
+    }else{
+      var PCLaptop = 0;
+    }
+    if(this.state.TabletSmartphone){
+      var TabletSmartphone = 1;
+    }else{
+      var TabletSmartphone = 0;
+    }
+    if(this.state.HardwareBasteln){
+      var HardwareBasteln = 1;
+    }else{
+      var HardwareBasteln = 0;
+    }
+    if(this.state.VideosFilme){
+      var VideosFilme = 1;
+    }else{
+      var VideosFilme = 0;
+    }
+    if(this.state.Unterrichstreihe){
+      var Unterrichstreihe = 1;
+    }else{
+      var Unterrichstreihe = 0;
+    }
+
+    if(this.state.Stunde){
+      var Stunde = 1;
+    }else{
+      var Stunde = 0;
+    }
+
+    if(this.state.Doppelstunde){
+      var Doppelstunde = 1;
+    }else{
+      var Doppelstunde = 0;
+    }
+
+    if(this.state.Flexibel){
+      var Flexibel = 1;
+    }else{
+      var Flexibel = 0;
+    }
+
+    if(this.state.Klasse){
+      var Klasse = 1;
+    }else{
+      var Klasse = 0;
+    }
+
+    if(this.state.Schule){
+      var Schule = 1;
+    }else{
+      var Schule = 0;
+    }
+
+    if(this.state.Fachlich){
+      var Fachlich = 1;
+    }else{
+      var Fachlich = 0;
+    }
+
+    if(this.state.Lehrer){
+      var Lehrer = 1;
+    }else{
+      var Lehrer = 0;
+    }
+
+    if(this.state.Elternvertretung){
+      var Elternvertretung = 1;
+    }else{
+      var Elternvertretung= 0;
+    }
+
+    if(this.state.Zeitmanagementbesserplanen){
+      var Zeitmanagementbesserplanen = 1;
+    }else{
+      var Zeitmanagementbesserplanen = 0;
+    }
+
+    if(this.state.BudgetFinanzierung){
+      var BudgetFinanzierung = 1;
+    }else{
+      var BudgetFinanzierung = 0;
+    }
+
+    if(this.state.BildungWissenvermittlung){
+      var BildungWissenvermittlung = 1;
+    }else{
+      var BildungWissenvermittlung = 0;
+    }
+
+    if(this.state.Unterrichtneugestalten){
+      var Unterrichtneugestalten = 1;
+    }else{
+      var Unterrichtneugestalten = 0;
+    }
+
+    if(this.state.Verwaltungverbessern){
+      var Verwaltungverbessern = 1;
+    }else{
+      var Verwaltungverbessern = 0;
+    }
+
+    if(this.state.Konfliktmanagement){
+      var Konfliktmanagement = 1;
+    }else{
+      var Konfliktmanagement = 0;
+    }
+    if(this.state.SonstigestrategischeZiele){
+      var SonstigestrategischeZiele = 1;
+    }else{
+      var SonstigestrategischeZiele = 0;
+    }
+
+    if(this.state.Tage){
+      var Tage = 1;
+    }else{
+      var Tage = 0;
+    }
+    if(this.state.Wochen){
+      var Wochen = 1;
+    }else{
+      var Wochen = 0;
+    }
+
+    if(this.state.Monate){
+      var Monate = 1;
+    }else{
+      var Monate = 0;
+    }
+
+    if(this.state.StadtGemeinde){
+      var StadtGemeinde = 1;
+    }else{
+      var StadtGemeinde = 0;
+    }
+    if(this.state.Personal){
+      var Personal = 1;
+    }else{
+      var Personal = 0;
+    }
+    if(this.state.Schueler){
+      var Schueler = 1;
+    }else{
+      var Schueler = 0;
+    }
+    if(this.state.Bildung){
+      var Bildung = 1;
+    }else{
+      var Bildung = 0;
+    }
+    if(this.state.SchulischeAusstatung){
+      var SchulischeAusstatung = 1;
+    }else{
+      var SchulischeAusstatung = 0;
+    }
+
+    if(this.state.ITtechnischerSupport){
+      var ITtechnischerSupport = 1;
+    }else{
+      var ITtechnischerSupport = 0;
+    }
+
+    if(this.state.VerpflegunginderSchule){
+      var VerpflegunginderSchule = 1;
+    }else{
+      var VerpflegunginderSchule = 0;
+    }
+
+    if(this.state.Finanzierung){
+      var Finanzierung = 1;
+    }else{
+      var Finanzierung= 0;
+    }
+
+    if(this.state.SozialesEngagement){
+      var SozialesEngagement = 1;
+    }else{
+      var SozialesEngagement = 0;
+    }
+
+    if(this.state.Titel){
+      var Titel = 1;
+    }else{
+      var Titel = 0;
+    }
+
+    if(this.state.Projektbeschreibung){
+      var Projektbeschreibung = 1;
+    }else{
+      var Projektbeschreibung = 0;
+    }
+
+
     var form = new FormData();
     form.append('project_author' ,localStorage.getItem('userid'));
-    form.append('SuchenVerarbeitenundAufbewahren',this.state.SuchenVerarbeitenundAufbewahren);
-    form.append('KommunizierenundKooperieren',this.state.KommunizierenundKooperieren);
-    form.append('ProduzierenundPräsentieren', this.state.ProduzierenundPräsentieren );
-    form.append('Schützenundsicheragieren',this.state.Schützenundsicheragieren);
-    form.append('ProblemelösenundHandeln',this.state.ProblemelösenundHandeln);
-    form.append('AnalysierenundReflektieren', this.state.AnalysierenundReflektieren);
-    form.append('KitaVorschule', this.state.KitaVorschule);
-    form.append('Grundschule', this.state.Grundschule);
-    form.append('Sekundarstufe1', this.state.Sekundarstufe1);
-    form.append('Sekundarstufe2', this.state.Sekundarstufe2);
-    form.append('HoehereHandelschule', this.state.HoehereHandelschule);
-    form.append('Handelschule', this.state.Handelschule);
-    form.append('Sprachen', this.state.Sprachen);
-    form.append('KulturelleBildung', this.state.KulturelleBildung);
-    form.append('GeschichteGesellschaft', this.state.GeschichteGesellschaft);
-    form.append('Naturwissenschaften', this.state.Naturwissenschaften);
-    form.append('InformatiktechnischeBildung', this.state.InformatiktechnischeBildung);
-    form.append('Mathematik', this.state.Mathematik);
-    form.append('Deutsch', this.state.Deutsch);
-    form.append('Englisch', this.state.Englisch);
-    form.append('Physik', this.state.Physik);
-    form.append('Chemie', this.state.Chemie);
-    form.append('Erdkunde', this.state.Erdkunde);
-    form.append('Sport', this.state.Sport);
-    form.append('Kunst', this.state.Kunst);
-    form.append('Französisch', this.state.Französisch);
-    form.append('Spanisch', this.state.Spanisch);
-    form.append('Italienisch', this.state.Italienisch);
-    form.append('Bwl', this.state.Bwl);
-    form.append('Vwl', this.state.Vwl);
-    form.append('Informatik', this.state.Informatik);
-    form.append('Pädagogik', this.state.Pädagogik);
-    form.append('Politik', this.state.Politik);
-    form.append('KeinInternet', this.state.KeinInternet);
-    form.append('PCLaptop', this.state.PCLaptop);
-    form.append('TabletSmartphone', this.state.TabletSmartphone);
-    form.append('HardwareBasteln', this.state.HardwareBasteln);
-    form.append('VideosFilme', this.state.VideosFilme);
-    form.append('Unterrichstreihe', this.state.Unterrichstreihe);
-    form.append('Stunde', this.state.Stunde);
-    form.append('Doppelstunde', this.state.Doppelstunde);
-    form.append('Flexibel', this.state.Flexibel);
-    form.append('Klasse', this.state.Klasse);
-    form.append('Schule', this.state.Schule);
-    form.append('Fachlich', this.state.Fachlich);
-    form.append('Lehrer', this.state.Lehrer);
-    form.append('Elternvertretung', this.state.Elternvertretung);
-    form.append('Zeitmanagementbesserplanen', this.state.Zeitmanagementbesserplanen);
-    form.append('BudgetFinanzierung', this.state.BudgetFinanzierung);
-    form.append('BildungWissenvermittlung', this.state.BildungWissenvermittlung);
-    form.append('Unterrichtneugestalten', this.state.Unterrichtneugestalten); 
-    form.append('Verwaltungverbessern', this.state.Verwaltungverbessern);  
-    form.append('Konfliktmanagement', this.state.Konfliktmanagement);  
-    form.append('SonstigestrategischeZiele', this.state.SonstigestrategischeZiele);     
-    form.append('Tage', this.state.Tage);  
-    form.append('Wochen', this.state.Wochen);  
-    form.append('Monate', this.state.Monate);  
-    form.append('StadtGemeinde', this.state.StadtGemeinde);  
-    form.append('Personal', this.state.Personal);  
-    form.append('Schueler', this.state.Schueler);  
-    form.append('Bildung', this.state.Bildung);  
-    form.append('SchulischeAusstatung', this.state.SchulischeAusstatung); 
-    form.append('ITtechnischerSupport', this.state.ITtechnischerSupport); 
-    form.append('VerpflegunginderSchule', this.state.VerpflegunginderSchule); 
-    form.append('Finanzierung', this.state.Finanzierung); 
-    form.append('SozialesEngagement', this.state.SozialesEngagement); 
+    form.append('lehrundlernProjekt', lehrundlernProjekt);
+    form.append('managementProjekt', managementProjekt);
+    form.append('unterstuetzendesProjekt', unterstuetzendesProjekt);
+    form.append('SuchenVerarbeitenundAufbewahren', SuchenVerarbeitenundAufbewahren);
+    form.append('KommunizierenundKooperieren',KommunizierenundKooperieren);
+    form.append('ProduzierenundPräsentieren', ProduzierenundPräsentieren );
+    form.append('Schützenundsicheragieren',Schützenundsicheragieren);
+    form.append('ProblemelösenundHandeln',ProblemelösenundHandeln);
+    form.append('AnalysierenundReflektieren', AnalysierenundReflektieren);
+    form.append('KitaVorschule', KitaVorschule);
+    form.append('Grundschule', Grundschule);
+    form.append('Sekundarstufe1', Sekundarstufe1);
+    form.append('Sekundarstufe2', Sekundarstufe2);
+    form.append('HoehereHandelschule', HoehereHandelschule);
+    form.append('Handelschule', Handelschule);
+    form.append('Sprachen', Sprachen);
+    form.append('KulturelleBildung', KulturelleBildung);
+    form.append('GeschichteGesellschaft', GeschichteGesellschaft);
+    form.append('Naturwissenschaften', Naturwissenschaften);
+    form.append('InformatiktechnischeBildung', InformatiktechnischeBildung);
+    form.append('Mathematik', Mathematik);
+    form.append('Deutsch', Deutsch);
+    form.append('Englisch', Englisch);
+    form.append('Physik', Physik);
+    form.append('Chemie', Chemie);
+    form.append('Erdkunde', Erdkunde);
+    form.append('Sport', Sport);
+    form.append('Kunst', Kunst);
+    form.append('Französisch', Französisch);
+    form.append('Spanisch', Spanisch);
+    form.append('Italienisch', Italienisch);
+    form.append('Bwl', Bwl);
+    form.append('Vwl', Vwl);
+    form.append('Informatik', Informatik);
+    form.append('Pädagogik', Pädagogik);
+    form.append('Politik', Politik);
+    form.append('KeinInternet', KeinInternet);
+    form.append('PCLaptop', PCLaptop);
+    form.append('TabletSmartphone', TabletSmartphone);
+    form.append('HardwareBasteln', HardwareBasteln);
+    form.append('VideosFilme', VideosFilme);
+    form.append('Unterrichstreihe', Unterrichstreihe);
+    form.append('Stunde', Stunde);
+    form.append('Doppelstunde', Doppelstunde);
+    form.append('Flexibel', Flexibel);
+    form.append('Klasse', Klasse);
+    form.append('Schule', Schule);
+    form.append('Fachlich', Fachlich);
+    form.append('Lehrer', Lehrer);
+    form.append('Elternvertretung', Elternvertretung);
+    form.append('Zeitmanagementbesserplanen', Zeitmanagementbesserplanen);
+    form.append('BudgetFinanzierung', BudgetFinanzierung);
+    form.append('BildungWissenvermittlung', BildungWissenvermittlung);
+    form.append('Unterrichtneugestalten', Unterrichtneugestalten); 
+    form.append('Verwaltungverbessern', Verwaltungverbessern);  
+    form.append('Konfliktmanagement', Konfliktmanagement);  
+    form.append('SonstigestrategischeZiele', SonstigestrategischeZiele);     
+    form.append('Tage', Tage);  
+    form.append('Wochen', Wochen);  
+    form.append('Monate', Monate);  
+    form.append('StadtGemeinde', StadtGemeinde);  
+    form.append('Personal', Personal);  
+    form.append('Schueler', Schueler);  
+    form.append('Bildung', Bildung);  
+    form.append('SchulischeAusstatung', SchulischeAusstatung); 
+    form.append('ITtechnischerSupport', ITtechnischerSupport); 
+    form.append('VerpflegunginderSchule', VerpflegunginderSchule); 
+    form.append('Finanzierung', Finanzierung); 
+    form.append('SozialesEngagement', SozialesEngagement); 
     form.append('project_name', this.state.Titel);   
     form.append('project_text', this.state.Projektbeschreibung);
     form.append('foo', this.state.file);
@@ -298,7 +686,8 @@ class Wizard extends Component {
         'Accept': 'application/json, */*'
       },
       body: form
-    })
+    });
+    console.log(lehrundlernProjekt);
   }
 
 

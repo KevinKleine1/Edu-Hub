@@ -34,7 +34,7 @@ class ProjectPage extends React.Component {
     super(props);
 
     this.state = {
-      key: "4234234",
+      key: 23,
       joined: null,
       modalShare: false,
       modalMember: false,
@@ -48,7 +48,9 @@ class ProjectPage extends React.Component {
       Erstellt: "",
       Data: [],
       Members: [],
-      ProjectID: ""
+      ProjectID: "",
+      title: "",
+      description: ""
 
     };
     this.toggleShare = this.toggleShare.bind(this);
@@ -56,8 +58,15 @@ class ProjectPage extends React.Component {
     this.toggleEdit = this.toggleEdit.bind(this);
     this.toggleChange = this.toggleChange.bind(this);
     this.toggleInfo = this.toggleInfo.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.changeTitle = this.changeTitle.bind(this);
+    this.changeDescription = this.changeDescription.bind(this);
+    this.handleProject = this.handleProject.bind(this);
 
   }
+
+  handleChange = (e, {name, value}) => this.setState({[name]: value})
+
   toggleShare() {
     this.setState({
       modalShare: !this.state.modalShare
@@ -152,6 +161,68 @@ class ProjectPage extends React.Component {
     })
   }
 
+  changeTitle(){
+    const title = this.state.title;
+    var forma = new FormData();
+    forma.append('userid', localStorage.getItem('userid'));
+    forma.append('projectid', localStorage.getItem('projectid'));
+    forma.append('changeid', 1);
+    forma.append('newtitle', title);
+    fetch('http://backend-edu.azurewebsites.net/project/update', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json, */*'
+      },
+      body: forma
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+      this.setState({key: Math.random()}, function(){
+        this.setData();
+      });
+    });
+    this.toggleChange();
+  }
+
+  changeDescription(){
+    const description = this.state.description;
+    var forma = new FormData();
+    forma.append('userid', localStorage.getItem('userid'));
+    forma.append('projectid', localStorage.getItem('projectid'));
+    forma.append('changeid', 2);
+    forma.append('newdescription', description);
+    fetch('http://backend-edu.azurewebsites.net/project/update', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json, */*'
+      },
+      body: forma
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+      this.setState({key: Math.random()}, function(){
+        this.setData();
+      });
+    });
+    this.toggleChange();
+  }
+
+  changePicture(){
+    var forme = new FormData();
+    forme.append('foo', this.state.file);
+    forme.append('email', localStorage.getItem('email'));
+
+    fetch('http://backend-edu.azurewebsites.net/user/changepicture', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json, */*'
+      },
+      body: forma
+    })
+  }
+
   //fetching the corresponding data from the server to display it on the webpage
   setMembers() {
     localStorage.setItem('projectid', this.props.match.params.projectid);
@@ -187,6 +258,15 @@ class ProjectPage extends React.Component {
     })
   }
 
+  handleProject(){
+    if(this.state.title.length > 0){
+      this.changeTitle();
+    }
+    if(this.state.description.length > 0){
+      this.changeDescription();
+    }
+  }
+
   //handles the click on the toggle (join/leave) Button
   handleClick = () => this.setState({
     joined: !this.state.joined,
@@ -195,7 +275,6 @@ class ProjectPage extends React.Component {
 
   //checks if the user is a member of the project or not and the calls the correct function to either leave the project or join it
   handleJoin() {
-
     var joined = this.state.joined;
     if (joined) {
       this.joinProject();
@@ -267,8 +346,15 @@ class ProjectPage extends React.Component {
   }
 
   //updates the projectpage if the url match changes, so we can easily swap between projects without having to reload the page
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.props.match.params.projectid !== prevProps.match.params.projectid) {
+      this.getReactions();
+      this.setData();
+      this.setMembers();
+      this.setUser();
+      this.setMembership();
+    }
+    if(this.state.key !== prevState.key){
       this.getReactions();
       this.setData();
       this.setMembers();
@@ -504,10 +590,10 @@ class ProjectPage extends React.Component {
                 Projektdaten Aktualisieren
               </h3>
               <Form.Group widths='equal'>
-                <Form.Input placeholder='Titel' icon='user' iconPosition='left'/>
+                <Form.Input placeholder='Titel' name="title" value={this.state.title} onChange={this.handleChange} icon='user' iconPosition='left'/>
               </Form.Group>
               <Form.Group widths='equal'>
-                <Form.TextArea rows={2} placeholder='Projektbeschreibung'/>
+                <Form.TextArea rows={2} name="description" value={this.state.description} onChange={this.handleChange} placeholder='Projektbeschreibung'/>
               </Form.Group>
               <Form.Group widths='equal'>
                 <Form.TextArea rows={2} placeholder='Zielerreichung'/>
@@ -529,7 +615,7 @@ class ProjectPage extends React.Component {
                 </Form.Field>
               </div>
               <div className="row justify-content-md-center">
-                <Button animated={true} color='teal' style={{
+                <Button onClick={this.handleProject} animated={true} color='teal' style={{
                     width: "130px"
                   }}>
                   <Button.Content visible={true}>Speichern</Button.Content>
