@@ -217,6 +217,7 @@ class Wizard extends Component {
 
 
   newProject(){
+    this.setState({Laden: true});
 
     if(this.state.lehrundlernProjekt){
       var lehrundlernProjekt = 1;
@@ -686,8 +687,17 @@ class Wizard extends Component {
         'Accept': 'application/json, */*'
       },
       body: form
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+      this.setState({
+        Pid: json[0].projectid
+      }, function() {
+        var link = json[0].projectid
+        history.push('/projectpage/' + link);
+      });
     });
-    console.log(lehrundlernProjekt);
   }
 
 

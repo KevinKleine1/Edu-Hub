@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
 import {Table, Button} from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
 
 //This part needs to be created dynamicly according to user
 const tableData = [
@@ -134,7 +135,8 @@ class MyProjects extends React.Component {
   render() {
     const {column, data, direction} = this.state
 
-    return (<div>
+    return (
+    <div>
       <Table sortable={true} celled={true} fixed={true} selectable={true} size='large'>
         <Table.Header>
           <Table.Row>
@@ -162,12 +164,15 @@ class MyProjects extends React.Component {
         </Table.Header>
         <Table.Body>
           {
-            _.map(data, ({project_name, project_projecttype, projectid, project_updated_at}) => (<Table.Row key={projectid}>
+            _.map(data, ({project_name, project_projecttype, projectid, project_updated_at}) => (
+              <Table.Row key={projectid}>
               <Table.Cell>{projectid}</Table.Cell>
-              <Table.Cell>{project_name}</Table.Cell>
+              <Table.Cell selectable><a href={'/projectpage/' + projectid}>{project_name}</a></Table.Cell>
               <Table.Cell>{project_projecttype}</Table.Cell>
               <Table.Cell>{this.formatDateWithTime(project_updated_at)}</Table.Cell>
-            </Table.Row>))
+              </Table.Row>
+           
+            ))
           }
         </Table.Body>
       </Table>
