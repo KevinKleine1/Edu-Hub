@@ -230,6 +230,12 @@ class Admin extends Component {
     localStorage.setItem("name", Vorname);
   }
 
+
+  changePicture(){
+    
+  }
+
+
   //the called function for the button which includes validation and data setting
   handleSubmit() {
 

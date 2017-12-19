@@ -34,7 +34,7 @@ class Wizard extends Component {
       dropdownOpen: false,
       activeIndex: 0,
       selectedOption: 'option1',
-      lehrundlernProjekt: true,
+      lehrundlernProjekt: false,
       managementProjekt: false,
       unterstuetzendesProjekt: false,
       SuchenVerarbeitenundAufbewahren: false,
@@ -106,9 +106,23 @@ class Wizard extends Component {
       Titel: "",
       Projektbeschreibung: "",
       Laden: false,
-      file: ''
+      file: '',
+      Userid: ""
 
     };
+  }
+
+  setUserdata() {
+    var target = ('http://backend-edu.azurewebsites.net/user/' + localStorage.getItem('email'))
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      localStorage.setItem('userid', json[0].userid);
+      
+
+    })
   }
 
   toggle() {
@@ -205,128 +219,85 @@ class Wizard extends Component {
   newProject(){
 
     var form = new FormData();
+    form.append('project_author' ,localStorage.getItem('userid'));
+    form.append('SuchenVerarbeitenundAufbewahren',this.state.SuchenVerarbeitenundAufbewahren);
+    form.append('KommunizierenundKooperieren',this.state.KommunizierenundKooperieren);
+    form.append('ProduzierenundPräsentieren', this.state.ProduzierenundPräsentieren );
+    form.append('Schützenundsicheragieren',this.state.Schützenundsicheragieren);
+    form.append('ProblemelösenundHandeln',this.state.ProblemelösenundHandeln);
+    form.append('AnalysierenundReflektieren', this.state.AnalysierenundReflektieren);
+    form.append('KitaVorschule', this.state.KitaVorschule);
+    form.append('Grundschule', this.state.Grundschule);
+    form.append('Sekundarstufe1', this.state.Sekundarstufe1);
+    form.append('Sekundarstufe2', this.state.Sekundarstufe2);
+    form.append('HoehereHandelschule', this.state.HoehereHandelschule);
+    form.append('Handelschule', this.state.Handelschule);
+    form.append('Sprachen', this.state.Sprachen);
+    form.append('KulturelleBildung', this.state.KulturelleBildung);
+    form.append('GeschichteGesellschaft', this.state.GeschichteGesellschaft);
+    form.append('Naturwissenschaften', this.state.Naturwissenschaften);
+    form.append('InformatiktechnischeBildung', this.state.InformatiktechnischeBildung);
+    form.append('Mathematik', this.state.Mathematik);
+    form.append('Deutsch', this.state.Deutsch);
+    form.append('Englisch', this.state.Englisch);
+    form.append('Physik', this.state.Physik);
+    form.append('Chemie', this.state.Chemie);
+    form.append('Erdkunde', this.state.Erdkunde);
+    form.append('Sport', this.state.Sport);
+    form.append('Kunst', this.state.Kunst);
+    form.append('Französisch', this.state.Französisch);
+    form.append('Spanisch', this.state.Spanisch);
+    form.append('Italienisch', this.state.Italienisch);
+    form.append('Bwl', this.state.Bwl);
+    form.append('Vwl', this.state.Vwl);
+    form.append('Informatik', this.state.Informatik);
+    form.append('Pädagogik', this.state.Pädagogik);
+    form.append('Politik', this.state.Politik);
+    form.append('KeinInternet', this.state.KeinInternet);
+    form.append('PCLaptop', this.state.PCLaptop);
+    form.append('TabletSmartphone', this.state.TabletSmartphone);
+    form.append('HardwareBasteln', this.state.HardwareBasteln);
+    form.append('VideosFilme', this.state.VideosFilme);
+    form.append('Unterrichstreihe', this.state.Unterrichstreihe);
+    form.append('Stunde', this.state.Stunde);
+    form.append('Doppelstunde', this.state.Doppelstunde);
+    form.append('Flexibel', this.state.Flexibel);
+    form.append('Klasse', this.state.Klasse);
+    form.append('Schule', this.state.Schule);
+    form.append('Fachlich', this.state.Fachlich);
+    form.append('Lehrer', this.state.Lehrer);
+    form.append('Elternvertretung', this.state.Elternvertretung);
+    form.append('Zeitmanagementbesserplanen', this.state.Zeitmanagementbesserplanen);
+    form.append('BudgetFinanzierung', this.state.BudgetFinanzierung);
+    form.append('BildungWissenvermittlung', this.state.BildungWissenvermittlung);
+    form.append('Unterrichtneugestalten', this.state.Unterrichtneugestalten); 
+    form.append('Verwaltungverbessern', this.state.Verwaltungverbessern);  
+    form.append('Konfliktmanagement', this.state.Konfliktmanagement);  
+    form.append('SonstigestrategischeZiele', this.state.SonstigestrategischeZiele);     
+    form.append('Tage', this.state.Tage);  
+    form.append('Wochen', this.state.Wochen);  
+    form.append('Monate', this.state.Monate);  
+    form.append('StadtGemeinde', this.state.StadtGemeinde);  
+    form.append('Personal', this.state.Personal);  
+    form.append('Schueler', this.state.Schueler);  
+    form.append('Bildung', this.state.Bildung);  
+    form.append('SchulischeAusstatung', this.state.SchulischeAusstatung); 
+    form.append('ITtechnischerSupport', this.state.ITtechnischerSupport); 
+    form.append('VerpflegunginderSchule', this.state.VerpflegunginderSchule); 
+    form.append('Finanzierung', this.state.Finanzierung); 
+    form.append('SozialesEngagement', this.state.SozialesEngagement); 
+    form.append('project_name', this.state.Titel);   
+    form.append('project_text', this.state.Projektbeschreibung);
     form.append('foo', this.state.file);
-    form.append('forename', this.state.Vorname);
-    form.append('surname', this.state.Nachname);
-    form.append('street', this.state.Strasse);
-    form.append('city', this.state.Stadt);
-    form.append('number', this.state.Hausnummer);
-    form.append('postcode', this.state.Postcode);
-    form.append('subject1', this.state.Fach1);
-    form.append('subject2', this.state.Fach2);
-    form.append('subject3', this.state.Fach3);
-    form.append('fileName', "Maria");
-    form.append('foo', this.state.file);
-    form.append('forename', this.state.Vorname);
-    form.append('surname', this.state.Nachname);
-    form.append('street', this.state.Strasse);
-    form.append('city', this.state.Stadt);
-    form.append('number', this.state.Hausnummer);
-    form.append('postcode', this.state.Postcode);
-    form.append('subject1', this.state.Fach1);
-    form.append('subject2', this.state.Fach2);
-    form.append('subject3', this.state.Fach3);
-    form.append('fileName', "Maria");
-    form.append('foo', this.state.file);
-    form.append('forename', this.state.Vorname);
-    form.append('surname', this.state.Nachname);
-    form.append('street', this.state.Strasse);
-    form.append('city', this.state.Stadt);
-    form.append('number', this.state.Hausnummer);
-    form.append('postcode', this.state.Postcode);
-    form.append('subject1', this.state.Fach1);
-    form.append('subject2', this.state.Fach2);
-    form.append('subject3', this.state.Fach3);
-    form.append('fileName', "Maria");
-    form.append('foo', this.state.file);
-    form.append('forename', this.state.Vorname);
-    form.append('surname', this.state.Nachname);
-    form.append('street', this.state.Strasse);
-    form.append('city', this.state.Stadt);
-    form.append('number', this.state.Hausnummer);
-    form.append('postcode', this.state.Postcode);
-    form.append('subject1', this.state.Fach1);
-    form.append('subject2', this.state.Fach2);
-    form.append('subject3', this.state.Fach3);
-    form.append('fileName', "Maria");
+    form.append('fileName', "Projekt"); 
 
 
     fetch('http://backend-edu.azurewebsites.net/wizardctrl/newProject', {
       method: 'POST',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Accept': 'application/json, */*'
       },
-      body: JSON.stringify({
-        SuchenVerarbeitenundAufbewahren: this.state.SuchenVerarbeitenundAufbewahren,
-        KommunizierenundKooperieren: this.state.KommunizierenundKooperieren,
-        ProduzierenundPräsentieren: this.state.ProduzierenundPräsentieren,
-        Schützenundsicheragieren: this.state.Schützenundsicheragieren,
-        ProblemelösenundHandeln: this.state.ProblemelösenundHandeln,
-        AnalysierenundReflektieren: this.state.AnalysierenundReflektieren,
-        KitaVorschule: this.state.KitaVorschule,
-        Grundschule: this.state.Grundschule,
-        Sekundarstufe1: this.state.Sekundarstufe1,
-        Sekundarstufe2: this.state.Sekundarstufe2,
-        HoehereHandelschule: this.state.HoehereHandelschule,
-        Handelschule: this.state.Handelschule,
-        Sprachen: this.state.Sprachen,
-        KulturelleBildung: this.state.KulturelleBildung,
-        GeschichteGesellschaft: this.state.GeschichteGesellschaft,
-        Naturwissenschaften: this.state.Naturwissenschaften,
-        InformatiktechnischeBildung: this.state.InformatiktechnischeBildung,
-        Mathematik: this.state.Mathematik,
-        Deutsch: this.state.Deutsch,
-        Englisch: this.state.Englisch,
-        Physik: this.state.Physik,
-        Chemie: this.state.Chemie,
-        Erdkunde: this.state.Erdkunde,
-        Sport: this.state.Sport,
-        Kunst: this.state.Kunst,
-        Französisch: this.state.Französisch,
-        Spanisch: this.state.Spanisch,
-        Italienisch: this.state.Italienisch,
-        Bwl: this.state.Bwl,
-        Vwl: this.state.Vwl,
-        Informatik: this.state.Informatik,
-        Pädagogik: this.state.Pädagogik,
-        Politik: this.state.Politik,
-        KeinInternet: this.state.KeinInternet,
-        PCLaptop: this.state.PCLaptop,
-        TabletSmartphone: this.state.TabletSmartphone,
-        HardwareBasteln: this.state.HardwareBasteln,
-        VideosFilme: this.state.VideosFilme,
-        Unterrichstreihe: this.state.Unterrichstreihe,
-        Stunde: this.state.Stunde,
-        Doppelstunde: this.state.Doppelstunde,
-        Flexibel: this.state.Flexibel,
-        Klasse: this.state.Klasse,
-        Schule: this.state.Schule,
-        Fachlich: this.state.Fachlich,
-        Lehrer: this.state.Lehrer,
-        Elternvertretung: this.state.Elternvertretung,
-        Zeitmanagementbesserplanen: this.state.Zeitmanagementbesserplanen,
-        BudgetFinanzierung: this.state.BudgetFinanzierung,
-        BildungWissenvermittlung: this.state.BildungWissenvermittlung,
-        Unterrichtneugestalten: this.state.Unterrichtneugestalten,
-        Verwaltungverbessern: this.state.Verwaltungverbessern,
-        Konfliktmanagement: this.state.Konfliktmanagement,
-        SonstigestrategischeZiele: this.state.SonstigestrategischeZiele,
-        Tage: this.state.Tage,
-        Wochen: this.state.Wochen,
-        Monate: this.state.Monate,
-        StadtGemeinde: this.state.StadtGemeinde,
-        Personal: this.state.Personal,
-        Schueler: this.state.Schueler,
-        Bildung: this.state.Bildung,
-        SchulischeAusstatung: this.state.SchulischeAusstatung,
-        ITtechnischerSupport: this.state.ITtechnischerSupport,
-        VerpflegunginderSchule: this.state.VerpflegunginderSchule,
-        Finanzierung: this.state.Finanzierung,
-        SozialesEngagement: this.state.SozialesEngagement,
-        Titel: "",
-        Projektbeschreibung: ""
-      })
+      body: form
     })
   }
 
@@ -354,17 +325,17 @@ class Wizard extends Component {
 
   changeTab() {
     if(this.state.activeIndex == "4"){
-      console.log("Checked");
-      console.log(this.state.Projektbeschreibung);
-      console.log(this.state.Titel);
       this.newProject();
     }else{
 
     if (this.state.value === "option1") {
+      this.setState({lehrundlernProjekt: true});
       this.setState({activeIndex: 1});
     } else if (this.state.value === "option2") {
+      this.setState({managementProjekt: true});
       this.setState({activeIndex: 2});
     } else if (this.state.value === "option3") {
+      this.setState({unterstuetzendesProjekt: true});
       this.setState({activeIndex: 3});
     }
     if(this.state.activeIndex =="1"){
@@ -379,6 +350,10 @@ class Wizard extends Component {
     
     }
   };
+
+  componentDidMount(){
+    this.setUserdata();
+  }
 
   render() {
     const {activeIndex} = this.state
