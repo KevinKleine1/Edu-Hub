@@ -185,7 +185,7 @@ class ProjectPage extends React.Component {
         this.toggleChange();
       });
     });
-    
+
   }
 
   changeDescription(){
@@ -211,7 +211,7 @@ class ProjectPage extends React.Component {
         this.toggleChange();
       });
     });
-    
+
   }
 
   changePicture(){
@@ -363,7 +363,7 @@ class ProjectPage extends React.Component {
       this.setUser();
       this.setMembership();
     }
- 
+
   }
 
   //formats date
@@ -589,9 +589,11 @@ class ProjectPage extends React.Component {
         menuItem: 'Bearbeiten',
         render: () => <Tab.Pane>
             <Form>
-              <h3>
-                Projektdaten Aktualisieren
-              </h3>
+              <Form.Group>
+              <Form.Field>
+                <Button floated='right' circular icon='delete' color='red' size='mini'/>
+              <Header as='h2' floated='left'>Projektdaten aktualisieren</Header>
+            </Form.Field></Form.Group>
               <Form.Group widths='equal'>
                 <Form.Input placeholder='Titel' name="title" value={this.state.title} onChange={this.handleChange} icon='user' iconPosition='left'/>
               </Form.Group>
