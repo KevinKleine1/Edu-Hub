@@ -29,6 +29,7 @@ import TimelineComponent from '../../components/TimelineComponent/TimelineCompon
 import UserCard from '../../components/UserCard/UserCard';
 import Tags from '../../components/Tags/Tags';
 import Ressources from '../../components/Ressources/Ressources';
+import history from '../../history';
 
 class ProjectPage extends React.Component {
 
@@ -57,7 +58,9 @@ class ProjectPage extends React.Component {
       TagData: [],
       ResourceData: [],
       tag: "",
-      resource: ""
+      resource: "",
+      Commenttitle: "",
+      Commenttext: ""
 
     };
     this.toggleShare = this.toggleShare.bind(this);
@@ -71,6 +74,8 @@ class ProjectPage extends React.Component {
     this.handleProject = this.handleProject.bind(this);
     this.addTag = this.addTag.bind(this);
     this.addResource = this.addResource.bind(this);
+    this.addComment = this.addComment.bind(this);
+    this.deleteProject = this.deleteProject.bind(this);
 
   }
 
@@ -215,6 +220,55 @@ class ProjectPage extends React.Component {
 
   }
 
+  addComment(){
+    this.setState({Laden: true});
+    var forma = new FormData();
+    forma.append('Project_projectid', this.props.match.params.projectid);
+    forma.append('project_name', this.state.Commenttitle);
+    forma.append('project_text', this.state.Commenttext);
+    forma.append('project_author', localStorage.getItem('userid'));
+
+    fetch('http://backend-edu.azurewebsites.net/project/addComment', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, */*'
+      },
+      body: forma
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+      this.setState({key: Math.random()}, function(){
+        this.getReactions();
+        this.setState({Commenttext: ""});
+        this.setState({Commenttitle: ""});
+        this.setState({Laden: false});
+        this.toggleEdit();
+      });
+    });
+  }
+
+  deleteProject(){
+    this.setState({Laden: true});
+    var forma = new FormData();
+    forma.append('projectid', this.props.match.params.projectid);
+
+    fetch('http://backend-edu.azurewebsites.net/project/delete', {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json, */*'
+      },
+      body: forma
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+        this.setState({key: Math.random()}, function(){
+        this.setState({Laden: false});
+        history.push('/dashboard');
+      });
+    });
+  }
 
   //creates the nodes for our timeline
   createNode(node) {
@@ -539,15 +593,15 @@ class ProjectPage extends React.Component {
         render: () => <Tab.Pane>
             <Form>
               <Form.Field>
-                <Form.Group><Form.Input placeholder='Titel' style={{
+                <Form.Group><Form.Input onChange={this.handleChange} name="Commenttitle" value={this.state.Commenttitle} placeholder='Titel' style={{
               width: "600px"
             }}/><br/></Form.Group>
-                <Form.Field control={TextArea} placeholder='Kommentar einfügen'/>
+                <Form.Field control={TextArea} onChange={this.handleChange} name="Commenttext" value={this.state.Commenttext} placeholder='Kommentar einfügen'/>
               </Form.Field>
               <br/>
             </Form>
             <div className="row justify-content-md-center">
-              <Button animated={true} color='teal' style={{
+              <Button loading={this.state.Laden} onClick={this.addComment} animated={true} color='teal' style={{
                   width: "130px"
                 }}>
                 <Button.Content visible={true}>Absenden</Button.Content>
@@ -706,7 +760,7 @@ class ProjectPage extends React.Component {
             <Form>
               <Form.Group>
               <Form.Field>
-                <Button floated='right' circular icon='delete' color='red' size='mini' />
+                <Button floated='right' onClick={this.deleteProject} circular icon='delete' color='red' size='mini' />
               <Header as='h2' floated='left'>Projektdaten aktualisieren</Header>
             </Form.Field></Form.Group>
               <Form.Group widths='equal'>
