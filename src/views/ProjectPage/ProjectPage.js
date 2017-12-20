@@ -28,16 +28,6 @@ import {Link} from 'react-router-dom';
 import TimelineComponent from '../../components/TimelineComponent/TimelineComponent';
 import UserCard from '../../components/UserCard/UserCard';
 
-//confirmation for delete button
-function confirmDelete(){
-  var clicked = confirm("Möchtest du dieses Projekt wirklich löschen?");
-  if (clicked == true) {
-    console.log("Ok has been clicked")
-} else {
-    console.log("Cancel has been clicked")
-}
-}
-
 class ProjectPage extends React.Component {
 
   constructor(props) {
@@ -93,6 +83,7 @@ class ProjectPage extends React.Component {
       modalEdit: !this.state.modalEdit
     });
   }
+
   toggleChange() {
     this.setState({
       modalChange: !this.state.modalChange
