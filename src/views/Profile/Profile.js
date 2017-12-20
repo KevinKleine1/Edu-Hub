@@ -11,6 +11,9 @@ import {
 } from 'semantic-ui-react';
 import history from '../../history';
 import jwt from 'jsonwebtoken';
+import ProfileComponent from '../../components/ProfileComponent/ProfileComponent';
+import {VerticalTimeline, VerticalTimelineElement} from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
 
 var vorname,
   name,
@@ -27,9 +30,36 @@ class Profile extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      profileData: []
+    };
   }
 
+  createNode(node) {
+    return <ProfileComponent type={node.project_projecttype} name={node.project_name} authorname={node.surname} authorvorname={node.forename} authormail={node.email} text={node.project_text} userid={node.userid} projectid={node.projectid} key={node.projectid}/>;
+  }
+
+  createNodes(nodes) {
+
+    return nodes.map(this.createNode);
+
+  }
+
+  setUser() {
+    var target = ('http://backend-edu.azurewebsites.net/user/' + localStorage.getItem('email'))
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({
+        NutzerId: json[0].userid
+      }, function() {
+        localStorage.setItem('userid', this.state.NutzerId);
+        this.getTimeline();
+      });
+    })
+  }
 
   //calls db for a fetch of the user data
   setData() {
@@ -54,6 +84,20 @@ class Profile extends React.Component {
     })
   }
 
+  getTimeline(){
+    var target = ('http://backend-edu.azurewebsites.net/user/profil/timeline/' + localStorage.getItem('userid'))
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({
+       profileData: json
+      }, function() {})
+
+    })
+  }
+
   changeView() {
     history.push('/admin');
   };
@@ -65,6 +109,8 @@ class Profile extends React.Component {
   //initial fetch call
   componentDidMount() {
     this.setData();
+    this.setUser();
+
   }
 
   render() {
@@ -177,10 +223,12 @@ class Profile extends React.Component {
               </div>
             </div>
           </div>
-
-        </div>
+         </div>
         <br/>
       </div>
+      <VerticalTimeline>
+      {this.createNodes(this.state.profileData)}
+      </VerticalTimeline>
     </div>
     )
   }
