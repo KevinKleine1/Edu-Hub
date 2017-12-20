@@ -68,7 +68,11 @@ class ProjectPage extends React.Component {
       Documenttext: "",
       ImageData: [],
       Imagetitle: "",
-      Imagetext: ""
+      Imagetext: "",
+      Termintitle: "",
+      Termintext: "",
+      Termindate: ""
+
 
     };
     this.toggleShare = this.toggleShare.bind(this);
@@ -86,6 +90,7 @@ class ProjectPage extends React.Component {
     this.deleteProject = this.deleteProject.bind(this);
     this.addDocument = this.addDocument.bind(this);
     this.addImage = this.addImage.bind(this);
+    this.addTermin = this.addTermin.bind(this);
 
   }
 
@@ -670,6 +675,33 @@ class ProjectPage extends React.Component {
     document.execCommand('Copy');
   }
 
+  addTermin(){
+    this.setState({Laden: true});
+    var forma = new FormData();
+    forma.append('project_author', localStorage.getItem('userid'));
+    forma.append('Project_projectid', this.props.match.params.projectid);
+    forma.append('project_name', this.state.Termintitle);
+    forma.append('project_text', this.state.Termintext);
+    forma.append('project_termin', this.state.Termindate);
+
+    fetch('http://backend-edu.azurewebsites.net/project/addTermin', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, */*'
+      },
+      body: forma
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+      this.setState({key: Math.random()}, function(){
+        this.getReactions();
+        this.setState({Laden: false});
+        this.toggleEdit();
+      });
+    });
+  }
+
 
   render() {
     const {
@@ -771,18 +803,18 @@ class ProjectPage extends React.Component {
 
             <Form>
               <Form.Field>
-                <Form.Group><Form.Input placeholder='Titel' style={{
+                <Form.Group><Form.Input name="Termintitle" value={this.state.Termintitle} onChange={this.handleChange} placeholder='Titel' style={{
               width: "600px"
             }}/><br/></Form.Group>
-                <Form.Field control={TextArea} placeholder='Beschreibung'/>
+                <Form.Field control={TextArea} name="Termintext" value={this.state.Termintext} onChange={this.handleChange} placeholder='Beschreibung'/>
                 <Form.Field>
                   <label>Termin</label><Form.Input style={{
               width: "200px"
-            }} type='date' placeholder='Datum' icon='calendar' iconPosition='left'/></Form.Field>
+            }} type='date' placeholder='Datum' name="Termindate" onChange={this.handleChange} icon='calendar' iconPosition='left'/></Form.Field>
               </Form.Field><br/>
             </Form>
             <div className="row justify-content-md-center">
-              <Button animated={true} color='teal' style={{
+              <Button loading={this.state.Laden} onClick={this.addTermin} animated={true} color='teal' style={{
                   width: "130px"
                 }}>
                 <Button.Content visible={true}>Absenden</Button.Content>

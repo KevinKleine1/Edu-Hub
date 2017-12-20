@@ -31,8 +31,11 @@ class Profile extends React.Component {
     super(props);
 
     this.state = {
-      profileData: []
+      profileData: [],
+      Erstellt: ""
     };
+
+  
   }
 
   createNode(node) {
@@ -45,21 +48,6 @@ class Profile extends React.Component {
 
   }
 
-  setUser() {
-    var target = ('http://backend-edu.azurewebsites.net/user/' + localStorage.getItem('email'))
-    fetch(target).then((results) => {
-      return results.json();
-
-    }).then((json) => {
-
-      this.setState({
-        NutzerId: json[0].userid
-      }, function() {
-        localStorage.setItem('userid', this.state.NutzerId);
-        this.getTimeline();
-      });
-    })
-  }
 
   //calls db for a fetch of the user data
   setData() {
@@ -69,6 +57,10 @@ class Profile extends React.Component {
 
     }).then((json) => {
 
+      this.setState({NutzerId: json[0].userid}, function(){
+        localStorage.setItem('userid', this.state.NutzerId);
+        this.getTimeline();
+      })
       this.setState({Vorname: json[0].forename});
       this.setState({Nachname: json[0].surname});
       this.setState({Stadt: json[0].city});
@@ -80,6 +72,7 @@ class Profile extends React.Component {
       this.setState({Fach2: json[0].subject2});
       this.setState({Fach3: json[0].subject3});
       this.setState({Bild: json[0].profilpic});
+      this.setState({Erstellt: json[0].user_created_at})
 
     })
   }
@@ -98,6 +91,39 @@ class Profile extends React.Component {
     })
   }
 
+  formatDateMonthName(date_unformatted) {
+    var day = date_unformatted.substr(8, 2);
+    var month = date_unformatted.substr(5, 2);
+    var year = date_unformatted.substr(0, 4);
+    var monthNamed = null;
+    if (month == '01') {
+      monthNamed = 'Januar';
+    } else if (month == '02') {
+      monthNamed = 'Februar';
+    } else if (month == '03') {
+      monthNamed = 'März';
+    } else if (month == '04') {
+      monthNamed = 'April';
+    } else if (month == '05') {
+      monthNamed = 'Mai';
+    } else if (month == '06') {
+      monthNamed = 'Juni';
+    } else if (month == '07') {
+      monthNamed = 'Juli';
+    } else if (month == '08') {
+      monthNamed = 'August';
+    } else if (month == '09') {
+      monthNamed = 'September';
+    } else if (month == '10') {
+      monthNamed = 'Oktober';
+    } else if (month == '11') {
+      monthNamed = 'November';
+    } else {
+      monthNamed = 'Dezember';
+    }
+    return day + '.' + monthNamed + '.' + year;
+  }
+
   changeView() {
     history.push('/admin');
   };
@@ -109,7 +135,6 @@ class Profile extends React.Component {
   //initial fetch call
   componentDidMount() {
     this.setData();
-    this.setUser();
 
   }
 
@@ -127,6 +152,7 @@ class Profile extends React.Component {
       Bild,
       Beschreibung
     } = this.state
+    var Erstellt = this.formatDateMonthName(this.state.Erstellt);
     return (
     <div className="animated fadeIn">
       <div className="container">
@@ -135,7 +161,7 @@ class Profile extends React.Component {
               width: "800px"
             }}>
             <img className="img-circle" src={ 'http://backend-edu.azurewebsites.net/' +  localStorage.getItem('picture') } style={{
-                width: "200px"
+                width: "200px", height: "200px"
               }} align="right"></img>
             <Header as='h2'>
               <Icon name='user outline'/>
@@ -228,6 +254,16 @@ class Profile extends React.Component {
       </div>
       <VerticalTimeline>
       {this.createNodes(this.state.profileData)}
+      <VerticalTimelineElement className="vertical-timeline-element--education" iconStyle={{
+              background: 'rgb(233, 30, 99)',
+              color: '#fff'
+            }} animate={true}>
+            <h3 className="vertical-timeline-element-title">Beitritt</h3>
+            <p>
+              Ist am {""} {Erstellt} {""}
+              Edu - Hub beigetreten.
+            </p>
+          </VerticalTimelineElement>
       </VerticalTimeline>
     </div>
     )

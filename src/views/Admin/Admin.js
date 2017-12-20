@@ -303,9 +303,9 @@ class Admin extends Component {
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img className="img-circle" src={imagePreviewUrl}/>);
+      $imagePreview = (<img className="img-circle"  style={{width: "200px", height: "200px"}} src={imagePreviewUrl}/>);
     } else {
-      $imagePreview = (<img className="img-circle" src={'http://backend-edu.azurewebsites.net/' + localStorage.getItem('picture')}/>);
+      $imagePreview = (<img className="img-circle" style={{width: "200px", height: "200px"}} src={'http://backend-edu.azurewebsites.net/' + localStorage.getItem('picture')}/>);
     }
     return (<div className="container">
       <div className="row justify-content-md-center">
