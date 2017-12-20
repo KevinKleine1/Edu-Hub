@@ -24,7 +24,7 @@ import 'whatwg-fetch'
 const auth = new Auth();
 
 //dashboard class where we can see up to date project and which is in general our landing page
-class Dashboard extends React.Component {
+class Test2 extends React.Component {
 
   constructor(props) {
     super(props);
@@ -153,4 +153,4 @@ class Dashboard extends React.Component {
   }
 }
 
-export default Dashboard;
+export default Test2;
