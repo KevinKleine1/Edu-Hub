@@ -27,6 +27,8 @@ import 'react-vertical-timeline-component/style.min.css';
 import {Link} from 'react-router-dom';
 import TimelineComponent from '../../components/TimelineComponent/TimelineComponent';
 import UserCard from '../../components/UserCard/UserCard';
+import Tags from '../../components/Tags/Tags';
+import Ressources from '../../components/Ressources/Ressources';
 
 class ProjectPage extends React.Component {
 
@@ -51,7 +53,11 @@ class ProjectPage extends React.Component {
       ProjectID: "",
       title: "",
       description: "",
-      Laden: false
+      Laden: false,
+      TagData: [],
+      ResourceData: [],
+      tag: "",
+      resource: ""
 
     };
     this.toggleShare = this.toggleShare.bind(this);
@@ -63,6 +69,8 @@ class ProjectPage extends React.Component {
     this.changeTitle = this.changeTitle.bind(this);
     this.changeDescription = this.changeDescription.bind(this);
     this.handleProject = this.handleProject.bind(this);
+    this.addTag = this.addTag.bind(this);
+    this.addResource = this.addResource.bind(this);
 
   }
 
@@ -109,6 +117,103 @@ class ProjectPage extends React.Component {
     })
   }
 
+  createTag(tag){
+    return <Tags Tag={tag.tag_name} key={tag.tagid} />
+  }
+
+  createTags(tags){
+
+    return tags.map(this.createTag);
+  }
+
+  getTags(){
+    var target = ('http://backend-edu.azurewebsites.net/tag/' + this.props.match.params.projectid)
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({
+        TagData: json
+      }, function() {})
+
+    })
+  }
+
+  addTag(){
+    this.setState({Laden: true});
+    const Tag = this.state.tag;
+    var forma = new FormData();
+    forma.append('pht_idproject', this.props.match.params.projectid);
+    forma.append('tag_name', Tag);
+
+    fetch('http://backend-edu.azurewebsites.net/tag', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, */*'
+      },
+      body: forma
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+      this.setState({key: Math.random()}, function(){
+        this.getTags();
+        this.setState({Laden: false});
+        this.toggleEdit();
+      });
+    });
+
+  }
+
+  getResources(){
+    var target = ('http://backend-edu.azurewebsites.net/resource/' + this.props.match.params.projectid)
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({
+        ResourceData: json
+      }, function() {})
+
+    })
+  }
+
+  createResource(resource){
+    return <Ressources Resource={resource.resource_name} key={resource.resourceid} />
+  }
+
+  createResources(resources){
+
+  return resources.map(this.createResource);
+  }
+
+  addResource(){
+    this.setState({Laden: true});
+    const Resource = this.state.resource;
+    var forma = new FormData();
+    forma.append('phr_idproject', this.props.match.params.projectid);
+    forma.append('resource_name', Resource);
+
+    fetch('http://backend-edu.azurewebsites.net/resource', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, */*'
+      },
+      body: forma
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+      this.setState({key: Math.random()}, function(){
+        this.getResources();
+        this.setState({Laden: false});
+        this.toggleEdit();
+      });
+    });
+
+  }
 
 
   //creates the nodes for our timeline
@@ -355,6 +460,8 @@ class ProjectPage extends React.Component {
     this.setMembers();
     this.setUser();
     this.setMembership();
+    this.getTags();
+    this.getResources();
   }
 
   //updates the projectpage if the url match changes, so we can easily swap between projects without having to reload the page
@@ -365,6 +472,8 @@ class ProjectPage extends React.Component {
       this.setMembers();
       this.setUser();
       this.setMembership();
+      this.getTags();
+      this.getResources();
     }
 
   }
@@ -392,7 +501,9 @@ class ProjectPage extends React.Component {
       Name,
       Text,
       Karma,
-      Members
+      Members,
+      TagData,
+      ResourceData
     } = this.state
     var org = this.state.Erstellt;
     var Erstellt = this.formatDate(org);
@@ -541,7 +652,7 @@ class ProjectPage extends React.Component {
             <Form>
               <Form.Field>
 
-                <Input icon='tags' iconPosition='left' label={{
+                <Input icon='tags' name="resource" value={this.state.resource} onChange={this.handleChange}   iconPosition='left' label={{
                     tag: true,
                     content: 'Add Tag',
                     color: 'grey'
@@ -551,7 +662,7 @@ class ProjectPage extends React.Component {
               <br/>
             </Form>
             <div className="row justify-content-md-center">
-              <Button animated={true} color='teal' style={{
+              <Button loading={this.state.Laden} onClick={this.addResource} animated={true} color='teal' style={{
                   width: "130px"
                 }}>
                 <Button.Content visible={true}>Absenden</Button.Content>
@@ -567,7 +678,7 @@ class ProjectPage extends React.Component {
 
             <Form>
               <Form.Field>
-                <Input icon='tags' iconPosition='left' label={{
+                <Input value={this.state.tag} name="tag" onChange={this.handleChange} icon='tags' iconPosition='left' label={{
                     tag: true,
                     content: 'Add Tag',
                     color: 'grey'
@@ -575,7 +686,7 @@ class ProjectPage extends React.Component {
               </Form.Field><br/>
             </Form>
             <div className="row justify-content-md-center">
-              <Button animated={true} color='teal' style={{
+              <Button loading={this.state.Laden} onClick={this.addTag} animated={true} color='teal' style={{
                   width: "130px"
                 }}>
                 <Button.Content visible={true}>Absenden</Button.Content>
@@ -595,7 +706,7 @@ class ProjectPage extends React.Component {
             <Form>
               <Form.Group>
               <Form.Field>
-                <Button floated='right' circular icon='delete' color='red' size='mini' onClick={confirmDelete}/>
+                <Button floated='right' circular icon='delete' color='red' size='mini' />
               <Header as='h2' floated='left'>Projektdaten aktualisieren</Header>
             </Form.Field></Form.Group>
               <Form.Group widths='equal'>
@@ -871,11 +982,8 @@ class ProjectPage extends React.Component {
                 </Divider>
 
                 <Label.Group size='medium' color='teal'>
-                  <Label>Schüler</Label>
-                  <Label>Selbstständigkeit</Label>
-                  <Label>Schule</Label>
-                  <Label>Bibliothek</Label>
-                  <Label>...</Label>
+                   {this.createTags(TagData)}
+
                 </Label.Group>
               </div>
               <br/>
@@ -883,14 +991,9 @@ class ProjectPage extends React.Component {
                 <Divider horizontal={true}>
                   <h3>Ressourcen</h3>
                 </Divider>
-
                 <Label.Group size='medium' color='blue'>
-                  <Label>Aufsichts Person</Label>
-                  <Label>Tische</Label>
-                  <Label>Stühle</Label>
-                  <Label>Stromversorgung</Label>
-                  <Label>Super kräfte</Label>
-                  <Label>...</Label>
+                  {this.createResources(ResourceData)}
+
                 </Label.Group>
               </div>
               <br/>
