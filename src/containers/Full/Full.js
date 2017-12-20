@@ -44,7 +44,7 @@ class Full extends React.Component {
         <div className="app-body">
           <Sidebar {...this.props}/>
           <main className="main">
-            <Breadcrumb />
+            {/*<Breadcrumb />*/}
             <Container fluid>
               <Switch>
               <Route path="/dashboard" name="Dashboard" component={Dashboard}/>
