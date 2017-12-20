@@ -14,7 +14,8 @@ import {
   Input,
   Menu,
   Segment,
-  Divider
+  Divider,
+  Form
 } from 'semantic-ui-react';
 import Welcome from '../Pages/Welcome/Welcome';
 import ProjectCards from '../../components/ProjectCards/ProjectCards';
@@ -117,12 +118,12 @@ class Dashboard extends React.Component {
       <div className="container">
         <div className="row justify-content-md-center">
           <Grid doubling={true} columns={4} divided='vertically'>
-             <Container textAlign='right'>
-               <Header as='h2' color='grey' floated='left'>
+
+               <Header as='h2' color='grey'>
                  Projekte entdecken
                </Header>
             <Input size='huge' transparent icon={{ name: 'search', link: true }} placeholder='Projekt suchen...' />
-          </Container>
+
               <Grid.Row>
               {this.createImages(this.state.Data, 0, 4)}
             </Grid.Row>
