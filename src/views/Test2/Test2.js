@@ -117,10 +117,13 @@ class Test2 extends React.Component {
       <div className="container">
         <div className="row justify-content-md-center">
           <Grid doubling={true} columns={4} divided='vertically'>
-            <Header as='h2' color='grey' floated='left'>
-              Projekte entdecken
-            </Header>
-            <Grid.Row>
+             <Container textAlign='right'>
+               <Header as='h2' color='grey' floated='left'>
+                 Projekte entdecken
+               </Header>
+            <Input size='huge' transparent icon={{ name: 'search', link: true }} placeholder='Projekt suchen...' />
+          </Container>
+              <Grid.Row>
               {this.createImages(this.state.Data, 0, 4)}
             </Grid.Row>
           </Grid>
