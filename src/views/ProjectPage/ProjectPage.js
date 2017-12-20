@@ -28,6 +28,16 @@ import {Link} from 'react-router-dom';
 import TimelineComponent from '../../components/TimelineComponent/TimelineComponent';
 import UserCard from '../../components/UserCard/UserCard';
 
+//confirmation for delete button
+function confirmDelete(){
+  var clicked = confirm("Möchtest du dieses Projekt wirklich löschen?");
+  if (clicked == true) {
+    console.log("Ok has been clicked")
+} else {
+    console.log("Cancel has been clicked")
+}
+}
+
 class ProjectPage extends React.Component {
 
   constructor(props) {
@@ -107,6 +117,8 @@ class ProjectPage extends React.Component {
 
     })
   }
+
+
 
   //creates the nodes for our timeline
   createNode(node) {
@@ -381,6 +393,7 @@ class ProjectPage extends React.Component {
     document.execCommand('Copy');
   }
 
+
   render() {
     const {
       joined,
@@ -591,7 +604,7 @@ class ProjectPage extends React.Component {
             <Form>
               <Form.Group>
               <Form.Field>
-                <Button floated='right' circular icon='delete' color='red' size='mini'/>
+                <Button floated='right' circular icon='delete' color='red' size='mini' onClick={confirmDelete}/>
               <Header as='h2' floated='left'>Projektdaten aktualisieren</Header>
             </Form.Field></Form.Group>
               <Form.Group widths='equal'>
