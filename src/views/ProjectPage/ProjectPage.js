@@ -65,7 +65,10 @@ class ProjectPage extends React.Component {
       DocumentData: [],
       file: '',
       Documenttitle: "",
-      Documenttext: ""
+      Documenttext: "",
+      ImageData: [],
+      Imagetitle: "",
+      Imagetext: ""
 
     };
     this.toggleShare = this.toggleShare.bind(this);
@@ -82,6 +85,7 @@ class ProjectPage extends React.Component {
     this.addComment = this.addComment.bind(this);
     this.deleteProject = this.deleteProject.bind(this);
     this.addDocument = this.addDocument.bind(this);
+    this.addImage = this.addImage.bind(this);
 
   }
 
@@ -395,6 +399,50 @@ class ProjectPage extends React.Component {
     })
   }
 
+  getImages(){
+
+    var target = ('http://backend-edu.azurewebsites.net/project/images/get/' + this.props.match.params.projectid)
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({
+        ImageData: json
+      }, function() {})
+
+    })
+  }
+
+  addImage(){
+    this.setState({Laden: true});
+    var forma = new FormData();
+    forma.append('fileName', "Bild");
+    forma.append('foo', this.state.file);
+    forma.append('project_author', localStorage.getItem('userid'));
+    forma.append('Project_projectid', this.props.match.params.projectid);
+    forma.append('project_name', this.state.Imagetitle);
+    forma.append('project_text', this.state.Imagetext);
+
+    fetch('http://backend-edu.azurewebsites.net/project/addImage', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, */*'
+      },
+      body: forma
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+      this.setState({key: Math.random()}, function(){
+        this.getImages();
+        this.setState({Laden: false});
+        this.toggleEdit();
+      });
+    });
+
+  }
+
   changeTitle(){
     const title = this.state.title;
     var forma = new FormData();
@@ -588,6 +636,7 @@ class ProjectPage extends React.Component {
     this.getTags();
     this.getResources();
     this.getDocuments();
+    this.getImages();
   }
 
   //updates the projectpage if the url match changes, so we can easily swap between projects without having to reload the page
@@ -601,6 +650,7 @@ class ProjectPage extends React.Component {
       this.getTags();
       this.getResources();
       this.getDocuments();
+      this.getImages();
     }
 
   }
@@ -748,21 +798,21 @@ class ProjectPage extends React.Component {
 
             <Form>
               <Form.Field>
-                <Form.Group><Form.Input placeholder='Titel' style={{
+                <Form.Group><Form.Input name="Imagetitle" onChange={this.handleChange} value={this.state.Imagetitle} placeholder='Titel' style={{
               width: "600px"
             }}/><br/></Form.Group>
-                <Form.Field control={TextArea} placeholder='Beschreibung'/>
+                <Form.Field control={TextArea} name="Imagetext" onChange={this.handleChange} value={this.state.Imagetext} placeholder='Beschreibung'/>
                 <label>
                   Foto hinzufügen
                 </label>
-                <input type="file" style={{
+                <input type="file" onChange={(e) => this._handleImageChange(e)} style={{
                     width: "400px"
                   }} className="form-control-file" id="exampleFormControlFile1"></input>
               </Form.Field>
               <br/>
             </Form>
             <div className="row justify-content-md-center">
-              <Button animated={true} color='teal' style={{
+              <Button loading={this.state.Laden} onClick={this.addImage} animated={true} color='teal' style={{
                   width: "130px"
                 }}>
                 <Button.Content visible={true}>Absenden</Button.Content>
@@ -990,7 +1040,7 @@ class ProjectPage extends React.Component {
               <Divider horizontal={true}>
                 <h3>Fotos</h3>
               </Divider>
-              <Gallery images={IMAGES} maxRows={1} imageCountSeparator=' von ' showImageCount={true} showLightboxThumbnails={true} backdropClosesModal={true} showCloseButton={false} enableImageSelection={true}/>
+              <Gallery images={this.state.ImageData} maxRows={1} imageCountSeparator=' von ' showImageCount={true} showLightboxThumbnails={true} backdropClosesModal={true} showCloseButton={false} enableImageSelection={true}/>
             </div>
 
           </Grid.Column>
