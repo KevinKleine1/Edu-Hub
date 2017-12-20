@@ -293,7 +293,6 @@ class ProjectPage extends React.Component {
     }
     this.handleClick();
     this.setMembers();
-    this.setState({key: Math.random()});
   }
 
   joinProject() {
@@ -312,7 +311,7 @@ class ProjectPage extends React.Component {
 
     }).then((json) => {
       this.setState({
-        key: Math.random()
+      key: Math.random()
       }, function() {
         this.setMembers();
         this.getReactions();
@@ -364,13 +363,7 @@ class ProjectPage extends React.Component {
       this.setUser();
       this.setMembership();
     }
-    if(this.state.key !== prevState.key){
-      this.getReactions();
-      this.setData();
-      this.setMembers();
-      this.setUser();
-      this.setMembership();
-    }
+ 
   }
 
   //formats date
