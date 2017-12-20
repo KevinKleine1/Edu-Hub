@@ -120,7 +120,7 @@ class Wizard extends Component {
     }).then((json) => {
 
       localStorage.setItem('userid', json[0].userid);
-      
+
 
     })
   }
@@ -659,26 +659,26 @@ class Wizard extends Component {
     form.append('Zeitmanagementbesserplanen', Zeitmanagementbesserplanen);
     form.append('BudgetFinanzierung', BudgetFinanzierung);
     form.append('BildungWissenvermittlung', BildungWissenvermittlung);
-    form.append('Unterrichtneugestalten', Unterrichtneugestalten); 
-    form.append('Verwaltungverbessern', Verwaltungverbessern);  
-    form.append('Konfliktmanagement', Konfliktmanagement);  
-    form.append('SonstigestrategischeZiele', SonstigestrategischeZiele);     
-    form.append('Tage', Tage);  
-    form.append('Wochen', Wochen);  
-    form.append('Monate', Monate);  
-    form.append('StadtGemeinde', StadtGemeinde);  
-    form.append('Personal', Personal);  
-    form.append('Schueler', Schueler);  
-    form.append('Bildung', Bildung);  
-    form.append('SchulischeAusstatung', SchulischeAusstatung); 
-    form.append('ITtechnischerSupport', ITtechnischerSupport); 
-    form.append('VerpflegunginderSchule', VerpflegunginderSchule); 
-    form.append('Finanzierung', Finanzierung); 
-    form.append('SozialesEngagement', SozialesEngagement); 
-    form.append('project_name', this.state.Titel);   
+    form.append('Unterrichtneugestalten', Unterrichtneugestalten);
+    form.append('Verwaltungverbessern', Verwaltungverbessern);
+    form.append('Konfliktmanagement', Konfliktmanagement);
+    form.append('SonstigestrategischeZiele', SonstigestrategischeZiele);
+    form.append('Tage', Tage);
+    form.append('Wochen', Wochen);
+    form.append('Monate', Monate);
+    form.append('StadtGemeinde', StadtGemeinde);
+    form.append('Personal', Personal);
+    form.append('Schueler', Schueler);
+    form.append('Bildung', Bildung);
+    form.append('SchulischeAusstatung', SchulischeAusstatung);
+    form.append('ITtechnischerSupport', ITtechnischerSupport);
+    form.append('VerpflegunginderSchule', VerpflegunginderSchule);
+    form.append('Finanzierung', Finanzierung);
+    form.append('SozialesEngagement', SozialesEngagement);
+    form.append('project_name', this.state.Titel);
     form.append('project_text', this.state.Projektbeschreibung);
     form.append('foo', this.state.file);
-    form.append('fileName', "Projekt"); 
+    form.append('fileName', "Projekt");
 
 
     fetch('http://backend-edu.azurewebsites.net/wizardctrl/newProject', {
@@ -746,7 +746,7 @@ class Wizard extends Component {
     else if (this.state.activeIndex =="3"){
       this.setState({activeIndex: (this.state.activeIndex + 1)});
     }
-    
+
     }
   };
 
@@ -1219,16 +1219,10 @@ class Wizard extends Component {
                           <option value='p'>privat</option>
                           <option value='o'>&ouml;ffentlich</option>
                         </Form.Field>
-                        <label>
-                          <b>Anhang</b>
-                        </label>
-                        <input type="file" style={{
-                            width: "400px"
-                          }} className="form-control-file" id="exampleFormControlFile1"></input>
                       </div>
 
                       <label>
-                        <b>Fotos</b>
+                        <b>Titelbild</b>
                       </label>
                       <input type="file" name='foo' id='foo' onChange={(e) => this._handleImageChange(e)} style={{
                           width: "400px"
