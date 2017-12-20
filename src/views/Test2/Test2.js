@@ -103,15 +103,15 @@ class Test2 extends React.Component {
 <div className="row justify-content-md-center">
   <div className="position-relative">
 
-        <img className="banner" src='../img/eduhub.png'/>
+        <img className="banner" src='../img/EduBanner.png'/>
         <Button basic={true} color='grey' style={{
           position: 'relative',
             width: '15%',
             height: 'auto',
-            left: '324px',
-            bottom: '130px'
+            left: '320px',
+            bottom: '50px'
           }}>
-          <b>registrieren</b>
+          <b>Einloggen/ Registrieren</b>
         </Button></div>
     </div>
       <div className="container">
