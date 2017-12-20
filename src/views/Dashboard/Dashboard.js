@@ -63,7 +63,7 @@ class Dashboard extends React.Component {
 
   //fetch call to get all projects we have available atm TODO: Remove subprojects, make it dynamically, have some kind of sorting
   getProjects() {
-    var target = ('http://backend-edu.azurewebsites.net/project/landingpage/get')
+    var target = ('http://backend-edu.azurewebsites.net/project/')
     fetch(target).then((results) => {
       return results.json();
 
@@ -115,15 +115,28 @@ class Dashboard extends React.Component {
           <b>Einloggen/ Registrieren</b>
         </Button></div>
     </div>
-      <div className="container">
+     <div className="container">
+    <div className="row justify-content-md-center">
+    <Menu style={{width: '1200px'}} secondary>
+       <Menu.Item><Header as='h2' color='grey' floated='left'>
+         Projekte entdecken
+       </Header></Menu.Item>
+       <Menu.Menu position='right'>
+         <Menu.Item>
+           <Input size='huge' floated='right' transparent icon={{ name: 'search', link: true }} placeholder='Projekt suchen...' />
+         </Menu.Item>
+       </Menu.Menu>
+     </Menu>
+   </div></div>
+    <div className="container">
+   <div className="row justify-content-md-center">
+   <Divider fitted style={{width: '1115px'}}/>
+ </div></div>
+     <div className="container">
         <div className="row justify-content-md-center">
+           <div className="menu">
+          <br/>
           <Grid doubling={true} columns={4} divided='vertically'>
-
-               <Header as='h2' color='grey'>
-                 Projekte entdecken
-               </Header>
-            <Input size='huge' transparent icon={{ name: 'search', link: true }} placeholder='Projekt suchen...' />
-
               <Grid.Row>
               {this.createImages(this.state.Data, 0, 4)}
             </Grid.Row>
@@ -133,6 +146,7 @@ class Dashboard extends React.Component {
               {this.createImages(this.state.Data, 4, 8)}
             </Grid.Row>
           </Grid>
+        </div>
         </div>
       </div>
     </div>);

@@ -24,7 +24,7 @@ import 'whatwg-fetch'
 const auth = new Auth();
 
 //dashboard class where we can see up to date project and which is in general our landing page
-class Test2 extends React.Component {
+class Dashboard extends React.Component {
 
   constructor(props) {
     super(props);
@@ -115,15 +115,28 @@ class Test2 extends React.Component {
           <b>Einloggen/ Registrieren</b>
         </Button></div>
     </div>
-      <div className="container">
+     <div className="container">
+    <div className="row justify-content-md-center">
+    <Menu style={{width: '1200px'}} secondary>
+       <Menu.Item><Header as='h2' color='grey' floated='left'>
+         Projekte entdecken
+       </Header></Menu.Item>
+       <Menu.Menu position='right'>
+         <Menu.Item>
+           <Input size='huge' floated='right' transparent icon={{ name: 'search', link: true }} placeholder='Projekt suchen...' />
+         </Menu.Item>
+       </Menu.Menu>
+     </Menu>
+   </div></div>
+    <div className="container">
+   <div className="row justify-content-md-center">
+   <Divider fitted style={{width: '1115px'}}/>
+ </div></div>
+     <div className="container">
         <div className="row justify-content-md-center">
+           <div className="menu">
+          <br/>
           <Grid doubling={true} columns={4} divided='vertically'>
-
-               <Header as='h2' color='grey'>
-                 Projekte entdecken
-               </Header>
-            <Input size='huge' transparent icon={{ name: 'search', link: true }} placeholder='Projekt suchen...' />
-        
               <Grid.Row>
               {this.createImages(this.state.Data, 0, 4)}
             </Grid.Row>
@@ -134,9 +147,10 @@ class Test2 extends React.Component {
             </Grid.Row>
           </Grid>
         </div>
+        </div>
       </div>
     </div>);
   }
 }
 
-export default Test2;
+export default Dashboard;
