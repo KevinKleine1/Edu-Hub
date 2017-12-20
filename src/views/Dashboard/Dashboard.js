@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Auth from '../../Auth/Auth';
+import {AUTH_CONFIG} from '../../Auth/auth0-variables';
+import Auth0Lock from 'auth0-lock';
 import history from '../../history';
 import {Link, Switch, Route, Redirect} from 'react-router-dom';
 import {
@@ -21,7 +23,39 @@ import Welcome from '../Pages/Welcome/Welcome';
 import ProjectCards from '../../components/ProjectCards/ProjectCards';
 import 'whatwg-fetch'
 
+
+var options = {
+  language: 'de',
+  oidcConformant: true,
+  socialButtonStyle: 'small',
+  rememberLastLogin: true,
+  loginAfterSignUp: true,
+  theme: {
+    logo: '/img/logo.png',
+    primaryColor: '#20a8d8',
+    labeledSubmitButton: false
+  },
+  auth: {
+    params: {
+      param1: "value1"
+    },
+    redirect: true,
+    redirectUrl: AUTH_CONFIG.callbackUrl, //change for production
+    responseType: 'token id_token',
+    audience: 'https://kevkle.eu.auth0.com/userinfo',
+    sso: true,
+    params: {
+      scope: 'openid email'
+    }
+  },
+  languageDictionary: {
+    emailInputPlaceholder: "Ihre Email",
+    title: ""
+  }
+};
+
 const auth = new Auth();
+var lock = new Auth0Lock('TAzP3VaJ1PJgDR2S5zTV0c4inUpt9A9J', 'kevkle.eu.auth0.com', options);
 
 //dashboard class where we can see up to date project and which is in general our landing page
 class Dashboard extends React.Component {
@@ -37,6 +71,11 @@ class Dashboard extends React.Component {
     };
 
     this.toggle = this.toggle.bind(this);
+  }
+
+  lockLogin() {
+    lock.show();
+
   }
 
   //Class to create a new project card with all the necessary data
@@ -105,7 +144,9 @@ class Dashboard extends React.Component {
   <div className="position-relative">
 
         <img className="banner" src='../img/EduBanner.png'/>
-        <Button basic={true} color='grey' style={{
+        {
+          !logged && (
+        <Button onClick={this.lockLogin} basic={true} color='grey' style={{
           position: 'relative',
             size: 'medium',
             height: 'auto',
@@ -113,7 +154,12 @@ class Dashboard extends React.Component {
             bottom: '46px'
           }}>
           <b>Einloggen/ Registrieren</b>
-        </Button></div>
+        </Button>
+          )}
+        
+        </div>
+          
+        
     </div>
      <div className="container">
     <div className="row justify-content-md-center">

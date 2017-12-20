@@ -11,8 +11,27 @@ class TimelineComponent extends React.Component {
   }
 
   render() {
+    if(this.props.type == "addImage"){
+      var farbe = 'rgb(127, 140, 141)';
+    }
+      else if(this.props.type == "addDocument"){
+        var farbe = 'rgb(127, 140, 141)';
+      }
+      else if(this.props.type == "newComment"){
+        var farbe = 'rgb(52, 152, 219)';
+      }
+      else if(this.props.type == "addTermin"){
+        var farbe = 'rgb(231, 76, 60)';
+      }
+      else if(this.props.type == "bemember"){
+        var farbe = 'rgb(46, 204, 113)';
+      }
+      else if(this.props.type == "cancelmembership"){
+        var farbe = 'rgb(46, 204, 113)';
+      }
+  
     return (<VerticalTimelineElement className="vertical-timeline-element--education" iconStyle={{
-        background: 'rgb(233, 30, 99)',
+        background: farbe,
         color: '#fff'
       }} animate={true}>
       <Link to={{
