@@ -30,6 +30,7 @@ import UserCard from '../../components/UserCard/UserCard';
 import Tags from '../../components/Tags/Tags';
 import Ressources from '../../components/Ressources/Ressources';
 import history from '../../history';
+import Anhang from '../../components/Anhang/Anhang';
 
 class ProjectPage extends React.Component {
 
@@ -60,7 +61,11 @@ class ProjectPage extends React.Component {
       tag: "",
       resource: "",
       Commenttitle: "",
-      Commenttext: ""
+      Commenttext: "",
+      DocumentData: [],
+      file: '',
+      Documenttitle: "",
+      Documenttext: ""
 
     };
     this.toggleShare = this.toggleShare.bind(this);
@@ -76,6 +81,7 @@ class ProjectPage extends React.Component {
     this.addResource = this.addResource.bind(this);
     this.addComment = this.addComment.bind(this);
     this.deleteProject = this.deleteProject.bind(this);
+    this.addDocument = this.addDocument.bind(this);
 
   }
 
@@ -164,6 +170,71 @@ class ProjectPage extends React.Component {
     }).then((json) => {
       this.setState({key: Math.random()}, function(){
         this.getTags();
+        this.setState({Laden: false});
+        this.toggleEdit();
+      });
+    });
+
+  }
+
+  getDocuments(){
+    var target = ('http://backend-edu.azurewebsites.net/project/documents/get/' + this.props.match.params.projectid)
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({
+        DocumentData: json
+      }, function() {})
+
+    })
+  }
+
+  createDocument(document){
+    return <Anhang name={document.project_name} doclink={document.document_documentpath} key={document.document_documentpath} />
+  }
+
+  createDocuments(documents){
+
+  return documents.map(this.createDocument);
+  }
+
+  _handleImageChange(e) {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({file: file});
+    }
+
+    reader.readAsDataURL(file)
+  }
+
+  addDocument(){
+    this.setState({Laden: true});
+    var forma = new FormData();
+    forma.append('fileName', "Document");
+    forma.append('foo', this.state.file);
+    forma.append('project_author', localStorage.getItem('userid'));
+    forma.append('Project_projectid', this.props.match.params.projectid);
+    forma.append('project_name', this.state.Documenttitle);
+    forma.append('project_text', this.state.Documenttext);
+
+    fetch('http://backend-edu.azurewebsites.net/project/addDocument', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, */*'
+      },
+      body: forma
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+      this.setState({key: Math.random()}, function(){
+        this.getDocuments();
         this.setState({Laden: false});
         this.toggleEdit();
       });
@@ -516,6 +587,7 @@ class ProjectPage extends React.Component {
     this.setMembership();
     this.getTags();
     this.getResources();
+    this.getDocuments();
   }
 
   //updates the projectpage if the url match changes, so we can easily swap between projects without having to reload the page
@@ -528,6 +600,7 @@ class ProjectPage extends React.Component {
       this.setMembership();
       this.getTags();
       this.getResources();
+      this.getDocuments();
     }
 
   }
@@ -616,15 +689,15 @@ class ProjectPage extends React.Component {
         render: () => <Tab.Pane>
             <Form>
               <Form.Field>
-                <Form.Group><Form.Input placeholder='Titel' style={{
+                <Form.Group><Form.Input name="Documenttitle" onChange={this.handleChange} value={this.state.Documenttitle} placeholder='Titel' style={{
               width: "600px"
             }}/><br/></Form.Group>
-                <Form.Field control={TextArea} placeholder='Beschreibung'/>
+                <Form.Field control={TextArea} name="Documenttext" onChange={this.handleChange} value={this.state.Documenttext} placeholder='Beschreibung'/>
                 <Form.Field>
                   <label>
                     Dokument hinzufügen<Popup trigger={<Icon name = 'question' color = 'grey' />} wide='very' content='Nur .pdf Format erlaubt'/>
                   </label>
-                  <input type="file" style={{
+                  <input type="file" name='foo' id='foo' onChange={(e) => this._handleImageChange(e)} style={{
                       width: "400px"
                     }} className="form-control-file" id="exampleFormControlFile1"></input>
                 </Form.Field>
@@ -632,7 +705,7 @@ class ProjectPage extends React.Component {
               <br/>
             </Form>
             <div className="row justify-content-md-center">
-              <Button animated={true} color='teal' style={{
+              <Button loading={this.state.Laden} onClick={this.addDocument} animated={true} color='teal' style={{
                   width: "130px"
                 }}>
                 <Button.Content visible={true}>Absenden</Button.Content>
@@ -1056,18 +1129,7 @@ class ProjectPage extends React.Component {
                   <h3>Anhang</h3>
                 </Divider>
                 <List divided={true} relaxed={true}>
-                  <List.Item>
-                    <List.Icon name='file outline' size='large' verticalAlign='middle'/>
-                    <List.Content>
-                      <List.Header as='a'>zeitplan.pdf</List.Header>
-                    </List.Content>
-                  </List.Item>
-                  <List.Item>
-                    <List.Icon name='file outline' size='large' verticalAlign='middle'/>
-                    <List.Content>
-                      <List.Header as='a'>Vorlage.pdf</List.Header>
-                    </List.Content>
-                  </List.Item>
+                 {this.createDocuments(this.state.DocumentData)}
                 </List>
               </div>
             </div>
