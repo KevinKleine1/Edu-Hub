@@ -371,7 +371,7 @@ class ProjectPage extends React.Component {
     var day = date_unformatted.substr(8, 2);
     var month = date_unformatted.substr(5, 2);
     var year = date_unformatted.substr(0, 4);
-    return day + '.' + month + '.' + year;
+    return day + '.' + month + '.' + year + '';
   }
 
   //function to copy text from an inputfield to the clipboard
@@ -924,7 +924,7 @@ class ProjectPage extends React.Component {
             <h4 className="vertical-timeline-element-subtitle">Insert Creator Here!!</h4>
 
             <p>
-              Das Projekt wurde am {Erstellt}
+              Das Projekt wurde am {""} {Erstellt}
               erstellt.
             </p>
           </VerticalTimelineElement>
