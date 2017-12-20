@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {TabContent, TabPane, Nav, NavItem, NavLink, Progress, Label, Input} from 'reactstrap';
 import classnames from 'classnames';
+import Termin from '../../components/Termin/Termin';
 
 //TODO Come up with some function for this part
 
@@ -10,7 +11,8 @@ class Aside extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      activeTab: '1'
+      activeTab: '1',
+      Termine: []
     };
   }
 
@@ -20,6 +22,48 @@ class Aside extends Component {
         activeTab: tab
       });
     }
+  }
+
+  createTermin(termin) {
+    return <Termin name={termin.project_name} termin={termin.project_termin} text={termin.project_text} bild={localStorage.getItem('picture')} key={termin.projectid}/>;
+  }
+
+  createTermine(termine) {
+
+    return termine.map(this.createTermin);
+
+  }
+
+  setData() {
+    var target = ('http://backend-edu.azurewebsites.net/user/' + localStorage.getItem('email'))
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({NutzerId: json[0].userid}, function(){
+        localStorage.setItem('userid', this.state.NutzerId);
+        this.getTermine();
+      })
+    })
+  }
+
+  getTermine(){
+    var target = ('http://backend-edu.azurewebsites.net/user/myevents/' + localStorage.getItem('userid'))
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({
+        Termine: json
+      }, function() {})
+
+    })
+  }
+
+  componentDidMount(){
+    this.setData();
   }
 
   render() {
@@ -47,90 +91,7 @@ class Aside extends Component {
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
-            <div className="callout m-0 py-2 text-muted text-center bg-light text-uppercase">
-              <small><b>Heute</b></small>
-            </div>
-            <hr className="transparent mx-3 my-0"/>
-            <div className="callout callout-warning m-0 py-3">
-              <div className="avatar float-right">
-                <img src={'/img/avatars/7.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
-              </div>
-              <div>Meeting mit <strong>Lucas</strong></div>
-              <small className="text-muted mr-3"><i className="icon-calendar"></i>&nbsp; 13.00 - 15.00</small>
-              <small className="text-muted"><i className="icon-location-pin"></i>&nbsp; Lise - Meitner Gesamtschule</small>
-            </div>
-            <hr className="mx-3 my-0"/>
-            <div className="callout callout-info m-0 py-3">
-              <div className="avatar float-right">
-                <img src={'/img/avatars/4.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
-              </div>
-              <div>Skypecall mit <strong>Megan</strong></div>
-              <small className="text-muted mr-3"><i className="icon-calendar"></i>&nbsp; 16.00 - 17.00</small>
-              <small className="text-muted"><i className="icon-social-skype"></i>&nbsp; Online</small>
-            </div>
-            <hr className="transparent mx-3 my-0"/>
-            <div className="callout m-0 py-2 text-muted text-center bg-light text-uppercase">
-              <small><b>Morgen</b></small>
-            </div>
-            <hr className="transparent mx-3 my-0"/>
-            <div className="callout callout-danger m-0 py-3">
-              <div>Digitales Lernzentrum - <strong>Eröffnung</strong></div>
-              <small className="text-muted mr-3"><i className="icon-calendar"></i>&nbsp; 10.00 - 11.00</small>
-              <small className="text-muted"><i className="icon-home"></i>&nbsp; creativeLabs HQ</small>
-              <div className="avatars-stack mt-2">
-                <div className="avatar avatar-xs">
-                  <img src={'/img/avatars/2.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
-                </div>
-                <div className="avatar avatar-xs">
-                  <img src={'/img/avatars/3.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
-                </div>
-                <div className="avatar avatar-xs">
-                  <img src={'/img/avatars/4.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
-                </div>
-                <div className="avatar avatar-xs">
-                  <img src={'/img/avatars/5.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
-                </div>
-                <div className="avatar avatar-xs">
-                  <img src={'/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
-                </div>
-              </div>
-            </div>
-            <hr className="mx-3 my-0"/>
-            <div className="callout callout-success m-0 py-3">
-              <div><strong>Inklusionsorganisation</strong> Meetup</div>
-              <small className="text-muted mr-3"><i className="icon-calendar"></i>&nbsp; 13.00 - 15.00</small>
-              <small className="text-muted"><i className="icon-location-pin"></i>&nbsp; Lise - Meitner Gesamtschule</small>
-            </div>
-            <hr className="mx-3 my-0"/>
-            <div className="callout callout-primary m-0 py-3">
-              <div><strong>Gruppentreffen</strong></div>
-              <small className="text-muted mr-3"><i className="icon-calendar"></i>&nbsp; 16.00 - 18.00</small>
-              <small className="text-muted"><i className="icon-home"></i>&nbsp; creativeLabs HQ</small>
-              <div className="avatars-stack mt-2">
-                <div className="avatar avatar-xs">
-                  <img src={'/img/avatars/2.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
-                </div>
-                <div className="avatar avatar-xs">
-                  <img src={'/img/avatars/3.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
-                </div>
-                <div className="avatar avatar-xs">
-                  <img src={'/img/avatars/4.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
-                </div>
-                <div className="avatar avatar-xs">
-                  <img src={'/img/avatars/5.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
-                </div>
-                <div className="avatar avatar-xs">
-                  <img src={'/img/avatars/6.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
-                </div>
-                <div className="avatar avatar-xs">
-                  <img src={'/img/avatars/7.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
-                </div>
-                <div className="avatar avatar-xs">
-                  <img src={'/img/avatars/8.jpg'} className="img-avatar" alt="admin@bootstrapmaster.com"/>
-                </div>
-              </div>
-            </div>
-            <hr className="mx-3 my-0"/>
+           {this.createTermine(this.state.Termine)}
           </TabPane>
           <TabPane tabId="2" className="p-3">
             <div className="message">
