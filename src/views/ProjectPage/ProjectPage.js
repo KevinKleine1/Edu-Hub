@@ -244,6 +244,7 @@ class ProjectPage extends React.Component {
     }).then((json) => {
       this.setState({key: Math.random()}, function(){
         this.getDocuments();
+        this.getReactions();
         this.setState({Laden: false});
         this.toggleEdit();
       });
