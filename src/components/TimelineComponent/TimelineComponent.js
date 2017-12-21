@@ -35,6 +35,9 @@ class TimelineComponent extends React.Component {
       else if(this.props.type == "changeDescription"){
         var farbe = 'rgb(18, 155, 155)';
       }
+      else if (this.props.type == "addComment"){
+        var farbe = 'rgb(90, 249, 62)';
+      }
   
     return (<VerticalTimelineElement className="vertical-timeline-element--education" iconStyle={{
         background: farbe,
