@@ -29,6 +29,12 @@ class TimelineComponent extends React.Component {
       else if(this.props.type == "cancelmembership"){
         var farbe = 'rgb(46, 204, 113)';
       }
+      else if(this.props.type == "changeTitle"){
+        var farbe = 'rgb(18, 155, 155)';
+      }
+      else if(this.props.type == "changeDescription"){
+        var farbe = 'rgb(18, 155, 155)';
+      }
   
     return (<VerticalTimelineElement className="vertical-timeline-element--education" iconStyle={{
         background: farbe,

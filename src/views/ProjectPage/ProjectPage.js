@@ -466,6 +466,7 @@ class ProjectPage extends React.Component {
 
     }).then((json) => {
       this.setState({key: Math.random()}, function(){
+        this.getReactions();
         this.setData();
         this.setState({Laden: false});
         this.toggleChange();
@@ -493,6 +494,7 @@ class ProjectPage extends React.Component {
     }).then((json) => {
       this.setState({key: Math.random()}, function(){
         this.setData();
+        this.getReactions();
         this.setState({Laden: false});
         this.toggleChange();
       });

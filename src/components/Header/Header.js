@@ -20,6 +20,29 @@ class Header extends Component {
     };
   }
 
+ /** {
+    logged && (<NavItem className="d-md-down-none">
+      <NavLink href="#">
+        <i className="icon-bell"></i>
+        <Badge pill= {true} color="danger">5</Badge>
+      </NavLink>
+    </NavItem>)
+  }
+  {
+    logged && (<NavItem className="d-md-down-none">
+      <NavLink href="#">
+        <i className="icon-list"></i>
+      </NavLink>
+    </NavItem>)
+  }
+  {
+    logged && (<NavItem className="d-md-down-none">
+      <NavLink href="#">
+        <i className="icon-location-pin"></i>
+      </NavLink>
+    </NavItem>)
+  }
+*/
   
   isAuthenticated() {
     // Check whether the current time is past the
@@ -62,28 +85,6 @@ class Header extends Component {
         <span className="navbar-toggler-icon"></span>
       </NavbarToggler>
       <Nav className="ml-auto" navbar= {true}>
-        {
-          logged && (<NavItem className="d-md-down-none">
-            <NavLink href="#">
-              <i className="icon-bell"></i>
-              <Badge pill= {true} color="danger">5</Badge>
-            </NavLink>
-          </NavItem>)
-        }
-        {
-          logged && (<NavItem className="d-md-down-none">
-            <NavLink href="#">
-              <i className="icon-list"></i>
-            </NavLink>
-          </NavItem>)
-        }
-        {
-          logged && (<NavItem className="d-md-down-none">
-            <NavLink href="#">
-              <i className="icon-location-pin"></i>
-            </NavLink>
-          </NavItem>)
-        }
         {
           logged && (<NavItem className="d-md-down-none">
             Hallo, {localStorage.getItem('name')}
