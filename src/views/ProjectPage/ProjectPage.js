@@ -20,7 +20,8 @@ import {
   Form,
   TextArea,
   Message,
-  Tab
+  Tab,
+  Menu
 } from 'semantic-ui-react';
 import {VerticalTimeline, VerticalTimelineElement} from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
@@ -71,7 +72,9 @@ class ProjectPage extends React.Component {
       Imagetext: "",
       Termintitle: "",
       Termintext: "",
-      Termindate: ""
+      Termindate: "",
+      activeItem: "Alle",
+      UploadData: []
 
 
     };
@@ -95,6 +98,8 @@ class ProjectPage extends React.Component {
   }
 
   handleChange = (e, {name, value}) => this.setState({[name]: value})
+
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
   toggleShare() {
     this.setState({
@@ -132,10 +137,28 @@ class ProjectPage extends React.Component {
 
       this.setState({
         Data: json
+      }, function() {
+        this.getUploadReaction()
+      })
+
+    })
+  }
+
+  getUploadReaction() {
+    var target = ('http://backend-edu.azurewebsites.net/project/filter/documentsimage/' + this.props.match.params.projectid)
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({
+        UploadData: json
       }, function() {})
 
     })
   }
+
+  
 
   createTag(tag){
     return <Tags Tag={tag.tag_name} key={tag.tagid} />
@@ -1222,8 +1245,16 @@ class ProjectPage extends React.Component {
         </Grid.Row>
       </Grid>
       <div className="timeline">
-
-        <VerticalTimeline>
+      <Menu pointing secondary>
+          <Menu.Item name='Alle' active={activeItem === 'Alle'} onClick={this.handleItemClick} />
+          <Menu.Item name='Uploads' active={activeItem === 'Uploads'} onClick={this.handleItemClick} />
+      </Menu>
+      {
+       (activeItem =="Alle") &&( <VerticalTimeline>
+          <VerticalTimelineElement className="vertical-timeline-element" iconStyle={{
+              background: 'rgb(233, 30, 99)', 
+            }} animate={true}>
+          </VerticalTimelineElement>
           {this.createNodes(this.state.Data)}
           <VerticalTimelineElement className="vertical-timeline-element--education" iconStyle={{
               background: 'rgb(233, 30, 99)',
@@ -1239,6 +1270,15 @@ class ProjectPage extends React.Component {
             </p>
           </VerticalTimelineElement>
         </VerticalTimeline>
+       )}
+    {
+
+      (activeItem == "Uploads") && (<VerticalTimeline>
+        {this.createNodes(this.state.UploadData)}
+      </VerticalTimeline> )
+    }
+
+
 
       </div>
     </div>)
