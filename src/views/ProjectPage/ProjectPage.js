@@ -75,7 +75,8 @@ class ProjectPage extends React.Component {
       Termindate: "",
       activeItem: "Alle",
       UploadData: [],
-      showPics: false
+      showPics: false,
+      isAuthor: false
 
 
     };
@@ -583,7 +584,22 @@ class ProjectPage extends React.Component {
   }
 
   setAuthor(){
-    //TODO Insert function
+    var target = ('http://backend-edu.azurewebsites.net/governance/amIAuthor/' + localStorage.getItem('projectid') + '/' + localStorage.getItem('userid'))
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      if (json.response == 1) {
+        this.setState({
+          isAuthor: true
+        }, function() {});
+      } else if (json.response == 0) {
+        this.setState({
+          isAuthor: false
+        }, function() {});
+      }
+    })
   }
 
   handleProject(){
@@ -605,6 +621,7 @@ class ProjectPage extends React.Component {
     joined: !this.state.joined,
     function() {}
   })
+
 
   //checks if the user is a member of the project or not and the calls the correct function to either leave the project or join it
   handleJoin() {
@@ -680,6 +697,7 @@ class ProjectPage extends React.Component {
     this.getResources();
     this.getDocuments();
     this.getImages();
+    this.setAuthor();
   }
 
   //updates the projectpage if the url match changes, so we can easily swap between projects without having to reload the page
@@ -694,6 +712,7 @@ class ProjectPage extends React.Component {
       this.getResources();
       this.getDocuments();
       this.getImages();
+      this.setAuthor();
     }
 
   }
@@ -751,7 +770,8 @@ class ProjectPage extends React.Component {
       Members,
       TagData,
       ResourceData,
-      showPics
+      showPics,
+      isAuthor
     } = this.state
     var org = this.state.Erstellt;
     var Erstellt = this.formatDate(org);
@@ -1218,12 +1238,16 @@ class ProjectPage extends React.Component {
             </div>
             <br/>
 
+
+          {
+            !isAuthor &&(
             <Button fluid={true} toggle={true} onClick={this.handleJoin.bind(this)} color={joined
                 ? 'green'
                 : 'red'} content={joined
                 ? 'Beitreten'
                 : 'Austreten'}/>
-
+                )
+              }
             <div className="tags">
 
               <div className="Tags">
