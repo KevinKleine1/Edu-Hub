@@ -38,7 +38,8 @@ class Welcome extends Component {
     Erfolg: false,
     file: '',
     imagePreviewUrl: '',
-    Laden: false
+    Laden: false,
+    Private: false
   };
 
 
@@ -57,6 +58,8 @@ class Welcome extends Component {
 
     reader.readAsDataURL(file)
   }
+
+  toggle = () => this.setState({ Private: !this.state.Private })
 
   //Validation if every field is used and the requirements are ok
   validate = () => {
@@ -109,6 +112,14 @@ class Welcome extends Component {
 
   //onsubmit as Formdata since we need to send an image
   onSubmit() {
+ var privat
+
+    if (this.state.Private){
+      privat = 1;
+    }
+    else{
+      privat = 0;
+    }
 
     var form = new FormData();
     form.append('foo', this.state.file);
@@ -123,6 +134,7 @@ class Welcome extends Component {
     form.append('subject3', this.state.Fach3);
     form.append('fileName', "Profil");
     form.append('email', localStorage.getItem('email'));
+    form.append('user_privacy', privat);
 
     fetch('http://backend-edu.azurewebsites.net/user/', {
       method: 'POST',
@@ -189,7 +201,8 @@ class Welcome extends Component {
       Postcode,
       Fach1,
       Fach2,
-      Fach3
+      Fach3,
+      Private
     } = this.state
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
@@ -272,6 +285,7 @@ class Welcome extends Component {
 
                     <Form.Input name="Fach3" value={Fach3} onChange={this.handleChange} placeholder='Interesse 3'/>
                   </Form.Field>
+                  <Form.Checkbox name="Private" label="Privates Profil" checked={Private} onChange={this.toggle} />
                 </Form.Group>
                 <Message error={true} header='Fehler bei Eingabe' content='Alle Felder müssen ausgefüllt sein und Hausnummer und PLZ müssen Zahlen sein.'/>
               </Form>

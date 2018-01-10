@@ -32,7 +32,8 @@ class User extends Component {
       Beschreibung: "",
       Id: "",
       Erstellt: "",
-      Data: []
+      Data: [],
+      Private: false,
 
     };
   }
@@ -50,6 +51,11 @@ class User extends Component {
       this.setState({Bild: json[0].profilpic});
       this.setState({Erstellt: json[0].user_created_at});
       this.setState({Beschreibung: json[0].user_description});
+      if (json[0].user_privacy === 1){
+        this.setState({Private: true});
+      } else{
+        this.setState({Private: false});
+      }
     })
   }
 
@@ -129,13 +135,18 @@ class User extends Component {
   }
 
   render() {
-    const {Name, Vorname, Bild, Beschreibung} = this.state
+    const {Name, Vorname, Bild, Beschreibung, Private} = this.state
     var Erstellt = this.formatDateMonthName(this.state.Erstellt);
     var Projekte = this.state.Data.length;
-    return (<div className="animated fadeIn">
+    return (
+    
+
+    <div className="animated fadeIn">
       <Grid stackable={true} columns={2} divided={true}>
         <Grid.Row>
-          <Grid.Column width={13}>
+        {   
+           !Private && (
+          <Grid.Column width={13}>         
             <div className="container">
               <div className="row justify-content-md-center">
                 <Segment vertical={true} style={{
@@ -204,8 +215,52 @@ class User extends Component {
                 </Segment>
               </div>
             </div>
-
           </Grid.Column>
+           )}
+            {   
+           Private && (
+          <Grid.Column width={13}>         
+            <div className="container">
+              <div className="row justify-content-md-center">
+                <Segment vertical={true} style={{
+                    width: "800px"
+                  }}>
+                  <Header as='h2'>
+                    <Icon name='user outline'/>
+                    <Header.Content>
+                    Privates Profil
+                      <Header.Subheader>
+                        Profil
+                      </Header.Subheader>
+                    </Header.Content>
+                  </Header>
+                  <p style={{
+                      width: "800px"
+                    }}>Das Profil dieses Nutzers ist privat.</p>
+                </Segment>
+                <Segment vertical={true} style={{
+                    width: "800px"
+                  }}>
+                  <div className="container">
+                    <div className="row justify-content-md-center">
+                      <Button animated={true} color='teal' onClick={this.goBack} style={{
+                          width: "130px",
+                          height: "40px"
+                        }}>
+                        <Button.Content visible={true}>Zurück</Button.Content>
+                        <Button.Content hidden={true}>
+                          <Icon name='arrow left'/>
+                        </Button.Content>
+                      </Button>
+                    </div>
+                  </div>
+                </Segment>
+              </div>
+            </div>
+          </Grid.Column>
+           )}
+
+           
           <Grid.Column width={3}>
             <div className="container">
               <div className="row justify-content-md-center">
@@ -214,6 +269,9 @@ class User extends Component {
                     height: "200px"
                   }}></img>
                 <div></div>
+              
+                {
+                  !Private &&(
                 <div className="container">
                   <div className="row justify-content-md-center">
                     <div><br/>
@@ -230,6 +288,10 @@ class User extends Component {
                     </div>
                   </div>
                 </div>
+                  )}
+
+{
+                  !Private &&(
                 <Statistic color='purple'>
                   <br/>
                   <Statistic.Value>
@@ -239,8 +301,11 @@ class User extends Component {
                   <Statistic.Label>Karma</Statistic.Label>
                   <br/>
                 </Statistic>
+                  )}
               </div>
             </div>
+            {
+                  !Private &&(
             <div className="container">
               <div className="row justify-content-md-center">
                 <Statistic color='violet'>
@@ -252,6 +317,9 @@ class User extends Component {
                 </Statistic>
               </div>
             </div>
+                  )}
+                    {
+                  !Private &&(
             <div className="container">
               <div className="row justify-content-md-center">
                 <Statistic color='blue'>
@@ -265,7 +333,10 @@ class User extends Component {
                   {this.createLists(this.state.Data)}
                 </List>
               </div>
+              
             </div>
+                  )}
+                  
           </Grid.Column>
         </Grid.Row>
       </Grid>
