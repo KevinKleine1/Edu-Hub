@@ -82,22 +82,12 @@ class Welcome extends Component {
       errors.nachnameError = true;
       errors.Fehler = true;
     }
-    if (this.state.Strasse.length < 1) {
-      isError = true;
-      errors.strasseError = true;
-      errors.Fehler = true;
-    }
-    if (this.state.Hausnummer.length < 1 || isNaN(this.state.Hausnummer)) {
+    if (isNaN(this.state.Hausnummer)) {
       isError = true;
       errors.hausnummerError = true;
       errors.Fehler = true;
     }
-    if (this.state.Stadt.length < 1) {
-      isError = true;
-      errors.stadtError = true;
-      errors.Fehler = true;
-    }
-    if (this.state.Postcode.length < 1 || isNaN(this.state.Postcode)) {
+    if (isNaN(this.state.Postcode)) {
       isError = true;
       errors.postcodeError = true;
       errors.Fehler = true;
@@ -257,19 +247,19 @@ class Welcome extends Component {
                   <label>Nachname</label>
                   <Form.Input name="Nachname" value={Nachname} onChange={this.handleChange} error={this.state.nachnameError} placeholder='Nachname'/>
                 </Form.Field>
-                <Form.Field required={true}>
+                <Form.Field required={false}>
                   <label>Straße</label>
                   <Form.Input name="Strasse" value={Strasse} onChange={this.handleChange} error={this.state.strasseError} placeholder='Straße'/>
                 </Form.Field>
-                <Form.Field required={true}>
+                <Form.Field required={false}>
                   <label>Hausnummer</label>
                   <Form.Input name="Hausnummer" value={Hausnummer} onChange={this.handleChange} error={this.state.hausnummerError} placeholder='Hausnummer'/>
                 </Form.Field>
-                <Form.Field required={true}>
+                <Form.Field required={false}>
                   <label>Stadt</label>
                   <Form.Input name="Stadt" value={Stadt} onChange={this.handleChange} error={this.state.stadtError} placeholder='Stadt'/>
                 </Form.Field>
-                <Form.Field required={true}>
+                <Form.Field required={false}>
                   <label>Postleitzahl</label>
                   <Form.Input name="Postcode" value={Postcode} onChange={this.handleChange} error={this.state.postcodeError} placeholder='Postleitzahl'/>
                 </Form.Field>
