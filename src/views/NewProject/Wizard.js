@@ -781,17 +781,17 @@ class Wizard extends Component {
                           <Form.Group grouped={true}>
                             <Form.Field>
                               <Radio label='Ich möchte mit meinem Projekt für den Lehr-und Lernprozess in der Schule beitragen' control='input' value='option1' onChange={this.handleChange} type='radio' checked={this.state.value === 'option1'} name='htmlRadios'/>
-                              <Popup trigger={<Icon name = 'question' />} wide='very' content='Das Kernziel einer Schule ist die Wissensvermittlung. Dazu gehören Projekte die den Unterricht fördern und neu gestalten können wie z.B Sportwoche, Theater AG oder Projekte wie „Effiziente Nutzung von Strom und Wasser im Alltag'/>
+                              <Popup trigger={<Icon name = 'info' />} wide='very' content='Das Kernziel einer Schule ist die Wissensvermittlung. Dazu gehören Projekte die den Unterricht fördern und neu gestalten können wie z.B Sportwoche, Theater AG oder Projekte wie „Effiziente Nutzung von Strom und Wasser im Alltag'/>
                             </Form.Field>
                             <br/>
 
                             <Form.Field>
                               <Radio label='Ich möchte koordinieren und organisieren' control='input' value='option2' onChange={this.handleChange} type='radio' checked={this.state.value === 'option2'} name='htmlRadios'/>
-                              <Popup trigger={<Icon name = 'question' />} wide='very' content='z. B digitales Klassenbuch. Planung, Organisiation und Durchführung der Unterstützungsprojekte und Lehr-bzw Lernprojekte.'/>
+                              <Popup trigger={<Icon name = 'info' />} wide='very' content='z. B digitales Klassenbuch. Planung, Organisiation und Durchführung der Unterstützungsprojekte und Lehr-bzw Lernprojekte.'/>
                             </Form.Field><br/>
                             <Form.Field>
                               <Radio label='Ich möchte ein Projekt erstellen um die Ziele der Schule zu unterstützen' control='input' value='option3' onChange={this.handleChange} type='radio' checked={this.state.value === 'option3'} name='htmlRadios'/>
-                              <Popup trigger={<Icon name = 'question' />} wide='very' content='Unterstützende Tätigikeiten wie z. B Infrastruktur der Schule verbessern oder Fundraising für eine Finanzierung.'/>
+                              <Popup trigger={<Icon name = 'info' />} wide='very' content='Unterstützende Tätigikeiten wie z. B Infrastruktur der Schule verbessern oder Fundraising für eine Finanzierung.'/>
                             </Form.Field>
                           </Form.Group>
                         </Form>
