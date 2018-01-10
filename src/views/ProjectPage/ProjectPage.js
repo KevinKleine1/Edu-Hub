@@ -958,10 +958,10 @@ class ProjectPage extends React.Component {
               <Header as='h2' floated='left'>Projektdaten aktualisieren</Header>
             </Form.Field></Form.Group>
               <Form.Group widths='equal'>
-                <Form.Input placeholder='Titel' name="title" value={this.state.title} onChange={this.handleChange} icon='user' iconPosition='left'/>
+                <Form.Input placeholder={Name} name="title" value={this.state.title} onChange={this.handleChange} icon='user' iconPosition='left'/>
               </Form.Group>
               <Form.Group widths='equal'>
-                <Form.TextArea rows={2} name="description" value={this.state.description} onChange={this.handleChange} placeholder='Projektbeschreibung'/>
+                <Form.TextArea rows={2} name="description" value={this.state.description} onChange={this.handleChange} placeholder={Text}/>
               </Form.Group>
               <Form.Group widths='equal'>
                 <Form.TextArea rows={2} placeholder='Zielerreichung'/>

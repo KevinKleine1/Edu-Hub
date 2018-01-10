@@ -29,6 +29,7 @@ class User extends Component {
       Name: "",
       Vorname: "",
       Bild: "",
+      Beschreibung: "",
       Id: "",
       Erstellt: "",
       Data: []
@@ -48,6 +49,7 @@ class User extends Component {
       this.setState({Vorname: json[0].forename})
       this.setState({Bild: json[0].profilpic});
       this.setState({Erstellt: json[0].user_created_at});
+      this.setState({Beschreibung: json[0].user_description});
     })
   }
 
@@ -127,7 +129,7 @@ class User extends Component {
   }
 
   render() {
-    const {Name, Vorname, Bild} = this.state
+    const {Name, Vorname, Bild, Beschreibung} = this.state
     var Erstellt = this.formatDateMonthName(this.state.Erstellt);
     var Projekte = this.state.Data.length;
     return (<div className="animated fadeIn">
@@ -150,7 +152,7 @@ class User extends Component {
                   </Header>
                   <p style={{
                       width: "800px"
-                    }}>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                    }}>{Beschreibung}</p>
                 </Segment>
                 <Segment vertical={true} style={{
                     width: "800px"
