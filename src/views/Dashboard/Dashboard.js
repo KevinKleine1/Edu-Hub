@@ -156,10 +156,10 @@ class Dashboard extends React.Component {
           <b>Einloggen/ Registrieren</b>
         </Button>
           )}
-        
+
         </div>
-          
-        
+
+
     </div>
      <div className="container">
     <div className="row justify-content-md-center">
@@ -184,12 +184,7 @@ class Dashboard extends React.Component {
           <br/>
           <Grid doubling={true} columns={4} divided='vertically'>
               <Grid.Row>
-              {this.createImages(this.state.Data, 0, 4)}
-            </Grid.Row>
-          </Grid>
-          <Grid doubling={true} columns={4} divided='vertically'>
-            <Grid.Row>
-              {this.createImages(this.state.Data, 4, 8)}
+              {this.createImages(this.state.Data, 0, 7)}
             </Grid.Row>
           </Grid>
         </div>

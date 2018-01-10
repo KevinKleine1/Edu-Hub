@@ -10,7 +10,8 @@ import {
   Message,
   Input,
   Menu,
-  Segment
+  Segment,
+  Table
 } from 'semantic-ui-react';
 import {Link, Switch, Route, Redirect} from 'react-router-dom';
 
