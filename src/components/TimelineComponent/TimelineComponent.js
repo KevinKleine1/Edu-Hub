@@ -10,7 +10,19 @@ class TimelineComponent extends React.Component {
     super(props);
   }
 
+  formatDate(date_unformatted) {
+    var day = date_unformatted.substr(8, 2);
+    var month = date_unformatted.substr(5, 2);
+    var year = date_unformatted.substr(0, 4);
+    var date_formatted = day + '.' + month + '.' + year;
+    return date_formatted;
+  }
+
   render() {
+    var updated = this.formatDate(this.props.updateDate);
+
+    var erstellt = this.formatDate(this.props.createDate);
+
     if(this.props.type == "addImage"){
       var farbe = 'rgb(127, 140, 141)';
     }
@@ -58,6 +70,12 @@ class TimelineComponent extends React.Component {
       </Link>
       <p>
         {this.props.text}
+      </p>
+      <p>
+        Erstellt am: {erstellt}
+      </p>
+      <p>
+        Aktualisiert am: {updated}
       </p>
     </VerticalTimelineElement>)
   }
