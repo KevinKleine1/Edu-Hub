@@ -24,7 +24,10 @@ class Aside extends Component {
     }
   }
 
+
+  //TODO: Add parentname directly in fetch
   createTermin(termin) {
+
     return <Termin name={termin.project_name} termin={termin.project_termin} text={termin.project_text} bild={localStorage.getItem('picture')} key={termin.projectid}/>;
   }
 
@@ -32,6 +35,18 @@ class Aside extends Component {
 
     return termine.map(this.createTermin);
 
+  }
+
+  getParentname(parent){
+    var target = ('http://backend-edu.azurewebsites.net/project/' + parent)
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      return json[0].project_name;
+
+    })
   }
 
   setData() {
