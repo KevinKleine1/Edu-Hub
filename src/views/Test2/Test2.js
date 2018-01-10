@@ -17,7 +17,10 @@ import {
   Menu,
   Segment,
   Divider,
-  Form
+  Form,
+  Select,
+  Checkbox,
+  Dropdown
 } from 'semantic-ui-react';
 import Welcome from '../Pages/Welcome/Welcome';
 import ProjectCards from '../../components/ProjectCards/ProjectCards';
@@ -56,6 +59,12 @@ var options = {
 
 const auth = new Auth();
 var lock = new Auth0Lock('TAzP3VaJ1PJgDR2S5zTV0c4inUpt9A9J', 'kevkle.eu.auth0.com', options);
+
+const kategorie = [
+  { key: 'a', text: 'Lehr und Lernprozess', value: 'a' },
+  { key: 'b', text: 'Management', value: 'b' },
+  { key: 'c', text: 'Unterstützungsprozess', value: 'c' },
+]
 
 //dashboard class where we can see up to date project and which is in general our landing page
 class Test2 extends React.Component {
@@ -141,37 +150,49 @@ class Test2 extends React.Component {
 
     return (<div className="animated fadeIn">
 <div className="row justify-content-md-center">
-  <div className="position-relative">
+  <br/>
+  <Card style={{ backgroundColor: "#FFFFFF", width: '1120px' }}>
+  <Segment basic={true} style={{width: '1120px'}}>
 
-        <img className="banner" src='../img/EduBanner.png'/>
-        {
-          !logged && (
-        <Button onClick={this.lockLogin} basic={true} color='grey' style={{
-          position: 'relative',
-            size: 'medium',
-            height: 'auto',
-            left: '320px',
-            bottom: '46px'
-          }}>
-          <b>Einloggen/ Registrieren</b>
-        </Button>
-          )}
-
-        </div>
+     <Header as='h3' color='grey' floated='left'>
+       Projekt suchen
+     </Header><br/>
+     <Segment.Group basic="true">
+       <Segment basic={true}><Input fluid placeholder='Titel'/></Segment>
+       <Segment basic={true}> <Dropdown
+    button
+    style={{width: "700px", backgroundColor: "#FAFAFA"}}
+    className='icon'
+    floating
+    labeled
+    icon='block layout'
+    options={kategorie}
+    search
+    text='Projekttyp aussuchen'
+  /></Segment>
+       <Segment basic={true}>
+         <Form.Group inline>
+          <Form.Field control={Checkbox} label='öffentlich'/>
+          <Form.Field control={Checkbox} label='privat'/>
+        </Form.Group></Segment>
+     </Segment.Group>
+<Button floated='right' animated={true} color='teal' style={{
+         width: "150px"
+       }}>
+       <Button.Content hidden={true}>suchen</Button.Content>
+       <Button.Content visible={true}>
+         <Icon name='search'/>
+       </Button.Content>
+     </Button></Segment></Card>
 
 
     </div>
      <div className="container">
-    <div className="row justify-content-md-center">
+    <div className="row justify-content-md-center"><br/>
     <Menu style={{width: '1200px'}} secondary>
        <Menu.Item><Header as='h2' color='grey' floated='left'>
-         Projekte entdecken
+         Ergebnisse
        </Header></Menu.Item>
-       <Menu.Menu position='right'>
-         <Menu.Item>
-           <Input size='huge' floated='right' transparent icon={{ name: 'search', link: true }} placeholder='Projekt suchen...' />
-         </Menu.Item>
-       </Menu.Menu>
      </Menu>
    </div></div>
     <div className="container">

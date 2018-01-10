@@ -118,6 +118,9 @@ class Dashboard extends React.Component {
 
     })
   }
+  searchProject() {
+    history.push('/discover');
+  };
 
   newProject() {
     history.replace('/wizard1');
@@ -163,13 +166,14 @@ class Dashboard extends React.Component {
     </div>
      <div className="container">
     <div className="row justify-content-md-center">
+      <br/>
     <Menu style={{width: '1200px'}} secondary>
        <Menu.Item><Header as='h2' color='grey' floated='left'>
          Projekte entdecken
        </Header></Menu.Item>
        <Menu.Menu position='right'>
          <Menu.Item>
-           <Input size='huge' floated='right' transparent icon={{ name: 'search', link: true }} placeholder='Projekt suchen...' />
+           <Button circucal onClick={this.searchProject} icon="search" size="massive" />
          </Menu.Item>
        </Menu.Menu>
      </Menu>
