@@ -74,7 +74,8 @@ class ProjectPage extends React.Component {
       Termintext: "",
       Termindate: "",
       activeItem: "Alle",
-      UploadData: []
+      UploadData: [],
+      showPics: false
 
 
     };
@@ -94,7 +95,7 @@ class ProjectPage extends React.Component {
     this.addDocument = this.addDocument.bind(this);
     this.addImage = this.addImage.bind(this);
     this.addTermin = this.addTermin.bind(this);
-
+    this.getImages = this.getImages.bind(this);
   }
 
   handleChange = (e, {name, value}) => this.setState({[name]: value})
@@ -435,9 +436,15 @@ class ProjectPage extends React.Component {
       return results.json();
 
     }).then((json) => {
-
+      if (json.length === 0){
+        this.setState({showPics: false});
+      }
+      else{
+        this.setState({showPics: true});
+      }
       this.setState({
         ImageData: json
+        
       }, function() {})
 
     })
@@ -575,6 +582,10 @@ class ProjectPage extends React.Component {
     })
   }
 
+  setAuthor(){
+    //TODO Insert function
+  }
+
   handleProject(){
     this.setState({Laden: true});
     if(this.state.title.length > 0){
@@ -631,6 +642,7 @@ class ProjectPage extends React.Component {
     });
 
   }
+
 
   leaveProject() {
     var user = localStorage.getItem('userid');
@@ -738,7 +750,8 @@ class ProjectPage extends React.Component {
       Karma,
       Members,
       TagData,
-      ResourceData
+      ResourceData,
+      showPics
     } = this.state
     var org = this.state.Erstellt;
     var Erstellt = this.formatDate(org);
@@ -1090,17 +1103,19 @@ class ProjectPage extends React.Component {
                 </Divider>
 
                 <p>{Text}</p>
-
-              </Container>
+             </Container>
 
             </div>
+            {
+              showPics &&(
             <div className="bilder">
               <Divider horizontal={true}>
                 <h3>Fotos</h3>
               </Divider>
               <Gallery images={this.state.ImageData} maxRows={1} imageCountSeparator=' von ' showImageCount={true} showLightboxThumbnails={true} backdropClosesModal={true} showCloseButton={false} enableImageSelection={true}/>
             </div>
-
+              )
+            }
           </Grid.Column>
           <Grid.Column width={3}>
             <br/>
