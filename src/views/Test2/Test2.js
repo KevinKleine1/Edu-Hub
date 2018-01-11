@@ -1,217 +1,281 @@
+import _ from 'lodash';
 import React, {Component} from 'react';
-import Auth from '../../Auth/Auth';
-import {AUTH_CONFIG} from '../../Auth/auth0-variables';
-import Auth0Lock from 'auth0-lock';
-import history from '../../history';
-import {Link, Switch, Route, Redirect} from 'react-router-dom';
-import {
-  Header,
-  Icon,
-  Image,
-  Container,
-  Card,
-  Grid,
-  Button,
-  Message,
-  Input,
-  Menu,
-  Segment,
-  Divider,
-  Form,
-  Select,
-  Checkbox,
-  Dropdown
-} from 'semantic-ui-react';
-import Welcome from '../Pages/Welcome/Welcome';
-import ProjectCards from '../../components/ProjectCards/ProjectCards';
-import 'whatwg-fetch'
+import {Table,
+Button,
+Menu,
+Header,
+Icon,
+Segment,
+Divider,
+Card,
+Grid,
+Image,
+Tab,
+Popup } from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
 
-
-var options = {
-  language: 'de',
-  oidcConformant: true,
-  socialButtonStyle: 'small',
-  rememberLastLogin: true,
-  loginAfterSignUp: true,
-  theme: {
-    logo: '/img/logo.png',
-    primaryColor: '#20a8d8',
-    labeledSubmitButton: false
-  },
-  auth: {
-    params: {
-      param1: "value1"
-    },
-    redirect: true,
-    redirectUrl: AUTH_CONFIG.callbackUrl, //change for production
-    responseType: 'token id_token',
-    audience: 'https://kevkle.eu.auth0.com/userinfo',
-    sso: true,
-    params: {
-      scope: 'openid email'
-    }
-  },
-  languageDictionary: {
-    emailInputPlaceholder: "Ihre Email",
-    title: ""
+//This part needs to be created dynamicly according to user
+const tableData = [
+  {
+    Nummer: '1',
+    ProjektName: 'Lernzentrum',
+    Status: 'In Bearbeitung',
+    ZuletztVeraendert: '2017-01-08T15:46:00.000Z'
+  }, {
+    Nummer: '2',
+    ProjektName: 'Fitness Studio',
+    Status: 'In Bearbeitung',
+    ZuletztVeraendert: '2016-12-07T15:46:00.000Z'
+  }, {
+    Nummer: '3',
+    ProjektName: 'Coding Kurs',
+    Status: 'Fertig',
+    ZuletztVeraendert: '2017-12-04T15:46:00.000Z'
+  }, {
+    Nummer: '4',
+    ProjektName: 'Bundes Jugendspiele',
+    Status: 'Fertig',
+    ZuletztVeraendert: '2017-12-04T15:45:00.000Z'
   }
-};
-
-const auth = new Auth();
-var lock = new Auth0Lock('TAzP3VaJ1PJgDR2S5zTV0c4inUpt9A9J', 'kevkle.eu.auth0.com', options);
-
-const kategorie = [
-  { key: 'a', text: 'Lehr und Lernprozess', value: 'a' },
-  { key: 'b', text: 'Management', value: 'b' },
-  { key: 'c', text: 'Unterstützungsprozess', value: 'c' },
 ]
 
-//dashboard class where we can see up to date project and which is in general our landing page
 class Test2 extends React.Component {
+  state = {
+    column: null,
+    data: [],
+    direction: null,
+    user: ""
+  }
+  /* formates date from database to readable | currently unused in this view
+  formatDate(date_unformatted){
+  var day = date_unformatted.substr(8, 2);
+  var month = date_unformatted.substr(5, 2);
+  var year = date_unformatted.substr(0, 4);
+  return day + '.' + month + '.' + year;
+}*/
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      modal: false,
-      activeItem: '',
-      dropdownOpen: false,
-      activeItem: "Kernprojekte",
-      Data: []
-    };
-
-    this.toggle = this.toggle.bind(this);
+  // formates date with time
+  formatDateWithTime(date_unformatted) {
+    var day = date_unformatted.substr(8, 2);
+    var month = date_unformatted.substr(5, 2);
+    var year = date_unformatted.substr(0, 4);
+    var time = date_unformatted.substr(11, 5);
+    var monthNamed = null;
+    if (month == '01') {
+      monthNamed = 'Jan';
+    } else if (month == '02') {
+      monthNamed = 'Feb';
+    } else if (month == '03') {
+      monthNamed = 'Mrz';
+    } else if (month == '04') {
+      monthNamed = 'Apr';
+    } else if (month == '05') {
+      monthNamed = 'Mai';
+    } else if (month == '06') {
+      monthNamed = 'Jun';
+    } else if (month == '07') {
+      monthNamed = 'Jul';
+    } else if (month == '08') {
+      monthNamed = 'Aug';
+    } else if (month == '09') {
+      monthNamed = 'Sep';
+    } else if (month == '10') {
+      monthNamed = 'Okt';
+    } else if (month == '11') {
+      monthNamed = 'Nov';
+    } else {
+      monthNamed = 'Dez';
+    }
+    return day + '. ' + monthNamed + '. ' + year + ' ' + time
   }
 
-  lockLogin() {
-    lock.show();
+  setData() {
+    var target = ('http://backend-edu.azurewebsites.net/user/' + localStorage.getItem('email'))
+    fetch(target).then((results) => {
+      return results.json();
 
+    }).then((json) => {
+
+      this.setState({user: json[0].userid}
+      , function(){
+        this.getProjects();
+      });
+    })
   }
 
-  //Class to create a new project card with all the necessary data
-  createImage(image) {
-    return <ProjectCards name={image.project_name} members={image.project_membercount} text={image.project_text} bild={image.project_imagepath} erstellt={image.project_created_at} link={image.projectid} key={image.projectid}/>;
-  }
-
-  //this is the mapping class which uses createImage on every content of the array
-  createImages(images, start, end) {
-    var Plist = images.slice(start, end)
-    return Plist.map(this.createImage);
-
-  }
-  //handler for the menu on top to change categories
-  handleItemClick = (e, {name}) => this.setState({activeItem: name})
-
-  //dropdown handler
-  toggle() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-
-    });
-  }
-
-  //fetch call to get all projects we have available atm TODO: Remove subprojects, make it dynamically, have some kind of sorting
   getProjects() {
-    var target = ('http://backend-edu.azurewebsites.net/project/landingpage/get')
+    var target = ('http://backend-edu.azurewebsites.net/user/getmyproject/' + this.state.user)
     fetch(target).then((results) => {
       return results.json();
 
     }).then((json) => {
 
       this.setState({
-        Data: json
-      }, function() {
-        this.setState({
-          Id: this.state.Data.map((elem) => elem.projectid)
-        }, function() {});
-      })
+        data: json
+      }, function() {})
 
     })
   }
 
-  newProject() {
-    history.replace('/wizard1');
+  //sorts column
+  handleSort = clickedColumn => () => {
+    const {column, data, direction} = this.state
+
+    if (column !== clickedColumn) {
+      this.setState({
+        column: clickedColumn,
+        data: _.sortBy(data, [clickedColumn]),
+        direction: 'ascending'
+      })
+
+      return
+    }
+
+    this.setState({
+      data: data.reverse(),
+      direction: direction === 'ascending'
+        ? 'descending'
+        : 'ascending'
+    })
   }
 
-  isAuthenticated() {
-    // Check whether the current time is past the
-    // access token's expiry time
-    let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-    return new Date().getTime() < expiresAt;
-  }
-  //inital call after component did render
-  componentDidMount() {
-    this.getProjects();
-
+  componentDidMount(){
+    this.setData();
   }
 
   render() {
-    const logged = this.isAuthenticated();
-    const {activeItem} = this.state;
+    const panes = [
+  { menuItem: { key: 'Liste', icon: 'list', content: 'Liste' }, render: () => <Tab.Pane attached={false}>
+    <Table sortable={true} celled={true} fixed={true} selectable={true} size='large'>
+      <Table.Header>
+        <Table.Row>
+          <Table.HeaderCell sorted={column === 'Nummer'
+              ? direction
+              : null} onClick={this.handleSort('Nummer')}>
+            #
+          </Table.HeaderCell>
+          <Table.HeaderCell sorted={column === 'ProjektName'
+              ? direction
+              : null} onClick={this.handleSort('ProjektName')}>
+            Projekt Name
+          </Table.HeaderCell>
+          <Table.HeaderCell sorted={column === 'Status'
+              ? direction
+              : null} onClick={this.handleSort('Status')}>
+            Status
+          </Table.HeaderCell>
+          <Table.HeaderCell sorted={column === 'ZuletztVeraendert'
+              ? direction
+              : null} onClick={this.handleSort('ZuletztVeraendert')}>
+            Zuletzt Verändert
+          </Table.HeaderCell>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {
+          _.map(data, ({project_name, project_projecttype, projectid, project_updated_at}) => (
+            <Table.Row key={projectid}>
+            <Table.Cell>{projectid}</Table.Cell>
+            <Table.Cell selectable><a href={'/projectpage/' + projectid}>{project_name}</a></Table.Cell>
+            <Table.Cell>{project_projecttype}</Table.Cell>
+            <Table.Cell>{this.formatDateWithTime(project_updated_at)}</Table.Cell>
+            </Table.Row>
 
-    return (<div className="animated fadeIn">
-<div className="row justify-content-md-center">
-  <br/>
-  <Card style={{ backgroundColor: "#FFFFFF", width: '1120px' }}>
-  <Segment basic={true} style={{width: '1120px'}}>
+          ))
+        }
+      </Table.Body>
+    </Table>
+  </Tab.Pane> },
+  {  menuItem: { key: 'Kacheln', icon: 'block layout', content: 'Kacheln' }, render: () => <Tab.Pane attached={false}>
+  <Grid doubling={true} columns={4} divided='vertically'>
+    <Grid.Column>
+          <Popup
+            trigger={<Image
+              fluid
+              size='medium'
+              label={{ as: 'a', color: 'teal', content: 'Digitale Bibliothek', ribbon: true }}
+              src='/img/Landingpage/projekt1.jpg'/>}
+              position='top left'>
+              <Popup.Content>
+              <p><b>Status:</b> fertig<br/> <b>Zuletzt verändert:</b> 11.01.2018</p>
+            </Popup.Content></Popup>
+        </Grid.Column>
+        <Grid.Column>
 
-     <Header as='h3' color='grey' floated='left'>
-       Projekt suchen
-     </Header><br/>
-     <Segment.Group basic="true">
-       <Segment basic={true}><Input fluid placeholder='Titel'/></Segment>
-       <Segment basic={true}> <Dropdown
-    button
-    style={{width: "700px", backgroundColor: "#FAFAFA"}}
-    className='icon'
-    floating
-    labeled
-    icon='block layout'
-    options={kategorie}
-    search
-    text='Projekttyp aussuchen'
-  /></Segment>
-       <Segment basic={true}>
-         <Form.Group inline>
-          <Form.Field control={Checkbox} label='öffentlich'/>
-          <Form.Field control={Checkbox} label='privat'/>
-        </Form.Group></Segment>
-     </Segment.Group>
-<Button floated='right' animated={true} color='teal' style={{
-         width: "150px"
-       }}>
-       <Button.Content hidden={true}>suchen</Button.Content>
-       <Button.Content visible={true}>
-         <Icon name='search'/>
-       </Button.Content>
-     </Button></Segment></Card>
+<Popup
+  trigger={<Image
+    fluid
+    size='medium'
+    label={{ as: 'a', color: 'teal', content: 'Experiment', ribbon: true }}
+    src='/img/Landingpage/projekt2.jpg'
+  />}
+    position='top left'>
+    <Popup.Content>
+    <p><b>Status:</b> fertig<br/> <b>Zuletzt verändert:</b> 11.01.2018</p>
+  </Popup.Content></Popup>
+</Grid.Column>
+<Grid.Column>
+
+    <Popup
+      trigger={<Image
+        fluid
+        size='medium'
+        label={{ as: 'a', color: 'teal', content: 'Selbstlernzetrum', ribbon: true }}
+        src='/img/Landingpage/projekt3.jpg'
+      />}
+        position='top left'>
+        <Popup.Content>
+        <p><b>Status:</b> fertig<br/> <b>Zuletzt verändert:</b> 11.01.2018</p>
+      </Popup.Content></Popup>
+  </Grid.Column>
+  <Grid.Column>
+
+        <Popup
+          trigger={<Image
+            fluid
+            size='medium'
+            label={{ as: 'a', color: 'teal', content: 'Selbstlernzetrum', ribbon: true }}
+            src='/img/Landingpage/projekt4.jpeg'
+          />}
+            position='top left'>
+            <Popup.Content>
+            <p><b>Status:</b> fertig<br/> <b>Zuletzt verändert:</b> 11.01.2018</p>
+          </Popup.Content></Popup>
+      </Grid.Column>
+      <Grid.Column>
+
+            <Popup
+              trigger={<Image
+                fluid
+                size='medium'
+                label={{ as: 'a', color: 'teal', content: 'Selbstlernzetrum', ribbon: true }}
+                src='/img/Landingpage/projekt4.jpeg'
+              />}
+                position='top left'>
+                <Popup.Content>
+                <p><b>Status:</b> fertig<br/> <b>Zuletzt verändert:</b> 11.01.2018</p>
+              </Popup.Content></Popup>
+          </Grid.Column>
+    </Grid>
+
+  </Tab.Pane> },
+]
+    const {column, data, direction} = this.state
 
 
-    </div>
-     <div className="container">
-    <div className="row justify-content-md-center"><br/>
-    <Menu style={{width: '1200px'}} secondary>
-       <Menu.Item><Header as='h2' color='grey' floated='left'>
-         Ergebnisse
-       </Header></Menu.Item>
-     </Menu>
-   </div></div>
-    <div className="container">
-   <div className="row justify-content-md-center">
-   <Divider fitted style={{width: '1115px'}}/>
- </div></div>
-     <div className="container">
-        <div className="row justify-content-md-center">
-           <div className="menu">
-          <br/>
-          <Grid doubling={true} columns={4} divided='vertically'>
-              <Grid.Row>
-              {this.createImages(this.state.Data, 0, 7)}
-            </Grid.Row>
-          </Grid>
-        </div>
-        </div>
-      </div>
-    </div>);
+    return (<div>
+    <br/>
+      <Header as='h2'>
+        <Icon name='empty heart'/>
+        <Header.Content>
+          Meine Projekte
+          <Header.Subheader>
+          Liste oder Kachelansicht deiner Projekte
+          </Header.Subheader>
+        </Header.Content>
+      </Header>
+     <Tab menu={{ secondary: true, pointing: true, fluid: true }} panes={panes} />
+   </div>)
   }
 }
 

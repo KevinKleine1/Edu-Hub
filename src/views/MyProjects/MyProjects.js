@@ -1,6 +1,19 @@
 import _ from 'lodash';
 import React, {Component} from 'react';
-import {Table, Button} from 'semantic-ui-react';
+import {
+  Table,
+  Button,
+  Menu,
+  Header,
+  Icon,
+  Segment,
+  Divider,
+  Card,
+  Grid,
+  Image,
+  Tab,
+  Popup
+} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 
 //This part needs to be created dynamicly according to user
@@ -85,8 +98,9 @@ class MyProjects extends React.Component {
 
     }).then((json) => {
 
-      this.setState({user: json[0].userid}
-      , function(){
+      this.setState({
+        user: json[0].userid
+      }, function() {
         this.getProjects();
       });
     })
@@ -128,55 +142,169 @@ class MyProjects extends React.Component {
     })
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.setData();
   }
 
   render() {
+    const panes = [
+      {
+        menuItem: {
+          key: 'Liste',
+          icon: 'list',
+          content: 'Liste'
+        },
+        render: () => <Tab.Pane attached={false}>
+            <Table sortable={true} celled={true} fixed={true} selectable={true} size='large'>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell sorted={column === 'Nummer'
+                      ? direction
+                      : null} onClick={this.handleSort('Nummer')}>
+                    #
+                  </Table.HeaderCell>
+                  <Table.HeaderCell sorted={column === 'ProjektName'
+                      ? direction
+                      : null} onClick={this.handleSort('ProjektName')}>
+                    Projekt Name
+                  </Table.HeaderCell>
+                  <Table.HeaderCell sorted={column === 'Status'
+                      ? direction
+                      : null} onClick={this.handleSort('Status')}>
+                    Status
+                  </Table.HeaderCell>
+                  <Table.HeaderCell sorted={column === 'ZuletztVeraendert'
+                      ? direction
+                      : null} onClick={this.handleSort('ZuletztVeraendert')}>
+                    Zuletzt Verändert
+                  </Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {
+                  _.map(data, ({project_name, project_projecttype, projectid, project_updated_at}) => (<Table.Row key={projectid}>
+                    <Table.Cell>{projectid}</Table.Cell>
+                    <Table.Cell selectable="selectable">
+                      <a href={'/projectpage/' + projectid}>{project_name}</a>
+                    </Table.Cell>
+                    <Table.Cell>{project_projecttype}</Table.Cell>
+                    <Table.Cell>{this.formatDateWithTime(project_updated_at)}</Table.Cell>
+                  </Table.Row>))
+                }
+              </Table.Body>
+            </Table>
+          </Tab.Pane>
+      }, {
+        menuItem: {
+          key: 'Kacheln',
+          icon: 'block layout',
+          content: 'Kacheln'
+        },
+        render: () => <Tab.Pane attached={false}>
+            <Grid doubling={true} columns={4} divided='vertically'>
+              <Grid.Column>
+                <Popup trigger={<Image
+                  size = 'medium'
+                  label = {{ as: 'a', color: 'teal', content: 'Digitale Bibliothek', ribbon: true }}
+                  src = '/img/Landingpage/projekt1.jpg' />} position='top left'>
+                  <Popup.Content>
+                    <p>
+                      <b>Status:</b>
+                      fertig<br/>
+                      <b>Zuletzt verändert:</b>
+                      11.01.2018</p>
+                  </Popup.Content>
+                </Popup>
+              </Grid.Column>
+              <Grid.Column>
+                <Popup trigger={<Image
+                  size = 'medium'
+                  label = {{ as: 'a', color: 'teal', content: 'Experiment', ribbon: true }}
+                  src = '/img/Landingpage/projekt2.jpg'
+                  />} position='top left'>
+                  <Popup.Content>
+                    <p>
+                      <b>Status:</b>
+                      fertig<br/>
+                      <b>Zuletzt verändert:</b>
+                      11.01.2018</p>
+                  </Popup.Content>
+                </Popup>
+              </Grid.Column>
+              <Grid.Column>
+
+                <Popup trigger={<Image
+                  size = 'medium'
+                  label = {{ as: 'a', color: 'teal', content: 'Selbstlernzetrum', ribbon: true }}
+                  src = '/img/Landingpage/projekt3.jpg'
+                  />} position='top left'>
+                  <Popup.Content>
+                    <p>
+                      <b>Status:</b>
+                      fertig<br/>
+                      <b>Zuletzt verändert:</b>
+                      11.01.2018</p>
+                  </Popup.Content>
+                </Popup>
+              </Grid.Column>
+              <Grid.Column>
+
+                <Popup trigger={<Image
+                  size = 'medium'
+                  label = {{ as: 'a', color: 'teal', content: 'Selbstlernzetrum', ribbon: true }}
+                  src = '/img/Landingpage/projekt4.jpeg'
+                  />} position='top left'>
+                  <Popup.Content>
+                    <p>
+                      <b>Status:</b>
+                      fertig<br/>
+                      <b>Zuletzt verändert:</b>
+                      11.01.2018</p>
+                  </Popup.Content>
+                </Popup>
+              </Grid.Column>
+              <Grid.Column>
+
+                <Popup trigger={<Image
+                  size = 'medium'
+                  label = {{ as: 'a', color: 'teal', content: 'Selbstlernzetrum', ribbon: true }}
+                  src = '/img/Landingpage/projekt4.jpeg'
+                  />} position='top left'>
+                  <Popup.Content>
+                    <p>
+                      <b>Status:</b>
+                      fertig<br/>
+                      <b>Zuletzt verändert:</b>
+                      11.01.2018</p>
+                  </Popup.Content>
+                </Popup>
+              </Grid.Column>
+            </Grid>
+
+          </Tab.Pane>
+      }
+    ]
     const {column, data, direction} = this.state
 
-    return (
-    <div>
-      <Table sortable={true} celled={true} fixed={true} selectable={true} size='large'>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell sorted={column === 'Nummer'
-                ? direction
-                : null} onClick={this.handleSort('Nummer')}>
-              #
-            </Table.HeaderCell>
-            <Table.HeaderCell sorted={column === 'ProjektName'
-                ? direction
-                : null} onClick={this.handleSort('ProjektName')}>
-              Projekt Name
-            </Table.HeaderCell>
-            <Table.HeaderCell sorted={column === 'Status'
-                ? direction
-                : null} onClick={this.handleSort('Status')}>
-              Status
-            </Table.HeaderCell>
-            <Table.HeaderCell sorted={column === 'ZuletztVeraendert'
-                ? direction
-                : null} onClick={this.handleSort('ZuletztVeraendert')}>
-              Zuletzt Verändert
-            </Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {
-            _.map(data, ({project_name, project_projecttype, projectid, project_updated_at}) => (
-              <Table.Row key={projectid}>
-              <Table.Cell>{projectid}</Table.Cell>
-              <Table.Cell selectable><a href={'/projectpage/' + projectid}>{project_name}</a></Table.Cell>
-              <Table.Cell>{project_projecttype}</Table.Cell>
-              <Table.Cell>{this.formatDateWithTime(project_updated_at)}</Table.Cell>
-              </Table.Row>
-           
-            ))
-          }
-        </Table.Body>
-      </Table>
-    </div>)
+    return (<div className="animated fadeIn">
+      <div>
+      <br/>
+      <Header as='h2'>
+        <Icon name='empty heart'/>
+        <Header.Content>
+          Meine Projekte
+          <Header.Subheader>
+            Liste oder Kachelansicht deiner Projekte
+          </Header.Subheader>
+        </Header.Content>
+      </Header>
+      <Tab menu={{
+          secondary: true,
+          pointing: true,
+          fluid: true
+        }} panes={panes}/>
+    </div>
+  </div>)
   }
 }
 
