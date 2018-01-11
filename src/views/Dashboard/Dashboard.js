@@ -23,7 +23,6 @@ import Welcome from '../Pages/Welcome/Welcome';
 import ProjectCards from '../../components/ProjectCards/ProjectCards';
 import 'whatwg-fetch'
 
-
 var options = {
   language: 'de',
   oidcConformant: true,
@@ -143,55 +142,60 @@ class Dashboard extends React.Component {
     const {activeItem} = this.state;
 
     return (<div className="animated fadeIn">
-<div className="row justify-content-md-center">
-  <div className="position-relative">
+      <div className="row justify-content-md-center">
+        <div className="position-relative">
 
-        <img className="banner" src='../img/EduBanner.png'/>
-        {
-          !logged && (
-        <Button onClick={this.lockLogin} basic={true} color='grey' style={{
-          position: 'relative',
-            size: 'medium',
-            height: 'auto',
-            left: '320px',
-            bottom: '46px'
-          }}>
-          <b>Einloggen/ Registrieren</b>
-        </Button>
-          )}
+          <img className="banner" src='../img/EduBanner.png'/> {
+            !logged && (<Button onClick={this.lockLogin} basic={true} color='grey' style={{
+                position: 'relative',
+                size: 'medium',
+                height: 'auto',
+                left: '320px',
+                bottom: '46px'
+              }}>
+              <b>Einloggen/ Registrieren</b>
+            </Button>)
+          }
 
         </div>
 
-
-    </div>
-     <div className="container">
-    <div className="row justify-content-md-center">
-      <br/>
-    <Menu style={{width: '1200px'}} secondary>
-       <Menu.Item><Header as='h2' color='grey' floated='left'>
-         Projekte entdecken
-       </Header></Menu.Item>
-       <Menu.Menu position='right'>
-         <Menu.Item>
-           <Button circucal onClick={this.searchProject} icon="search" size="massive" />
-         </Menu.Item>
-       </Menu.Menu>
-     </Menu>
-   </div></div>
-    <div className="container">
-   <div className="row justify-content-md-center">
-   <Divider fitted style={{width: '1115px'}}/>
- </div></div>
-     <div className="container">
+      </div>
+      <div className="container">
         <div className="row justify-content-md-center">
-           <div className="menu">
           <br/>
-          <Grid doubling={true} columns={4} divided='vertically'>
-              <Grid.Row>
-              {this.createImages(this.state.Data, 0, 7)}
-            </Grid.Row>
-          </Grid>
+          <Menu style={{
+              width: '1200px'
+            }} secondary={true}>
+            <Menu.Item>
+              <Header as='h2' color='grey' floated='left'>
+                Projekte entdecken
+              </Header>
+            </Menu.Item>
+            <Menu.Menu position='right'>
+              <Menu.Item>
+                <Button circular={true} onClick={this.searchProject} icon="search" size="massive"/>
+              </Menu.Item>
+            </Menu.Menu>
+          </Menu>
         </div>
+      </div>
+      <div className="container">
+        <div className="row justify-content-md-center">
+          <Divider fitted={true} style={{
+              width: '1115px'
+            }}/>
+        </div>
+      </div>
+      <div className="container">
+        <div className="row justify-content-md-center">
+          <div className="menu">
+            <br/>
+            <Grid doubling={true} columns={4} divided='vertically'>
+              <Grid.Row>
+                {this.createImages(this.state.Data, 0, 7)}
+              </Grid.Row>
+            </Grid>
+          </div>
         </div>
       </div>
     </div>);
