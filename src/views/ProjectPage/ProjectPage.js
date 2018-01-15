@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {render} from 'react-dom';
+import React, { Component } from 'react';
+import { render } from 'react-dom';
 import Gallery from 'react-grid-gallery';
-import {Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {
   Card,
   Grid,
@@ -25,9 +25,9 @@ import {
   Table,
   Checkbox
 } from 'semantic-ui-react';
-import {VerticalTimeline, VerticalTimelineElement} from 'react-vertical-timeline-component';
+import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import TimelineComponent from '../../components/TimelineComponent/TimelineComponent';
 import UserCard from '../../components/UserCard/UserCard';
 import Tags from '../../components/Tags/Tags';
@@ -101,7 +101,7 @@ class ProjectPage extends React.Component {
     this.getImages = this.getImages.bind(this);
   }
 
-  handleChange = (e, {name, value}) => this.setState({[name]: value})
+  handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
@@ -141,7 +141,7 @@ class ProjectPage extends React.Component {
 
       this.setState({
         Data: json
-      }, function() {
+      }, function () {
         this.getUploadReaction()
       })
 
@@ -157,23 +157,23 @@ class ProjectPage extends React.Component {
 
       this.setState({
         UploadData: json
-      }, function() {})
+      }, function () { })
 
     })
   }
 
-  
 
-  createTag(tag){
+
+  createTag(tag) {
     return <Tags Tag={tag.tag_name} key={tag.tagid} />
   }
 
-  createTags(tags){
+  createTags(tags) {
 
     return tags.map(this.createTag);
   }
 
-  getTags(){
+  getTags() {
     var target = ('http://backend-edu.azurewebsites.net/tag/' + this.props.match.params.projectid)
     fetch(target).then((results) => {
       return results.json();
@@ -182,13 +182,13 @@ class ProjectPage extends React.Component {
 
       this.setState({
         TagData: json
-      }, function() {})
+      }, function () { })
 
     })
   }
 
-  addTag(){
-    this.setState({Laden: true});
+  addTag() {
+    this.setState({ Laden: true });
     const Tag = this.state.tag;
     var forma = new FormData();
     forma.append('pht_idproject', this.props.match.params.projectid);
@@ -204,16 +204,16 @@ class ProjectPage extends React.Component {
       return response.json();
 
     }).then((json) => {
-      this.setState({key: Math.random()}, function(){
+      this.setState({ key: Math.random() }, function () {
         this.getTags();
-        this.setState({Laden: false});
+        this.setState({ Laden: false });
         this.toggleEdit();
       });
     });
 
   }
 
-  getDocuments(){
+  getDocuments() {
     var target = ('http://backend-edu.azurewebsites.net/project/documents/get/' + this.props.match.params.projectid)
     fetch(target).then((results) => {
       return results.json();
@@ -222,18 +222,18 @@ class ProjectPage extends React.Component {
 
       this.setState({
         DocumentData: json
-      }, function() {})
+      }, function () { })
 
     })
   }
 
-  createDocument(document){
+  createDocument(document) {
     return <Anhang name={document.project_name} doclink={document.document_documentpath} key={document.document_documentpath} />
   }
 
-  createDocuments(documents){
+  createDocuments(documents) {
 
-  return documents.map(this.createDocument);
+    return documents.map(this.createDocument);
   }
 
   _handleImageChange(e) {
@@ -243,14 +243,14 @@ class ProjectPage extends React.Component {
     let file = e.target.files[0];
 
     reader.onloadend = () => {
-      this.setState({file: file});
+      this.setState({ file: file });
     }
 
     reader.readAsDataURL(file)
   }
 
-  addDocument(){
-    this.setState({Laden: true});
+  addDocument() {
+    this.setState({ Laden: true });
     var forma = new FormData();
     forma.append('fileName', "Document");
     forma.append('foo', this.state.file);
@@ -269,17 +269,17 @@ class ProjectPage extends React.Component {
       return response.json();
 
     }).then((json) => {
-      this.setState({key: Math.random()}, function(){
+      this.setState({ key: Math.random() }, function () {
         this.getDocuments();
         this.getReactions();
-        this.setState({Laden: false});
+        this.setState({ Laden: false });
         this.toggleEdit();
       });
     });
 
   }
 
-  getResources(){
+  getResources() {
     var target = ('http://backend-edu.azurewebsites.net/resource/' + this.props.match.params.projectid)
     fetch(target).then((results) => {
       return results.json();
@@ -288,22 +288,22 @@ class ProjectPage extends React.Component {
 
       this.setState({
         ResourceData: json
-      }, function() {})
+      }, function () { })
 
     })
   }
 
-  createResource(resource){
+  createResource(resource) {
     return <Ressources Resource={resource.resource_name} key={resource.resourceid} />
   }
 
-  createResources(resources){
+  createResources(resources) {
 
-  return resources.map(this.createResource);
+    return resources.map(this.createResource);
   }
 
-  addResource(){
-    this.setState({Laden: true});
+  addResource() {
+    this.setState({ Laden: true });
     const Resource = this.state.resource;
     var forma = new FormData();
     forma.append('phr_idproject', this.props.match.params.projectid);
@@ -319,17 +319,17 @@ class ProjectPage extends React.Component {
       return response.json();
 
     }).then((json) => {
-      this.setState({key: Math.random()}, function(){
+      this.setState({ key: Math.random() }, function () {
         this.getResources();
-        this.setState({Laden: false});
+        this.setState({ Laden: false });
         this.toggleEdit();
       });
     });
 
   }
 
-  addComment(){
-    this.setState({Laden: true});
+  addComment() {
+    this.setState({ Laden: true });
     var forma = new FormData();
     forma.append('Project_projectid', this.props.match.params.projectid);
     forma.append('project_name', this.state.Commenttitle);
@@ -346,18 +346,18 @@ class ProjectPage extends React.Component {
       return response.json();
 
     }).then((json) => {
-      this.setState({key: Math.random()}, function(){
+      this.setState({ key: Math.random() }, function () {
         this.getReactions();
-        this.setState({Commenttext: ""});
-        this.setState({Commenttitle: ""});
-        this.setState({Laden: false});
+        this.setState({ Commenttext: "" });
+        this.setState({ Commenttitle: "" });
+        this.setState({ Laden: false });
         this.toggleEdit();
       });
     });
   }
 
-  deleteProject(){
-    this.setState({Laden: true});
+  deleteProject() {
+    this.setState({ Laden: true });
     var forma = new FormData();
     forma.append('projectid', this.props.match.params.projectid);
 
@@ -371,8 +371,8 @@ class ProjectPage extends React.Component {
       return response.json();
 
     }).then((json) => {
-        this.setState({key: Math.random()}, function(){
-        this.setState({Laden: false});
+      this.setState({ key: Math.random() }, function () {
+        this.setState({ Laden: false });
         history.push('/dashboard');
       });
     });
@@ -380,7 +380,7 @@ class ProjectPage extends React.Component {
 
   //creates the nodes for our timeline
   createNode(node) {
-    return <TimelineComponent type={node.project_projecttype} createDate={node.project_created_at} updateDate={node.project_updated_at} name={node.project_name} authorname={node.surname} authorvorname={node.forename} authormail={node.email} text={node.project_text} userid={node.userid} projectid={node.projectid} key={node.projectid}/>;
+    return <TimelineComponent type={node.project_projecttype} createDate={node.project_created_at} updateDate={node.project_updated_at} name={node.project_name} authorname={node.surname} authorvorname={node.forename} authormail={node.email} text={node.project_text} userid={node.userid} projectid={node.projectid} key={node.projectid} />;
   }
 
   createNodes(nodes) {
@@ -391,7 +391,7 @@ class ProjectPage extends React.Component {
 
   //creates the user cards to check who in in the projcet
   createCard(card) {
-    return <UserCard vorname={card.forename} nachname={card.surname} description={card.user_description} usermail={card.email} id={card.userid} key={card.userid}/>;
+    return <UserCard vorname={card.forename} nachname={card.surname} description={card.user_description} usermail={card.email} id={card.userid} key={card.userid} />;
   }
 
   createCards(cards) {
@@ -408,11 +408,11 @@ class ProjectPage extends React.Component {
 
     }).then((json) => {
 
-      this.setState({Name: json[0].project_name});
-      this.setState({Text: json[0].project_text});
-      this.setState({Karma: json[0].project_karma});
-      this.setState({Bild: json[0].project_imagepath});
-      this.setState({Erstellt: json[0].project_created_at})
+      this.setState({ Name: json[0].project_name });
+      this.setState({ Text: json[0].project_text });
+      this.setState({ Karma: json[0].project_karma });
+      this.setState({ Bild: json[0].project_imagepath });
+      this.setState({ Erstellt: json[0].project_created_at })
 
     })
   }
@@ -426,35 +426,35 @@ class ProjectPage extends React.Component {
 
       this.setState({
         NutzerId: json[0].userid
-      }, function() {
+      }, function () {
         localStorage.setItem('userid', this.state.NutzerId);
       });
     })
   }
 
-  getImages(){
+  getImages() {
 
     var target = ('http://backend-edu.azurewebsites.net/project/images/get/' + this.props.match.params.projectid)
     fetch(target).then((results) => {
       return results.json();
 
     }).then((json) => {
-      if (json.length === 0){
-        this.setState({showPics: false});
+      if (json.length === 0) {
+        this.setState({ showPics: false });
       }
-      else{
-        this.setState({showPics: true});
+      else {
+        this.setState({ showPics: true });
       }
       this.setState({
         ImageData: json
-        
-      }, function() {})
+
+      }, function () { })
 
     })
   }
 
-  addImage(){
-    this.setState({Laden: true});
+  addImage() {
+    this.setState({ Laden: true });
     var forma = new FormData();
     forma.append('fileName', "Bild");
     forma.append('foo', this.state.file);
@@ -473,16 +473,16 @@ class ProjectPage extends React.Component {
       return response.json();
 
     }).then((json) => {
-      this.setState({key: Math.random()}, function(){
+      this.setState({ key: Math.random() }, function () {
         this.getImages();
-        this.setState({Laden: false});
+        this.setState({ Laden: false });
         this.toggleEdit();
       });
     });
 
   }
 
-  changeTitle(){
+  changeTitle() {
     const title = this.state.title;
     var forma = new FormData();
     forma.append('userid', localStorage.getItem('userid'));
@@ -499,17 +499,17 @@ class ProjectPage extends React.Component {
       return response.json();
 
     }).then((json) => {
-      this.setState({key: Math.random()}, function(){
+      this.setState({ key: Math.random() }, function () {
         this.getReactions();
         this.setData();
-        this.setState({Laden: false});
+        this.setState({ Laden: false });
         this.toggleChange();
       });
     });
 
   }
 
-  changeDescription(){
+  changeDescription() {
     const description = this.state.description;
     var forma = new FormData();
     forma.append('userid', localStorage.getItem('userid'));
@@ -526,17 +526,17 @@ class ProjectPage extends React.Component {
       return response.json();
 
     }).then((json) => {
-      this.setState({key: Math.random()}, function(){
+      this.setState({ key: Math.random() }, function () {
         this.setData();
         this.getReactions();
-        this.setState({Laden: false});
+        this.setState({ Laden: false });
         this.toggleChange();
       });
     });
 
   }
 
-  changePicture(){
+  changePicture() {
     var forme = new FormData();
     forme.append('foo', this.state.file);
     forme.append('email', localStorage.getItem('email'));
@@ -561,7 +561,7 @@ class ProjectPage extends React.Component {
 
       this.setState({
         Members: json
-      }, function() {})
+      }, function () { })
 
     })
   }
@@ -576,16 +576,16 @@ class ProjectPage extends React.Component {
       if (json.response == 1) {
         this.setState({
           joined: false
-        }, function() {});
+        }, function () { });
       } else if (json.response == 0) {
         this.setState({
           joined: true
-        }, function() {});
+        }, function () { });
       }
     })
   }
 
-  setAuthor(){
+  setAuthor() {
     var target = ('http://backend-edu.azurewebsites.net/governance/amIAuthor/' + localStorage.getItem('projectid') + '/' + localStorage.getItem('userid'))
     fetch(target).then((results) => {
       return results.json();
@@ -595,21 +595,21 @@ class ProjectPage extends React.Component {
       if (json.response == 1) {
         this.setState({
           isAuthor: true
-        }, function() {});
+        }, function () { });
       } else if (json.response == 0) {
         this.setState({
           isAuthor: false
-        }, function() {});
+        }, function () { });
       }
     })
   }
 
-  handleProject(){
-    this.setState({Laden: true});
-    if(this.state.title.length > 0){
+  handleProject() {
+    this.setState({ Laden: true });
+    if (this.state.title.length > 0) {
       this.changeTitle();
     }
-    if(this.state.description.length > 0){
+    if (this.state.description.length > 0) {
       this.changeDescription();
     }
     this.setState({
@@ -621,7 +621,7 @@ class ProjectPage extends React.Component {
   //handles the click on the toggle (join/leave) Button
   handleClick = () => this.setState({
     joined: !this.state.joined,
-    function() {}
+    function() { }
   })
 
 
@@ -647,14 +647,14 @@ class ProjectPage extends React.Component {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({uhp_iduser: user, uhp_idproject: project})
+      body: JSON.stringify({ uhp_iduser: user, uhp_idproject: project })
     }).then((response) => {
       return response.json();
 
     }).then((json) => {
       this.setState({
-      key: Math.random()
-      }, function() {
+        key: Math.random()
+      }, function () {
         this.setMembers();
         this.getReactions();
       });
@@ -681,7 +681,7 @@ class ProjectPage extends React.Component {
     }).then((json) => {
       this.setState({
         key: Math.random()
-      }, function() {
+      }, function () {
         this.setMembers();
         this.getReactions();
       });
@@ -734,8 +734,8 @@ class ProjectPage extends React.Component {
     document.execCommand('Copy');
   }
 
-  addTermin(){
-    this.setState({Laden: true});
+  addTermin() {
+    this.setState({ Laden: true });
     var forma = new FormData();
     forma.append('project_author', localStorage.getItem('userid'));
     forma.append('Project_projectid', this.props.match.params.projectid);
@@ -753,9 +753,9 @@ class ProjectPage extends React.Component {
       return response.json();
 
     }).then((json) => {
-      this.setState({key: Math.random()}, function(){
+      this.setState({ key: Math.random() }, function () {
         this.getReactions();
-        this.setState({Laden: false});
+        this.setState({ Laden: false });
         this.toggleEdit();
       });
     });
@@ -789,37 +789,37 @@ class ProjectPage extends React.Component {
     //content of the member modal
     const memberModal = <div className="container">
       <Card.Group itemsPerRow={3}>
-        <Card link={true} header='Oemer' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')}/>
-        <Card link={true} header='Kevin' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')}/>
-        <Card link={true} header='Burcu' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')}/>
-        <Card link={true} header='Felix' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')}/>
+        <Card link={true} header='Oemer' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')} />
+        <Card link={true} header='Kevin' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')} />
+        <Card link={true} header='Burcu' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')} />
+        <Card link={true} header='Felix' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')} />
       </Card.Group>
     </div>
 
     //content of rights modal
     const rightsModal = <div className="container">
       <List divided={true}>
-      <List.Item>
-      <List.Content floated='right'>
-        <Popup trigger={<Button color="red" size= "mini" icon="remove user"/>} content='Entferne diese Person aus dem Projekt' />
-      </List.Content>
-      <Image avatar src='../img/avatars/1.jpg' />
-      <List.Content>
-        <List.Header as='a'>Rachel</List.Header>
-        <List.Description>Kann bearbeiten <Checkbox defaultChecked = {true}/></List.Description>
-      </List.Content>
-      </List.Item>
-      <List.Item>
-      <List.Content floated='right'>
-        <Popup trigger={<Button color="red" size= "mini" icon="remove user"/>} content='Entferne diese Person aus dem Projekt' />
-      </List.Content>
-      <Image avatar src='../img/avatars/2.jpg' />
-      <List.Content>
-        <List.Header as='a'>Ross</List.Header>
-        <List.Description>Kann bearbeiten <Checkbox defaultChecked = {true} /></List.Description>
-      </List.Content>
-    </List.Item>
-    </List>
+        <List.Item>
+          <List.Content floated='right'>
+            <Popup trigger={<Button color="red" size="mini" icon="remove user" />} content='Entferne diese Person aus dem Projekt' />
+          </List.Content>
+          <Image avatar src='../img/avatars/1.jpg' />
+          <List.Content>
+            <List.Header as='a'>Rachel</List.Header>
+            <List.Description>Kann bearbeiten <Checkbox defaultChecked={true} /></List.Description>
+          </List.Content>
+        </List.Item>
+        <List.Item>
+          <List.Content floated='right'>
+            <Popup trigger={<Button color="red" size="mini" icon="remove user" />} content='Entferne diese Person aus dem Projekt' />
+          </List.Content>
+          <Image avatar src='../img/avatars/2.jpg' />
+          <List.Content>
+            <List.Header as='a'>Ross</List.Header>
+            <List.Description>Kann bearbeiten <Checkbox defaultChecked={true} /></List.Description>
+          </List.Content>
+        </List.Item>
+      </List>
     </div>
 
     //tabs for edit modal
@@ -828,165 +828,165 @@ class ProjectPage extends React.Component {
       {
         menuItem: 'Kommentar',
         render: () => <Tab.Pane>
-            <Form>
-              <Form.Field>
-                <Form.Group><Form.Input onChange={this.handleChange} name="Commenttitle" value={this.state.Commenttitle} placeholder='Titel' style={{
-              width: "600px"
-            }}/><br/></Form.Group>
-                <Form.Field control={TextArea} onChange={this.handleChange} name="Commenttext" value={this.state.Commenttext} placeholder='Kommentar einfügen'/>
-              </Form.Field>
-              <br/>
-            </Form>
-            <div className="row justify-content-md-center">
-              <Button loading={this.state.Laden} onClick={this.addComment} animated={true} color='teal' style={{
-                  width: "130px"
-                }}>
-                <Button.Content visible={true}>Absenden</Button.Content>
-                <Button.Content hidden={true}>
-                  <Icon name='check'/>
-                </Button.Content>
-              </Button>
-            </div>
-          </Tab.Pane>
+          <Form>
+            <Form.Field>
+              <Form.Group><Form.Input onChange={this.handleChange} name="Commenttitle" value={this.state.Commenttitle} placeholder='Titel' style={{
+                width: "600px"
+              }} /><br /></Form.Group>
+              <Form.Field control={TextArea} onChange={this.handleChange} name="Commenttext" value={this.state.Commenttext} placeholder='Kommentar einfügen' />
+            </Form.Field>
+            <br />
+          </Form>
+          <div className="row justify-content-md-center">
+            <Button loading={this.state.Laden} onClick={this.addComment} animated={true} color='teal' style={{
+              width: "130px"
+            }}>
+              <Button.Content visible={true}>Absenden</Button.Content>
+              <Button.Content hidden={true}>
+                <Icon name='check' />
+              </Button.Content>
+            </Button>
+          </div>
+        </Tab.Pane>
       }, {
         menuItem: 'Dokument',
         render: () => <Tab.Pane>
-            <Form>
+          <Form>
+            <Form.Field>
+              <Form.Group><Form.Input name="Documenttitle" onChange={this.handleChange} value={this.state.Documenttitle} placeholder='Titel' style={{
+                width: "600px"
+              }} /><br /></Form.Group>
+              <Form.Field control={TextArea} name="Documenttext" onChange={this.handleChange} value={this.state.Documenttext} placeholder='Beschreibung' />
               <Form.Field>
-                <Form.Group><Form.Input name="Documenttitle" onChange={this.handleChange} value={this.state.Documenttitle} placeholder='Titel' style={{
-              width: "600px"
-            }}/><br/></Form.Group>
-                <Form.Field control={TextArea} name="Documenttext" onChange={this.handleChange} value={this.state.Documenttext} placeholder='Beschreibung'/>
-                <Form.Field>
-                  <label>
-                    Dokument hinzufügen<Popup trigger={<Icon name = 'question' color = 'grey' />} wide='very' content='Nur .pdf Format erlaubt'/>
-                  </label>
-                  <input type="file" name='foo' id='foo' onChange={(e) => this._handleImageChange(e)} style={{
-                      width: "400px"
-                    }} className="form-control-file" id="exampleFormControlFile1"></input>
-                </Form.Field>
+                <label>
+                  Dokument hinzufügen<Popup trigger={<Icon name='question' color='grey' />} wide='very' content='Nur .pdf Format erlaubt' />
+                </label>
+                <input type="file" name='foo' id='foo' onChange={(e) => this._handleImageChange(e)} style={{
+                  width: "400px"
+                }} className="form-control-file" id="exampleFormControlFile1"></input>
               </Form.Field>
-              <br/>
-            </Form>
-            <div className="row justify-content-md-center">
-              <Button loading={this.state.Laden} onClick={this.addDocument} animated={true} color='teal' style={{
-                  width: "130px"
-                }}>
-                <Button.Content visible={true}>Absenden</Button.Content>
-                <Button.Content hidden={true}>
-                  <Icon name='check'/>
-                </Button.Content>
-              </Button>
-            </div>
-          </Tab.Pane>
+            </Form.Field>
+            <br />
+          </Form>
+          <div className="row justify-content-md-center">
+            <Button loading={this.state.Laden} onClick={this.addDocument} animated={true} color='teal' style={{
+              width: "130px"
+            }}>
+              <Button.Content visible={true}>Absenden</Button.Content>
+              <Button.Content hidden={true}>
+                <Icon name='check' />
+              </Button.Content>
+            </Button>
+          </div>
+        </Tab.Pane>
       }, {
         menuItem: 'Termin',
         render: () => <Tab.Pane>
 
-            <Form>
+          <Form>
+            <Form.Field>
+              <Form.Group><Form.Input name="Termintitle" value={this.state.Termintitle} onChange={this.handleChange} placeholder='Titel' style={{
+                width: "600px"
+              }} /><br /></Form.Group>
+              <Form.Field control={TextArea} name="Termintext" value={this.state.Termintext} onChange={this.handleChange} placeholder='Beschreibung' />
               <Form.Field>
-                <Form.Group><Form.Input name="Termintitle" value={this.state.Termintitle} onChange={this.handleChange} placeholder='Titel' style={{
-              width: "600px"
-            }}/><br/></Form.Group>
-                <Form.Field control={TextArea} name="Termintext" value={this.state.Termintext} onChange={this.handleChange} placeholder='Beschreibung'/>
-                <Form.Field>
-                  <label>Termin</label><Form.Input style={{
-              width: "200px"
-            }} type='date' placeholder='Datum' name="Termindate" onChange={this.handleChange} icon='calendar' iconPosition='left'/></Form.Field>
-              </Form.Field><br/>
-            </Form>
-            <div className="row justify-content-md-center">
-              <Button loading={this.state.Laden} onClick={this.addTermin} animated={true} color='teal' style={{
-                  width: "130px"
-                }}>
-                <Button.Content visible={true}>Absenden</Button.Content>
-                <Button.Content hidden={true}>
-                  <Icon name='check'/>
-                </Button.Content>
-              </Button>
-            </div>
-          </Tab.Pane>
+                <label>Termin</label><Form.Input style={{
+                  width: "200px"
+                }} type='date' placeholder='Datum' name="Termindate" onChange={this.handleChange} icon='calendar' iconPosition='left' /></Form.Field>
+            </Form.Field><br />
+          </Form>
+          <div className="row justify-content-md-center">
+            <Button loading={this.state.Laden} onClick={this.addTermin} animated={true} color='teal' style={{
+              width: "130px"
+            }}>
+              <Button.Content visible={true}>Absenden</Button.Content>
+              <Button.Content hidden={true}>
+                <Icon name='check' />
+              </Button.Content>
+            </Button>
+          </div>
+        </Tab.Pane>
       }, {
         menuItem: 'Foto',
         render: () => <Tab.Pane>
 
-            <Form>
-              <Form.Field>
-                <Form.Group><Form.Input name="Imagetitle" onChange={this.handleChange} value={this.state.Imagetitle} placeholder='Titel' style={{
-              width: "600px"
-            }}/><br/></Form.Group>
-                <Form.Field control={TextArea} name="Imagetext" onChange={this.handleChange} value={this.state.Imagetext} placeholder='Beschreibung'/>
-                <label>
-                  Foto hinzufügen
+          <Form>
+            <Form.Field>
+              <Form.Group><Form.Input name="Imagetitle" onChange={this.handleChange} value={this.state.Imagetitle} placeholder='Titel' style={{
+                width: "600px"
+              }} /><br /></Form.Group>
+              <Form.Field control={TextArea} name="Imagetext" onChange={this.handleChange} value={this.state.Imagetext} placeholder='Beschreibung' />
+              <label>
+                Foto hinzufügen
                 </label>
-                <input type="file" onChange={(e) => this._handleImageChange(e)} style={{
-                    width: "400px"
-                  }} className="form-control-file" id="exampleFormControlFile1"></input>
-              </Form.Field>
-              <br/>
-            </Form>
-            <div className="row justify-content-md-center">
-              <Button loading={this.state.Laden} onClick={this.addImage} animated={true} color='teal' style={{
-                  width: "130px"
-                }}>
-                <Button.Content visible={true}>Absenden</Button.Content>
-                <Button.Content hidden={true}>
-                  <Icon name='check'/>
-                </Button.Content>
-              </Button>
-            </div>
-          </Tab.Pane>
+              <input type="file" onChange={(e) => this._handleImageChange(e)} style={{
+                width: "400px"
+              }} className="form-control-file" id="exampleFormControlFile1"></input>
+            </Form.Field>
+            <br />
+          </Form>
+          <div className="row justify-content-md-center">
+            <Button loading={this.state.Laden} onClick={this.addImage} animated={true} color='teal' style={{
+              width: "130px"
+            }}>
+              <Button.Content visible={true}>Absenden</Button.Content>
+              <Button.Content hidden={true}>
+                <Icon name='check' />
+              </Button.Content>
+            </Button>
+          </div>
+        </Tab.Pane>
       }, {
         menuItem: 'Ressourcen',
         render: () => <Tab.Pane>
 
-            <Form>
-              <Form.Field>
+          <Form>
+            <Form.Field>
 
-                <Input icon='tags' name="resource" value={this.state.resource} onChange={this.handleChange}   iconPosition='left' label={{
-                    tag: true,
-                    content: 'Add Tag',
-                    color: 'grey'
-                  }} labelPosition='right' placeholder='Ressourcen'/>
+              <Input icon='tags' name="resource" value={this.state.resource} onChange={this.handleChange} iconPosition='left' label={{
+                tag: true,
+                content: 'Add Tag',
+                color: 'grey'
+              }} labelPosition='right' placeholder='Ressourcen' />
 
-              </Form.Field>
-              <br/>
-            </Form>
-            <div className="row justify-content-md-center">
-              <Button loading={this.state.Laden} onClick={this.addResource} animated={true} color='teal' style={{
-                  width: "130px"
-                }}>
-                <Button.Content visible={true}>Absenden</Button.Content>
-                <Button.Content hidden={true}>
-                  <Icon name='check'/>
-                </Button.Content>
-              </Button>
-            </div>
-          </Tab.Pane>
+            </Form.Field>
+            <br />
+          </Form>
+          <div className="row justify-content-md-center">
+            <Button loading={this.state.Laden} onClick={this.addResource} animated={true} color='teal' style={{
+              width: "130px"
+            }}>
+              <Button.Content visible={true}>Absenden</Button.Content>
+              <Button.Content hidden={true}>
+                <Icon name='check' />
+              </Button.Content>
+            </Button>
+          </div>
+        </Tab.Pane>
       }, {
         menuItem: 'Tags',
         render: () => <Tab.Pane>
 
-            <Form>
-              <Form.Field>
-                <Input value={this.state.tag} name="tag" onChange={this.handleChange} icon='tags' iconPosition='left' label={{
-                    tag: true,
-                    content: 'Add Tag',
-                    color: 'grey'
-                  }} labelPosition='right' placeholder='Tags'/>
-              </Form.Field><br/>
-            </Form>
-            <div className="row justify-content-md-center">
-              <Button loading={this.state.Laden} onClick={this.addTag} animated={true} color='teal' style={{
-                  width: "130px"
-                }}>
-                <Button.Content visible={true}>Absenden</Button.Content>
-                <Button.Content hidden={true}>
-                  <Icon name='check'/>
-                </Button.Content>
-              </Button>
-            </div>
-          </Tab.Pane>
+          <Form>
+            <Form.Field>
+              <Input value={this.state.tag} name="tag" onChange={this.handleChange} icon='tags' iconPosition='left' label={{
+                tag: true,
+                content: 'Add Tag',
+                color: 'grey'
+              }} labelPosition='right' placeholder='Tags' />
+            </Form.Field><br />
+          </Form>
+          <div className="row justify-content-md-center">
+            <Button loading={this.state.Laden} onClick={this.addTag} animated={true} color='teal' style={{
+              width: "130px"
+            }}>
+              <Button.Content visible={true}>Absenden</Button.Content>
+              <Button.Content hidden={true}>
+                <Icon name='check' />
+              </Button.Content>
+            </Button>
+          </div>
+        </Tab.Pane>
       }
     ]
 
@@ -994,93 +994,93 @@ class ProjectPage extends React.Component {
       {
         menuItem: 'Bearbeiten',
         render: () => <Tab.Pane>
-            <Form>
-              <Form.Group>
+          <Form>
+            <Form.Group>
               <Form.Field>
                 <Button floated='right' onClick={this.deleteProject} circular icon='delete' color='red' size='mini' />
-              <Header as='h2' floated='left'>Projektdaten aktualisieren</Header>
-            </Form.Field></Form.Group>
-              <Form.Group widths='equal'>
-                <Form.Input placeholder={Name} name="title" value={this.state.title} onChange={this.handleChange} icon='user' iconPosition='left'/>
-              </Form.Group>
-              <Form.Group widths='equal'>
-                <Form.TextArea rows={2} name="description" value={this.state.description} onChange={this.handleChange} placeholder={Text}/>
-              </Form.Group>
-              <Form.Group widths='equal'>
-                <Form.TextArea rows={2} placeholder='Zielerreichung'/>
-              </Form.Group>
-              <Form.Field>
-                <label>
-                  Titelbild aktualisieren
+                <Header as='h2' floated='left'>Projektdaten aktualisieren</Header>
+              </Form.Field></Form.Group>
+            <Form.Group widths='equal'>
+              <Form.Input placeholder={Name} name="title" value={this.state.title} onChange={this.handleChange} icon='user' iconPosition='left' />
+            </Form.Group>
+            <Form.Group widths='equal'>
+              <Form.TextArea rows={2} name="description" value={this.state.description} onChange={this.handleChange} placeholder={Text} />
+            </Form.Group>
+            <Form.Group widths='equal'>
+              <Form.TextArea rows={2} placeholder='Zielerreichung' />
+            </Form.Group>
+            <Form.Field>
+              <label>
+                Titelbild aktualisieren
                 </label>
-                <input type="file" style={{
-                    width: "400px"
-                  }} className="form-control-file" id="exampleFormControlFile1"></input>
+              <input type="file" style={{
+                width: "400px"
+              }} className="form-control-file" id="exampleFormControlFile1"></input>
+            </Form.Field>
+            <div className="form-group">
+              <Form.Field style={{
+                width: "200px"
+              }} label='Privatsphäre' control='select'>
+                <option value='p'>privat</option>
+                <option value='o'>&ouml;ffentlich</option>
               </Form.Field>
-              <div className="form-group">
-                <Form.Field style={{
-                    width: "200px"
-                  }} label='Privatsphäre' control='select'>
-                  <option value='p'>privat</option>
-                  <option value='o'>&ouml;ffentlich</option>
-                </Form.Field>
-              </div>
-              <div className="row justify-content-md-center">
-                <Button loading={this.state.Laden} onClick={this.handleProject} animated={true} color='teal' style={{
-                    width: "130px"
-                  }}>
-                  <Button.Content visible={true}>Speichern</Button.Content>
-                  <Button.Content hidden={true}>
-                    <Icon name='check'/>
-                  </Button.Content>
-                </Button>
-              </div>
+            </div>
+            <div className="row justify-content-md-center">
+              <Button loading={this.state.Laden} onClick={this.handleProject} animated={true} color='teal' style={{
+                width: "130px"
+              }}>
+                <Button.Content visible={true}>Speichern</Button.Content>
+                <Button.Content hidden={true}>
+                  <Icon name='check' />
+                </Button.Content>
+              </Button>
+            </div>
 
-            </Form>
-          </Tab.Pane>
+          </Form>
+        </Tab.Pane>
       }
     ]
 
     //Conent of the edit modal
     const editModal = <div>
-      <Tab panes={panes}/>
-      <br/></div>
+      <Tab panes={panes} />
+      <br /></div>
 
     const changeModal = <div>
-      <Tab panes={tabs}/>
-      <br/></div>
+      <Tab panes={tabs} />
+      <br /></div>
 
     //content of the share modal
     const shareModal = <div className="container">
       <div className="row justify-content-md-center">
         <h4>Teile dieses Projekt auf deiner lieblings Plattform</h4>
         <div>
-          <br/>
+          <br />
           <Button color='facebook' href={redirectToFacebook} target="_blank">
-            <Icon name='facebook'/>
+            <Icon name='facebook' />
             Facebook
           </Button>
           <Button color='twitter' href={redirectToTwitter}>
-            <Icon name='twitter'/>
+            <Icon name='twitter' />
             Twitter
           </Button>
           <Button color='google plus' href={redirectToGooglePlus} target="_blank">
-            <Icon name='google plus'/>
+            <Icon name='google plus' />
             Google Plus
           </Button>
-          <Button icon='mail' color='grey' href={redirectToMail}/>
+          <Button icon='mail' color='grey' href={redirectToMail} />
         </div>
         <div>
-          <br/>
+          <br />
           <Input type="text" size='small' value={currentPageUrlShort} id="InputFieldContent" style={{
-              width: '15em'
-            }} action={<Button
-            color = 'teal'
-            icon = 'clipboard'
-            onClick = {
+            width: '15em'
+          }} action={<Button
+            color='teal'
+            icon='clipboard'
+            onClick={
               this.copyToClipboard
             }
-            />}/>
+          />} />
         </div>
       </div>
     </div>
@@ -1146,37 +1146,37 @@ class ProjectPage extends React.Component {
                 </Divider>
 
                 <p>{Text}</p>
-             </Container>
+              </Container>
 
             </div>
             {
-              showPics &&(
-            <div className="bilder">
-              <Divider horizontal={true}>
-                <h3>Fotos</h3>
-              </Divider>
-              <Gallery images={this.state.ImageData} maxRows={1} imageCountSeparator=' von ' showImageCount={true} showLightboxThumbnails={true} backdropClosesModal={true} showCloseButton={false} enableImageSelection={true}/>
-            </div>
+              showPics && (
+                <div className="bilder">
+                  <Divider horizontal={true}>
+                    <h3>Fotos</h3>
+                  </Divider>
+                  <Gallery images={this.state.ImageData} maxRows={1} imageCountSeparator=' von ' showImageCount={true} showLightboxThumbnails={true} backdropClosesModal={true} showCloseButton={false} enableImageSelection={true} />
+                </div>
               )
             }
           </Grid.Column>
           <Grid.Column width={3}>
-            <br/>
-            <div className="projektfoto"><Image src={'http://backend-edu.azurewebsites.net/' + this.state.Bild} size='medium' bordered={true} circular={true}/><br/></div>
+            <br />
+            <div className="projektfoto"><Image src={'http://backend-edu.azurewebsites.net/' + this.state.Bild} size='medium' bordered={true} circular={true} /><br /></div>
             <div className="row justify-content-md-center">
               <div>
-                <Popup content='Füge dieses Projekt deinen Favoriten hinzu' trigger={<Button circular = {
-                    true
-                  }
-                  color = 'grey' icon = 'bookmark' />}/>
+                <Popup content='Füge dieses Projekt deinen Favoriten hinzu' trigger={<Button circular={
+                  true
+                }
+                  color='grey' icon='bookmark' />} />
               </div>
               <div>
-                <Popup content='Teile dieses Projekt mit anderen' trigger={<Button circular = {
-                    true
-                  }
-                  color = 'grey' icon = 'share alternate square' onClick = {
+                <Popup content='Teile dieses Projekt mit anderen' trigger={<Button circular={
+                  true
+                }
+                  color='grey' icon='share alternate square' onClick={
                     this.toggleShare
-                  } />}/>
+                  } />} />
                 <Modal isOpen={this.state.modalShare} toggle={this.toggleShare} className={this.props.className}>
                   <ModalBody>
                     {shareModal}
@@ -1184,12 +1184,12 @@ class ProjectPage extends React.Component {
                 </Modal>
               </div>
               <div key={this.state.key}>
-                <Popup content='Siehe dir die Projektteilnehmer an' trigger={<Button circular = {
-                    true
-                  }
-                  color = 'grey' icon = 'user' onClick = {
+                <Popup content='Siehe dir die Projektteilnehmer an' trigger={<Button circular={
+                  true
+                }
+                  color='grey' icon='user' onClick={
                     this.toggleMember
-                  } />}/>
+                  } />} />
                 <Modal isOpen={this.state.modalMember} toggle={this.toggleMember} className={this.props.className} size='lg'>
                   <ModalBody>
                     <div className="container">
@@ -1201,12 +1201,12 @@ class ProjectPage extends React.Component {
                 </Modal>
               </div>
               <div>
-                <Popup content='Füge einen Beitrag hinzu' trigger={<Button circular = {
-                    true
-                  }
-                  color = 'grey' icon = 'edit' onClick = {
+                <Popup content='Füge einen Beitrag hinzu' trigger={<Button circular={
+                  true
+                }
+                  color='grey' icon='edit' onClick={
                     this.toggleEdit
-                  } />}/>
+                  } />} />
                 <Modal isOpen={this.state.modalEdit} toggle={this.toggleEdit} className={this.props.className} size='lg'>
                   <ModalBody>
                     <div fluid="fluid">
@@ -1216,12 +1216,12 @@ class ProjectPage extends React.Component {
                 </Modal>
               </div>
               <div>
-                <Popup content='Bearbeite dein Projekt' trigger={<Button circular = {
-                    true
-                  }
-                  color = 'grey' icon = 'setting' onClick = {
+                <Popup content='Bearbeite dein Projekt' trigger={<Button circular={
+                  true
+                }
+                  color='grey' icon='setting' onClick={
                     this.toggleChange
-                  } />}/>
+                  } />} />
                 <Modal isOpen={this.state.modalChange} toggle={this.toggleChange} className={this.props.className} size='lg'>
                   <ModalBody>
                     <div fluid="fluid">
@@ -1232,12 +1232,12 @@ class ProjectPage extends React.Component {
               </div>
 
               <div>
-                <Popup content='Rechtemanagement' trigger={<Button circular = {
-                    true
-                  }
-                  color = 'grey' icon = 'privacy' onClick = {
+                <Popup content='Rechtemanagement' trigger={<Button circular={
+                  true
+                }
+                  color='grey' icon='privacy' onClick={
                     this.toggleRights
-                  } />}/>
+                  } />} />
                 <Modal isOpen={this.state.modalRights} toggle={this.toggleRights} className={this.props.className} size='lg'>
                   <ModalBody>
                     <div fluid="fluid">
@@ -1246,31 +1246,34 @@ class ProjectPage extends React.Component {
                   </ModalBody>
                 </Modal>
               </div>
-              <br/>
+              <br />
               <div className="container">
                 <div className="row justify-content-md-center">
-                  <br/>
-                  <Statistic fluid="true" color='purple' size='tiny' horizontal={true}>
-                    <Statistic.Value>
-                      <Icon name='diamond'/> {Karma}
-                    </Statistic.Value>
-                    <Statistic.Label>Karma</Statistic.Label>
-                  </Statistic>
+                  <div>
+                  <br />
+                    <Button as='div' labelPosition='right'>
+                      <Button color='blue'>
+                        <Icon name='like outline' />
+                        Like
+                      </Button>
+                      <Label as='a' basic color='blue' pointing='left'>{Karma}</Label>
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
-            <br/>
+            <br />
 
 
-          {
-            !isAuthor &&(
-            <Button fluid={true} toggle={true} onClick={this.handleJoin.bind(this)} color={joined
-                ? 'green'
-                : 'red'} content={joined
-                ? 'Beitreten'
-                : 'Austreten'}/>
-                )
-              }
+            {
+              !isAuthor && (
+                <Button fluid={true} toggle={true} onClick={this.handleJoin.bind(this)} color={joined
+                  ? 'green'
+                  : 'red'} content={joined
+                    ? 'Beitreten'
+                    : 'Austreten'} />
+              )
+            }
             <div className="tags">
 
               <div className="Tags">
@@ -1279,11 +1282,11 @@ class ProjectPage extends React.Component {
                 </Divider>
 
                 <Label.Group size='medium' color='teal'>
-                   {this.createTags(TagData)}
+                  {this.createTags(TagData)}
 
                 </Label.Group>
               </div>
-              <br/>
+              <br />
               <div className="Ressourcen">
                 <Divider horizontal={true}>
                   <h3>Ressourcen</h3>
@@ -1293,13 +1296,13 @@ class ProjectPage extends React.Component {
 
                 </Label.Group>
               </div>
-              <br/>
+              <br />
               <div>
                 <Divider horizontal={true}>
                   <h3>Anhang</h3>
                 </Divider>
                 <List divided={true} relaxed={true}>
-                 {this.createDocuments(this.state.DocumentData)}
+                  {this.createDocuments(this.state.DocumentData)}
                 </List>
               </div>
             </div>
@@ -1307,38 +1310,38 @@ class ProjectPage extends React.Component {
         </Grid.Row>
       </Grid>
       <div className="timeline">
-      <Menu pointing secondary>
+        <Menu pointing secondary>
           <Menu.Item name='Alle' active={activeItem === 'Alle'} onClick={this.handleItemClick} />
           <Menu.Item name='Uploads' active={activeItem === 'Uploads'} onClick={this.handleItemClick} />
-      </Menu>
-      {
-       (activeItem =="Alle") &&( <VerticalTimeline>
-          <VerticalTimelineElement className="vertical-timeline-element" iconStyle={{
-              background: 'rgb(233, 30, 99)', 
+        </Menu>
+        {
+          (activeItem == "Alle") && (<VerticalTimeline>
+            <VerticalTimelineElement className="vertical-timeline-element" iconStyle={{
+              background: 'rgb(233, 30, 99)',
             }} animate={true}>
-          </VerticalTimelineElement>
-          {this.createNodes(this.state.Data)}
-          <VerticalTimelineElement className="vertical-timeline-element--education" iconStyle={{
+            </VerticalTimelineElement>
+            {this.createNodes(this.state.Data)}
+            <VerticalTimelineElement className="vertical-timeline-element--education" iconStyle={{
               background: 'rgb(233, 30, 99)',
               color: '#fff'
             }} animate={true}>
-            <h3 className="vertical-timeline-element-title">Projekt wurde erstellt</h3>
+              <h3 className="vertical-timeline-element-title">Projekt wurde erstellt</h3>
 
-            <h4 className="vertical-timeline-element-subtitle">Insert Creator Here!!</h4>
+              <h4 className="vertical-timeline-element-subtitle">Insert Creator Here!!</h4>
 
-            <p>
-              Das Projekt wurde am {""} {Erstellt}
-              erstellt.
+              <p>
+                Das Projekt wurde am {""} {Erstellt}
+                erstellt.
             </p>
-          </VerticalTimelineElement>
-        </VerticalTimeline>
-       )}
-    {
+            </VerticalTimelineElement>
+          </VerticalTimeline>
+          )}
+        {
 
-      (activeItem == "Uploads") && (<VerticalTimeline>
-        {this.createNodes(this.state.UploadData)}
-      </VerticalTimeline> )
-    }
+          (activeItem == "Uploads") && (<VerticalTimeline>
+            {this.createNodes(this.state.UploadData)}
+          </VerticalTimeline>)
+        }
 
 
 
