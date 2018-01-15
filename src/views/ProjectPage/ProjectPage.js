@@ -1248,18 +1248,16 @@ class ProjectPage extends React.Component {
               </div>
               <br />
               <div className="container">
-                <div className="row justify-content-md-center">
                   <div>
                   <br />
-                    <Button as='div' labelPosition='right'>
-                      <Button color='blue'>
+                    <Button fluid as='div' labelPosition='right'>
+                      <Button fluid color='blue'>
                         <Icon name='like outline' />
                         Like
                       </Button>
                       <Label as='a' basic color='blue' pointing='left'>{Karma}</Label>
                     </Button>
                   </div>
-                </div>
               </div>
             </div>
             <br />
