@@ -59,16 +59,10 @@ var options = {
 const auth = new Auth();
 var lock = new Auth0Lock('TAzP3VaJ1PJgDR2S5zTV0c4inUpt9A9J', 'kevkle.eu.auth0.com', options);
 
-const kategorie = [
-  { key: 'a', text: 'Lehr und Lernprozess', value: 'a' },
-  { key: 'b', text: 'Management', value: 'b' },
-  { key: 'c', text: 'Unterstützungsprozess', value: 'c' },
-]
+
 
 //dashboard class where we can see up to date project and which is in general our landing page
 class Dashboard extends React.Component {
-
-  state = { visible: true }
 
   toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
@@ -79,7 +73,8 @@ class Dashboard extends React.Component {
       activeItem: '',
       dropdownOpen: false,
       activeItem: "Kernprojekte",
-      Data: []
+      Data: [],
+      visible: false
     };
 
     this.toggle = this.toggle.bind(this);
@@ -153,7 +148,12 @@ class Dashboard extends React.Component {
   render() {
     const logged = this.isAuthenticated();
     const {activeItem} = this.state;
-    const { visible } = this.state
+    const { visible } = this.state;
+    const kategorie = [
+      { key: 'a', text: 'Lehr und Lernprozess', value: 'a' },
+      { key: 'b', text: 'Management', value: 'b' },
+      { key: 'c', text: 'Unterstützungsprozess', value: 'c' },
+    ]
 
     return (<div className="animated fadeIn">
       <div className="row justify-content-md-center">
@@ -206,7 +206,7 @@ class Dashboard extends React.Component {
           <Card style={{ backgroundColor: "#FFFFFF", width: '1120px' }}>
              <Segment.Group fluid='true' vertical='true'>
                <Segment basic={true}><Input fluid placeholder='Titel / Beschreibung'/></Segment>
-               <Segment basic={true}> <Dropdown style={{color: 'teal'}} placeholder='Kategorie' fluid multiple search selection options={kategorie} /><br/><div>
+               <Segment basic={true}> <Dropdown style={{color: 'tealf'}} placeholder='Kategorie' fluid multiple search selection options={kategorie} /><br/><div>
            <Button floated='right' animated={true} color='teal' style={{
                width: "150px", position: 'relative'
              }}>
