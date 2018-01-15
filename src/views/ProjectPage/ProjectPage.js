@@ -21,7 +21,9 @@ import {
   TextArea,
   Message,
   Tab,
-  Menu
+  Menu,
+  Table,
+  Checkbox
 } from 'semantic-ui-react';
 import {VerticalTimeline, VerticalTimelineElement} from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
@@ -45,7 +47,7 @@ class ProjectPage extends React.Component {
       modalMember: false,
       modalEdit: false,
       modalChange: false,
-      modalInfo: false,
+      modalRights: false,
       NutzerId: "",
       Name: "",
       Text: "",
@@ -84,7 +86,7 @@ class ProjectPage extends React.Component {
     this.toggleMember = this.toggleMember.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
     this.toggleChange = this.toggleChange.bind(this);
-    this.toggleInfo = this.toggleInfo.bind(this);
+    this.toggleRights = this.toggleRights.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.changeTitle = this.changeTitle.bind(this);
     this.changeDescription = this.changeDescription.bind(this);
@@ -124,9 +126,9 @@ class ProjectPage extends React.Component {
       modalChange: !this.state.modalChange
     });
   }
-  toggleInfo() {
+  toggleRights() {
     this.setState({
-      modalInfo: !this.state.modalInfo
+      modalRights: !this.state.modalRights
     });
   }
 
@@ -794,9 +796,30 @@ class ProjectPage extends React.Component {
       </Card.Group>
     </div>
 
-    //content of info modal
-    const infoModal = <div className="container">
-      bla bla bla bla bla bla mehr bla bla bla bla bla bla
+    //content of rights modal
+    const rightsModal = <div className="container">
+      <List divided={true}>
+      <List.Item>
+      <List.Content floated='right'>
+        <Popup trigger={<Button color="red" size= "mini" icon="remove user"/>} content='Entferne diese Person aus dem Projekt' />
+      </List.Content>
+      <Image avatar src='../img/avatars/1.jpg' />
+      <List.Content>
+        <List.Header as='a'>Rachel</List.Header>
+        <List.Description>Kann bearbeiten <Checkbox defaultChecked = {true}/></List.Description>
+      </List.Content>
+      </List.Item>
+      <List.Item>
+      <List.Content floated='right'>
+        <Popup trigger={<Button color="red" size= "mini" icon="remove user"/>} content='Entferne diese Person aus dem Projekt' />
+      </List.Content>
+      <Image avatar src='../img/avatars/2.jpg' />
+      <List.Content>
+        <List.Header as='a'>Ross</List.Header>
+        <List.Description>Kann bearbeiten <Checkbox defaultChecked = {true} /></List.Description>
+      </List.Content>
+    </List.Item>
+    </List>
     </div>
 
     //tabs for edit modal
@@ -1209,16 +1232,16 @@ class ProjectPage extends React.Component {
               </div>
 
               <div>
-                <Popup content='Informationen zu diesem Projekt' trigger={<Button circular = {
+                <Popup content='Rechtemanagement' trigger={<Button circular = {
                     true
                   }
-                  color = 'grey' icon = 'info' onClick = {
-                    this.toggleInfo
+                  color = 'grey' icon = 'privacy' onClick = {
+                    this.toggleRights
                   } />}/>
-                <Modal isOpen={this.state.modalInfo} toggle={this.toggleInfo} className={this.props.className} size='lg'>
+                <Modal isOpen={this.state.modalRights} toggle={this.toggleRights} className={this.props.className} size='lg'>
                   <ModalBody>
                     <div fluid="fluid">
-                      {infoModal}
+                      {rightsModal}
                     </div>
                   </ModalBody>
                 </Modal>
