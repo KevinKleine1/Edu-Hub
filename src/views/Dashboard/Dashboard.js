@@ -206,31 +206,16 @@ class Dashboard extends React.Component {
           <Card style={{ backgroundColor: "#FFFFFF", width: '1120px' }}>
              <Segment.Group fluid='true' vertical='true'>
                <Segment basic={true}><Input fluid placeholder='Titel / Beschreibung'/></Segment>
-               <Segment basic={true}> <Dropdown
-            button
-            style={{width: "300px", backgroundColor: "#e6fff5"}}
-            className='icon'
-            floating
-            labeled
-            icon='block layout'
-            options={kategorie}
-            search
-            text='Projekttyp aussuchen'
-            /></Segment>
-               <Segment basic={true}>
-                 <Form.Group inline>
-                  <Form.Field control={Checkbox} label='öffentlich'/>
-                  <Form.Field control={Checkbox} label='privat'/>
-                </Form.Group></Segment>
-                <Segment floated='right' basic={true}>
-             <Button animated={true} color='teal' style={{
-                 width: "150px", position: 'relative'
-               }}>
-               <Button.Content hidden={true}>suchen</Button.Content>
-               <Button.Content visible={true}>
-                 <Icon name='search'/>
-               </Button.Content>
-             </Button></Segment><br/></Segment.Group></Card>
+               <Segment basic={true}> <Dropdown style={{color: 'teal'}} placeholder='Kategorie' fluid multiple search selection options={kategorie} /><br/><div>
+           <Button floated='right' animated={true} color='teal' style={{
+               width: "150px", position: 'relative'
+             }}>
+             <Button.Content hidden={true}>suchen</Button.Content>
+             <Button.Content visible={true}>
+               <Icon name='search'/>
+             </Button.Content>
+           </Button><br/></div><br/></Segment>
+            </Segment.Group></Card>
 
 
             </div>
