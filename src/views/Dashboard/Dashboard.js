@@ -17,7 +17,10 @@ import {
   Menu,
   Segment,
   Divider,
-  Form
+  Form,
+  Transition,
+  Dropdown,
+  Checkbox
 } from 'semantic-ui-react';
 import Welcome from '../Pages/Welcome/Welcome';
 import ProjectCards from '../../components/ProjectCards/ProjectCards';
@@ -56,8 +59,18 @@ var options = {
 const auth = new Auth();
 var lock = new Auth0Lock('TAzP3VaJ1PJgDR2S5zTV0c4inUpt9A9J', 'kevkle.eu.auth0.com', options);
 
+const kategorie = [
+  { key: 'a', text: 'Lehr und Lernprozess', value: 'a' },
+  { key: 'b', text: 'Management', value: 'b' },
+  { key: 'c', text: 'Unterstützungsprozess', value: 'c' },
+]
+
 //dashboard class where we can see up to date project and which is in general our landing page
 class Dashboard extends React.Component {
+
+  state = { visible: true }
+
+  toggleVisibility = () => this.setState({ visible: !this.state.visible })
 
   constructor(props) {
     super(props);
@@ -140,6 +153,7 @@ class Dashboard extends React.Component {
   render() {
     const logged = this.isAuthenticated();
     const {activeItem} = this.state;
+    const { visible } = this.state
 
     return (<div className="animated fadeIn">
       <div className="row justify-content-md-center">
@@ -173,7 +187,7 @@ class Dashboard extends React.Component {
             </Menu.Item>
             <Menu.Menu position='right'>
               <Menu.Item>
-                <Button circular={true} onClick={this.searchProject} icon="search" size="massive"/>
+              <Button content={visible ? 'Verbergen' : 'Projekt suchen'} onClick={this.toggleVisibility} />
               </Menu.Item>
             </Menu.Menu>
           </Menu>
@@ -185,7 +199,42 @@ class Dashboard extends React.Component {
               width: '1115px'
             }}/>
         </div>
-      </div>
+      </div><br/>
+      <div className="row justify-content-md-center">
+      <Transition visible={visible} animation='scale'>
+        <div className="row justify-content-md-center">
+          <Card style={{ backgroundColor: "#FFFFFF", width: '1120px' }}>
+             <Segment.Group fluid='true' vertical='true'>
+               <Segment basic={true}><Input fluid placeholder='Titel / Beschreibung'/></Segment>
+               <Segment basic={true}> <Dropdown
+            button
+            style={{width: "300px", backgroundColor: "#e6fff5"}}
+            className='icon'
+            floating
+            labeled
+            icon='block layout'
+            options={kategorie}
+            search
+            text='Projekttyp aussuchen'
+            /></Segment>
+               <Segment basic={true}>
+                 <Form.Group inline>
+                  <Form.Field control={Checkbox} label='öffentlich'/>
+                  <Form.Field control={Checkbox} label='privat'/>
+                </Form.Group></Segment>
+                <Segment floated='right' basic={true}>
+             <Button animated={true} color='teal' style={{
+                 width: "150px", position: 'relative'
+               }}>
+               <Button.Content hidden={true}>suchen</Button.Content>
+               <Button.Content visible={true}>
+                 <Icon name='search'/>
+               </Button.Content>
+             </Button></Segment><br/></Segment.Group></Card>
+
+
+            </div>
+      </Transition></div>
       <div className="container">
         <div className="row justify-content-md-center">
           <div className="menu">

@@ -153,11 +153,12 @@ class Discover extends React.Component {
 <div className="row justify-content-md-center">
   <br/>
   <Card style={{ backgroundColor: "#FFFFFF", width: '1120px' }}>
+    <Segment.Group>
   <Segment basic={true} style={{width: '1120px'}}>
      <Header as='h3' color='grey' floated='left'>
        Projekt suchen
-     </Header><br/>
-     <Segment.Group basic="true">
+     </Header></Segment><br/>
+     <Segment.Group fluid={true} vertical>
        <Segment basic={true}><Input fluid placeholder='Titel / Beschreibung'/></Segment>
        <Segment basic={true}> <Dropdown
     button
@@ -176,14 +177,15 @@ class Discover extends React.Component {
           <Form.Field control={Checkbox} label='privat'/>
         </Form.Group></Segment>
      </Segment.Group>
-     <Button floated='right' animated={true} color='teal' style={{
-         width: "150px"
+     <Segment basic={true} style={{width: '1120px'}}>
+     <Button animated={true} color='teal' style={{
+         width: "150px", position: 'relative'
        }}>
        <Button.Content hidden={true}>suchen</Button.Content>
        <Button.Content visible={true}>
          <Icon name='search'/>
        </Button.Content>
-     </Button></Segment></Card>
+     </Button><br/></Segment><br/></Segment.Group></Card>
 
 
     </div>
