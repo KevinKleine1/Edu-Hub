@@ -213,6 +213,7 @@ class Welcome extends Component {
     }
     return (<div className="container">
       <div className="row justify-content-md-center">
+        <br/>
         <Card style={{
             width: "800px"
           }}>
@@ -240,18 +241,18 @@ class Welcome extends Component {
             <div className="container">
               <div className="row justify-content-md-center">
                 <div className="form-group">
+                    <div className="row justify-content-md-center">
                   <label htmlFor="foo">
                     <b>Profilfoto hinzufügen</b>
-                  </label>
-                  <br/>
+                  </label></div>
+                    <div className="row justify-content-md-center">
                   <input type="file" onChange={(e) => this._handleImageChange(e)} className="form-control-file" name="foo" id="foo"></input>
-                </div>
+                </div></div>
               </div>
             </div>
 
             <div className="card-text">
               <Form loading={this.state.Laden} error={this.state.Fehler} onSubmit={this.handleSubmit}>
-
                 <Form.Field required={true}>
                   <label>Vorname</label>
                   <Form.Input name="Vorname" value={Vorname} onChange={this.handleChange} error={this.state.vornameError} placeholder='Vorname'/>
@@ -278,15 +279,19 @@ class Welcome extends Component {
                 </Form.Field>
                 <Form.Group inline={true}>
                   <Form.Field required={true}>
-                    <label>Interessen</label>
-                    <Form.Input name="Fach1" value={Fach1} onChange={this.handleChange} error={this.state.fachError} placeholder='Interesse 1'/>
+                    <label>Interessen / Fächer</label>
+                    <Form.Input name="Fach1" value={Fach1} onChange={this.handleChange} error={this.state.fachError} placeholder='Interesse 1' style={{width: "300px"}}/>
 
-                    <Form.Input name="Fach2" value={Fach2} onChange={this.handleChange} placeholder='Interesse 2'/>
+                    <Form.Input name="Fach2" value={Fach2} onChange={this.handleChange} placeholder='Interesse 2' style={{width: "300px"}}/>
 
-                    <Form.Input name="Fach3" value={Fach3} onChange={this.handleChange} placeholder='Interesse 3'/>
+                    <Form.Input name="Fach3" value={Fach3} onChange={this.handleChange} placeholder='Interesse 3' style={{width: "300px"}}/>
+                  </Form.Field>
+                  </Form.Group>
+                  <Form.Field>
+                      <label>Profilbeschreibung</label>
+                    <Form.TextArea rows={2} name='Profilbeschreibung' placeholder='Profilbeschreibung'/>
                   </Form.Field>
                   <Form.Checkbox name="Private" label="Privates Profil" checked={Private} onChange={this.toggle} />
-                </Form.Group>
                 <Message error={true} header='Fehler bei Eingabe' content='Alle Felder müssen ausgefüllt sein und Hausnummer und PLZ müssen Zahlen sein.'/>
               </Form>
             </div>
@@ -314,7 +319,7 @@ class Welcome extends Component {
 
           </Card.Content>
 
-        </Card>
+        </Card><br/>
       </div>
     </div>);
   }
