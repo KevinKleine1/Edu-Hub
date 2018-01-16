@@ -290,7 +290,7 @@ class MyProjects extends React.Component {
       <div>
       <br/>
       <Header as='h2'>
-        <Icon name='empty heart'/>
+        <Icon name='folder outline'/>
         <Header.Content>
           Meine Projekte
           <Header.Subheader>
