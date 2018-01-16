@@ -253,6 +253,7 @@ class Welcome extends Component {
 
             <div className="card-text">
               <Form loading={this.state.Laden} error={this.state.Fehler} onSubmit={this.handleSubmit}>
+                <Form.Group widths='equal'>
                 <Form.Field required={true}>
                   <label>Vorname</label>
                   <Form.Input name="Vorname" value={Vorname} onChange={this.handleChange} error={this.state.vornameError} placeholder='Vorname'/>
@@ -261,21 +262,24 @@ class Welcome extends Component {
                   <label>Nachname</label>
                   <Form.Input name="Nachname" value={Nachname} onChange={this.handleChange} error={this.state.nachnameError} placeholder='Nachname'/>
                 </Form.Field>
+              </Form.Group>
+                <Form.Group>
                 <Form.Field required={false}>
                   <label>Straße</label>
-                  <Form.Input name="Strasse" value={Strasse} onChange={this.handleChange} error={this.state.strasseError} placeholder='Straße'/>
+                  <Form.Input name="Strasse" value={Strasse} onChange={this.handleChange} error={this.state.strasseError} placeholder='Straße' style={{width: "600px"}}/>
                 </Form.Field>
                 <Form.Field required={false}>
                   <label>Hausnummer</label>
-                  <Form.Input name="Hausnummer" value={Hausnummer} onChange={this.handleChange} error={this.state.hausnummerError} placeholder='Hausnummer'/>
+                  <Form.Input name="Hausnummer" value={Hausnummer} onChange={this.handleChange} error={this.state.hausnummerError} placeholder='Hausnummer' style={{width: "162px"}}/>
                 </Form.Field>
-                <Form.Field required={false}>
+                  </Form.Group>
+                    <Form.Field required={false}>
+                      <label>Postleitzahl</label>
+                      <Form.Input name="Postcode" value={Postcode} onChange={this.handleChange} error={this.state.postcodeError} placeholder='Postleitzahl'/>
+                    </Form.Field>
+                  <Form.Field required={false}>
                   <label>Stadt</label>
                   <Form.Input name="Stadt" value={Stadt} onChange={this.handleChange} error={this.state.stadtError} placeholder='Stadt'/>
-                </Form.Field>
-                <Form.Field required={false}>
-                  <label>Postleitzahl</label>
-                  <Form.Input name="Postcode" value={Postcode} onChange={this.handleChange} error={this.state.postcodeError} placeholder='Postleitzahl'/>
                 </Form.Field>
                 <Form.Group inline={true}>
                   <Form.Field required={true}>
