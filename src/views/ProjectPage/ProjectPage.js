@@ -34,6 +34,7 @@ import Tags from '../../components/Tags/Tags';
 import Ressources from '../../components/Ressources/Ressources';
 import history from '../../history';
 import Anhang from '../../components/Anhang/Anhang';
+import Usercomponents from '../../components/Usercomponents/Usercomponents';
 
 class ProjectPage extends React.Component {
 
@@ -78,7 +79,8 @@ class ProjectPage extends React.Component {
       activeItem: "Alle",
       UploadData: [],
       showPics: false,
-      isAuthor: false
+      isAuthor: false,
+      isEditor: false
 
 
     };
@@ -194,7 +196,7 @@ class ProjectPage extends React.Component {
     forma.append('pht_idproject', this.props.match.params.projectid);
     forma.append('tag_name', Tag);
 
-    fetch('http://backend-edu.azurewebsites.net/tag', {
+    fetch('http://backend-edu.azurewebsites.net/addtag', {
       method: 'POST',
       headers: {
         'Accept': 'application/json, */*'
@@ -309,7 +311,7 @@ class ProjectPage extends React.Component {
     forma.append('phr_idproject', this.props.match.params.projectid);
     forma.append('resource_name', Resource);
 
-    fetch('http://backend-edu.azurewebsites.net/resource', {
+    fetch('http://backend-edu.azurewebsites.net/addresource', {
       method: 'POST',
       headers: {
         'Accept': 'application/json, */*'
@@ -400,6 +402,16 @@ class ProjectPage extends React.Component {
 
   }
 
+  createUser(user) {
+    return <Usercomponents vorname={user.forename} bild={user.profilpic} id={user.userid} key={user.userid} />;
+  }
+
+  createUsers(users) {
+
+    return users.map(this.createUser);
+
+  }
+
   //fetching the corresponding data from the server to display it on the webpage
   setData() {
     var target = ('http://backend-edu.azurewebsites.net/project/' + this.props.match.params.projectid)
@@ -429,6 +441,25 @@ class ProjectPage extends React.Component {
       }, function () {
         localStorage.setItem('userid', this.state.NutzerId);
       });
+    })
+  }
+
+  setEditor(){
+    var target = ('http://backend-edu.azurewebsites.net/governance/amIEditor/' + localStorage.getItem('projectid') + '/' + localStorage.getItem('userid'))
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      if (json.response == 1) {
+        this.setState({
+          isEditor: true
+        }, function () { });
+      } else if (json.response == 0) {
+        this.setState({
+          isEditor: false
+        }, function () { });
+      }
     })
   }
 
@@ -773,7 +804,8 @@ class ProjectPage extends React.Component {
       TagData,
       ResourceData,
       showPics,
-      isAuthor
+      isAuthor,
+      isEditor
     } = this.state
     var org = this.state.Erstellt;
     var Erstellt = this.formatDate(org);
@@ -786,39 +818,10 @@ class ProjectPage extends React.Component {
     var redirectToFacebook = 'https://facebook.com/sharer.php?url=' + currentPageUrl
     var redirectToMail = 'mailto:?body=' + currentPageUrl
 
-    //content of the member modal
-    const memberModal = <div className="container">
-      <Card.Group itemsPerRow={3}>
-        <Card link={true} header='Oemer' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')} />
-        <Card link={true} header='Kevin' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')} />
-        <Card link={true} header='Burcu' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')} />
-        <Card link={true} header='Felix' meta='Scientist' description={['Rick is a genius scientist whose alcoholism and reckless,', ' nihilistic behavior are a source of concern for his family'].join('')} />
-      </Card.Group>
-    </div>
-
     //content of rights modal
     const rightsModal = <div className="container">
       <List divided={true}>
-        <List.Item>
-          <List.Content floated='right'>
-            <Popup trigger={<Button color="red" size="mini" icon="remove user" />} content='Entferne diese Person aus dem Projekt' />
-          </List.Content>
-          <Image avatar src='../img/avatars/1.jpg' />
-          <List.Content>
-            <List.Header as='a'>Rachel</List.Header>
-            <List.Description>Kann bearbeiten <Checkbox defaultChecked={true} /></List.Description>
-          </List.Content>
-        </List.Item>
-        <List.Item>
-          <List.Content floated='right'>
-            <Popup trigger={<Button color="red" size="mini" icon="remove user" />} content='Entferne diese Person aus dem Projekt' />
-          </List.Content>
-          <Image avatar src='../img/avatars/2.jpg' />
-          <List.Content>
-            <List.Header as='a'>Ross</List.Header>
-            <List.Description>Kann bearbeiten <Checkbox defaultChecked={true} /></List.Description>
-          </List.Content>
-        </List.Item>
+        {this.createUsers(Members)}
       </List>
     </div>
 
@@ -1200,6 +1203,8 @@ class ProjectPage extends React.Component {
                   </ModalBody>
                 </Modal>
               </div>
+              {
+                isAuthor || isEditor &&(
               <div>
                 <Popup content='Füge einen Beitrag hinzu' trigger={<Button circular={
                   true
@@ -1215,6 +1220,9 @@ class ProjectPage extends React.Component {
                   </ModalBody>
                 </Modal>
               </div>
+                )}
+                {
+                  isAuthor &&(
               <div>
                 <Popup content='Bearbeite dein Projekt' trigger={<Button circular={
                   true
@@ -1230,7 +1238,9 @@ class ProjectPage extends React.Component {
                   </ModalBody>
                 </Modal>
               </div>
-
+                  )}
+              {
+                isAuthor &&(
               <div>
                 <Popup content='Rechtemanagement' trigger={<Button circular={
                   true
@@ -1246,6 +1256,7 @@ class ProjectPage extends React.Component {
                   </ModalBody>
                 </Modal>
               </div>
+                )}
               <br />
               <div className="container">
                   <div>
