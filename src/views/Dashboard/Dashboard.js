@@ -75,10 +75,15 @@ class Dashboard extends React.Component {
       dropdownOpen: false,
       activeItem: "Kernprojekte",
       Data: [],
-      visible: false
+      visible: false,
+      searchPara: "",
+      hits: 0,
+      hitvisible: false
     };
 
     this.toggle = this.toggle.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.searchProjects = this.searchProjects.bind(this);
   }
 
   lockLogin() {
@@ -86,9 +91,31 @@ class Dashboard extends React.Component {
 
   }
 
+  handleChange = (e, { name, value }) => this.setState({ [name]: value })
+
   //Class to create a new project card with all the necessary data
   createImage(image) {
     return <ProjectCards name={image.project_name} members={image.project_membercount} text={image.project_text} bild={image.project_imagepath} erstellt={image.project_created_at} link={image.projectid} key={image.projectid}/>;
+  }
+
+  searchProjects(){
+    var target = ('http://backend-edu.azurewebsites.net/project/stringsearch/' + this.state.searchPara)
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({
+        Data: json
+      }, function() {
+        this.setState({
+          Id: this.state.Data.map((elem) => elem.projectid),
+          hits: json.length,
+          hitvisible: true
+        }, function() {});
+      })
+
+    })
   }
 
   //this is the mapping class which uses createImage on every content of the array
@@ -126,9 +153,6 @@ class Dashboard extends React.Component {
 
     })
   }
-  searchProject() {
-    history.push('/discover');
-  };
 
   newProject() {
     history.replace('/wizard1');
@@ -150,6 +174,8 @@ class Dashboard extends React.Component {
     const logged = this.isAuthenticated();
     const {activeItem} = this.state;
     const { visible } = this.state;
+    const { hitvisible } = this.state;
+    const {hits} = this.state;
     const kategorie = [
       { key: 'a', text: 'Lehr und Lernprozess', value: 'a' },
       { key: 'b', text: 'Management', value: 'b' },
@@ -206,9 +232,9 @@ class Dashboard extends React.Component {
         <div className="row justify-content-md-center">
           <Card centered style={{ backgroundColor: "#FFFFFF", width: '1115px' }}>
              <Segment.Group fluid='true' vertical='true'>
-               <Segment basic={true}><Input fluid placeholder='Titel / Beschreibung'/></Segment>
+               <Segment basic={true}><Input fluid onChange={this.handleChange} name="searchPara" value={this.state.searchPara} placeholder='Titel / Beschreibung'/></Segment>
                <Segment basic={true}> <Dropdown style={{color: 'teal'}} placeholder='Kategorie' fluid multiple search selection options={kategorie} /><br/><div>
-           <Button floated='right' animated={true} color='teal' style={{
+           <Button floated='right' onClick={this.searchProjects} animated={true} color='teal' style={{
                width: "150px", position: 'relative'
              }}>
              <Button.Content hidden={true}>suchen</Button.Content>
@@ -222,10 +248,13 @@ class Dashboard extends React.Component {
         <Menu style={{width: '1200px'}} secondary>
            <Menu.Menu position='right'>
              <Menu.Item>
+               {
+                 hitvisible && (
            <Statistic color='grey' size='tiny'>
-            <Statistic.Value>5</Statistic.Value>
+            <Statistic.Value>{hits}</Statistic.Value>
             <Statistic.Label >Treffer</Statistic.Label>
           </Statistic>
+                 )}
         </Menu.Item>
       </Menu.Menu>
          </Menu>

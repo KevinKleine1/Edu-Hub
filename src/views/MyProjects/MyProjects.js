@@ -15,39 +15,23 @@ import {
   Popup
 } from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
-
+import KachelComponent from '../../components/KachelComponent/KachelComponent';
 //This part needs to be created dynamicly according to user
-const tableData = [
-  {
-    Nummer: '1',
-    ProjektName: 'Lernzentrum',
-    Status: 'In Bearbeitung',
-    ZuletztVeraendert: '2017-01-08T15:46:00.000Z'
-  }, {
-    Nummer: '2',
-    ProjektName: 'Fitness Studio',
-    Status: 'In Bearbeitung',
-    ZuletztVeraendert: '2016-12-07T15:46:00.000Z'
-  }, {
-    Nummer: '3',
-    ProjektName: 'Coding Kurs',
-    Status: 'Fertig',
-    ZuletztVeraendert: '2017-12-04T15:46:00.000Z'
-  }, {
-    Nummer: '4',
-    ProjektName: 'Bundes Jugendspiele',
-    Status: 'Fertig',
-    ZuletztVeraendert: '2017-12-04T15:45:00.000Z'
-  }
-]
 
 class MyProjects extends React.Component {
-  state = {
-    column: null,
-    data: [],
-    direction: null,
-    user: ""
+  constructor(props) {
+    super(props);
+    this.state = {
+      column: null,
+      data: [],
+      direction: null,
+      user: ""
+   }
+
+   this.createImages = this.createImages.bind(this);
+   this.setData = this.setData.bind(this);
   }
+ 
   /* formates date from database to readable | currently unused in this view
   formatDate(date_unformatted){
   var day = date_unformatted.substr(8, 2);
@@ -55,6 +39,16 @@ class MyProjects extends React.Component {
   var year = date_unformatted.substr(0, 4);
   return day + '.' + month + '.' + year;
 }*/
+
+
+createImage(image) {
+  return <KachelComponent name={image.project_name} bild={image.project_imagepath} erstellt={image.project_created_at} link={image.projectid} key={image.projectid}/>;
+}
+
+createImages(images) {
+  return images.map(this.createImage);
+
+}
 
   // formates date with time
   formatDateWithTime(date_unformatted) {
@@ -202,83 +196,7 @@ class MyProjects extends React.Component {
         },
         render: () => <Tab.Pane attached={false}>
             <Grid doubling={true} columns={4} divided='vertically'>
-              <Grid.Column>
-                <Popup trigger={<Image
-                  size = 'medium'
-                  label = {{ as: 'a', color: 'teal', content: 'Digitale Bibliothek', ribbon: true }}
-                  src = '/img/Landingpage/projekt1.jpg' />} position='top left'>
-                  <Popup.Content>
-                    <p>
-                      <b>Status: </b>
-                      fertig<br/>
-                      <b>Zuletzt verändert: </b>
-                      11.01.2018</p>
-                  </Popup.Content>
-                </Popup>
-              </Grid.Column>
-              <Grid.Column>
-                <Popup trigger={<Image
-                  size = 'medium'
-                  label = {{ as: 'a', color: 'teal', content: 'Experiment', ribbon: true }}
-                  src = '/img/Landingpage/projekt2.jpg'
-                  />} position='top left'>
-                  <Popup.Content>
-                    <p>
-                      <b>Status: </b>
-                      fertig<br/>
-                      <b>Zuletzt verändert: </b>
-                      11.01.2018</p>
-                  </Popup.Content>
-                </Popup>
-              </Grid.Column>
-              <Grid.Column>
-
-                <Popup trigger={<Image
-                  size = 'medium'
-                  label = {{ as: 'a', color: 'teal', content: 'Selbstlernzetrum', ribbon: true }}
-                  src = '/img/Landingpage/projekt3.jpg'
-                  />} position='top left'>
-                  <Popup.Content>
-                    <p>
-                      <b>Status: </b>
-                      fertig<br/>
-                      <b>Zuletzt verändert: </b>
-                      11.01.2018</p>
-                  </Popup.Content>
-                </Popup>
-              </Grid.Column>
-              <Grid.Column>
-
-                <Popup trigger={<Image
-                  size = 'medium'
-                  label = {{ as: 'a', color: 'teal', content: 'Selbstlernzetrum', ribbon: true }}
-                  src = '/img/Landingpage/projekt4.jpeg'
-                  />} position='top left'>
-                  <Popup.Content>
-                    <p>
-                      <b>Status: </b>
-                      fertig<br/>
-                      <b>Zuletzt verändert: </b>
-                      11.01.2018</p>
-                  </Popup.Content>
-                </Popup>
-              </Grid.Column>
-              <Grid.Column>
-
-                <Popup trigger={<Image
-                  size = 'medium'
-                  label = {{ as: 'a', color: 'teal', content: 'Selbstlernzetrum', ribbon: true }}
-                  src = '/img/Landingpage/projekt4.jpeg'
-                  />} position='top left'>
-                  <Popup.Content>
-                    <p>
-                      <b>Status: </b>
-                      fertig<br/>
-                      <b>Zuletzt verändert: </b>
-                      11.01.2018</p>
-                  </Popup.Content>
-                </Popup>
-              </Grid.Column>
+             {this.createImages(this.state.data)}
             </Grid>
 
           </Tab.Pane>
