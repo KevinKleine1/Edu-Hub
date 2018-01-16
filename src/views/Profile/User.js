@@ -191,6 +191,16 @@ class User extends Component {
                     width: "800px"
                   }}>
                   <Header as='h3' floated='left'>
+                    <b>Interessen / Fächer</b>
+                  </Header>
+                  <Header as='h3' floated='right' color='grey'>
+                    Germanistik, Kunst, Projektmanagement
+                  </Header>
+                </Segment>
+                <Segment vertical={true} style={{
+                    width: "800px"
+                  }}>
+                  <Header as='h3' floated='left'>
                     <b>Mitglied seit</b>
                   </Header>
                   <Header as='h3' floated='right' color='grey'>

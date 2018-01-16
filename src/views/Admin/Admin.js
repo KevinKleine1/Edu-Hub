@@ -377,6 +377,10 @@ class Admin extends Component {
                   <label>Stadt</label>
                   <Form.Input name="Stadt" value={Stadt} onChange={this.handleChange} error={this.state.stadtError} placeholder={this.state.StadtAlt}/>
                 </Form.Field>
+                <Form.Field>
+                <label>Schule</label>
+                <Form.Input name="Schule"/>
+              </Form.Field>
                 <Form.Group inline={true}>
                   <Form.Field>
                     <label>Interessen / Fächer</label>
@@ -389,7 +393,7 @@ class Admin extends Component {
                 </Form.Group>
                 <Form.Field>
                     <label>Profilbeschreibung</label>
-                  <Form.TextArea rows={2} name='Profilbeschreibung' placeholder='Profilbeschreibung'/>
+                  <Form.TextArea rows={2} name='Profilbeschreibung'/>
                 </Form.Field>
                 <Message error={true} header='Fehler bei Eingabe' content='Hausnummer und PLZ müssen Zahlen sein.'/>
                 <Message success={true} header='Daten erfolgreich aktualisiert' content='Weiterhin viel Spaß auf Edu-Hub.'/>

@@ -281,6 +281,10 @@ class Welcome extends Component {
                   <label>Stadt</label>
                   <Form.Input name="Stadt" value={Stadt} onChange={this.handleChange} error={this.state.stadtError} placeholder='Stadt'/>
                 </Form.Field>
+                <Form.Field required={false}>
+                <label>Schule</label>
+                <Form.Input name="Schule" placeholder='Schule'/>
+              </Form.Field>
                 <Form.Group inline={true}>
                   <Form.Field required={true}>
                     <label>Interessen / Fächer</label>
