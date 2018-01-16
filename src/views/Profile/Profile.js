@@ -35,7 +35,7 @@ class Profile extends React.Component {
       Erstellt: ""
     };
 
-  
+
   }
 
   createNode(node) {
@@ -220,7 +220,7 @@ class Profile extends React.Component {
               width: "800px"
             }}>
             <Header as='h3' floated='left'>
-              Fächer
+              Interessen / Fächer
             </Header>
             <Header as='h3' floated='right' color='grey'>
               {Fach1}, {Fach2}, {Fach3}
