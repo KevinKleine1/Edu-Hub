@@ -783,7 +783,7 @@ class ProjectPage extends React.Component {
     //Social media redirects
     var redirectToTwitter = 'https://twitter.com/intent/tweet?text=Hey,%20schau%20dir%20dieses%20Projekt%20an:%20' + currentPageUrl
     var redirectToGooglePlus = 'https://plus.google.com/share?url=' + currentPageUrl
-    var redirectToFacebook = 'https://facebook.com/sharer.php?u=' + currentPageUrl
+    var redirectToFacebook = 'https://facebook.com/sharer.php?url=' + currentPageUrl
     var redirectToMail = 'mailto:?body=' + currentPageUrl
 
     //content of the member modal
@@ -1168,7 +1168,7 @@ class ProjectPage extends React.Component {
                 <Popup content='Füge dieses Projekt deinen Favoriten hinzu' trigger={<Button circular={
                   true
                 }
-                  color='grey' icon='bookmark' />} />
+                  color='grey' icon='empty heart' />} />
               </div>
               <div>
                 <Popup content='Teile dieses Projekt mit anderen' trigger={<Button circular={
