@@ -337,18 +337,19 @@ class Admin extends Component {
             <div className="container">
               <div className="row justify-content-md-center">
                 <div className="form-group">
+                    <div className="row justify-content-md-center">
                   <label htmlFor="exampleFormControlFile1">
                     <b>Profilfoto Aktualisieren</b>
-                  </label>
-                  <br/>
+                  </label></div>
+                      <div className="row justify-content-md-center">
                   <input type="file" onChange={(e) => this._handleImageChange(e)} className="form-control-file" id="exampleFormControlFile1"></input>
-                </div>
+                </div></div>
               </div>
             </div>
 
             <div className="card-text">
               <Form loading={this.state.Laden} error={this.state.Fehler} success={this.state.Erfolg} onSubmit={this.handleSubmit}>
-
+                <Form.Group widths='equal'>
                 <Form.Field>
                   <label>Vorname</label>
                   <Form.Input name="Vorname" value={Vorname} onChange={this.handleChange} error={this.state.vornameError} placeholder={this.state.VornameAlt}/>
@@ -357,32 +358,43 @@ class Admin extends Component {
                   <label>Nachname</label>
                   <Form.Input name="Nachname" value={Nachname} onChange={this.handleChange} error={this.state.nachnameError} placeholder={this.state.NachnameAlt}/>
                 </Form.Field>
+              </Form.Group>
+              <Form.Group>
                 <Form.Field>
                   <label>Straße</label>
-                  <Form.Input name="Strasse" value={Strasse} onChange={this.handleChange} error={this.state.strasseError} placeholder={this.state.StrasseAlt}/>
+                  <Form.Input name="Strasse" value={Strasse} onChange={this.handleChange} error={this.state.strasseError} placeholder={this.state.StrasseAlt} style={{width: "600px"}}/>
                 </Form.Field>
                 <Form.Field>
                   <label>Hausnummer</label>
-                  <Form.Input name="Hausnummer" value={Hausnummer} onChange={this.handleChange} error={this.state.hausnummerError} placeholder={this.state.HausnummerAlt}/>
+                  <Form.Input name="Hausnummer" value={Hausnummer} onChange={this.handleChange} error={this.state.hausnummerError} placeholder={this.state.HausnummerAlt} style={{width: "162px"}}/>
                 </Form.Field>
+              </Form.Group>
+              <Form.Field>
+                <label>Postleitzahl</label>
+                <Form.Input name="Postcode" value={Postcode} onChange={this.handleChange} error={this.state.postcodeError} placeholder={this.state.PostcodeAlt}/>
+              </Form.Field>
                 <Form.Field>
                   <label>Stadt</label>
                   <Form.Input name="Stadt" value={Stadt} onChange={this.handleChange} error={this.state.stadtError} placeholder={this.state.StadtAlt}/>
                 </Form.Field>
                 <Form.Field>
-                  <label>Postleitzahl</label>
-                  <Form.Input name="Postcode" value={Postcode} onChange={this.handleChange} error={this.state.postcodeError} placeholder={this.state.PostcodeAlt}/>
-                </Form.Field>
+                <label>Schule</label>
+                <Form.Input name="Schule"/>
+              </Form.Field>
                 <Form.Group inline={true}>
-                  <Form.Field required={true}>
-                    <label>Fächer</label>
-                    <Form.Input name="Fach1" value={Fach1} onChange={this.handleChange} error={this.state.fachError} placeholder={this.state.Fach1Alt}/>
+                  <Form.Field>
+                    <label>Interessen / Fächer</label>
+                    <Form.Input name="Fach1" value={Fach1} onChange={this.handleChange} error={this.state.fachError} placeholder={this.state.Fach1Alt} style={{width: "300px"}}/>
 
-                    <Form.Input name="Fach2" value={Fach2} onChange={this.handleChange} placeholder={this.state.Fach2Alt}/>
+                    <Form.Input name="Fach2" value={Fach2} onChange={this.handleChange} placeholder={this.state.Fach2Alt} style={{width: "300px"}}/>
 
-                    <Form.Input name="Fach3" value={Fach3} onChange={this.handleChange} placeholder={this.state.Fach3Alt}/>
+                    <Form.Input name="Fach3" value={Fach3} onChange={this.handleChange} placeholder={this.state.Fach3Alt} style={{width: "300px"}}/>
                   </Form.Field>
                 </Form.Group>
+                <Form.Field>
+                    <label>Profilbeschreibung</label>
+                  <Form.TextArea rows={2} name='Profilbeschreibung'/>
+                </Form.Field>
                 <Message error={true} header='Fehler bei Eingabe' content='Hausnummer und PLZ müssen Zahlen sein.'/>
                 <Message success={true} header='Daten erfolgreich aktualisiert' content='Weiterhin viel Spaß auf Edu-Hub.'/>
               </Form>
@@ -390,6 +402,7 @@ class Admin extends Component {
 
             <div className="container">
               <div className="row justify-content-md-center">
+                <br/>
                 <Button animated={true} color='teal' style={{
                     width: "150px"
                   }} onClick={this.handleSubmit.bind(this)}>

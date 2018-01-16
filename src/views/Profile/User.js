@@ -108,7 +108,7 @@ class User extends Component {
     })
   }
 
-  //creates the list of the Projectitems 
+  //creates the list of the Projectitems
   createList(item) {
     return <ListItems titel={item.project_name} erstellt={item.project_created_at} link={item.projectid} key={item.projectid}/>;
   }
@@ -139,14 +139,15 @@ class User extends Component {
     var Erstellt = this.formatDateMonthName(this.state.Erstellt);
     var Projekte = this.state.Data.length;
     return (
-    
+
 
     <div className="animated fadeIn">
+      <br/>
       <Grid stackable={true} columns={2} divided={true}>
         <Grid.Row>
-        {   
+        {
            !Private && (
-          <Grid.Column width={13}>         
+          <Grid.Column width={13}>
             <div className="container">
               <div className="row justify-content-md-center">
                 <Segment vertical={true} style={{
@@ -190,6 +191,16 @@ class User extends Component {
                     width: "800px"
                   }}>
                   <Header as='h3' floated='left'>
+                    <b>Interessen / Fächer</b>
+                  </Header>
+                  <Header as='h3' floated='right' color='grey'>
+                    Germanistik, Kunst, Projektmanagement
+                  </Header>
+                </Segment>
+                <Segment vertical={true} style={{
+                    width: "800px"
+                  }}>
+                  <Header as='h3' floated='left'>
                     <b>Mitglied seit</b>
                   </Header>
                   <Header as='h3' floated='right' color='grey'>
@@ -217,9 +228,9 @@ class User extends Component {
             </div>
           </Grid.Column>
            )}
-            {   
+            {
            Private && (
-          <Grid.Column width={13}>         
+          <Grid.Column width={13}>
             <div className="container">
               <div className="row justify-content-md-center">
                 <Segment vertical={true} style={{
@@ -260,7 +271,7 @@ class User extends Component {
           </Grid.Column>
            )}
 
-           
+
           <Grid.Column width={3}>
             <div className="container">
               <div className="row justify-content-md-center">
@@ -269,7 +280,7 @@ class User extends Component {
                     height: "200px"
                   }}></img>
                 <div></div>
-              
+
                 {
                   !Private &&(
                 <div className="container">
@@ -333,10 +344,10 @@ class User extends Component {
                   {this.createLists(this.state.Data)}
                 </List>
               </div>
-              
+
             </div>
                   )}
-                  
+
           </Grid.Column>
         </Grid.Row>
       </Grid>
