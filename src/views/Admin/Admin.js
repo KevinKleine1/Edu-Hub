@@ -78,8 +78,8 @@ class Admin extends Component {
   setData() {
     var decoded = jwt.decode(localStorage.getItem('id_token')); //decoder for JWT Token
     localStorage.setItem('email', decoded.email);
-                                
-    var target = ('http://backend-edu.azurewebsites.net/user/' + localStorage.getItem('email')) 
+
+    var target = ('http://backend-edu.azurewebsites.net/user/' + localStorage.getItem('email'))
     fetch(target).then((results) => {
       return results.json();
 
@@ -309,6 +309,7 @@ class Admin extends Component {
     }
     return (<div className="container">
       <div className="row justify-content-md-center">
+        <br/>
         <Card style={{
             width: "800px"
           }}>
