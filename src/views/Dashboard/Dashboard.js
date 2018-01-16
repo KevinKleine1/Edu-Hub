@@ -120,8 +120,8 @@ class Dashboard extends React.Component {
 
   //this is the mapping class which uses createImage on every content of the array
   createImages(images, start, end) {
-    var Plist = images.slice(start, end)
-    return Plist.map(this.createImage);
+   
+    return images.map(this.createImage);
 
   }
   //handler for the menu on top to change categories
@@ -269,7 +269,7 @@ class Dashboard extends React.Component {
             <br/>
             <Grid doubling={true} columns={4} divided='vertically'>
               <Grid.Row>
-                {this.createImages(this.state.Data, 0, 7)}
+                {this.createImages(this.state.Data)}
               </Grid.Row>
             </Grid>
           </div>

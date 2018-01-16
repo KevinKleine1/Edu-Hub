@@ -21,9 +21,9 @@ export default class Termin extends Component {
         <hr className="transparent mx-3 my-0"/>
             <div className="callout callout-warning m-0 py-3">
               <div className="avatar float-right">
-                <img src={'http://backend-edu.azurewebsites.net/' + this.props.bild} className="img-avatar" alt="admin@bootstrapmaster.com"/>
+                <img src={'http://backend-edu.azurewebsites.net/' + localStorage.getItem("picture")} className="img-avatar" alt="admin@bootstrapmaster.com"/>
               </div>
-              <div>{this.props.name} <strong>{this.props.text}</strong></div>
+              <div>{this.props.parent}: {this.props.name} <strong>{this.props.text}</strong></div>
               <small className="text-muted mr-3"><i className="icon-calendar"></i>&nbsp;{Datum}</small>
             </div>
     </div>
