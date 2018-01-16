@@ -20,7 +20,8 @@ import {
   Form,
   Transition,
   Dropdown,
-  Checkbox
+  Checkbox,
+  Statistic
 } from 'semantic-ui-react';
 import Welcome from '../Pages/Welcome/Welcome';
 import ProjectCards from '../../components/ProjectCards/ProjectCards';
@@ -200,13 +201,13 @@ class Dashboard extends React.Component {
             }}/>
         </div>
       </div><br/>
-      <div className="row justify-content-md-center">
+
       <Transition visible={visible} animation='scale'>
         <div className="row justify-content-md-center">
-          <Card style={{ backgroundColor: "#FFFFFF", width: '1120px' }}>
+          <Card centered style={{ backgroundColor: "#FFFFFF", width: '1115px' }}>
              <Segment.Group fluid='true' vertical='true'>
                <Segment basic={true}><Input fluid placeholder='Titel / Beschreibung'/></Segment>
-               <Segment basic={true}> <Dropdown style={{color: 'tealf'}} placeholder='Kategorie' fluid multiple search selection options={kategorie} /><br/><div>
+               <Segment basic={true}> <Dropdown style={{color: 'teal'}} placeholder='Kategorie' fluid multiple search selection options={kategorie} /><br/><div>
            <Button floated='right' animated={true} color='teal' style={{
                width: "150px", position: 'relative'
              }}>
@@ -215,11 +216,24 @@ class Dashboard extends React.Component {
                <Icon name='search'/>
              </Button.Content>
            </Button><br/></div><br/></Segment>
-            </Segment.Group></Card>
-
+         </Segment.Group></Card>
+         <div className="container">
+        <div className="row justify-content-md-center">
+        <Menu style={{width: '1200px'}} secondary>
+           <Menu.Menu position='right'>
+             <Menu.Item>
+           <Statistic color='grey' size='tiny'>
+            <Statistic.Value>5</Statistic.Value>
+            <Statistic.Label >Treffer</Statistic.Label>
+          </Statistic>
+        </Menu.Item>
+      </Menu.Menu>
+         </Menu>
+       </div></div>
 
             </div>
-      </Transition></div>
+
+      </Transition>
       <div className="container">
         <div className="row justify-content-md-center">
           <div className="menu">
