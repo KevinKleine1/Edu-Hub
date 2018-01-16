@@ -209,9 +209,9 @@ class MyProjects extends React.Component {
                   src = '/img/Landingpage/projekt1.jpg' />} position='top left'>
                   <Popup.Content>
                     <p>
-                      <b>Status:</b>
+                      <b>Status: </b>
                       fertig<br/>
-                      <b>Zuletzt verändert:</b>
+                      <b>Zuletzt verändert: </b>
                       11.01.2018</p>
                   </Popup.Content>
                 </Popup>
@@ -224,9 +224,9 @@ class MyProjects extends React.Component {
                   />} position='top left'>
                   <Popup.Content>
                     <p>
-                      <b>Status:</b>
+                      <b>Status: </b>
                       fertig<br/>
-                      <b>Zuletzt verändert:</b>
+                      <b>Zuletzt verändert: </b>
                       11.01.2018</p>
                   </Popup.Content>
                 </Popup>
@@ -240,9 +240,9 @@ class MyProjects extends React.Component {
                   />} position='top left'>
                   <Popup.Content>
                     <p>
-                      <b>Status:</b>
+                      <b>Status: </b>
                       fertig<br/>
-                      <b>Zuletzt verändert:</b>
+                      <b>Zuletzt verändert: </b>
                       11.01.2018</p>
                   </Popup.Content>
                 </Popup>
@@ -256,9 +256,9 @@ class MyProjects extends React.Component {
                   />} position='top left'>
                   <Popup.Content>
                     <p>
-                      <b>Status:</b>
+                      <b>Status: </b>
                       fertig<br/>
-                      <b>Zuletzt verändert:</b>
+                      <b>Zuletzt verändert: </b>
                       11.01.2018</p>
                   </Popup.Content>
                 </Popup>
@@ -272,9 +272,9 @@ class MyProjects extends React.Component {
                   />} position='top left'>
                   <Popup.Content>
                     <p>
-                      <b>Status:</b>
+                      <b>Status: </b>
                       fertig<br/>
-                      <b>Zuletzt verändert:</b>
+                      <b>Zuletzt verändert: </b>
                       11.01.2018</p>
                   </Popup.Content>
                 </Popup>
