@@ -483,9 +483,10 @@ class ProjectPage extends React.Component {
       this.setState({ Text: json[0].project_text });
       this.setState({ Karma: json[0].project_karma });
       this.setState({ Bild: json[0].project_imagepath });
-      this.setState({ Erstellt: json[0].project_created_at })
+      this.setState({ Erstellt: json[0].project_created_at });
 
     })
+
   }
   //fetching the corresponding data from the server to display it on the webpage
   setUser() {
@@ -1410,10 +1411,6 @@ class ProjectPage extends React.Component {
         </Menu>
         {
           (activeItem == "Alle") && (<VerticalTimeline>
-            <VerticalTimelineElement className="vertical-timeline-element" iconStyle={{
-              background: 'rgb(233, 30, 99)',
-            }} animate={true}>
-            </VerticalTimelineElement>
             {this.createNodes(this.state.Data)}
             <VerticalTimelineElement className="vertical-timeline-element--education" iconStyle={{
               background: 'rgb(233, 30, 99)',

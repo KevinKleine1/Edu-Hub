@@ -28,7 +28,7 @@ class Aside extends Component {
   //TODO: Add parentname directly in fetch
   createTermin(termin) {
 
-    return <Termin name={termin[0].project_name} parent={termin[0].project_titel} termin={termin[0].project_termin}  key={termin[0].project_id}/>;
+    return <Termin name={termin[0].project_name} parent={termin[0].project_titel} termin={termin[0].project_termin}  key={termin[0].projectid}/>;
   }
 
   createTermine(termine) {
