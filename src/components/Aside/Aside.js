@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {TabContent, TabPane, Nav, NavItem, NavLink, Progress, Label, Input} from 'reactstrap';
 import classnames from 'classnames';
 import Termin from '../../components/Termin/Termin';
+import {Button, Icon} from 'semantic-ui-react';
 
 //TODO Come up with some function for this part
 
@@ -14,6 +15,7 @@ class Aside extends Component {
       activeTab: '1',
       Termine: []
     };
+    this.setData = this.setData.bind(this);
   }
 
   toggle(tab) {
@@ -94,6 +96,9 @@ class Aside extends Component {
         </Nav>
         <TabContent activeTab={this.state.activeTab}>
           <TabPane tabId="1">
+          <Button onClick={this.setData} icon>
+               <Icon name='refresh' />
+          </Button>
            {this.createTermine(this.state.Termine)}
           </TabPane>
           <TabPane tabId="2" className="p-3">
