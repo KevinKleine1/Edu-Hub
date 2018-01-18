@@ -13,7 +13,7 @@ import jwt from 'jsonwebtoken';
 import 'whatwg-fetch'
 
 //page where every new registered user will be redirected to, so he can complete his data, functionality is the same as on the admin page
-//TODO: fix the hickup if no picture will be uploded
+//TODO: better solution for the picture input
 
 class Welcome extends Component {
 
@@ -36,7 +36,7 @@ class Welcome extends Component {
     fachError: false,
     Fehler: false,
     Erfolg: false,
-    file: '',
+    file: '../img/avatars/NotLogged.jpg',
     imagePreviewUrl: '',
     Laden: false,
     Private: false
@@ -74,6 +74,11 @@ class Welcome extends Component {
       fachError: false,
       Fehler: false
     };
+
+    if(this.state.imagePreviewUrl === ""){
+      isError = true;
+      errors.Fehler = true;
+    }
 
     if (this.state.Vorname.length < 1) {
       isError = true;
@@ -123,6 +128,7 @@ class Welcome extends Component {
 
     var form = new FormData();
     form.append('foo', this.state.file);
+    form.append('fileName', "Profil");
     form.append('forename', this.state.Vorname);
     form.append('surname', this.state.Nachname);
     form.append('street', this.state.Strasse);
@@ -132,7 +138,6 @@ class Welcome extends Component {
     form.append('subject1', this.state.Fach1);
     form.append('subject2', this.state.Fach2);
     form.append('subject3', this.state.Fach3);
-    form.append('fileName', "Profil");
     form.append('email', localStorage.getItem('email'));
     form.append('user_privacy', privat);
 
