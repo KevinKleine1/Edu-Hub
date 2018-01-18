@@ -80,7 +80,10 @@ class ProjectPage extends React.Component {
       UploadData: [],
       showPics: false,
       isAuthor: false,
-      isEditor: false
+      isEditor: false,
+      JoinData: [],
+      CommentData: [],
+      TerminData: []
 
 
     };
@@ -101,6 +104,8 @@ class ProjectPage extends React.Component {
     this.addImage = this.addImage.bind(this);
     this.addTermin = this.addTermin.bind(this);
     this.getImages = this.getImages.bind(this);
+    this.setMembers = this.setMembers.bind(this);
+
   }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
@@ -145,6 +150,9 @@ class ProjectPage extends React.Component {
         Data: json
       }, function () {
         this.getUploadReaction()
+        this.getJoinReaction()
+        this.getCommentReaction()
+        this.getDateReaction()
       })
 
     })
@@ -159,6 +167,45 @@ class ProjectPage extends React.Component {
 
       this.setState({
         UploadData: json
+      }, function () { })
+
+    })
+  }
+  getJoinReaction() {
+    var target = ('http://backend-edu.azurewebsites.net/project/filter/memberevents/' + this.props.match.params.projectid)
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({
+        JoinData: json
+      }, function () { })
+
+    })
+  }
+  getCommentReaction() {
+    var target = ('http://backend-edu.azurewebsites.net/project/filter/comments/' + this.props.match.params.projectid)
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({
+        CommentData: json
+      }, function () { })
+
+    })
+  }
+  getDateReaction() {
+    var target = ('http://backend-edu.azurewebsites.net/project/termin/documentsimage/' + this.props.match.params.projectid)
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({
+        TerminData: json
       }, function () { })
 
     })
@@ -398,17 +445,29 @@ class ProjectPage extends React.Component {
 
   createCards(cards) {
 
-    return cards.map(this.createCard);
+    return cards.map(this.createCard, this);
 
   }
 
   createUser(user) {
-    return <Usercomponents vorname={user.forename} bild={user.profilpic} id={user.userid} key={user.userid} />;
+    if (user.uhp_userrole === "member"){
+      var rights = false;
+      var author = false;
+    }
+    else if (user.uhp_userrole === "editor"){
+      var rights = true;
+      var author = false;
+    }
+    else if (user.uhp_userrole === "author"){
+      var author = true;
+      var rights = true;
+    }
+  return <Usercomponents vorname={user.forename} update={() => this.setMembers()} new={() => this.getReactions()}  author={author} rights={rights} project={user.uhp_idproject} bild={user.profilpic} id={user.userid} key={user.userid} />;
   }
 
   createUsers(users) {
 
-    return users.map(this.createUser);
+    return users.map(this.createUser, this);
 
   }
 
@@ -453,11 +512,13 @@ class ProjectPage extends React.Component {
 
       if (json.response == 1) {
         this.setState({
-          isEditor: true
+          isEditor: true,
+          joined: false
         }, function () { });
       } else if (json.response == 0) {
         this.setState({
-          isEditor: false
+          isEditor: false,
+          joined: true
         }, function () { });
       }
     })
@@ -633,6 +694,7 @@ class ProjectPage extends React.Component {
         }, function () { });
       }
     })
+   
   }
 
   handleProject() {
@@ -731,6 +793,7 @@ class ProjectPage extends React.Component {
     this.getDocuments();
     this.getImages();
     this.setAuthor();
+    this.setEditor();
   }
 
   //updates the projectpage if the url match changes, so we can easily swap between projects without having to reload the page
@@ -746,6 +809,7 @@ class ProjectPage extends React.Component {
       this.getDocuments();
       this.getImages();
       this.setAuthor();
+      this.setEditor();
     }
 
   }
@@ -1204,7 +1268,25 @@ class ProjectPage extends React.Component {
                 </Modal>
               </div>
               {
-                isAuthor || isEditor &&(
+                isAuthor &&(
+              <div>
+                <Popup content='Füge einen Beitrag hinzu' trigger={<Button circular={
+                  true
+                }
+                  color='grey' icon='edit' onClick={
+                    this.toggleEdit
+                  } />} />
+                <Modal isOpen={this.state.modalEdit} toggle={this.toggleEdit} className={this.props.className} size='lg'>
+                  <ModalBody>
+                    <div fluid="fluid">
+                      {editModal}
+                    </div>
+                  </ModalBody>
+                </Modal>
+              </div>
+                )}
+                {
+              isEditor &&(
               <div>
                 <Popup content='Füge einen Beitrag hinzu' trigger={<Button circular={
                   true
@@ -1322,6 +1404,9 @@ class ProjectPage extends React.Component {
         <Menu pointing secondary>
           <Menu.Item name='Alle' active={activeItem === 'Alle'} onClick={this.handleItemClick} />
           <Menu.Item name='Uploads' active={activeItem === 'Uploads'} onClick={this.handleItemClick} />
+          <Menu.Item name='Beitritte' active={activeItem === 'Beitritte'} onClick={this.handleItemClick} />
+          <Menu.Item name='Kommentare' active={activeItem === 'Kommentare'} onClick={this.handleItemClick} />
+          <Menu.Item name='Termine' active={activeItem === 'Termine'} onClick={this.handleItemClick} />
         </Menu>
         {
           (activeItem == "Alle") && (<VerticalTimeline>
@@ -1351,6 +1436,24 @@ class ProjectPage extends React.Component {
             {this.createNodes(this.state.UploadData)}
           </VerticalTimeline>)
         }
+                {
+
+        (activeItem == "Beitritte") && (<VerticalTimeline>
+           {this.createNodes(this.state.JoinData)}
+            </VerticalTimeline>)
+}
+        {
+
+(activeItem == "Kommentare") && (<VerticalTimeline>
+  {this.createNodes(this.state.CommentData)}
+</VerticalTimeline>)
+}
+        {
+
+(activeItem == "Termine") && (<VerticalTimeline>
+  {this.createNodes(this.state.TerminData)}
+</VerticalTimeline>)
+}
 
 
 
