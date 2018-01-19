@@ -83,7 +83,10 @@ class ProjectPage extends React.Component {
       isEditor: false,
       JoinData: [],
       CommentData: [],
-      TerminData: []
+      TerminData: [],
+      goal: "",
+      value: "o",
+      Ziel: ""
 
 
     };
@@ -105,6 +108,7 @@ class ProjectPage extends React.Component {
     this.addTermin = this.addTermin.bind(this);
     this.getImages = this.getImages.bind(this);
     this.setMembers = this.setMembers.bind(this);
+    this.handleRights = this.handleRights.bind(this);
 
   }
 
@@ -198,7 +202,7 @@ class ProjectPage extends React.Component {
     })
   }
   getDateReaction() {
-    var target = ('http://backend-edu.azurewebsites.net/project/termin/documentsimage/' + this.props.match.params.projectid)
+    var target = ('http://backend-edu.azurewebsites.net/project/filter/termin/' + this.props.match.params.projectid)
     fetch(target).then((results) => {
       return results.json();
 
@@ -238,9 +242,10 @@ class ProjectPage extends React.Component {
 
   addTag() {
     this.setState({ Laden: true });
-    const Tag = this.state.tag;
+    var Tag = this.state.tag;
+    var pid = this.props.match.params.projectid;
     var forma = new FormData();
-    forma.append('pht_idproject', this.props.match.params.projectid);
+    forma.append('projectid', pid);
     forma.append('tag_name', Tag);
 
     fetch('http://backend-edu.azurewebsites.net/addtag', {
@@ -355,7 +360,7 @@ class ProjectPage extends React.Component {
     this.setState({ Laden: true });
     const Resource = this.state.resource;
     var forma = new FormData();
-    forma.append('phr_idproject', this.props.match.params.projectid);
+    forma.append('projectid', this.props.match.params.projectid);
     forma.append('resource_name', Resource);
 
     fetch('http://backend-edu.azurewebsites.net/addresource', {
@@ -479,8 +484,16 @@ class ProjectPage extends React.Component {
 
     }).then((json) => {
 
+      if(json[0].project_writeRights === 0){
+        this.setState({ value: "o"});
+      }
+      else{
+        this.setState({ value: "p"});
+      }
+
       this.setState({ Name: json[0].project_name });
       this.setState({ Text: json[0].project_text });
+      this.setState({ Ziel: json[0].project_statement});
       this.setState({ Karma: json[0].project_karma });
       this.setState({ Bild: json[0].project_imagepath });
       this.setState({ Erstellt: json[0].project_created_at });
@@ -643,6 +656,64 @@ class ProjectPage extends React.Component {
     })
   }
 
+  changeGoal() {
+    const newGoal = this.state.goal;
+    var forma = new FormData();
+    forma.append('userid', localStorage.getItem('userid'));
+    forma.append('projectid', localStorage.getItem('projectid'));
+    forma.append('changeid', 5);
+    forma.append('newgoal', newGoal);
+    fetch('http://backend-edu.azurewebsites.net/project/update', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json, */*'
+      },
+      body: forma
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+      this.setState({ key: Math.random() }, function () {
+        this.setData();
+        this.getReactions();
+        this.setState({ Laden: false });
+        this.toggleChange();
+      });
+    });
+  }
+
+  changeRights() {
+    const newRights = this.state.value;
+    if (newRights === 'o'){
+      var zahl = 0;
+    }
+    else{
+      var zahl = 1;
+    }
+    var forma = new FormData();
+    forma.append('userid', localStorage.getItem('userid'));
+    forma.append('projectid', localStorage.getItem('projectid'));
+    forma.append('changeid', 6);
+    forma.append('newwriteRights', zahl);
+    fetch('http://backend-edu.azurewebsites.net/project/update', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json, */*'
+      },
+      body: forma
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+      this.setState({ key: Math.random() }, function () {
+        this.setData();
+        this.getReactions();
+        this.setState({ Laden: false });
+        this.toggleChange();
+      });
+    });
+  }
+
   //fetching the corresponding data from the server to display it on the webpage
   setMembers() {
     localStorage.setItem('projectid', this.props.match.params.projectid);
@@ -706,9 +777,15 @@ class ProjectPage extends React.Component {
     if (this.state.description.length > 0) {
       this.changeDescription();
     }
+    if (this.state.goal.length > 0){
+      this.changeGoal();
+    }
+    this.changeRights();
+  // TODO Fix bug if nothing is done 
     this.setState({
       title: "",
-      description: ""
+      description: "",
+      goal: ""
     })
   }
 
@@ -823,6 +900,10 @@ class ProjectPage extends React.Component {
     return day + '.' + month + '.' + year + '';
   }
 
+  handleRights(event) {
+    this.setState({value: event.target.value});
+  }
+
   //function to copy text from an inputfield to the clipboard
   copyToClipboard() {
     var copyText = document.getElementById('InputFieldContent');
@@ -863,6 +944,8 @@ class ProjectPage extends React.Component {
       joined,
       activeItem,
       Name,
+      Ziel,
+      value,
       Text,
       Karma,
       Members,
@@ -1075,7 +1158,7 @@ class ProjectPage extends React.Component {
               <Form.TextArea rows={2} name="description" value={this.state.description} onChange={this.handleChange} placeholder={Text} />
             </Form.Group>
             <Form.Group widths='equal'>
-              <Form.TextArea rows={2} placeholder='Zielerreichung' />
+              <Form.TextArea rows={2} name="goal" onChange={this.handleChange} value={this.state.goal} placeholder={Ziel} />
             </Form.Group>
             <Form.Field>
               <label>
@@ -1088,9 +1171,9 @@ class ProjectPage extends React.Component {
             <div className="form-group">
               <Form.Field style={{
                 width: "200px"
-              }} label='Privatsphäre' control='select'>
-                <option value='p'>privat</option>
-                <option value='o'>&ouml;ffentlich</option>
+              }} label='Privatsphäre' control='select' value={this.state.value} onChange={this.handleRights}>
+                <option name='p' value='p'>privat</option>
+                <option name='o' value='o'>&ouml;ffentlich</option>
               </Form.Field>
             </div>
             <div className="row justify-content-md-center">

@@ -41,9 +41,85 @@ class Wizard extends Component {
       Projektbeschreibung: "",
       Laden: false,
       file: '',
-      Userid: ""
+      Userid: "",
+      ProjektId: "",
+      SuchenVerarbeitenundAufbewahren: false,
+     KommunizierenundKooperieren: false,
+     ProduzierenundPräsentieren: false,
+     Schützenundsicheragieren: false,
+     ProblemelösenundHandeln: false,
+     AnalysierenundReflektieren: false,
+     KitaVorschule: false,
+     Grundschule: false,
+     Sekundarstufe1: false,
+     Sekundarstufe2: false,
+     HoehereHandelschule: false,
+     Handelschule: false,
+     Sprachen: false,
+     KulturelleBildung: false,
+     GeschichteGesellschaft: false,
+     Naturwissenschaften: false,
+     InformatiktechnischeBildung: false,
+     Mathematik: false,
+     Deutsch: false,
+     Englisch: false,
+     Physik: false,
+     Chemie: false,
+     Erdkunde: false,
+     Sport: false,
+     Kunst: false,
+     Französisch: false,
+     Spanisch: false,
+     Italienisch: false,
+     Bwl: false,
+     Vwl: false,
+     Informatik: false,
+     Pädagogik: false,
+     Politik: false,
+     KeinInternet: false,
+     PCLaptop: false,
+     TabletSmartphone: false,
+     HardwareBasteln: false,
+     VideosFilme: false,
+     Unterrichstreihe: false,
+     Stunde: false,
+     Doppelstunde: false,
+     Flexibel: false,
+     Klasse: false,
+     Schule: false,
+     Fachlich: false,
+     Lehrer: false,
+     Elternvertretung: false,
+     Zeitmanagementbesserplanen: false,
+     BudgetFinanzierung: false,
+     BildungWissenvermittlung: false,
+     Unterrichtneugestalten: false,
+     Verwaltungverbessern: false,
+     Konfliktmanagement: false,
+     SonstigestrategischeZiele: false,
+     Tage: false,
+     Wochen: false,
+     Monate: false,
+     StadtGemeinde: false,
+     Personal: false,
+     Schueler: false,
+     Bildung: false,
+     SchulischeAusstatung: false,
+     ITtechnischerSupport: false,
+     VerpflegunginderSchule: false,
+     Finanzierung: false,
+     SozialesEngagement: false,
+     goal: "",
+     startdate: "",
+     rights:"o"
 
     };
+    this.firstClick = this.firstClick.bind(this);
+    this.newProject = this.newProject.bind(this);
+    this.goBack = this.goBack.bind(this);
+    this.changeTab = this.changeTab.bind(this);
+    this.nextField = this.nextField.bind(this);
+    this.handleRights = this.handleRights.bind(this);
   }
 
   setUserdata() {
@@ -58,6 +134,38 @@ class Wizard extends Component {
 
     })
   }
+
+  firstClick(){
+    if(this.state.value === 'option1'){
+      var activity = "lehrundlernProjekte";
+    }
+    if(this.state.value === 'option2'){
+      var activity = "managementProjekt";
+    }
+    if(this.state.value === 'option3'){
+      var activity = "unterstuetzendesProjekt";
+    }
+
+    var form = new FormData();
+    form.append('project_author', localStorage.getItem("userid"));
+    form.append('project_activity', activity);
+
+    fetch('http://backend-edu.azurewebsites.net/wizardctrl/newProject', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, */*'
+      },
+      body: form
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+      this.setState({ProjektId: json[0].projectid},
+      function(){
+        this.changeTab();
+      });
+  });
+}
 
   toggle() {
     this.setState({
@@ -80,17 +188,79 @@ class Wizard extends Component {
 
   handleChange = (e, {value}) => this.setState({value})
   handleText = (e, {name, value}) => this.setState({[name]: value})
+  handleSuchenVerarbeitenundAufbewahren = (e) => this.setState({SuchenVerarbeitenundAufbewahren : !this.state.SuchenVerarbeitenundAufbewahren})
+  handleKommunizierenundKooperieren = (e) => this.setState({KommunizierenundKooperieren : !this.state.KommunizierenundKooperieren})
+  handleProduzierenundPräsentieren = (e) => this.setState({ProduzierenundPräsentieren : !this.state.ProduzierenundPräsentieren},function(){this.addTag("Produzieren")})
+  handleSchützenundsicheragieren = (e) => this.setState({Schützenundsicheragieren : !this.state.Schützenundsicheragieren})
+  handleProblemelösenundHandeln = (e) => this.setState({ProblemelösenundHandeln : !this.state.ProblemelösenundHandeln})
+  handleAnalysierenundReflektieren = (e) => this.setState({AnalysierenundReflektieren : !this.state.AnalysierenundReflektieren})
+  handleKitaVorschule = (e) => this.setState({KitaVorschule : !this.state.KitaVorschule})
+  handleGrundschule = (e) => this.setState({Grundschule : !this.state.Grundschule})
+  handleSekundarstufe1 = (e) => this.setState({Sekundarstufe1 : !this.state.Sekundarstufe1})
+  handleSekundarstufe2 = (e) => this.setState({Sekundarstufe2 : !this.state.Sekundarstufe2})
+  handleHoehereHandelschule = (e) => this.setState({HoehereHandelschule : !this.state.HoehereHandelschule})
+  handleHandelschule = (e) => this.setState({Handelschule : !this.state.Handelschule})
+  handleSprachen = (e) => this.setState({Sprachen : !this.state.Sprachen})
+  handleKulturelleBildung = (e) => this.setState({KulturelleBildung : !this.state.KulturelleBildung})
+  handleGeschichteGesellschaft = (e) => this.setState({GeschichteGesellschaft : !this.state.GeschichteGesellschaft})
+  handleNaturwissenschaften = (e) => this.setState({Naturwissenschaften : !this.state.Naturwissenschaften})
+  handleInformatiktechnischeBildung = (e) => this.setState({InformatiktechnischeBildung : !this.state.InformatiktechnischeBildung})
+  handleMathematik = (e) => this.setState({Mathematik : !this.state.Mathematik})
+  handleDeutsch = (e) => this.setState({Deutsch : !this.state.Deutsch})
+  handleEnglisch = (e) => this.setState({Englisch : !this.state.Englisch})
+  handlePhysik = (e) => this.setState({Physik : !this.state.Physik})
+  handleChemie = (e) => this.setState({Chemie : !this.state.Chemie})
+  handleErdkunde = (e) => this.setState({Erdkunde : !this.state.Erdkunde})
+  handleSport = (e) => this.setState({Sport : !this.state.Sport})
+  handleKunst = (e) => this.setState({Kunst : !this.state.Kunst})
+  handleFranzösisch = (e) => this.setState({Französisch : !this.state.Französisch})
+  handleSpanisch = (e) => this.setState({Spanisch : !this.state.Spanisch})
+  handleItalienisch = (e) => this.setState({Italienisch : !this.state.Italienisch})
+  handleBwl = (e) => this.setState({Bwl : !this.state.Bwl})
+  handleVwl = (e) => this.setState({Vwl : !this.state.Vwl})
+  handleInformatik = (e) => this.setState({Informatik : !this.state.Informatik})
+  handlePädagogik = (e) => this.setState({Pädagogik : !this.state.Pädagogik})
+  handlePolitik = (e) => this.setState({Politik : !this.state.Politik})
+  handleKeinInternet = (e) => this.setState({KeinInternet : !this.state.KeinInternet})
+  handlePCLaptop = (e) => this.setState({PCLaptop : !this.state.PCLaptop})
+  handleTabletSmartphone = (e) => this.setState({TabletSmartphone : !this.state.TabletSmartphone})
+  handleHardwareBasteln = (e) => this.setState({HardwareBasteln : !this.state.HardwareBasteln})
+  handleVideosFilme = (e) => this.setState({VideosFilme : !this.state.VideosFilme})
+  handleUnterrichstreihe = (e) => this.setState({Unterrichstreihe : !this.state.Unterrichstreihe})
+  handleStunde = (e) => this.setState({Stunde : !this.state.Stunde})
+  handleDoppelstunde = (e) => this.setState({Doppelstunde : !this.state.Doppelstunde})
+  handleFlexibel = (e) => this.setState({Flexibel : !this.state.Flexibel})
+  handleKlasse = (e) => this.setState({Klasse : !this.state.Klasse})
+  handleSchule = (e) => this.setState({Schule : !this.state.Schule})
+  handleFachlich = (e) => this.setState({Fachlich : !this.state.Fachlich})
+  handleLehrer = (e) => this.setState({Lehrer : !this.state.Lehrer})
+  handleElternvertretung = (e) => this.setState({Elternvertretung : !this.state.Elternvertretung})
+  handleZeitmanagementbesserplanen = (e) => this.setState({Zeitmanagementbesserplanen : !this.state.Zeitmanagementbesserplanen})
+  handleBudgetFinanzierung = (e) => this.setState({BudgetFinanzierung : !this.state.BudgetFinanzierung})
+  handleBildungWissenvermittlung = (e) => this.setState({BildungWissenvermittlung : !this.state.BildungWissenvermittlung})
+  handleUnterrichtneugestalten = (e) => this.setState({Unterrichtneugestalten : !this.state.Unterrichtneugestalten})
+  handleVerwaltungverbessern = (e) => this.setState({Verwaltungverbessern : !this.state.Verwaltungverbessern})
+  handleKonfliktmanagement = (e) => this.setState({Konfliktmanagement : !this.state.Konfliktmanagement})
+  handleSonstigestrategischeZiele = (e) => this.setState({SonstigestrategischeZiele : !this.state.SonstigestrategischeZiele})
+  handleTage = (e) => this.setState({Tage : !this.state.Tage})
+  handleWochen = (e) => this.setState({Wochen : !this.state.Wochen})
+  handleMonate = (e) => this.setState({Monate : !this.state.Monate})
+  handleStadtGemeinde = (e) => this.setState({StadtGemeinde : !this.state.StadtGemeinde})
+  handlePersonal = (e) => this.setState({Personal : !this.state.Personal})
+  handleSchueler = (e) => this.setState({Schueler : !this.state.Schueler})
+  handleBildung = (e) => this.setState({Bildung : !this.state.Bildung})
+  handleSchulischeAusstatung = (e) => this.setState({SchulischeAusstatung : !this.state.SchulischeAusstatung})
+  handleITtechnischerSupport = (e) => this.setState({ITtechnischerSupport : !this.state.ITtechnischerSupport})
+  handleVerpflegunginderSchule = (e) => this.setState({VerpflegunginderSchule : !this.state.VerpflegunginderSchule})
+  handleFinanzierung = (e) => this.setState({Finanzierung : !this.state.Finanzierung})
+  handleSozialesEngagement = (e) => this.setState({SozialesEngagement : !this.state.SozialesEngagement})
 
-  newProject(){
-    this.setState({Laden: true});
+  addTag(tag){
     var form = new FormData();
-    form.append('project_name', this.state.Titel);
-    form.append('project_text', this.state.Projektbeschreibung);
-    form.append('foo', this.state.file);
-    form.append('fileName', "Projekt");
+    form.append('projectid', this.state.ProjektId);
+    form.append('tag_name', tag);
 
-
-    fetch('http://backend-edu.azurewebsites.net/wizardctrl/newProject', {
+    fetch('http://backend-edu.azurewebsites.net/addtag', {
       method: 'POST',
       headers: {
         'Accept': 'application/json, */*'
@@ -98,18 +268,274 @@ class Wizard extends Component {
       body: form
     }).then((response) => {
       return response.json();
-
     }).then((json) => {
-      this.setState({
-        Pid: json[0].projectid
-      }, function() {
-        var link = json[0].projectid
-        history.push('/projectpage/' + link);
       });
-    });
+  }
+
+  handleRights(event) {
+    this.setState({value: event.target.value});
   }
 
 
+  addTags(){
+  if(this.state.lehrundlernProjekt){
+    this.addTag("Lehr und Lernprojekt");
+  }
+  if(this.state.managementProjekt){
+    this.addTag("Managementprojekt");
+  }
+  if(this.state.unterstuetzendesProjekt){
+    this.addTag("Unterstützend");
+  }
+  if(this.state.ProduzierenundPräsentieren){
+    this.addTag("Produzieren und Präsentieren");
+  }
+  if(this.state.SuchenVerarbeitenundAufbewahren){
+    this.addTag("Suchen verarbeiten und aufbewahren");
+  }
+  if(this.state.KommunizierenundKooperieren){
+    this.addTag("Kommunizieren und Kooperieren");
+  }
+  if(this.state.Schützenundsicheragieren){
+    this.addTag("Schützenundsicheragieren");
+  }
+  if(this.state.ProblemelösenundHandeln){
+    this.addTag("Probleme lösen und Handeln");
+  }
+  if(this.state.AnalysierenundReflektieren){
+    this.addTag("Analysieren und Reflektieren");
+  }
+  if(this.state.KitaVorschule){
+    var KitaVorschule = 1;
+  }
+  if(this.state.Grundschule){
+    var Grundschule = 1;
+  }
+  if(this.state.Sekundarstufe1){
+    var Sekundarstufe1 = 1;
+  }
+  if(this.state.Sekundarstufe2){
+    var Sekundarstufe2 = 1;
+  }
+  if(this.state.HoehereHandelschule){
+    var HoehereHandelschule = 1;
+  }
+  if(this.state.Handelschule){
+    var Handelschule = 1;
+  }
+  if(this.state.Sprachen){
+    var Sprachen = 1;
+  }
+  if(this.state.KulturelleBildung){
+    var KulturelleBildung = 1;
+  }
+  if(this.state.GeschichteGesellschaft){
+    var GeschichteGesellschaft = 1;
+  }
+  if(this.state.Naturwissenschaften){
+    var Naturwissenschaften = 1;
+  }
+  if(this.state.InformatiktechnischeBildung){
+    var InformatiktechnischeBildung = 1;
+  }
+  if(this.state.Mathematik){
+    var Mathematik = 1;
+  }
+  if(this.state.Deutsch){
+    var Deutsch = 1;
+  }
+  if(this.state.Englisch){
+    var Englisch = 1;
+  }
+  if(this.state.Physik){
+    var Physik = 1;
+  }
+  if(this.state.Chemie){
+    var Chemie = 1;
+  }
+  if(this.state.Erdkunde){
+    var Erdkunde = 1;
+  }
+  if(this.state.Sport){
+    var Sport = 1;
+  }
+  if(this.state.Kunst){
+    var Kunst = 1;
+  }
+  if(this.state.Französisch){
+    var Französisch = 1;
+  }
+  if(this.state.Spanisch){
+    var Spanisch = 1;
+  }
+  if(this.state.Italienisch){
+    var Italienisch = 1;
+  }
+  if(this.state.Bwl){
+    var Bwl = 1;
+  }
+  if(this.state.Vwl){
+    var Vwl = 1;
+  }
+  if(this.state.Informatik){
+    var Informatik = 1;
+  }
+  if(this.state.Pädagogik){
+    var Pädagogik = 1;
+  }
+  if(this.state.Politik){
+    var Politik = 1;
+  }
+  if(this.state.KeinInternet){
+    var KeinInternet = 1;
+  }
+  if(this.state.PCLaptop){
+    var PCLaptop = 1;
+  }
+  if(this.state.TabletSmartphone){
+    var TabletSmartphone = 1;
+  }
+  if(this.state.HardwareBasteln){
+    var HardwareBasteln = 1;
+  }
+  if(this.state.VideosFilme){
+    var VideosFilme = 1;
+  }
+  if(this.state.Unterrichstreihe){
+    var Unterrichstreihe = 1;
+  }
+  if(this.state.Stunde){
+    var Stunde = 1;
+  }
+  if(this.state.Doppelstunde){
+    var Doppelstunde = 1;
+  }
+  if(this.state.Flexibel){
+    var Flexibel = 1;
+  }
+  if(this.state.Klasse){
+    var Klasse = 1;
+  }
+  if(this.state.Schule){
+    var Schule = 1;
+  }
+  if(this.state.Fachlich){
+    var Fachlich = 1;
+  }
+  if(this.state.Lehrer){
+    var Lehrer = 1;
+  }
+  if(this.state.Elternvertretung){
+    var Elternvertretung = 1;
+  }
+  if(this.state.Zeitmanagementbesserplanen){
+    var Zeitmanagementbesserplanen = 1;
+  }
+  if(this.state.BudgetFinanzierung){
+    var BudgetFinanzierung = 1;
+  }
+  if(this.state.BildungWissenvermittlung){
+    var BildungWissenvermittlung = 1;
+  }
+  if(this.state.Unterrichtneugestalten){
+    var Unterrichtneugestalten = 1;
+  }
+  if(this.state.Verwaltungverbessern){
+    var Verwaltungverbessern = 1;
+  }
+  if(this.state.Konfliktmanagement){
+    var Konfliktmanagement = 1;
+  }
+  if(this.state.SonstigestrategischeZiele){
+    var SonstigestrategischeZiele = 1;
+  }
+  if(this.state.Tage){
+    var Tage = 1;
+  }
+  if(this.state.Wochen){
+    var Wochen = 1;
+  }
+  if(this.state.Monate){
+    var Monate = 1;
+  }
+  if(this.state.StadtGemeinde){
+    var StadtGemeinde = 1;
+  }
+  if(this.state.Personal){
+    var Personal = 1;
+  }
+  if(this.state.Schueler){
+    var Schueler = 1;
+  }
+  if(this.state.Bildung){
+    var Bildung = 1;
+  }
+  if(this.state.SchulischeAusstatung){
+    var SchulischeAusstatung = 1;
+  }
+  if(this.state.ITtechnischerSupport){
+    var ITtechnischerSupport = 1;
+  }
+  if(this.state.VerpflegunginderSchule){
+    var VerpflegunginderSchule = 1;
+  }
+  if(this.state.Finanzierung){
+    var Finanzierung = 1;
+  }
+  if(this.state.SozialesEngagement){
+    var SozialesEngagement = 1;
+  }
+  if(this.state.Titel){
+    var Titel = 1;
+  }
+  if(this.state.Projektbeschreibung){
+    var Projektbeschreibung = 1;
+  }
+}
+
+//TODO: Add all tag possibilities
+
+  newProject(){
+    if(this.state.rights === 'o'){
+      var zahl = 0;
+    }
+    else{
+      var zahl = 1;
+    }
+    this.setState({Laden: true});
+    var form = new FormData();
+    form.append('project_name', this.state.Titel);
+    form.append('project_text', this.state.Projektbeschreibung);
+    form.append('foo', this.state.file);
+    form.append('fileName', "Projekt");
+    form.append('project_writeRights', zahl );
+    form.append('project_statement', this.state.goal);
+    form.append('termin', this.state.startdate);
+    form.append('projectid', this.state.ProjektId); 
+
+    fetch('http://backend-edu.azurewebsites.net/wizardctrl/newProject', {
+      method: 'PUT',
+      headers: {
+        'Accept': 'application/json, */*'
+      },
+      body: form
+    }).then((response) => {
+      return response.json();
+    }).then((json) => {
+        // this.addTags();
+      history.push("projectpage/" + this.state.ProjektId);
+      });
+  }
+
+
+  nextField(){
+    if (this.state.lehrundlernProjekt || this.state.unterstuetzendesProjekt || this.state.managementProjekt){
+      this.changeTab();
+    }
+    else{
+      this.firstClick();
+    }
+  }
 
 
   goBack() {
@@ -597,7 +1023,7 @@ class Wizard extends Component {
                         <Form.TextArea rows={2} onChange={this.handleText} value={this.state.Projektbeschreibung} name='Projektbeschreibung' placeholder='Projektbeschreibung'/>
                       </Form.Group>
                       <Form.Group widths='equal'>
-                        <Form.TextArea rows={2} placeholder='Wie soll die Zielerreichung gemessen werden?'/>
+                        <Form.TextArea rows={2} onChange={this.handleText} value={this.state.goal} name='goal' placeholder='Wie soll die Zielerreichung gemessen werden?'/>
                       </Form.Group>
                       <div>
                         <Input icon='tags' iconPosition='left' label={{
@@ -618,15 +1044,15 @@ class Wizard extends Component {
                         <Form.Field>
                           <label>Projektbeginn</label><Form.Input style={{
               width: "200px"
-            }} type='date' placeholder='Projektbeginn' icon='calendar' iconPosition='left'/></Form.Field>
+            }} type='date' placeholder='Projektbeginn' name="startdate" onChange={this.handleText} icon='calendar' iconPosition='left'/></Form.Field>
                       </div>
                       <br/>
                       <div className="form-group">
                         <Form.Field style={{
                             width: "200px"
-                          }} label='Privatsphäre' control='select'>
-                          <option value='p'>privat</option>
-                          <option value='o'>&ouml;ffentlich</option>
+                          }} label='Privatsphäre' control='select' value={this.state.rights} onChange={this.handleRights}>
+                          <option name="o" value='o'>&ouml;ffentlich</option>
+                          <option name="p" value='p'>privat</option>
                         </Form.Field>
                       </div>
 
@@ -657,7 +1083,7 @@ class Wizard extends Component {
           <div className="row justify-content-md-center">
             <Button animated={true} color='teal' style={{
                 width: "150px"
-              }} onClick={this.changeTab.bind(this)}>
+              }} onClick={this.nextField}>
               <Button.Content hidden={true}>speichern</Button.Content>
               <Button.Content visible={true}>
                 <Icon name='check'/>

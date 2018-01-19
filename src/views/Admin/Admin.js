@@ -53,7 +53,9 @@ class Admin extends Component {
     file: '',
     imagePreviewUrl: '',
     key: "",
-    Laden: false
+    Laden: false,
+    Profilbeschreibung: "",
+    ProfilbeschreibungAlt: ""
   };
 
   //handler for change events in the textfields
@@ -94,6 +96,7 @@ class Admin extends Component {
       this.setState({Fach1Alt: json[0].subject1});
       this.setState({Fach2Alt: json[0].subject2});
       this.setState({Fach3Alt: json[0].subject3});
+      this.setState({ProfilbeschreibungAlt: json[0].user_description});
 
     })
   }
@@ -144,7 +147,8 @@ class Admin extends Component {
       PostcodeAlt,
       Fach1Alt,
       Fach2Alt,
-      Fach3Alt
+      Fach3Alt,
+      ProfilbeschreibungAlt
     } = this.state
     var Vorname = "";
     var Nachname = "";
@@ -155,6 +159,7 @@ class Admin extends Component {
     var Fach1 = "";
     var Fach2 = "";
     var Fach3 = "";
+    var Profilbeschreibung = "";
 
     if (this.state.Vorname.length < 1) {
       Vorname = VornameAlt;
@@ -201,6 +206,11 @@ class Admin extends Component {
     } else {
       Fach3 = this.state.Fach3;
     }
+    if(this.state.Profilbeschreibung < 1) {
+      Profilbeschreibung = ProfilbeschreibungAlt;
+    } else {
+      Profilbeschreibung = this.state.Profilbeschreibung;
+    }
 
     fetch('http://backend-edu.azurewebsites.net/user/', {
       method: 'PUT',
@@ -218,7 +228,8 @@ class Admin extends Component {
         postcode: Postcode,
         subject1: Fach1,
         subject2: Fach2,
-        subject3: Fach3
+        subject3: Fach3,
+        user_description: Profilbeschreibung
       })
     })
     this.setState({VornameAlt: Vorname})
@@ -230,6 +241,7 @@ class Admin extends Component {
     this.setState({Fach1Alt: Fach1})
     this.setState({Fach2Alt: Fach2})
     this.setState({Fach3Alt: Fach3})
+    this.setState({ProfilbeschreibungAlt: Profilbeschreibung})
     localStorage.setItem("name", Vorname);
   }
 
@@ -266,6 +278,7 @@ class Admin extends Component {
         Fach1: "",
         Fach2: "",
         Fach3: "",
+        Profilbeschreibung: "",
         vornameError: false,
         nachnameError: false,
         strasseError: false,
@@ -298,7 +311,8 @@ class Admin extends Component {
       Postcode,
       Fach1,
       Fach2,
-      Fach3
+      Fach3,
+      Profilbeschreibung
     } = this.state
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
@@ -393,7 +407,7 @@ class Admin extends Component {
                 </Form.Group>
                 <Form.Field>
                     <label>Profilbeschreibung</label>
-                  <Form.TextArea rows={2} name='Profilbeschreibung'/>
+                  <Form.TextArea rows={2} value={Profilbeschreibung} onChange={this.handleChange} placeholder={this.state.ProfilbeschreibungAlt} name='Profilbeschreibung'/>
                 </Form.Field>
                 <Message error={true} header='Fehler bei Eingabe' content='Hausnummer und PLZ müssen Zahlen sein.'/>
                 <Message success={true} header='Daten erfolgreich aktualisiert' content='Weiterhin viel Spaß auf Edu-Hub.'/>

@@ -39,7 +39,8 @@ class Welcome extends Component {
     file: '../img/avatars/NotLogged.jpg',
     imagePreviewUrl: '',
     Laden: false,
-    Private: false
+    Private: false,
+    Profilbeschreibung: ""
   };
 
 
@@ -140,6 +141,7 @@ class Welcome extends Component {
     form.append('subject3', this.state.Fach3);
     form.append('email', localStorage.getItem('email'));
     form.append('user_privacy', privat);
+    form.append('user_description', this.state.Profilbeschreibung);
 
     fetch('http://backend-edu.azurewebsites.net/user/', {
       method: 'POST',
@@ -302,7 +304,7 @@ class Welcome extends Component {
                   </Form.Group>
                   <Form.Field>
                       <label>Profilbeschreibung</label>
-                    <Form.TextArea rows={2} name='Profilbeschreibung' placeholder='Profilbeschreibung'/>
+                    <Form.TextArea rows={2} name='Profilbeschreibung' value={this.state.Desc} onChange={this.handleChange} placeholder='Profilbeschreibung'/>
                   </Form.Field>
                   <Form.Checkbox name="Private" label="Privates Profil" checked={Private} onChange={this.toggle} />
                 <Message error={true} header='Fehler bei Eingabe' content='Alle Felder müssen ausgefüllt sein und Hausnummer und PLZ müssen Zahlen sein.'/>
