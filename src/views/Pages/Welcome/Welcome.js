@@ -40,7 +40,15 @@ class Welcome extends Component {
     imagePreviewUrl: '',
     Laden: false,
     Private: false,
-    Profilbeschreibung: ""
+    Profilbeschreibung: "",
+    Schule: "",
+    Schulstrasse: "",
+    Schulplz: "",
+    Schulstadt: "",
+    SError: false,
+    SStadterror: false,
+    SPlzerror: false,
+    SStrasseerror: false
   };
 
 
@@ -73,7 +81,11 @@ class Welcome extends Component {
       stadtError: false,
       postcodeError: false,
       fachError: false,
-      Fehler: false
+      Fehler: false,
+      SError: false,
+      SStadterror: false,
+      SPlzerror: false,
+      SStrasseerror: false
     };
 
     if(this.state.imagePreviewUrl === ""){
@@ -104,6 +116,26 @@ class Welcome extends Component {
     if (this.state.Fach1.length < 1) {
       isError = true;
       errors.fachError = true;
+      errors.Fehler = true;
+    }
+    if (this.state.Schule.length < 1){
+      isError = true;
+      errors.SError = true;
+      errors.Fehler = true;
+    }
+    if (this.state.Schulstrasse.length < 1){
+      isError = true;
+      errors.SStrasseerror = true;
+      errors.Fehler = true;
+    }
+    if (this.state.Schulstadt.length < 1){
+      isError = true;
+      errors.SStadterror = true;
+      errors.Fehler = true;
+    }
+    if (this.state.Schulplz.length < 1){
+      isError = true;
+      errors.SPlzerror = true;
       errors.Fehler = true;
     }
 
@@ -139,6 +171,10 @@ class Welcome extends Component {
     form.append('subject1', this.state.Fach1);
     form.append('subject2', this.state.Fach2);
     form.append('subject3', this.state.Fach3);
+    form.append('school_name', this.state.Schule);
+    form.append('school_street', this.state.Schulstrasse);
+    form.append('school_postcode', this.state.Schulplz);
+    form.append('school_city', this.state.Schulstadt);
     form.append('email', localStorage.getItem('email'));
     form.append('user_privacy', privat);
     form.append('user_description', this.state.Profilbeschreibung);
@@ -188,6 +224,10 @@ class Welcome extends Component {
         stadtError: false,
         postcodeError: false,
         fachError: false,
+        SError: false,
+        SStadterror: false,
+        SStrasseerror: false,
+        SPlzerror: false,
         Fehler: false,
         Erfolg: true
       });
@@ -209,7 +249,11 @@ class Welcome extends Component {
       Fach1,
       Fach2,
       Fach3,
-      Private
+      Private,
+      Schule,
+      Schulplz,
+      Schulstadt,
+      Schulstrasse
     } = this.state
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
@@ -288,24 +332,24 @@ class Welcome extends Component {
                   <label>Stadt</label>
                   <Form.Input name="Stadt" value={Stadt} onChange={this.handleChange} error={this.state.stadtError} placeholder='Stadt'/>
                 </Form.Field>
-                <Form.Field required={false}>
+                <Form.Field required={true}>
                 <label>Schule</label>
-                <Form.Input name="Schule" placeholder='Schule'/>
+                <Form.Input name="Schule" value={this.state.Schule} error={this.state.SError} onChange={this.handleChange} name="Schule" placeholder='Schule'/>
               </Form.Field>
               <Form.Group>
-              <Form.Field required={false}>
+              <Form.Field required={true}>
                 <label>Straße der Schule</label>
-                <Form.Input name="Strasse" placeholder='Straße' style={{width: "600px"}}/>
+                <Form.Input name="Schulstrasse" value={this.state.Schulstrasse} error={this.state.SStrasseerror} onChange={this.handleChange} placeholder='Straße' style={{width: "600px"}}/>
               </Form.Field>
                 </Form.Group>
                 <Form.Group widths='equal'>
-                  <Form.Field required={false}>
+                  <Form.Field required={true}>
                     <label>Postleitzahl der Schule</label>
-                    <Form.Input name="Postcode" placeholder='Postleitzahl'/>
+                    <Form.Input name="Schulplz" value={this.state.Schulplz} error={this.state.SPlzerror} onChange={this.handleChange} placeholder='Postleitzahl'/>
                   </Form.Field>
-                <Form.Field required={false}>
+                <Form.Field required={true}>
                 <label>Stadt der Schule</label>
-                <Form.Input name="Stadt" placeholder='Stadt'/>
+                <Form.Input name="Schulstadt" value={this.state.Schulstadt} error={this.state.SStadterror} onChange={this.handleChange} placeholder='Stadt'/>
               </Form.Field>
                 </Form.Group>
                 <Form.Group inline={true}>

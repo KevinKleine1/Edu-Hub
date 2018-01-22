@@ -73,6 +73,7 @@ class Profile extends React.Component {
       this.setState({Fach3: json[0].subject3});
       this.setState({Bild: json[0].profilpic});
       this.setState({Erstellt: json[0].user_created_at})
+      this.setState({Schule: json[0].school_name});
 
     })
   }
@@ -150,7 +151,8 @@ class Profile extends React.Component {
       Fach2,
       Fach3,
       Bild,
-      Beschreibung
+      Beschreibung,
+      Schule
     } = this.state
     var Erstellt = this.formatDateMonthName(this.state.Erstellt);
     return (
@@ -213,7 +215,7 @@ class Profile extends React.Component {
               Schule
             </Header>
             <Header as='h3' floated='right' color='grey'>
-              Open-School
+              {Schule}
             </Header>
           </Segment>
           <Segment vertical={true} style={{

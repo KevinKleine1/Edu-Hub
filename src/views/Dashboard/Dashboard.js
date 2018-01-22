@@ -65,7 +65,7 @@ var lock = new Auth0Lock('TAzP3VaJ1PJgDR2S5zTV0c4inUpt9A9J', 'kevkle.eu.auth0.co
 //dashboard class where we can see up to date project and which is in general our landing page
 class Dashboard extends React.Component {
 
-  toggleVisibility = () => this.setState({ visible: !this.state.visible })
+  toggleVisibility = () => this.setState({ visible: !this.state.visible }, function(){if(!this.state.visible){this.getProjects(); this.setState({hitvisible: false, searchPara: ""})}})
 
   constructor(props) {
     super(props);
@@ -120,7 +120,7 @@ class Dashboard extends React.Component {
 
   //this is the mapping class which uses createImage on every content of the array
   createImages(images, start, end) {
-   
+
     return images.map(this.createImage);
 
   }
