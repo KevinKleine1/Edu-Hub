@@ -14,3 +14,12 @@
 .menustat{
   margin-left: 50px;
 }
+
+//Removes scrollbar in Chrome and Safari
+::-webkit-scrollbar {
+  display: none;
+  }
+
+  html{
+    overflow: hidden;
+  }
