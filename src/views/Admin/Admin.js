@@ -395,6 +395,22 @@ class Admin extends Component {
                 <label>Schule</label>
                 <Form.Input name="Schule"/>
               </Form.Field>
+              <Form.Group>
+              <Form.Field required={false}>
+                <label>Straße der Schule</label>
+                <Form.Input name="Strasse" placeholder='Straße' style={{width: "600px"}}/>
+              </Form.Field>
+              </Form.Group>
+                <Form.Group widths='equal'>
+                  <Form.Field required={false}>
+                    <label>Postleitzahl der Schule</label>
+                    <Form.Input name="Postcode" placeholder='Postleitzahl'/>
+                  </Form.Field>
+                <Form.Field required={false}>
+                <label>Stadt der Schule</label>
+                <Form.Input name="Stadt" placeholder='Stadt'/>
+              </Form.Field>
+                </Form.Group>
                 <Form.Group inline={true}>
                   <Form.Field>
                     <label>Interessen / Fächer</label>

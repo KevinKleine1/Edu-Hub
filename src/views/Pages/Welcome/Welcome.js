@@ -142,7 +142,6 @@ class Welcome extends Component {
     form.append('email', localStorage.getItem('email'));
     form.append('user_privacy', privat);
     form.append('user_description', this.state.Profilbeschreibung);
-    
 
     fetch('http://backend-edu.azurewebsites.net/user/', {
       method: 'POST',
@@ -293,6 +292,22 @@ class Welcome extends Component {
                 <label>Schule</label>
                 <Form.Input name="Schule" placeholder='Schule'/>
               </Form.Field>
+              <Form.Group>
+              <Form.Field required={false}>
+                <label>Straße der Schule</label>
+                <Form.Input name="Strasse" placeholder='Straße' style={{width: "600px"}}/>
+              </Form.Field>
+                </Form.Group>
+                <Form.Group widths='equal'>
+                  <Form.Field required={false}>
+                    <label>Postleitzahl der Schule</label>
+                    <Form.Input name="Postcode" placeholder='Postleitzahl'/>
+                  </Form.Field>
+                <Form.Field required={false}>
+                <label>Stadt der Schule</label>
+                <Form.Input name="Stadt" placeholder='Stadt'/>
+              </Form.Field>
+                </Form.Group>
                 <Form.Group inline={true}>
                   <Form.Field required={true}>
                     <label>Interessen / Fächer</label>
