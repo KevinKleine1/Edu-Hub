@@ -142,6 +142,7 @@ class Welcome extends Component {
     form.append('email', localStorage.getItem('email'));
     form.append('user_privacy', privat);
     form.append('user_description', this.state.Profilbeschreibung);
+    
 
     fetch('http://backend-edu.azurewebsites.net/user/', {
       method: 'POST',
