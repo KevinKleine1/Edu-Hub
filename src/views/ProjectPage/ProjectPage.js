@@ -837,7 +837,7 @@ class ProjectPage extends React.Component {
         }, function () { });
       }
     })
-   
+
   }
 
   handleProject() {
@@ -852,7 +852,7 @@ class ProjectPage extends React.Component {
       this.changeGoal();
     }
     this.changeRights();
-  // TODO Fix bug if nothing is done 
+  // TODO Fix bug if nothing is done
     this.setState({
       title: "",
       description: "",
@@ -1585,22 +1585,21 @@ class ProjectPage extends React.Component {
                   </div>
               </div>
             </div>
-            <br />
 
 
             {
-              !isAuthor && logged && (
+              !isAuthor && logged && (<div><br/>
                 <Button fluid={true} toggle={true} onClick={this.handleJoin.bind(this)} color={joined
                   ? 'green'
                   : 'red'} content={joined
                     ? 'Beitreten'
-                    : 'Austreten'} />
+                    : 'Austreten'} /></div>
               )
             }
 
             {
-              !logged &&(
-                <Button fluid={true} toggle={true} onClick={this.register.bind(this)} color = "green" content={"Anmelden"} />
+              !logged &&(<div><br/>
+                <Button fluid={true} toggle={true} onClick={this.register.bind(this)} color = "green" content={"Anmelden"} /></div>
               )
             }
 
