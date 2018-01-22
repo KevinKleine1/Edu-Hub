@@ -190,7 +190,7 @@ class Wizard extends Component {
   handleText = (e, {name, value}) => this.setState({[name]: value})
   handleSuchenVerarbeitenundAufbewahren = (e) => this.setState({SuchenVerarbeitenundAufbewahren : !this.state.SuchenVerarbeitenundAufbewahren})
   handleKommunizierenundKooperieren = (e) => this.setState({KommunizierenundKooperieren : !this.state.KommunizierenundKooperieren})
-  handleProduzierenundPräsentieren = (e) => this.setState({ProduzierenundPräsentieren : !this.state.ProduzierenundPräsentieren},function(){if(this.state.ProduzierenundPräsentieren){this.addTag("Produzieren")}else{this.removeTag("Produzieren")}}) //TODO fix
+  handleProduzierenundPräsentieren = (e) => this.setState({ProduzierenundPräsentieren : !this.state.ProduzierenundPräsentieren},function(){if(this.state.ProduzierenundPräsentieren){this.addTag("Produzieren")}else{this.removeTag("Produzieren")}}) 
   handleSchützenundsicheragieren = (e) => this.setState({Schützenundsicheragieren : !this.state.Schützenundsicheragieren})
   handleProblemelösenundHandeln = (e) => this.setState({ProblemelösenundHandeln : !this.state.ProblemelösenundHandeln})
   handleAnalysierenundReflektieren = (e) => this.setState({AnalysierenundReflektieren : !this.state.AnalysierenundReflektieren})
