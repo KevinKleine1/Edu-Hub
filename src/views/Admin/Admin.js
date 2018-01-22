@@ -55,7 +55,15 @@ class Admin extends Component {
     key: "",
     Laden: false,
     Profilbeschreibung: "",
-    ProfilbeschreibungAlt: ""
+    ProfilbeschreibungAlt: "",
+    Schule: "",
+    SchuleAlt: "",
+    SStrasse: "",
+    SStrasseAlt: "",
+    SStadt: "",
+    SStadtAlt: "",
+    SPlz: "",
+    SPlzAlt: ""
   };
 
   //handler for change events in the textfields
@@ -160,6 +168,7 @@ class Admin extends Component {
     var Fach2 = "";
     var Fach3 = "";
     var Profilbeschreibung = "";
+
 
     if (this.state.Vorname.length < 1) {
       Vorname = VornameAlt;
@@ -279,6 +288,10 @@ class Admin extends Component {
         Fach2: "",
         Fach3: "",
         Profilbeschreibung: "",
+        Schule: "",
+        SStrasse: "",
+        SStadt: "",
+        SPlz: "",
         vornameError: false,
         nachnameError: false,
         strasseError: false,
@@ -312,7 +325,11 @@ class Admin extends Component {
       Fach1,
       Fach2,
       Fach3,
-      Profilbeschreibung
+      Profilbeschreibung,
+      Schule,
+      SStadt,
+      SStrasse,
+      SPlz
     } = this.state
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
