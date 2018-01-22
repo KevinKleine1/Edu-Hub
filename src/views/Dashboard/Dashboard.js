@@ -120,7 +120,7 @@ class Dashboard extends React.Component {
 
   //this is the mapping class which uses createImage on every content of the array
   createImages(images, start, end) {
-   
+
     return images.map(this.createImage);
 
   }
