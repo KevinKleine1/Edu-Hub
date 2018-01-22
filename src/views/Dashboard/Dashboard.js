@@ -263,18 +263,16 @@ class Dashboard extends React.Component {
             </div>
 
       </Transition>
-      <div className="container">
-        <div className="row justify-content-md-center">
           <div className="menu">
             <br/>
+            <Container>
             <Grid doubling={true} columns={4} divided='vertically'>
               <Grid.Row>
                 {this.createImages(this.state.Data)}
               </Grid.Row>
             </Grid>
+            </Container>
           </div>
-        </div>
-      </div>
     </div>);
   }
 }
