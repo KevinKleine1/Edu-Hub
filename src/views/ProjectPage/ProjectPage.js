@@ -123,7 +123,8 @@ class ProjectPage extends React.Component {
       goal: "",
       value: "o",
       Ziel: "",
-      liked: false
+      liked: false,
+      fav: false
 
 
     };
@@ -149,6 +150,9 @@ class ProjectPage extends React.Component {
     this.like = this.like.bind(this);
     this.unlike = this.unlike.bind(this);
     this.handleLike = this.handleLike.bind(this);
+    this.fav = this.fav.bind(this);
+    this.unfav = this.unfav.bind(this);
+    this.handleFav = this.handleFav.bind(this);
 
   }
 
@@ -184,8 +188,28 @@ class ProjectPage extends React.Component {
         }, function () { });
       }
     })
-
   }
+
+  setFav(){
+    var target = ('http://backend-edu.azurewebsites.net/useraddsproject/amIFavorite/' + localStorage.getItem('projectid') + '/' + localStorage.getItem('userid'))
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      if (json.response == 1) {
+        this.setState({
+          fav: true
+        }, function () { });
+      } else if (json.response == 0) {
+        this.setState({
+           fav: false
+        }, function () { });
+      }
+    })
+  }
+  
+
   toggleEdit() {
     this.setState({
       modalEdit: !this.state.modalEdit
@@ -860,6 +884,54 @@ class ProjectPage extends React.Component {
     })
   }
 
+  fav(){
+    var user = localStorage.getItem('userid');
+    var project = localStorage.getItem('projectid');
+
+    fetch('http://backend-edu.azurewebsites.net/useraddsproject/beFavorite', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ uhp_iduser: user, uhp_idproject: project })
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+      this.setState({
+        fav: true
+      }, function () {
+        this.setData();
+        this.getReactions();
+      });
+    });
+  }
+
+  unfav(){
+    var user = localStorage.getItem('userid');
+    var project = localStorage.getItem('projectid');
+
+    fetch('http://backend-edu.azurewebsites.net/useraddsproject/cancelFavorite', {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ uhp_iduser: user, uhp_idproject: project })
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+      this.setState({
+        fav: false
+      }, function () {
+        this.setData();
+        this.getReactions();
+      });
+    }); 
+  }
+
   like(){
     var user = localStorage.getItem('userid');
     var project = localStorage.getItem('projectid');
@@ -914,6 +986,15 @@ class ProjectPage extends React.Component {
     }
     else{
       this.like();
+    }
+  }
+
+  handleFav(){
+    if(this.state.fav){
+      this.unfav();
+    }
+    else{
+      this.fav();
     }
   }
 
@@ -1449,7 +1530,7 @@ class ProjectPage extends React.Component {
             <div className="projektfoto"><Image src={'http://backend-edu.azurewebsites.net/' + this.state.Bild} size='medium' bordered={true} circular={true} /><br /></div>
             <div className="row justify-content-md-center">
               <div>
-                <Popup content='Füge dieses Projekt deinen Favoriten hinzu' trigger={<Button circular={
+                <Popup content='Füge dieses Projekt deinen Favoriten hinzu' trigger={<Button onClick={this.handleFav} circular={
                   true
                 }
                   color='grey' icon='empty heart' />} />

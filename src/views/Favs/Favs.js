@@ -9,6 +9,7 @@ import {
   Grid,
   Image
 } from 'semantic-ui-react';
+import FavObject from '../../components/FavObject/FavObject';
 
 
 class Favs extends Component {
@@ -17,14 +18,64 @@ class Favs extends Component {
 
     this.toggle = this.toggle.bind(this);
     this.state = {
-      dropdownOpen: false
+      dropdownOpen: false,
+      favs: []
     };
+    this.createFavs = this.createFavs.bind(this);
+  }
+
+  getFavs(){
+    var target = ('http://backend-edu.azurewebsites.net/user/getmyproject/favs/' + localStorage.getItem("userid"))
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({
+        favs: json
+      }, function() {
+        this.setState({
+  
+        }, function() {});
+      })
+
+    })
+  }
+
+  setUser() {
+    var target = ('http://backend-edu.azurewebsites.net/user/' + localStorage.getItem('email'))
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({
+        NutzerId: json[0].userid
+      }, function () {
+        localStorage.setItem('userid', this.state.NutzerId);
+      });
+    })
+  }
+
+  createFavs(favs) {
+
+    return favs.map(this.createFav);
+
+  }
+
+  createFav(fav) {
+    return <FavObject name={fav.project_name} image={fav.project_imagepath} key={fav.projectid}/>;
   }
 
   toggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
+  }
+
+  componentDidMount(){
+    this.setUser();
+    this.getFavs();
   }
 
   render() {
@@ -47,51 +98,7 @@ class Favs extends Component {
             <Divider fitted/>
         <Divider hidden/>
         <Grid doubling={true} columns={4} divided='vertically'>
-          <Grid.Column>
-            <Image
-              fluid
-              label={{ as: 'a', color: 'teal', content: 'Digitale Bibliothek', ribbon: true }}
-              src='/img/Landingpage/projekt1.jpg'
-                />
-              </Grid.Column>
-              <Grid.Column>
-      <Image
-        fluid
-        label={{ as: 'a', color: 'teal', content: 'Experiment', ribbon: true }}
-        src='/img/Landingpage/projekt2.jpg'
-      />
-    </Grid.Column>
-    <Grid.Column>
-          <Image
-            fluid
-            label={{ as: 'a', color: 'teal', content: 'Selbstlernzetrum', ribbon: true }}
-            src='/img/Landingpage/projekt3.jpg'
-          />
-        </Grid.Column>
-        <Grid.Column>
-              <Image
-                fluid
-                label={{ as: 'a', color: 'teal', content: 'Cafeteria', ribbon: true }}
-                src='/img/Landingpage/projekt4.jpeg'
-              />
-            </Grid.Column>
-
-        </Grid>
-        <Grid doubling={true} columns={4} divided='vertically'>
-          <Grid.Column>
-            <Image
-              fluid
-              label={{ as: 'a', color: 'teal', content: 'Garten AG', ribbon: true }}
-              src='/img/Landingpage/projekt5.jpeg'
-                />
-              </Grid.Column>
-              <Grid.Column>
-                <Image
-                  fluid
-                  label={{ as: 'a', color: 'teal', content: 'KFZ Werkstatt', ribbon: true }}
-                  src='/img/Landingpage/projekt6.jpeg'
-                />
-      </Grid.Column>
+          {this.createFavs(this.state.favs)}
 
 
         </Grid>
