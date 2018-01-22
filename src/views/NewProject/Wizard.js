@@ -190,7 +190,7 @@ class Wizard extends Component {
   handleText = (e, {name, value}) => this.setState({[name]: value})
   handleSuchenVerarbeitenundAufbewahren = (e) => this.setState({SuchenVerarbeitenundAufbewahren : !this.state.SuchenVerarbeitenundAufbewahren})
   handleKommunizierenundKooperieren = (e) => this.setState({KommunizierenundKooperieren : !this.state.KommunizierenundKooperieren})
-  handleProduzierenundPräsentieren = (e) => this.setState({ProduzierenundPräsentieren : !this.state.ProduzierenundPräsentieren},function(){if(this.state.ProduzierenundPräsentieren){this.addTag("Produzieren")}else{this.removeTag("Produzieren")}}) 
+  handleProduzierenundPräsentieren = (e) => this.setState({ProduzierenundPräsentieren : !this.state.ProduzierenundPräsentieren},function(){if(this.state.ProduzierenundPräsentieren){this.addTag("Produzieren")}else{this.removeTag("Produzieren")}})
   handleSchützenundsicheragieren = (e) => this.setState({Schützenundsicheragieren : !this.state.Schützenundsicheragieren})
   handleProblemelösenundHandeln = (e) => this.setState({ProblemelösenundHandeln : !this.state.ProblemelösenundHandeln})
   handleAnalysierenundReflektieren = (e) => this.setState({AnalysierenundReflektieren : !this.state.AnalysierenundReflektieren})
@@ -229,31 +229,31 @@ class Wizard extends Component {
   handleUnterrichstreihe = (e) => this.setState({Unterrichstreihe : !this.state.Unterrichstreihe})
   handleStunde = (e) => this.setState({Stunde : !this.state.Stunde})
   handleDoppelstunde = (e) => this.setState({Doppelstunde : !this.state.Doppelstunde})
-  handleFlexibel = (e) => this.setState({Flexibel : !this.state.Flexibel})
-  handleKlasse = (e) => this.setState({Klasse : !this.state.Klasse})
-  handleSchule = (e) => this.setState({Schule : !this.state.Schule})
-  handleFachlich = (e) => this.setState({Fachlich : !this.state.Fachlich})
-  handleLehrer = (e) => this.setState({Lehrer : !this.state.Lehrer})
-  handleElternvertretung = (e) => this.setState({Elternvertretung : !this.state.Elternvertretung})
-  handleZeitmanagementbesserplanen = (e) => this.setState({Zeitmanagementbesserplanen : !this.state.Zeitmanagementbesserplanen})
-  handleBudgetFinanzierung = (e) => this.setState({BudgetFinanzierung : !this.state.BudgetFinanzierung})
-  handleBildungWissenvermittlung = (e) => this.setState({BildungWissenvermittlung : !this.state.BildungWissenvermittlung})
-  handleUnterrichtneugestalten = (e) => this.setState({Unterrichtneugestalten : !this.state.Unterrichtneugestalten})
-  handleVerwaltungverbessern = (e) => this.setState({Verwaltungverbessern : !this.state.Verwaltungverbessern})
-  handleKonfliktmanagement = (e) => this.setState({Konfliktmanagement : !this.state.Konfliktmanagement})
+  handleFlexibel = (e) => this.setState({Flexibel : !this.state.Flexibel},function(){if(this.state.Flexibel){this.addTag("Flexibel")}else{this.removeTag("Flexibel")}})
+  handleKlasse = (e) => this.setState({Klasse : !this.state.Klasse},function(){if(this.state.Klasse){this.addTag("Klasse")}else{this.removeTag("Klasse")}})
+  handleSchule = (e) => this.setState({Schule : !this.state.Schule},function(){if(this.state.Schule){this.addTag("Schule")}else{this.removeTag("Schule")}})
+  handleFachlich = (e) => this.setState({Fachlich : !this.state.Fachlich},function(){if(this.state.Fachlich){this.addTag("Fachlich")}else{this.removeTag("Fachlich")}})
+  handleLehrer = (e) => this.setState({Lehrer : !this.state.Lehrer},function(){if(this.state.Lehrer){this.addTag("Lehrer")}else{this.removeTag("Lehrer")}})
+  handleElternvertretung = (e) => this.setState({Elternvertretung : !this.state.Elternvertretung},function(){if(this.state.Elternvertretung){this.addTag("Elternvertretung")}else{this.removeTag("Elternvertretung")}})
+  handleZeitmanagementbesserplanen = (e) => this.setState({Zeitmanagementbesserplanen : !this.state.Zeitmanagementbesserplanen},function(){if(this.state.Zeitmanagementbesserplanen){this.addTag("Zeitmanagement besser planen")}else{this.removeTag("Zeitmanagement besser planen")}})
+  handleBudgetFinanzierung = (e) => this.setState({BudgetFinanzierung : !this.state.BudgetFinanzierung},function(){if(this.state.BudgetFinanzierung){this.addTag("Budget")}else{this.removeTag("Budget")}})
+  handleBildungWissenvermittlung = (e) => this.setState({BildungWissenvermittlung : !this.state.BildungWissenvermittlung},function(){if(this.state.BildungWissenvermittlung){this.addTag("Wissen vermitteln")}else{this.removeTag("Wissen vermitteln")}})
+  handleUnterrichtneugestalten = (e) => this.setState({Unterrichtneugestalten : !this.state.Unterrichtneugestalten},function(){if(this.state.Unterrichtneugestalten){this.addTag("Unterricht gestalten")}else{this.removeTag("Unterricht gestalten")}})
+  handleVerwaltungverbessern = (e) => this.setState({Verwaltungverbessern : !this.state.Verwaltungverbessern},function(){if(this.state.Verwaltungverbessern){this.addTag("Verwaltung-Support")}else{this.removeTag("Verwaltung-Support")}})
+  handleKonfliktmanagement = (e) => this.setState({Konfliktmanagement : !this.state.Konfliktmanagement},function(){if(this.state.Konfliktmanagement){this.addTag("Konfliktmanagement")}else{this.removeTag("Konfliktmanagement")}})
   handleSonstigestrategischeZiele = (e) => this.setState({SonstigestrategischeZiele : !this.state.SonstigestrategischeZiele})
-  handleTage = (e) => this.setState({Tage : !this.state.Tage})
-  handleWochen = (e) => this.setState({Wochen : !this.state.Wochen})
-  handleMonate = (e) => this.setState({Monate : !this.state.Monate})
-  handleStadtGemeinde = (e) => this.setState({StadtGemeinde : !this.state.StadtGemeinde})
-  handlePersonal = (e) => this.setState({Personal : !this.state.Personal})
-  handleSchueler = (e) => this.setState({Schueler : !this.state.Schueler})
-  handleBildung = (e) => this.setState({Bildung : !this.state.Bildung})
-  handleSchulischeAusstatung = (e) => this.setState({SchulischeAusstatung : !this.state.SchulischeAusstatung})
-  handleITtechnischerSupport = (e) => this.setState({ITtechnischerSupport : !this.state.ITtechnischerSupport})
-  handleVerpflegunginderSchule = (e) => this.setState({VerpflegunginderSchule : !this.state.VerpflegunginderSchule})
-  handleFinanzierung = (e) => this.setState({Finanzierung : !this.state.Finanzierung})
-  handleSozialesEngagement = (e) => this.setState({SozialesEngagement : !this.state.SozialesEngagement})
+  handleTage = (e) => this.setState({Tage : !this.state.Tage},function(){if(this.state.Tage){this.addTag("Tage")}else{this.removeTag("Tage")}})
+  handleWochen = (e) => this.setState({Wochen : !this.state.Wochen},function(){if(this.state.Wochen){this.addTag("Schulische Ausstattung")}else{this.removeTag("Schulische Ausstattung")}})
+  handleMonate = (e) => this.setState({Monate : !this.state.Monate},function(){if(this.state.Monate){this.addTag("Monate")}else{this.removeTag("Monate")}})
+  handleStadtGemeinde = (e) => this.setState({StadtGemeinde : !this.state.StadtGemeinde},function(){if(this.state.StadtGemeinde){this.addTag("Stadt")}else{this.removeTag("Stadt")}})
+  handlePersonal = (e) => this.setState({Personal : !this.state.Personal},function(){if(this.state.Personal){this.addTag("Personal")}else{this.removeTag("Personal")}})
+  handleSchueler = (e) => this.setState({Schueler : !this.state.Schueler},function(){if(this.state.Schueler){this.addTag("Schüler")}else{this.removeTag("Schüler")}})
+  handleBildung = (e) => this.setState({Bildung : !this.state.Bildung},function(){if(this.state.Bildung){this.addTag("Bildung")}else{this.removeTag("Bildung")}})
+  handleSchulischeAusstatung = (e) => this.setState({SchulischeAusstatung : !this.state.SchulischeAusstatung},function(){if(this.state.SchulischeAusstatung){this.addTag("Schulische Ausstattung")}else{this.removeTag("Schulische Ausstattung")}})
+  handleITtechnischerSupport = (e) => this.setState({ITtechnischerSupport : !this.state.ITtechnischerSupport},function(){if(this.state.ITtechnischerSupport){this.addTag("Technischer Support")}else{this.removeTag("Technischer Support")}})
+  handleVerpflegunginderSchule = (e) => this.setState({VerpflegunginderSchule : !this.state.VerpflegunginderSchule},function(){if(this.state.VerpflegunginderSchule){this.addTag("Verpflegung")}else{this.removeTag("Verpflegung")}})
+  handleFinanzierung = (e) => this.setState({Finanzierung : !this.state.Finanzierung},function(){if(this.state.Finanzierung){this.addTag("Finanzierung")}else{this.removeTag("Finanzierung")}})
+  handleSozialesEngagement = (e) => this.setState({SozialesEngagement : !this.state.SozialesEngagement},function(){if(this.state.SozialesEngagement){this.addTag("Sozial")}else{this.removeTag("Sozial")}})
 
   addTag(tag){
     var form = new FormData();
@@ -537,7 +537,7 @@ class Wizard extends Component {
     form.append('project_writeRights', zahl );
     form.append('project_statement', this.state.goal);
     form.append('termin', this.state.startdate);
-    form.append('projectid', this.state.ProjektId); 
+    form.append('projectid', this.state.ProjektId);
 
     fetch('http://backend-edu.azurewebsites.net/wizardctrl/newProject', {
       method: 'PUT',
