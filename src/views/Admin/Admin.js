@@ -105,7 +105,10 @@ class Admin extends Component {
       this.setState({Fach2Alt: json[0].subject2});
       this.setState({Fach3Alt: json[0].subject3});
       this.setState({ProfilbeschreibungAlt: json[0].user_description});
-
+      this.setState({SchuleAlt: json[0].school_name});
+      this.setState({SStadtAlt: json[0].school_city});
+      this.setState({SStrasseAlt: json[0].school_street});
+      this.setState({SPlzAlt: json[0].school_postcode});
     })
   }
 
@@ -156,7 +159,11 @@ class Admin extends Component {
       Fach1Alt,
       Fach2Alt,
       Fach3Alt,
-      ProfilbeschreibungAlt
+      ProfilbeschreibungAlt,
+      SchuleAlt,
+      SStadtAlt,
+      SStrasseAlt,
+      SPlzAlt
     } = this.state
     var Vorname = "";
     var Nachname = "";
@@ -168,6 +175,10 @@ class Admin extends Component {
     var Fach2 = "";
     var Fach3 = "";
     var Profilbeschreibung = "";
+    var Schule = "";
+    var SStadt = "";
+    var SStrasse = "";
+    var SPlz = "";
 
 
     if (this.state.Vorname.length < 1) {
@@ -215,14 +226,34 @@ class Admin extends Component {
     } else {
       Fach3 = this.state.Fach3;
     }
-    if(this.state.Profilbeschreibung < 1) {
+    if(this.state.Profilbeschreibung.length < 1) {
       Profilbeschreibung = ProfilbeschreibungAlt;
     } else {
       Profilbeschreibung = this.state.Profilbeschreibung;
     }
+    if(this.state.Schule.length < 1) {
+      Schule = SchuleAlt;
+    } else {
+      Schule = this.state.Schule;
+    }
+    if(this.state.SStadt.length < 1) {
+      SStadt = SStadtAlt;
+    } else {
+      SStadt = this.state.SStadt;
+    }
+    if(this.state.SStrasse.length < 1) {
+      SStrasse = SStrasseAlt;
+    } else {
+      SStrasse = this.state.SStrasse;
+    }
+    if(this.state.SPlz.length < 1) {
+      SPlz = SPlzAlt;
+    } else {
+      SPlz = this.state.SPlz;
+    }
 
-    fetch('http://backend-edu.azurewebsites.net/user/', {
-      method: 'PUT',
+    fetch('http://backend-edu.azurewebsites.net/user/update', {
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -238,7 +269,11 @@ class Admin extends Component {
         subject1: Fach1,
         subject2: Fach2,
         subject3: Fach3,
-        user_description: Profilbeschreibung
+        user_description: Profilbeschreibung,
+        school_name: Schule,
+        school_street: SStrasse,
+        school_city: SStadt,
+        school_postcode: SPlz
       })
     })
     this.setState({VornameAlt: Vorname})
@@ -251,6 +286,10 @@ class Admin extends Component {
     this.setState({Fach2Alt: Fach2})
     this.setState({Fach3Alt: Fach3})
     this.setState({ProfilbeschreibungAlt: Profilbeschreibung})
+    this.setState({SchuleAlt: Schule})
+    this.setState({SStadtAlt: SStadt})
+    this.setState({SStrasseAlt: SStrasse})
+    this.setState({SPlzAlt: SPlz})
     localStorage.setItem("name", Vorname);
   }
 
@@ -410,22 +449,22 @@ class Admin extends Component {
                 </Form.Field>
                 <Form.Field>
                 <label>Schule</label>
-                <Form.Input name="Schule"/>
+                <Form.Input value={Schule} onChange={this.handleChange} placeholder={this.state.SchuleAlt} name="Schule"/>
               </Form.Field>
               <Form.Group>
               <Form.Field required={false}>
                 <label>Straße der Schule</label>
-                <Form.Input name="Strasse" placeholder='Straße' style={{width: "600px"}}/>
+                <Form.Input name="Strasse" value={SStrasse} onChange={this.handleChange} placeholder={this.state.SStrasseAlt} style={{width: "600px"}}/>
               </Form.Field>
               </Form.Group>
                 <Form.Group widths='equal'>
                   <Form.Field required={false}>
                     <label>Postleitzahl der Schule</label>
-                    <Form.Input name="Postcode" placeholder='Postleitzahl'/>
+                    <Form.Input name="Postcode" value={SPlz} onChange={this.handleChange} placeholder={this.state.SPlzAlt}/>
                   </Form.Field>
                 <Form.Field required={false}>
                 <label>Stadt der Schule</label>
-                <Form.Input name="Stadt" placeholder='Stadt'/>
+                <Form.Input name="Stadt" value={SStadt} onChange={this.handleChange} placeholder={this.state.StadtAlt}/>
               </Form.Field>
                 </Form.Group>
                 <Form.Group inline={true}>

@@ -258,7 +258,9 @@ class Welcome extends Component {
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img className="img-circle" src={imagePreviewUrl}/>);
+      $imagePreview = (<img className="img-circle" src={imagePreviewUrl} style={{
+        width: "200px", height: "200px"
+      }} />);
     } else {
       $imagePreview = (<img className="img-circle" src='../img/avatars/NotLogged.jpg'/>);
     }
