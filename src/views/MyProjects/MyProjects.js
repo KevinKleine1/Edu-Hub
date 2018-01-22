@@ -178,7 +178,7 @@ createImages(images) {
                 {
                   _.map(data, ({project_name, project_projecttype, projectid, project_updated_at}) => (<Table.Row key={projectid}>
                     <Table.Cell>{projectid}</Table.Cell>
-                    <Table.Cell selectable="selectable">
+                    <Table.Cell selectable={true}>
                       <a href={'/projectpage/' + projectid}>{project_name}</a>
                     </Table.Cell>
                     <Table.Cell>{project_projecttype}</Table.Cell>

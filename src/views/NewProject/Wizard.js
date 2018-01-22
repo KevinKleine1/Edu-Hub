@@ -190,7 +190,7 @@ class Wizard extends Component {
   handleText = (e, {name, value}) => this.setState({[name]: value})
   handleSuchenVerarbeitenundAufbewahren = (e) => this.setState({SuchenVerarbeitenundAufbewahren : !this.state.SuchenVerarbeitenundAufbewahren})
   handleKommunizierenundKooperieren = (e) => this.setState({KommunizierenundKooperieren : !this.state.KommunizierenundKooperieren})
-  handleProduzierenundPräsentieren = (e) => this.setState({ProduzierenundPräsentieren : !this.state.ProduzierenundPräsentieren},function(){this.addTag("Produzieren")})
+  handleProduzierenundPräsentieren = (e) => this.setState({ProduzierenundPräsentieren : !this.state.ProduzierenundPräsentieren},function(){if(this.state.ProduzierenundPräsentieren){this.addTag("Produzieren")}else{this.removeTag("Produzieren")}}) //TODO fix
   handleSchützenundsicheragieren = (e) => this.setState({Schützenundsicheragieren : !this.state.Schützenundsicheragieren})
   handleProblemelösenundHandeln = (e) => this.setState({ProblemelösenundHandeln : !this.state.ProblemelösenundHandeln})
   handleAnalysierenundReflektieren = (e) => this.setState({AnalysierenundReflektieren : !this.state.AnalysierenundReflektieren})
@@ -272,8 +272,34 @@ class Wizard extends Component {
       });
   }
 
+  removeTag(tag){
+    var form = new FormData();
+    form.append('projectid', this.state.ProjektId);
+    form.append('tag_name', tag);
+
+    fetch('http://backend-edu.azurewebsites.net/deletetag', {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json, */*'
+      },
+      body: form
+    }).then((response) => {
+      return response.json();
+    }).then((json) => {
+      });
+  }
+
+  handleTag(tag){
+    if (this.state.tag){
+      this.removeTag(tag);
+    }
+    else{
+      this.addTag(tag);
+    }
+  }
+
   handleRights(event) {
-    this.setState({value: event.target.value});
+    this.setState({rights: event.target.value});
   }
 
 

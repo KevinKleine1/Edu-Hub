@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Gallery from 'react-grid-gallery';
+import Auth from '../../Auth/Auth';
+import {AUTH_CONFIG} from '../../Auth/auth0-variables';
+import Auth0Lock from 'auth0-lock';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import {
   Card,
@@ -35,6 +38,39 @@ import Ressources from '../../components/Ressources/Ressources';
 import history from '../../history';
 import Anhang from '../../components/Anhang/Anhang';
 import Usercomponents from '../../components/Usercomponents/Usercomponents';
+
+var options = {
+  language: 'de',
+  oidcConformant: true,
+  socialButtonStyle: 'small',
+  rememberLastLogin: true,
+  loginAfterSignUp: true,
+  theme: {
+    logo: '/img/logo.png',
+    primaryColor: '#20a8d8',
+    labeledSubmitButton: false
+  },
+  auth: {
+    params: {
+      param1: "value1"
+    },
+    redirect: true,
+    redirectUrl: AUTH_CONFIG.callbackUrl, //change for production
+    responseType: 'token id_token',
+    audience: 'https://kevkle.eu.auth0.com/userinfo',
+    sso: true,
+    params: {
+      scope: 'openid email'
+    }
+  },
+  languageDictionary: {
+    emailInputPlaceholder: "Ihre Email",
+    title: ""
+  }
+};
+
+const auth = new Auth();
+var lock = new Auth0Lock('TAzP3VaJ1PJgDR2S5zTV0c4inUpt9A9J', 'kevkle.eu.auth0.com', options);
 
 class ProjectPage extends React.Component {
 
@@ -86,7 +122,8 @@ class ProjectPage extends React.Component {
       TerminData: [],
       goal: "",
       value: "o",
-      Ziel: ""
+      Ziel: "",
+      liked: false
 
 
     };
@@ -109,6 +146,9 @@ class ProjectPage extends React.Component {
     this.getImages = this.getImages.bind(this);
     this.setMembers = this.setMembers.bind(this);
     this.handleRights = this.handleRights.bind(this);
+    this.like = this.like.bind(this);
+    this.unlike = this.unlike.bind(this);
+    this.handleLike = this.handleLike.bind(this);
 
   }
 
@@ -125,6 +165,26 @@ class ProjectPage extends React.Component {
     this.setState({
       modalMember: !this.state.modalMember
     });
+  }
+
+  setLiker(){
+    var target = ('http://backend-edu.azurewebsites.net/useraddsproject/karma/amILiker/' + localStorage.getItem('projectid') + '/' + localStorage.getItem('userid'))
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      if (json.response == 1) {
+        this.setState({
+          liked: true
+        }, function () { });
+      } else if (json.response == 0) {
+        this.setState({
+          liked: false
+        }, function () { });
+      }
+    })
+
   }
   toggleEdit() {
     this.setState({
@@ -382,6 +442,13 @@ class ProjectPage extends React.Component {
 
   }
 
+  isAuthenticated() {
+    // Check whether the current time is past the
+    // access token's expiry time
+    let expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+    return new Date().getTime() < expiresAt;
+  }
+
   addComment() {
     this.setState({ Laden: true });
     var forma = new FormData();
@@ -408,6 +475,10 @@ class ProjectPage extends React.Component {
         this.toggleEdit();
       });
     });
+  }
+
+  register(){
+    lock.show();
   }
 
   deleteProject() {
@@ -789,6 +860,63 @@ class ProjectPage extends React.Component {
     })
   }
 
+  like(){
+    var user = localStorage.getItem('userid');
+    var project = localStorage.getItem('projectid');
+
+    fetch('http://backend-edu.azurewebsites.net/useraddsproject/karma/add', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ uhp_iduser: user, uhp_idproject: project })
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+      this.setState({
+        liked: true
+      }, function () {
+        this.setData();
+        this.getReactions();
+      });
+    });
+  }
+
+  unlike(){
+    var user = localStorage.getItem('userid');
+    var project = localStorage.getItem('projectid');
+
+    fetch('http://backend-edu.azurewebsites.net/useraddsproject/karma/remove', {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ uhp_iduser: user, uhp_idproject: project })
+    }).then((response) => {
+      return response.json();
+
+    }).then((json) => {
+      this.setState({
+        liked: false
+      }, function () {
+        this.setData();
+        this.getReactions();
+      });
+    });
+  }
+
+  handleLike(){
+    if(this.state.liked){
+      this.unlike();
+    }
+    else{
+      this.like();
+    }
+  }
+
   //handles the click on the toggle (join/leave) Button
   handleClick = () => this.setState({
     joined: !this.state.joined,
@@ -872,6 +1000,7 @@ class ProjectPage extends React.Component {
     this.getImages();
     this.setAuthor();
     this.setEditor();
+    this.setLiker();
   }
 
   //updates the projectpage if the url match changes, so we can easily swap between projects without having to reload the page
@@ -888,6 +1017,7 @@ class ProjectPage extends React.Component {
       this.getImages();
       this.setAuthor();
       this.setEditor();
+      this.setLiker();
     }
 
   }
@@ -1286,6 +1416,9 @@ class ProjectPage extends React.Component {
       'grey',
       'black'
     ]
+
+    const logged = this.isAuthenticated();
+
     return (<div className="animated fadeIn">
       <Grid columns={2} divided={true} colums="equal">
         <Grid.Row stretched={true}>
@@ -1427,13 +1560,28 @@ class ProjectPage extends React.Component {
               <div className="container">
                   <div>
                   <br />
-                    <Button fluid as='div' labelPosition='right'>
+                  {
+                    logged && (
+                    <Button onClick={this.handleLike} fluid as='div' labelPosition='right'>
                       <Button fluid color='blue'>
                         <Icon name='like outline' />
                         Like
                       </Button>
                       <Label as='a' basic color='blue' pointing='left'>{Karma}</Label>
                     </Button>
+                    )}
+
+                    {
+                      !logged &&(
+                        <Button onClick={this.register.bind(this)} fluid as='div' labelPosition='right'>
+                      <Button fluid color='blue'>
+                        <Icon name='like outline' />
+                        Like
+                      </Button>
+                      <Label as='a' basic color='blue' pointing='left'>{Karma}</Label>
+                    </Button>
+                      )
+                    }
                   </div>
               </div>
             </div>
@@ -1441,7 +1589,7 @@ class ProjectPage extends React.Component {
 
 
             {
-              !isAuthor && (
+              !isAuthor && logged && (
                 <Button fluid={true} toggle={true} onClick={this.handleJoin.bind(this)} color={joined
                   ? 'green'
                   : 'red'} content={joined
@@ -1449,6 +1597,13 @@ class ProjectPage extends React.Component {
                     : 'Austreten'} />
               )
             }
+
+            {
+              !logged &&(
+                <Button fluid={true} toggle={true} onClick={this.register.bind(this)} color = "green" content={"Anmelden"} />
+              )
+            }
+
             <div className="tags">
 
               <div className="Tags">

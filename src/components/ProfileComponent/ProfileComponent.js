@@ -41,6 +41,13 @@ class ProfileComponent extends React.Component {
       else if (this.props.type == "addComment"){
         var farbe = 'rgb(90, 249, 62)';
       }
+      else if (this.props.type == "beeditor"){
+        var farbe = 'rgb(43, 78, 216)';
+      }
+      else if(this.props.type == "deleteeditor"){
+        var farbe = 'rgb(252, 176, 0)';
+      }
+  
   
     return (<VerticalTimelineElement className="vertical-timeline-element--education" iconStyle={{
         background: farbe,
