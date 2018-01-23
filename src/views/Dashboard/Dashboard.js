@@ -65,7 +65,7 @@ var lock = new Auth0Lock('TAzP3VaJ1PJgDR2S5zTV0c4inUpt9A9J', 'kevkle.eu.auth0.co
 //dashboard class where we can see up to date project and which is in general our landing page
 class Dashboard extends React.Component {
 
-  toggleVisibility = () => this.setState({ visible: !this.state.visible }, function(){if(!this.state.visible){this.getProjects(); this.setState({hitvisible: false, searchPara: ""})}})
+  toggleVisibility = () => this.setState({ visible: !this.state.visible }, function(){if(!this.state.visible){this.getProjects(); this.setState({hitvisible: false, searchPara: "", value: ""})}})
 
   constructor(props) {
     super(props);
@@ -78,12 +78,14 @@ class Dashboard extends React.Component {
       visible: false,
       searchPara: "",
       hits: 0,
-      hitvisible: false
+      hitvisible: false,
+      value: ""
     };
 
     this.toggle = this.toggle.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.searchProjects = this.searchProjects.bind(this);
+    this.handleActivity = this.handleActivity.bind(this);
   }
 
   lockLogin() {
@@ -93,13 +95,25 @@ class Dashboard extends React.Component {
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value })
 
+  handleActivity = (e, { value }) => this.setState({ value })
+
   //Class to create a new project card with all the necessary data
   createImage(image) {
     return <ProjectCards name={image.project_name} members={image.project_membercount} text={image.project_text} bild={image.project_imagepath} erstellt={image.project_created_at} link={image.projectid} key={image.projectid}/>;
   }
 
   searchProjects(){
-    var target = ('http://backend-edu.azurewebsites.net/project/stringsearch/' + this.state.searchPara)
+    if (this.state.value === 'a'){
+      var activity = "lehrundlernProjekt";
+    }else if(this.state.value === 'b'){
+      var activity = "managementProjekt";
+    }else if(this.state.value === 'c'){
+      var activity = "unterstuetzendesProjekt";
+    }else{
+      var activity = "";
+    }
+ 
+    var target = ('http://backend-edu.azurewebsites.net/project/stringsearch/' + this.state.searchPara + "/" + activity)
     fetch(target).then((results) => {
       return results.json();
 
@@ -175,6 +189,7 @@ class Dashboard extends React.Component {
     const {activeItem} = this.state;
     const { visible } = this.state;
     const { hitvisible } = this.state;
+    const { value } = this.state;
     const {hits} = this.state;
     const kategorie = [
       { key: 'a', text: 'Lehr und Lernprozess', value: 'a' },
@@ -233,7 +248,7 @@ class Dashboard extends React.Component {
           <Card centered style={{ backgroundColor: "#FFFFFF", width: '1115px' }}>
              <Segment.Group fluid='true' vertical='true'>
                <Segment basic={true}><Input fluid onChange={this.handleChange} name="searchPara" value={this.state.searchPara} placeholder='Titel / Beschreibung'/></Segment>
-               <Segment basic={true}> <Dropdown style={{color: 'teal'}} placeholder='Kategorie' fluid multiple search selection options={kategorie} /><br/><div>
+               <Segment basic={true}> <Dropdown style={{color: 'teal'}} value={value} placeholder='Kategorie' onChange={this.handleActivity} fluid single search selection options={kategorie} /><br/><div>
            <Button floated='right' onClick={this.searchProjects} animated={true} color='teal' style={{
                width: "150px", position: 'relative'
              }}>

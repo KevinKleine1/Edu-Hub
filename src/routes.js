@@ -3,7 +3,7 @@ const routes = {
   '/dashboard': 'Home',
   '/profil': 'Profil',
   '/user': 'User',
-  '/admin': 'Profil Ändern',
+  '/admin': 'Profil bearbeiten',
   '/wizard': 'Wizard',
   '/nowizard': 'Erstellen ohne Wizard',
   '/MyProjects': 'Meine Projekte',

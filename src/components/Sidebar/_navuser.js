@@ -22,7 +22,7 @@ export default {
 
         },
         {
-          name: 'Profil ändern',
+          name: 'Profil bearbeiten',
           url: '/admin',
           icon: 'icon-note',
 
@@ -44,11 +44,6 @@ export default {
           name: 'Favoriten',
           url: '/Favs',
           icon: 'icon-heart',
-      },
-      {
-          name: 'Entdecken',
-          url: '/discover',
-          icon: 'icon-compass',
       }
   ]
 };
