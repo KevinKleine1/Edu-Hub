@@ -303,9 +303,10 @@ class User extends Component {
                     </div>
                   </div>
                 </div>
-                  )}
+                  )}  
               </div>
             </div>
+            <br/>
             {
                   !Private &&(
             <div className="container">
