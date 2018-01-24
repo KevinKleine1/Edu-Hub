@@ -875,7 +875,8 @@ class ProjectPage extends React.Component {
     if (this.state.goal.length > 0){
       this.changeGoal();
     }
-    this.changeRights();
+    if(this.state.title.length < 1 && this.state.description.length < 1 && this.state.goal.length < 1){
+      this.changeRights();}
   // TODO Fix bug if nothing is done
     this.setState({
       title: "",
