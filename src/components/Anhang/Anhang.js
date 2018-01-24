@@ -2,7 +2,6 @@ import React, { Component, Border } from 'react'
 import {Container, Segment, Card, Grid, Image, Header, Form, Icon, Button, Comment, Statistic, Label, List} from 'semantic-ui-react';
 import {Link} from 'react-router-dom';
 
-//TODO: try to make the links appear blue again
 
 export default class Anhang extends Component {
   render() {

@@ -221,7 +221,6 @@ class Dashboard extends React.Component {
     });
   }
 
-  //fetch call to get all projects we have available atm TODO: Remove subprojects, make it dynamically, have some kind of sorting
   getProjects() {
     var target = ('http://backend-edu.azurewebsites.net/project/landingpage/get')
     fetch(target).then((results) => {

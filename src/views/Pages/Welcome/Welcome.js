@@ -13,7 +13,6 @@ import jwt from 'jsonwebtoken';
 import 'whatwg-fetch'
 
 //page where every new registered user will be redirected to, so he can complete his data, functionality is the same as on the admin page
-//TODO: better solution for the picture input
 
 class Welcome extends Component {
 

@@ -4,7 +4,6 @@ import classnames from 'classnames';
 import Termin from '../../components/Termin/Termin';
 import {Button, Icon} from 'semantic-ui-react';
 
-//TODO Come up with some function for this part
 
 class Aside extends Component {
   constructor(props) {
@@ -27,7 +26,6 @@ class Aside extends Component {
   }
 
 
-  //TODO: Add parentname directly in fetch
   createTermin(termin) {
 
     return <Termin name={termin.project_name1} parent={termin.parentproject} parentid={termin.project_projectid1} termin={termin.project_termin1}  key={termin.projectid1}/>;
