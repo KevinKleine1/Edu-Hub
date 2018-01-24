@@ -84,8 +84,11 @@ class Dashboard extends React.Component {
 
     this.toggle = this.toggle.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.searchProjects = this.searchProjects.bind(this);
     this.handleActivity = this.handleActivity.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
+    this.searchProjectsstring = this.searchProjectsstring.bind(this);
+    this.searchProjectscat = this.searchProjectscat.bind(this);
+    this.searchProjectsboth = this.searchProjectsboth.bind(this);
   }
 
   lockLogin() {
@@ -102,7 +105,7 @@ class Dashboard extends React.Component {
     return <ProjectCards name={image.project_name} members={image.project_membercount} text={image.project_text} bild={image.project_imagepath} erstellt={image.project_created_at} link={image.projectid} key={image.projectid}/>;
   }
 
-  searchProjects(){
+  searchProjectsboth(){
     if (this.state.value === 'a'){
       var activity = "lehrundlernProjekt";
     }else if(this.state.value === 'b'){
@@ -113,7 +116,7 @@ class Dashboard extends React.Component {
       var activity = "";
     }
  
-    var target = ('http://backend-edu.azurewebsites.net/project/stringsearch/' + this.state.searchPara + "/" + activity)
+    var target = ('http://backend-edu.azurewebsites.net/project/stringsearchwithcat/' + this.state.searchPara + "/" + activity)
     fetch(target).then((results) => {
       return results.json();
 
@@ -130,6 +133,75 @@ class Dashboard extends React.Component {
       })
 
     })
+  }
+  searchProjectsstring(){
+    if (this.state.value === 'a'){
+      var activity = "lehrundlernProjekt";
+    }else if(this.state.value === 'b'){
+      var activity = "managementProjekt";
+    }else if(this.state.value === 'c'){
+      var activity = "unterstuetzendesProjekt";
+    }else{
+      var activity = "";
+    }
+ 
+    var target = ('http://backend-edu.azurewebsites.net/project/stringsearch/' + this.state.searchPara )
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({
+        Data: json
+      }, function() {
+        this.setState({
+          Id: this.state.Data.map((elem) => elem.projectid),
+          hits: json.length,
+          hitvisible: true
+        }, function() {});
+      })
+
+    })
+  }
+  searchProjectscat(){
+    if (this.state.value === 'a'){
+      var activity = "lehrundlernProjekt";
+    }else if(this.state.value === 'b'){
+      var activity = "managementProjekt";
+    }else if(this.state.value === 'c'){
+      var activity = "unterstuetzendesProjekt";
+    }else{
+      var activity = "";
+    }
+ 
+    var target = ('http://backend-edu.azurewebsites.net/project/catsearch/' + activity)
+    fetch(target).then((results) => {
+      return results.json();
+
+    }).then((json) => {
+
+      this.setState({
+        Data: json
+      }, function() {
+        this.setState({
+          Id: this.state.Data.map((elem) => elem.projectid),
+          hits: json.length,
+          hitvisible: true
+        }, function() {});
+      })
+
+    })
+  }
+
+
+  handleSearch(){
+    if (this.state.searchPara < 1 && this.state.value != ""){
+      this.searchProjectscat();
+    }else if(this.state.searchPara > 0 && this.state.value === ""){
+      this.searchProjectsstring();
+    }else if(this.state.searchPara > 0 && this.state.value != ""){
+      this.searchProjectsboth();
+    }
   }
 
   //this is the mapping class which uses createImage on every content of the array
@@ -249,7 +321,7 @@ class Dashboard extends React.Component {
              <Segment.Group fluid='true' vertical='true'>
                <Segment basic={true}><Input fluid onChange={this.handleChange} name="searchPara" value={this.state.searchPara} placeholder='Titel / Beschreibung'/></Segment>
                <Segment basic={true}> <Dropdown style={{color: 'teal'}} value={value} placeholder='Kategorie' onChange={this.handleActivity} fluid single search selection options={kategorie} /><br/><div>
-           <Button floated='right' onClick={this.searchProjects} animated={true} color='teal' style={{
+           <Button floated='right' onClick={this.handleSearch} animated={true} color='teal' style={{
                width: "150px", position: 'relative'
              }}>
              <Button.Content hidden={true}>suchen</Button.Content>

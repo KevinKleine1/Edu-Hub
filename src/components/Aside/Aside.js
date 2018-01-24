@@ -69,6 +69,7 @@ class Aside extends Component {
 
   componentDidMount(){
     this.setData();
+    this.getTermine();
   }
 
   render() {
