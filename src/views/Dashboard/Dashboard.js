@@ -165,7 +165,7 @@ class Dashboard extends React.Component {
   }
   searchProjectscat(){
     if (this.state.value === 'a'){
-      var activity = "lehrundlernProjekt";
+      var activity = "lehrundlernProjekte";
     }else if(this.state.value === 'b'){
       var activity = "managementProjekt";
     }else if(this.state.value === 'c'){
@@ -195,11 +195,11 @@ class Dashboard extends React.Component {
 
 
   handleSearch(){
-    if (this.state.searchPara < 1 && this.state.value != ""){
+    if (this.state.searchPara.length < 1 && this.state.value != ""){
       this.searchProjectscat();
-    }else if(this.state.searchPara > 0 && this.state.value === ""){
+    }else if(this.state.searchPara.length > 0 && this.state.value === ""){
       this.searchProjectsstring();
-    }else if(this.state.searchPara > 0 && this.state.value != ""){
+    }else if(this.state.searchPara.length > 0 && this.state.value != ""){
       this.searchProjectsboth();
     }
   }
