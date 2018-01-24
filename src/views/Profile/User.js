@@ -340,6 +340,7 @@ class User extends Component {
                   </Statistic.Value>
                   <Statistic.Label>Eigene Projekte</Statistic.Label>
                 </Statistic>
+                
                 <List divided={true} relaxed={true}>
                   {this.createLists(this.state.Data)}
                 </List>

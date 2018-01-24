@@ -29,9 +29,6 @@ class ProfileComponent extends React.Component {
       else if(this.props.type == "cancelmembership"){
         var farbe = 'rgb(46, 204, 113)';
       }
-      else if(this.props.type == "newProject"){
-          var farbe = 'rgb(219, 10, 191)';
-      }
       else if(this.props.type == "changeTitle"){
         var farbe = 'rgb(18, 155, 155)';
       }
@@ -46,6 +43,18 @@ class ProfileComponent extends React.Component {
       }
       else if(this.props.type == "deleteeditor"){
         var farbe = 'rgb(252, 176, 0)';
+      }
+      else if(this.props.type == "addlike"){
+        var farbe = 'rgb(220, 120, 20)';
+      }
+      else if(this.props.type == "changeRights"){
+        var farbe = 'rgb(225, 100, 80)';
+      }
+      else if(this.props.type == "cancelfavorite"){
+        var farbe = 'rgb(190, 100, 80)';
+      }
+      else if(this.props.type == "befavorite"){
+        var farbe = 'rgb(190, 100, 80)';
       }
   
   

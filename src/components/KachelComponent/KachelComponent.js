@@ -40,7 +40,7 @@ class KachelComponent extends React.Component {
   
       return (
         <Grid.Column>
-        <Popup trigger={<Image
+        <Popup trigger={<Image 
           size = 'medium'
           label = {{ as: 'a', color: 'teal', content: this.props.name, ribbon: true }}
           src = {'http://backend-edu.azurewebsites.net/' + this.props.bild} />} position='top left'>

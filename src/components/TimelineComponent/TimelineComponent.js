@@ -62,6 +62,12 @@ class TimelineComponent extends React.Component {
       else if(this.props.type == "changeRights"){
         var farbe = 'rgb(225, 100, 80)';
       }
+      else if(this.props.type == "cancelfavorite"){
+        var farbe = 'rgb(190, 100, 80)';
+      }
+      else if(this.props.type == "befavorite"){
+        var farbe = 'rgb(190, 100, 80)';
+      }
   
 
       
