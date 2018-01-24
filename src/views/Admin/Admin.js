@@ -464,7 +464,7 @@ class Admin extends Component {
                   </Form.Field>
                 <Form.Field required={false}>
                 <label>Stadt der Schule</label>
-                <Form.Input name="Stadt" value={SStadt} onChange={this.handleChange} placeholder={this.state.StadtAlt}/>
+                <Form.Input name="Stadt" value={SStadt} onChange={this.handleChange} placeholder={this.state.SStadtAlt}/>
               </Form.Field>
                 </Form.Group>
                 <Form.Group inline={true}>
