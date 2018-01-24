@@ -368,7 +368,7 @@ class Welcome extends Component {
                     <Form.TextArea rows={2} name='Profilbeschreibung' value={this.state.Desc} onChange={this.handleChange} placeholder='Profilbeschreibung'/>
                   </Form.Field>
                   <Form.Checkbox name="Private" label="Privates Profil" checked={Private} onChange={this.toggle} />
-                <Message error={true} header='Fehler bei Eingabe' content='Alle Felder müssen ausgefüllt sein und Hausnummer und PLZ müssen Zahlen sein.'/>
+                <Message error={true} header='Fehler bei Eingabe' content='Alle mit Stern markierten Felder müssen ausgefüllt sein und Hausnummer und PLZ müssen Zahlen sein. Zudem muss ein Profilbild hochgeladen werden'/>
               </Form>
             </div>
 
