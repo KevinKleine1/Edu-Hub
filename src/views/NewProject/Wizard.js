@@ -832,21 +832,7 @@ class Wizard extends Component {
                         <Form.TextArea rows={2} onChange={this.handleText} value={this.state.goal} name='goal' placeholder='Wie soll die Zielerreichung gemessen werden?'/>
                       </Form.Group>
                       <div>
-                        <Input icon='tags' iconPosition='left' label={{
-                            tag: true,
-                            content: 'Add Tag',
-                            color: 'blue'
-                          }} labelPosition='right' placeholder='Tags'/></div>
-                      <br/>
 
-                      <div>
-                        <Input icon='tags' iconPosition='left' label={{
-                            tag: true,
-                            content: 'Add Tag',
-                            color: 'grey'
-                          }} labelPosition='right' placeholder='Ressourcen'/></div>
-                      <br/>
-                      <div>
                         <Form.Field>
                           <label>Projektbeginn</label><Form.Input style={{
               width: "200px"

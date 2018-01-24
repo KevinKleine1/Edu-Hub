@@ -56,6 +56,9 @@ class ProfileComponent extends React.Component {
       else if(this.props.type == "befavorite"){
         var farbe = 'rgb(190, 100, 80)';
       }
+      else if(this.props.type == "newProject"){
+        var farbe = 'rgb(120, 70, 40)';
+      }
   
   
     return (<VerticalTimelineElement className="vertical-timeline-element--education" iconStyle={{
