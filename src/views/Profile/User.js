@@ -304,19 +304,6 @@ class User extends Component {
                   </div>
                 </div>
                   )}
-
-{
-                  !Private &&(
-                <Statistic color='purple'>
-                  <br/>
-                  <Statistic.Value>
-                    <Icon name='diamond'/>
-                    84
-                  </Statistic.Value>
-                  <Statistic.Label>Karma</Statistic.Label>
-                  <br/>
-                </Statistic>
-                  )}
               </div>
             </div>
             {
