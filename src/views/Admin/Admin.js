@@ -204,7 +204,7 @@ class Admin extends Component {
     if (this.state.Stadt.length < 1) {
       Stadt = StadtAlt;
     } else {
-      Stadt = this.state.Hausnummer;
+      Stadt = this.state.Stadt;
     }
     if (this.state.Postcode.length < 1) {
       Postcode = PostcodeAlt;
