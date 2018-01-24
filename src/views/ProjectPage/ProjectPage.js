@@ -1736,7 +1736,6 @@ class ProjectPage extends React.Component {
             }} animate={true}>
               <h3 className="vertical-timeline-element-title">Projekt wurde erstellt</h3>
 
-              <h4 className="vertical-timeline-element-subtitle">Insert Creator Here!!</h4>
 
               <p>
                 Das Projekt wurde am {""} {Erstellt}
