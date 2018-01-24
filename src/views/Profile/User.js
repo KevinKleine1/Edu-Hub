@@ -34,7 +34,7 @@ class User extends Component {
       Erstellt: "",
       Data: [],
       Private: false,
-
+      Schule: ""
     };
   }
 
@@ -51,6 +51,10 @@ class User extends Component {
       this.setState({Bild: json[0].profilpic});
       this.setState({Erstellt: json[0].user_created_at});
       this.setState({Beschreibung: json[0].user_description});
+      this.setState({Schule: json[0].school_name});
+      this.setState({Fach1: json[0].subject1});
+      this.setState({Fach2: json[0].subject2});
+      this.setState({Fach3: json[0].subject3});
       if (json[0].user_privacy === 1){
         this.setState({Private: true});
       } else{
@@ -135,7 +139,7 @@ class User extends Component {
   }
 
   render() {
-    const {Name, Vorname, Bild, Beschreibung, Private} = this.state
+    const {Name, Vorname, Bild, Beschreibung, Private, Schule, Fach1, Fach2, Fach3} = this.state
     var Erstellt = this.formatDateMonthName(this.state.Erstellt);
     var Projekte = this.state.Data.length;
     return (
@@ -184,7 +188,7 @@ class User extends Component {
                     <b>Schule</b>
                   </Header>
                   <Header as='h3' floated='right' color='grey'>
-                    Gymnasium Köln-Ehrenfeld
+                    {Schule}
                   </Header>
                 </Segment>
                 <Segment vertical={true} style={{
@@ -194,7 +198,7 @@ class User extends Component {
                     <b>Interessen / Fächer</b>
                   </Header>
                   <Header as='h3' floated='right' color='grey'>
-                    Germanistik, Kunst, Projektmanagement
+                    {Fach1}, {Fach2}, {Fach3}
                   </Header>
                 </Segment>
                 <Segment vertical={true} style={{
@@ -333,14 +337,6 @@ class User extends Component {
                   !Private &&(
             <div className="container">
               <div className="row justify-content-md-center">
-                <Statistic color='blue'>
-                  <Statistic.Value>
-                    <Icon name='star'/>
-                    3
-                  </Statistic.Value>
-                  <Statistic.Label>Eigene Projekte</Statistic.Label>
-                </Statistic>
-                
                 <List divided={true} relaxed={true}>
                   {this.createLists(this.state.Data)}
                 </List>
