@@ -8,6 +8,7 @@ import {
   NavbarToggler,
   NavbarBrand
 } from 'reactstrap';
+import { Icon } from 'semantic-ui-react';
 
 import HeaderDropdown from './HeaderDropdown';
 
@@ -95,7 +96,7 @@ class Header extends Component {
       </Nav>
       {
         logged && (<NavbarToggler className="d-md-down-none" onClick={this.asideToggle}>
-          <span className="fa fa-table fa-lg mt-4"></span>
+          <Icon name='calendar' size='large'/>
         </NavbarToggler>)
       }
 
